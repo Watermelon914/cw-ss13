@@ -23,7 +23,7 @@ RUN python3 tools/ci/template_dm_generator.py
 FROM ${IMG_BUILD_NODE} AS tgui
 COPY tgui tgui
 RUN chmod u+x tgui/bin/tgui
-RUN tgui/bin/tgui --ci
+RUN tgui/bin/tgui
 
 FROM byond as cm13
 COPY . .
