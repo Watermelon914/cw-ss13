@@ -14,7 +14,6 @@ RUN curl ${BYOND_DOWNLOAD_URL} -o byond.zip \
 	&& rm -rf byond.zip
 WORKDIR /byond
 RUN make here
-RUN source /byond/bin/byondsetup
 RUN DEBIAN_FRONTEND=noninteractive apt-get clean && rm -rf /var/lib/apt/lists/*
 
 FROM ${IMG_BUILD_PYTHON} AS mapping
@@ -29,9 +28,8 @@ RUN tgui/bin/tgui
 
 FROM byond AS cm13
 COPY . .
-RUN source /byond/bin/byondsetup
 ARG DM_PROJECT_NAME=ColonialMarinesALPHA
-RUN DreamMaker ${DM_PROJECT_NAME}.dme
+RUN source /byond/bin/byondsetup && DreamMaker ${DM_PROJECT_NAME}.dme
 
 FROM cm13 AS cm-runner
 ENV DREAMDAEMON_PORT=1400
