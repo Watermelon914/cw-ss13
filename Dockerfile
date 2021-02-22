@@ -13,8 +13,8 @@ RUN curl ${BYOND_DOWNLOAD_URL} -o byond.zip \
 	&& rm -rf byond.zip
 WORKDIR /byond
 RUN make here
+RUN source /byond/bin/byondsetup
 RUN DEBIAN_FRONTEND=noninteractive apt-get clean && rm -rf /var/lib/apt/lists/*
-RUN ./bin/byondsetup
 
 FROM ${IMG_BUILD_PYTHON} AS mapping
 COPY tools tools
@@ -31,7 +31,7 @@ COPY . .
 ARG DM_PROJECT_NAME=ColonialMarinesALPHA
 RUN DreamMaker ${DM_PROJECT_NAME}.dme
 
-FROM byond AS cm-runner
+FROM cm13 AS cm-runner
 ENV DREAMDAEMON_PORT=1400
 RUN mkdir -p /cm/data
 WORKDIR /cm
