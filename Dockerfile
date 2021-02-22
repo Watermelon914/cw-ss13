@@ -13,7 +13,7 @@ RUN curl ${BYOND_DOWNLOAD_URL} -o byond.zip \
 	&& rm -rf byond.zip
 WORKDIR /byond
 RUN make here
-RUN source /byond/bin/byondsetup
+RUN /bin/bash source /byond/bin/byondsetup
 RUN DEBIAN_FRONTEND=noninteractive apt-get clean && rm -rf /var/lib/apt/lists/*
 
 FROM ${IMG_BUILD_PYTHON} AS mapping
