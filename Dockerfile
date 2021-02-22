@@ -29,6 +29,7 @@ RUN tgui/bin/tgui
 
 FROM byond AS cm13
 COPY . .
+RUN source /byond/bin/byondsetup
 ARG DM_PROJECT_NAME=ColonialMarinesALPHA
 RUN DreamMaker ${DM_PROJECT_NAME}.dme
 
