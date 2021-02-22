@@ -40,6 +40,7 @@ COPY maps maps
 ARG RUSTG_VERSION=0.4.7
 ARG RUSTG_URL=https://github.com/tgstation/rust-g/releases/download/${RUSTG_VERSION}/librust_g.so
 ADD ${RUSTG_URL} librust_g.so
+ARG DM_PROJECT_NAME=ColonialMarinesALPHA
 COPY ${DM_PROJECT_NAME}.rsc application.rsc
 COPY ${DM_PROJECT_NAME}.dmb application.dmb
 COPY tools/runner-entrypoint.sh /entrypoint.sh
