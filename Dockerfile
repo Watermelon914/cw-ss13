@@ -3,9 +3,8 @@ ARG BYOND_BASE_IMAGE=i386/ubuntu:bionic
 ARG IMG_BUILD_PYTHON=python:3.7-buster
 ARG IMG_BUILD_NODE=node:15-buster
 
-SHELL ["/bin/bash", "-c"]
-
 FROM ${BYOND_BASE_IMAGE} AS byond
+SHELL ["/bin/bash", "-c"]
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y make man curl unzip libssl-dev
 ARG BYOND_MAJOR=513
 ARG BYOND_MINOR=1536
