@@ -39,6 +39,6 @@ ADD ${RUSTG_URL} librust_g.so
 ARG DM_PROJECT_NAME=ColonialMarinesALPHA
 COPY --from=cm-build /build/${DM_PROJECT_NAME}.rsc application.rsc
 COPY --from=cm-build /build/${DM_PROJECT_NAME}.dmb application.dmb
-COPY tools/docker-entrypoint.sh /entrypoint.sh
+COPY tools/runner-entrypoint.sh /entrypoint.sh
 RUN chmod u+x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
