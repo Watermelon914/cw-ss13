@@ -14,6 +14,7 @@ RUN curl ${BYOND_DOWNLOAD_URL} -o byond.zip \
 WORKDIR /byond
 RUN make here
 RUN DEBIAN_FRONTEND=noninteractive apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN ./bin/byondsetup
 
 FROM ${IMG_BUILD_PYTHON} AS mapping
 COPY tools tools
