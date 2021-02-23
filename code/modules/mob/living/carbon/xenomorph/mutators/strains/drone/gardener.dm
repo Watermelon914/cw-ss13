@@ -135,7 +135,7 @@
 /datum/action/xeno_action/onclick/change_fruit/New()
 	..()
 	button.overlays.Cut()
-	button.overlays += image('icons/mob/hostiles/fruits.dmi', action_icon_state)
+	button.overlays += image('icons/obj/xeno/fruits.dmi', action_icon_state)
 
 /datum/action/xeno_action/onclick/change_fruit/use_ability(atom/A)
 	var/mob/living/carbon/Xenomorph/X = owner
@@ -154,7 +154,7 @@
 			fruit_icon = "fruit_unstable"
 		if("Spore Resin Fruit")
 			fruit_icon = "fruit_spore"
-	button.overlays += image('icons/mob/hostiles/fruits.dmi', fruit_icon)
+	button.overlays += image('icons/obj/xeno/fruits.dmi', fruit_icon)
 
 /*
 	Resin Surge

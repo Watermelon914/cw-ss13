@@ -19,17 +19,10 @@
     var/materials_required = list() //Example resource requirements i.e. MATERIAL_METAL = 1
     var/extras_required = list() //Example extra requirements i.e. /obj/item = 1
 
-/datum/construction_template/New()
-	. = ..()
-	set_structure_image()
-
 /datum/construction_template/Destroy()
     owner = null
     build_loc = null
     return ..()
-
-/datum/construction_template/proc/set_structure_image()
-	return
 
 /datum/construction_template/proc/get_structure_image()
     return image(build_icon, build_icon_state)

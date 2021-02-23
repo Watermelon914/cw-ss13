@@ -32,6 +32,7 @@
 	caste_name = "Spitter"
 	name = "Spitter"
 	desc = "A gross, oozing alien of some kind."
+	icon = 'icons/mob/hostiles/spitter.dmi'
 	icon_size = 48
 	icon_state = "Spitter Walking"
 	plasma_types = list(PLASMA_NEUROTOXIN)
@@ -52,11 +53,6 @@
 		/mob/living/carbon/Xenomorph/proc/vent_crawl,
 		)
 	mutation_type = SPITTER_NORMAL
-
-/mob/living/carbon/Xenomorph/Spitter/Initialize(mapload, mob/living/carbon/Xenomorph/oldXeno, h_number)
-	. = ..()
-	icon = get_icon_from_source(CONFIG_GET(string/alien_spitter))
-
 /datum/behavior_delegate/spitter_base
 	name = "Base Spitter Behavior Delegate"
 

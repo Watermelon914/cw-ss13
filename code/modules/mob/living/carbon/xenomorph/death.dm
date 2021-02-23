@@ -139,9 +139,9 @@
 
 /mob/living/carbon/Xenomorph/gib_animation()
 	var/to_flick = "gibbed-a"
-	var/icon_path = get_icon_from_source(CONFIG_GET(string/alien_gib_48x48))
+	var/icon_path = 'icons/mob/xenos_old/xenomorph_48x48.dmi'
 	if(mob_size >= MOB_SIZE_BIG)
-		icon_path = get_icon_from_source(CONFIG_GET(string/alien_gib_64x64))
+		icon_path = 'icons/mob/xenos_old/xenomorph_64x64.dmi'
 	switch(caste.caste_name)
 		if("Runner")
 			to_flick = "gibbed-a-runner"

@@ -18,6 +18,9 @@
 	darksight = 5
 	slowdown = -0.5
 
+	icobase_source = 'icons/mob/humans/species/r_zombie.dmi'
+	deform_source = 'icons/mob/humans/species/r_zombie.dmi'
+
 	timed_hug = FALSE
 
 	heat_level_1 = 500
@@ -68,9 +71,6 @@
 
 /datum/species/yautja/proc/setup_yautja_icons()
 	SIGNAL_HANDLER
-
-	icobase_source = CONFIG_GET(string/species_hunter)
-	deform_source = CONFIG_GET(string/species_hunter)
 	UnregisterSignal(SSdcs, COMSIG_GLOB_MODE_POSTSETUP, .proc/setup_yautja_icons)
 
 /datum/species/yautja/larva_impregnated(var/obj/item/alien_embryo/embryo)

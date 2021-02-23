@@ -6,10 +6,7 @@
 	desc = "theres something alien about this"
 	unacidable = TRUE
 	health = 1
-
-/obj/effect/alien/Initialize(mapload, ...)
-	. = ..()
-	icon = get_icon_from_source(CONFIG_GET(string/alien_effects))
+	icon = 'icons/effects/xeno/Effects.dmi'
 
 /*
  * Resin
@@ -165,12 +162,12 @@
 	health = HEALTH_DOOR_XENO
 	var/close_delay = 100
 	var/hivenumber = XENO_HIVE_NORMAL
+	icon = 'icons/effects/xeno/Effects.dmi'
 
 	tiles_with = list(/obj/structure/mineral_door/resin)
 
 /obj/structure/mineral_door/resin/Initialize(mapload, hive)
 	. = ..()
-	icon = get_icon_from_source(CONFIG_GET(string/alien_effects))
 	relativewall()
 	relativewall_neighbours()
 	for(var/turf/closed/wall/W in orange(1))

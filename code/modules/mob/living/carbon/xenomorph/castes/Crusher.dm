@@ -27,6 +27,7 @@
 	caste_name = "Crusher"
 	name = "Crusher"
 	desc = "A huge alien with an enormous armored head crest."
+	icon = 'icons/mob/hostiles/crusher.dmi'
 	icon_size = 64
 	icon_state = "Crusher Walking"
 	plasma_types = list(PLASMA_CHITIN)
@@ -55,10 +56,6 @@
 
 	mutation_type = CRUSHER_NORMAL
 	claw_type = CLAW_TYPE_VERY_SHARP
-
-/mob/living/carbon/Xenomorph/Crusher/Initialize(mapload, mob/living/carbon/Xenomorph/oldXeno, h_number)
-	. = ..()
-	icon = get_icon_from_source(CONFIG_GET(string/alien_crusher))
 
 // Refactored to handle all of crusher's interactions with object during charge.
 /mob/living/carbon/Xenomorph/proc/handle_collision(atom/target)

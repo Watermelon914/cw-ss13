@@ -31,6 +31,7 @@
 	caste_name = "Ravager"
 	name = "Ravager"
 	desc = "A huge, nasty red alien with enormous scythed claws."
+	icon = 'icons/mob/hostiles/ravager.dmi'
 	icon_size = 64
 	icon_state = "Ravager Walking"
 	plasma_types = list(PLASMA_CATECHOLAMINE)
@@ -51,10 +52,6 @@
 		/datum/action/xeno_action/activable/pounce/charge,
 		/datum/action/xeno_action/activable/scissor_cut
 		)
-
-/mob/living/carbon/Xenomorph/Ravager/Initialize(mapload, mob/living/carbon/Xenomorph/oldXeno, h_number)
-	. = ..()
-	icon = get_icon_from_source(CONFIG_GET(string/alien_ravager))
 
 // Mutator delegate for base ravager
 /datum/behavior_delegate/ravager_base

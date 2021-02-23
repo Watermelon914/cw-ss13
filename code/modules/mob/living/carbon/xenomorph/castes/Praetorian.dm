@@ -31,6 +31,7 @@
 	caste_name = "Praetorian"
 	name = "Praetorian"
 	desc = "A huge, looming beast of an alien."
+	icon = 'icons/mob/hostiles/praetorian.dmi'
 	icon_size = 64
 	icon_state = "Praetorian Walking"
 	plasma_types = list(PLASMA_PHEROMONE,PLASMA_NEUROTOXIN)
@@ -51,10 +52,6 @@
 		/datum/action/xeno_action/activable/prae_acid_ball,
 		/datum/action/xeno_action/activable/spray_acid/base_prae_spray_acid,
 	)
-
-/mob/living/carbon/Xenomorph/Praetorian/Initialize(mapload, mob/living/carbon/Xenomorph/oldXeno, h_number)
-	. = ..()
-	icon = get_icon_from_source(CONFIG_GET(string/alien_praetorian))
 
 /datum/behavior_delegate/praetorian_base
 	name = "Base Praetorian Behavior Delegate"

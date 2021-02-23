@@ -231,6 +231,7 @@
 	caste_name = "Queen"
 	name = "Queen"
 	desc = "A huge, looming alien creature. The biggest and the baddest."
+	icon = 'icons/mob/hostiles/queen.dmi'
 	icon_size = 64
 	icon_state = "Queen Walking"
 	plasma_types = list(PLASMA_ROYAL,PLASMA_CHITIN,PLASMA_PHEROMONE,PLASMA_NEUROTOXIN)
@@ -259,8 +260,8 @@
 	var/egg_amount = 0 //amount of eggs inside the queen
 	var/screech_sound_effect = 'sound/voice/alien_queen_screech.ogg' //the noise the Queen makes when she screeches. Done this way for VV purposes.
 	var/egg_planting_range = 3 // in ovipositor queen can plant egg up to this amount of tiles away from her position
-	var/queen_ovipositor_icon
-	var/queen_standing_icon
+	var/queen_ovipositor_icon = 'icons/mob/hostiles/Ovipositor.dmi'
+	var/queen_standing_icon = 'icons/mob/hostiles/queen.dmi'
 
 	tileoffset = 0
 	viewsize = 12
@@ -344,9 +345,6 @@
 
 /mob/living/carbon/Xenomorph/Queen/Initialize()
 	. = ..()
-	icon = get_icon_from_source(CONFIG_GET(string/alien_queen_standing))
-	queen_standing_icon = get_icon_from_source(CONFIG_GET(string/alien_queen_standing))
-	queen_ovipositor_icon = get_icon_from_source(CONFIG_GET(string/alien_queen_ovipositor))
 	if(!is_admin_level(z))//so admins can safely spawn Queens in Thunderdome for tests.
 		xeno_message(SPAN_XENOANNOUNCE("A new Queen has risen to lead the Hive! Rejoice!"),3,hivenumber)
 	playsound(loc, 'sound/voice/alien_queen_command.ogg', 75, 0)

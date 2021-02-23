@@ -260,12 +260,11 @@
 
 /obj/effect/overlay/temp/gib_animation/xeno
 	effect_duration = 10
+	icon = 'icons/effects/xeno/Effects.dmi'
 
 /obj/effect/overlay/temp/gib_animation/xeno/Initialize(mapload, mob/source_mob, gib_icon, new_icon)
 	. = ..()
-	if(!new_icon)
-		icon = get_icon_from_source(CONFIG_GET(string/alien_effects))
-	else
+	if(new_icon)
 		icon = new_icon
 
 //dust animation
@@ -286,7 +285,5 @@
 	name = "acid splash"
 	icon_state = "acidpoolsplash"
 	effect_duration = 10 SECONDS
+	icon = 'icons/effects/xeno/Effects.dmi'
 
-/obj/effect/overlay/temp/acid_pool_splash/Initialize(mapload, ...)
-	. = ..()
-	icon = get_icon_from_source(CONFIG_GET(string/alien_effects))

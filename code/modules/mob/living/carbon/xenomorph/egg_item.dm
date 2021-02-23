@@ -3,6 +3,7 @@
 	name = "egg"
 	desc = "Some sort of egg."
 	icon_state = "egg_item"
+	icon = 'icons/effects/xeno/Effects.dmi'
 	w_class = SIZE_MASSIVE
 	flags_atom = OPENCONTAINER
 	flags_item = NOBLUDGEON
@@ -23,7 +24,6 @@
 
 	set_hive_data(src, hivenumber)
 	. = ..()
-	icon = get_icon_from_source(CONFIG_GET(string/alien_effects))
 
 /obj/item/xeno_egg/examine(mob/user)
 	..()

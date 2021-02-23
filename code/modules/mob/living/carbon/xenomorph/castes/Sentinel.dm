@@ -30,6 +30,7 @@
 	caste_name = "Sentinel"
 	name = "Sentinel"
 	desc = "A slithery, spitting kind of alien."
+	icon = 'icons/mob/hostiles/sentinel.dmi'
 	icon_size = 48
 	icon_state = "Sentinel Walking"
 	plasma_types = list(PLASMA_NEUROTOXIN)
@@ -48,7 +49,3 @@
 		/mob/living/carbon/Xenomorph/proc/vent_crawl,
 		)
 	mutation_type = SENTINEL_NORMAL
-
-/mob/living/carbon/Xenomorph/Sentinel/Initialize(mapload, mob/living/carbon/Xenomorph/oldXeno, h_number)
-	. = ..()
-	icon = get_icon_from_source(CONFIG_GET(string/alien_sentinel))

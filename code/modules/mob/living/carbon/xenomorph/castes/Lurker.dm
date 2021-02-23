@@ -26,6 +26,7 @@
 	caste_name = "Lurker"
 	name = "Lurker"
 	desc = "A beefy, fast alien with sharp claws."
+	icon = 'icons/mob/hostiles/lurker.dmi'
 	icon_size = 48
 	icon_state = "Lurker Walking"
 	plasma_types = list(PLASMA_CATECHOLAMINE)
@@ -48,10 +49,6 @@
 
 	tackle_min = 2
 	tackle_max = 6
-
-/mob/living/carbon/Xenomorph/Lurker/Initialize(mapload, mob/living/carbon/Xenomorph/oldXeno, h_number)
-	. = ..()
-	icon = get_icon_from_source(CONFIG_GET(string/alien_lurker))
 
 /datum/behavior_delegate/lurker_base
 	name = "Base Lurker Behavior Delegate"

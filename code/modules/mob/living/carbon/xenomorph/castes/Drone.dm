@@ -31,6 +31,7 @@
 	caste_name = "Drone"
 	name = "Drone"
 	desc = "An Alien Drone"
+	icon = 'icons/mob/hostiles/drone.dmi'
 	icon_size = 48
 	icon_state = "Drone Walking"
 	plasma_types = list(PLASMA_PURPLE)
@@ -54,7 +55,3 @@
 		/mob/living/carbon/Xenomorph/proc/rename_tunnel,
 		)
 	mutation_type = DRONE_NORMAL
-
-/mob/living/carbon/Xenomorph/Drone/Initialize(mapload, mob/living/carbon/Xenomorph/oldXeno, h_number)
-	. = ..()
-	icon = get_icon_from_source(CONFIG_GET(string/alien_drone))
