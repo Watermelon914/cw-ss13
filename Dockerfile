@@ -41,5 +41,6 @@ COPY --from=cm-build /build/${DM_PROJECT_NAME}.rsc application.rsc
 COPY --from=cm-build /build/${DM_PROJECT_NAME}.dmb application.dmb
 COPY tools/runner-entrypoint.sh /entrypoint.sh
 COPY nano nano
+COPY map_config map_config
 RUN chmod u+x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
