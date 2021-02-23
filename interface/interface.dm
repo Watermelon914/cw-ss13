@@ -40,7 +40,7 @@
 	set desc = "Join our Discord! Meet and talk with other players in the server."
 	set hidden = 1
 
-	src << link("https://discordapp.com/invite/TByu8b5")
+	src << link(CONFIG_GET(string/discordurl))
 	return
 
 /client/verb/submitbug()
