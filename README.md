@@ -2,7 +2,7 @@
 
 The code for CM-SS13 is licensed under the [GNU Affero General Public License v3](http://www.gnu.org/licenses/agpl.html), which can be found in full in [/LICENSE-AGPL3](/LICENSE-AGPL3).
 
-Assets including icons and sound are under the [Creative Commons 3.0 BY-SA license](https://creativecommons.org/licenses/by-sa/3.0/) unless otherwise indicated. Authorship for assets including art and sound under the CC BY-SA license is defined as the active development team of CM-SS13 unless stated otherwise (by author of the commit). 
+Assets including icons and sound are under the [Creative Commons 3.0 BY-SA license](https://creativecommons.org/licenses/by-sa/3.0/) unless otherwise indicated. Authorship for assets including art and sound under the CC BY-SA license is defined as the active development team of CM-SS13 unless stated otherwise (by author of the commit).
 
 All code is assumed to be licensed under AGPL v3 unless stated otherwise by file header. Commits before 9a001bf520f889b434acd295253a1052420860af are assumed to be licensed under GPLv3 and can be used in closed source repo.
 
@@ -35,66 +35,30 @@ To start contributing:
 
 The Owner is responsible for controlling, adding, and removing maintainers from the project. While the Head Developer is officially in charge of the Development team, the Owner is a formal position to ensure ownership of the repository remains in the hands of the Hosts.
 
-**Head Developer**
+**Maintainer**
 
-The Head Developer has the final say on what changes get into and out of the repository. He or she has full veto power on any feature or balance additions, changes, or removals, and establishes a general, personally-preferred direction for the game. The Head Developer is also the Development team lead, and manages team structure, direction, composition and integrity.
-
-**System Administrator**
-
-The System Administrator assists the Host & Vice Host in managing and maintaining the security and day-to-day operation of the game server and its myriad configuration details. They must be available and online often and easily enough via readily-available means of communication i.e. Discord for emergencies.
-
-While not directly a part of the development team, the System Administrator has access to branch switching, repository access, and relevant dev channels for the purpose of supporting the team when needed.
-
-**Lead Spriter**
-
-The Lead Spriter controls sprites and aesthetic that get into the game. New or modified art assets fall to the Lead Spriter, who can decide whether or not a sprite tweak is both merited and a suitable replacement, and may request changes on any MR on the grounds that the sprite changes to not fit the art style and standards. Large changes to art-direction should be referenced to the rest of the team, but the ultimate discretion falls to the Lead Spriter. They also maintain Fax Templates & Logos, Forum graphics, and help curate wiki content. These tasks can be delegated at their discretion. They also handle all incoming spriter applicantions as well as direct changes to the spriting test. They are also responsible for managing the Sprite team.
-
-**Lead Mapper**
-
-The Lead Mapper oversees the management of mapping content going into the repository. They have the final say on any design and gameplay decisions when related to maps, and may request changes on any MR on the grounds that the proposed map changes do not fit the mapping standards. They are also responsible for managing the Mapping team.
-
-**Developers**
-
-Developers refers to everyone in the development team. As a part of the development team, you are required to meet the guidelines and standards set by the Leads and the team when contributing to the repository. As well as contributing to the repository, Developers are in charge of handling the review of open MRs, as well as the management of suggestions and issues.
+Maintainers refers to everyone in the development team. As a part of the development team, you are required to meet the guidelines and standards set by the Leads and the team when contributing to the repository. As well as contributing to the repository, Maintainers are in charge of handling the review of open MRs, as well as the management of suggestions and issues.
 
 **Contributors**
 
 Contributors refer to anyone outside of the development team contributing to the repository in the form of MRs. Much like Developers, you are required to follow this document with regards to code quality and standards. As a contributor, you may only open MRs with changes related to bugs, runtimes, or Accepted Suggestions on the Gitlab issue tracker, which are handled by the development team.
 
 ## Merge Requests
-All Merge Requests (except Dev to Master MRs) must either target a work-in-progress branch, or the Dev branch. No one may push to master.
+All Merge Requests (except Dev to Master MRs) must either target a work-in-progress branch, or the Dev branch.
 
-All features added to Dev must come through a Merge Request. No one, except for changelog merges during a Dev to Master MR, may push to Dev without a Merge Request.
+All features added to Dev must come through a Merge Request. No one may push to Dev without a Merge Request.
 
-All Merge Requests (except Dev to Master MRs) should be appropriately tagged. Any MR that is not complete and ready for review should be marked with a WIP: in the title and the DO NOT MERGE tag. Add any tags that apply to your MR, without being excessive.
+All Merge Requests should be appropriately tagged. Any MR that is not complete and ready for review should be marked as a draft. Add any tags that apply to your MR, without being excessive.
 
-Merge Requests should include a copy of the changelog entries for that branch in its description or, if no changelog is required (hotfixes, typo corrections, and other very minor changes) include a description of the changes manually (unless it can be fully explained in the MR title).
+Merge Requests should include a copy of the changelog entries for that branch in its description
 
-Merge Requests targeting Dev should be set to squash commits and remove the branch when the merge is complete to keep the repository clean. Merge requests to Master should never do this.
+Merge Requests targeting Dev should be set to squash commits and remove the branch when the merge is complete to keep the repository clean.
 
 All Merge Requests must wait for the CI pipeline to complete before merging unless there is a confirmed issue with the unit tests themselves.
 
-All Merge Requests require two valid Approvals to merge into Dev immediately, or one valid Approval by a Developer or higher and at least 24 hours of awaiting further approval. See Approvals below to determine who/when to approve an MR. MRs should only be approved once all discussions opened during review of the MR are resolved.
+All Merge Requests require two valid Approvals to merge into Dev immediately, or one valid Approval by a Maintainer or higher and at least 24 hours of awaiting further approval. See Approvals below to determine who/when to approve an MR. MRs should only be approved once all discussions opened during review of the MR are resolved.
 
-All Merge Requests should have one of the following tags:
-- ``Pending Review``: The MR is awaiting code review, or has addressed all comments and is awaiting re-review.
-- ``Awaiting Author``: The MR has comments to address before progressing further.
-- ``Needs Testing``: The MR needs further testing, potentially in a live environment.
-
-Merge requests should not include multiple sweeping changes unrelated to each other. Developers must split up and create multiple MRs for each of their changes where necessary so as to keep them organized as their own standalone feature or change. The only time multiple changes in an MR is acceptible is when submitting bugfixes to the repository.
-
-Once a Merge Request is approved and merged into Dev, ensure that all changelog files are forwarded to the Wiki Maintainer, as well as any art assets or additional information they request; changes that are not included in the Changelog, but can be accessed or interacted with by players, should additionally be forwarded to the Wiki Maintainer.
-
-**Changelogs follow a specific format. To correctly create a changelog, make a copy of Example.yml and do the following:**
-1. Rename your copy to your name and some identifying information (usually the branch name, or something similar), following the format of the example.
-2. Open the renamed copy and change the Author to be a complete list of contributors to the branch or, if you feel the need to make a given change anonymous, you may use the pseudonym ‘John Titor’ instead.
-3. Follow the instructions provided in the file to correctly assemble a discrete list of changes. Where possible, provide a link or reference to the Gitlab issues related to each change, by ID number (i.e. #3445).
-4. Ensure that you are using your escape characters appropriately. If you want to have a quotation mark “ appear in the changelog entry, you need to escape it, i.e. \” so that the changelog generator doesn’t get confused.
-5. Ensure that you are indenting the entries with the correct number of spaces, as described in the file’s instructions.
-Include the .yml file in your staged changes when pushing to your branch.
-
-These files are used by the changelog generation tool (see Dev Tool Usage below) to create cohesive, conflict-free changelog entries.
-
+Merge requests should not include multiple sweeping changes unrelated to each other. Contributors and maintainers must split up and create multiple MRs for each of their changes where necessary so as to keep them organized as their own standalone feature or change. The only time multiple changes in an MR is acceptible is when submitting bugfixes to the repository.
 
 ## Issues Tracker
 Open issues are categorized into two tags, bugs & suggestions.
@@ -107,14 +71,9 @@ If the bug in question is related to any change that may have been implemented b
 When attempting to fix a bug, if unassigned, Developers must assign themselves to the issue.
 
 ### Suggestions
-All suggestions should be marked with a 1 month due date upon opening, and should be tagged as suggestions, as well as any relevant sub-categories. Once the due date is reached, suggestions should be closed.
-
-If a developer wishes to work on a suggestion, they must assign themselves, as well as swap the suggestion tag with an accepted suggestion tag. They may also give the suggestion a new 1 month due date.
-
-Accepted suggestions are not to be considered as guaranteed upcoming changes, and developers must not make promises when speaking to the community.
+Feature requests and suggestions should not be made on the issue tracker.
 
 ## Specifications
-
 As mentioned before, you are expected to follow these specifications in order to make everyone's lives easier. It'll save both your time and ours, by making sure you don't have to make any changes and we don't have to ask you to.
 
 ### Object Oriented Code
@@ -396,7 +355,7 @@ If you need to use a typecheck multiple times for a specific type path, create a
 	* Areas should not be var-edited on a map to change it's name or attributes. All areas of a single type and it's altered instances are considered the same area within the code, and editing their variables on a map can lead to issues with powernets and event subsystems which are difficult to debug.
 
 ### User Interfaces
-* All new player-facing user interfaces must use nanoui. 
+* All new player-facing user interfaces must use nanoui.
 * Raw HTML is permitted for admin and debug UIs.
 
 ### Operators
@@ -461,7 +420,7 @@ for(var/obj/item/sword/S in bag_of_swords)
 	if(!best_sword || S.damage > best_sword.damage)
 		best_sword = S
 ```
-specifies a type for DM to filter by. 
+specifies a type for DM to filter by.
 
 With the previous example that's perfectly fine, we only want swords, but here the bag only contains swords? Is DM still going to try to filter because we gave it a type to filter by? YES, and here comes the inefficiency. Wherever a list (or other container, such as an atom (in which case you're technically accessing their special contents list, but that's irrelevant)) contains datums of the same datatype or subtypes of the datatype you require for your loop's body,
 you can circumvent DM's filtering and automatic ```istype()``` checks by writing the loop as such:
@@ -498,7 +457,7 @@ mob
 ```
 This does NOT mean that you can access it everywhere like a global var. Instead, it means that that var will only exist once for all instances of its type, in this case that var will only exist once for all mobs - it's shared across everything in its type. (Much more like the keyword `static` in other languages like PHP/C++/C#/Java)
 
-Isn't that confusing? 
+Isn't that confusing?
 
 There is also an undocumented keyword called `static` that has the same behaviour as global but more correctly describes BYOND's behaviour. Therefore, we always use static instead of global where we need it, as it reduces suprise when reading BYOND code.
 
@@ -614,7 +573,7 @@ Dream Daemon can be unintuitive to set up. This document will cover the basic st
 
 Be sure Dream Daemon is inactive when compiling, as it locks up assets and prevents recompiling in some cases.
 
-Unit tests can be run locally with `DreamDaemon ColonialMarinesALPHA.dme someport -trusted -params "run_tests=1&verbose_tests=1"` or by hosting a server and using the debug verbs for running test cases. If you've only made changes relevant to one test set you can use the world parameter `test_set` to run only the specified test set, i.e. 
+Unit tests can be run locally with `DreamDaemon ColonialMarinesALPHA.dme someport -trusted -params "run_tests=1&verbose_tests=1"` or by hosting a server and using the debug verbs for running test cases. If you've only made changes relevant to one test set you can use the world parameter `test_set` to run only the specified test set, i.e.
 ``-params "run_tests=1&verbose_tests=1&test_set=\"Maps\""``
 
 ### Live Testing
