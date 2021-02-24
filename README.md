@@ -33,7 +33,7 @@ To start contributing:
 
 **Host**
 
-The Owner is responsible for controlling, adding, and removing maintainers from the project. While the Head Developer is officially in charge of the Development team, the Owner is a formal position to ensure ownership of the repository remains in the hands of the Hosts.
+The Host is responsible for controlling, adding, and removing maintainers from the project.
 
 **Maintainer**
 
