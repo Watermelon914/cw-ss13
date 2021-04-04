@@ -96,7 +96,7 @@ SUBSYSTEM_DEF(ticker)
 				current_state = GAME_STATE_FINISHED
 				ooc_allowed = TRUE
 				mode.declare_completion(force_ending)
-				if(text2num(SSperf_logging?.round?.id) % CONFIG_GET(number/gamemode_rounds_needed) == 0)
+				if(CONFIG_GET(number/gamemode_rounds_needed) != -1 && text2num(SSperf_logging?.round?.id) % CONFIG_GET(number/gamemode_rounds_needed) == 0)
 					addtimer(CALLBACK(
 						SSvote,
 						/datum/controller/subsystem/vote/proc/initiate_vote,
