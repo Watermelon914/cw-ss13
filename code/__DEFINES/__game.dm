@@ -139,7 +139,7 @@
 #define ELEVATOR_RECHARGE 15 SECONDS  // 15 seconds
 
 //Shuttle moving status
-#define SHUTTLE_IDLE		0
+//#define SHUTTLE_IDLE		0
 #define SHUTTLE_WARMUP		1
 #define SHUTTLE_INTRANSIT	2
 #define SHUTTLE_CRASHED		3
@@ -426,3 +426,9 @@
 // Beams
 /// For beams with an infinite duration (deletion is handled separately)
 #define BEAM_INFINITE_DURATION -1
+
+/// Used for calculations with delta_time when figuring how much "amount" to give per "time"
+/// `amount` - The number to get per time
+/// `time` - The time period in which to gain this amount
+/// To be used with delta_time. Multiplied by 10 to convert from deciseconds to seconds
+#define AMOUNT_PER_TIME(amount, time) ((amount / (time))*10)

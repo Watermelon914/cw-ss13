@@ -1,5 +1,7 @@
 /datum/caste_datum/ravager
-	caste_name = "Ravager"
+	caste_type = XENO_CASTE_RAVAGER
+	display_icon = XENO_CASTE_RAVAGER
+	display_name = XENO_CASTE_RAVAGER
 	tier = 3
 
 	melee_damage_lower = XENO_DAMAGE_TIER_6
@@ -20,7 +22,7 @@
 	tacklestrength_max = 5
 
 	evolution_allowed = FALSE
-	deevolves_to = "Lurker"
+	deevolves_to = XENO_CASTE_LURKER
 	caste_desc = "A brutal, devastating front-line attacker."
 	fire_immunity = FIRE_IMMUNITY_NO_DAMAGE
 	attack_delay = -1
@@ -28,10 +30,9 @@
 	behavior_delegate_type = /datum/behavior_delegate/ravager_base
 
 /mob/living/carbon/Xenomorph/Ravager
-	caste_name = "Ravager"
-	name = "Ravager"
+	caste_type = XENO_CASTE_RAVAGER
+	name = XENO_CASTE_RAVAGER
 	desc = "A huge, nasty red alien with enormous scythed claws."
-	icon = 'icons/mob/hostiles/ravager.dmi'
 	icon_size = 64
 	icon_state = "Ravager Walking"
 	plasma_types = list(PLASMA_CATECHOLAMINE)
@@ -44,14 +45,14 @@
 	mutation_type = RAVAGER_NORMAL
 	claw_type = CLAW_TYPE_VERY_SHARP
 
-	actions = list(
+	base_actions = list(
 		/datum/action/xeno_action/onclick/xeno_resting,
 		/datum/action/xeno_action/onclick/regurgitate,
 		/datum/action/xeno_action/watch_xeno,
 		/datum/action/xeno_action/activable/empower,
 		/datum/action/xeno_action/activable/pounce/charge,
 		/datum/action/xeno_action/activable/scissor_cut
-		)
+	)
 
 // Mutator delegate for base ravager
 /datum/behavior_delegate/ravager_base

@@ -62,7 +62,7 @@ IN_USE						used for vending/denying
 
 	//restoring sprite to initial
 	overlays.Cut()
-	icon_state = initial(icon_state)	//shouldn't be needed but just in case
+	//icon_state = initial(icon_state)	//shouldn't be needed but just in case
 	var/matrix/A = matrix()
 	apply_transform(A)
 
@@ -437,7 +437,8 @@ IN_USE						used for vending/denying
 	if(vend_delay)
 		overlays.Cut()
 		icon_state = "[initial(icon_state)]_deny"
-	sleep(15)
+	sleep(1.5 SECONDS)
+	icon_state = initial(icon_state)
 	stat &= ~IN_USE
 	update_icon()
 	return
@@ -514,7 +515,7 @@ IN_USE						used for vending/denying
 						to_chat(H, SPAN_WARNING("Only specialists can take specialist sets."))
 						vend_fail()
 						return
-					else if(!H.skills || H.skills.get_skill_level(SKILL_SPEC_WEAPONS) != SKILL_SPEC_TRAINED)
+					else if(!H.skills || H.skills.get_skill_level(SKILL_SPEC_WEAPONS) != SKILL_SPEC_ALL)
 						to_chat(H, SPAN_WARNING("You already have a specialization."))
 						vend_fail()
 						return

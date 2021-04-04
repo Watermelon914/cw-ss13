@@ -1,5 +1,7 @@
 /datum/caste_datum/hivelord
-	caste_name = "Hivelord"
+	caste_type = XENO_CASTE_HIVELORD
+	display_icon = XENO_CASTE_HIVELORD
+	display_name = XENO_CASTE_HIVELORD
 	tier = 2
 
 	melee_damage_lower = XENO_DAMAGE_TIER_1
@@ -15,7 +17,7 @@
 
 	evolution_allowed = FALSE
 	caste_desc = "A builder of really big hives."
-	deevolves_to = "Drone"
+	deevolves_to = XENO_CASTE_DRONE
 	can_hold_facehuggers = 1
 	can_hold_eggs = CAN_HOLD_TWO_HANDS
 	acid_level = 2
@@ -37,10 +39,9 @@
 	resin_build_order = GLOB.resin_build_order_hivelord
 
 /mob/living/carbon/Xenomorph/Hivelord
-	caste_name = "Hivelord"
-	name = "Hivelord"
+	caste_type = XENO_CASTE_HIVELORD
+	name = XENO_CASTE_HIVELORD
 	desc = "A builder of really big hives."
-	icon = 'icons/mob/hostiles/hivelord.dmi'
 	icon_size = 64
 	icon_state = "Hivelord Walking"
 	plasma_types = list(PLASMA_PURPLE,PLASMA_PHEROMONE)
@@ -49,7 +50,7 @@
 	mob_size = MOB_SIZE_BIG
 	drag_delay = 6 //pulling a big dead xeno is hard
 	tier = 2
-	actions = list(
+	base_actions = list(
 		/datum/action/xeno_action/onclick/xeno_resting,
 		/datum/action/xeno_action/onclick/regurgitate,
 		/datum/action/xeno_action/watch_xeno,

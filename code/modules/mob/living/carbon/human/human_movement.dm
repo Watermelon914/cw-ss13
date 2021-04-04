@@ -75,8 +75,8 @@
 		var/obj/item/weapon/gun/G = get_active_hand() //If wielding, it will ALWAYS be on the active hand
 		. += max(0, G.slowdown - wear_slowdown_reduction)
 
-	if(mobility_aura)
-		. -= 0.1 + 0.1 * mobility_aura
+	if(mobility_aura && . >= 1.5)
+		. = max(. - (0.1 + 0.1 * mobility_aura), 1.5)
 
 	if(superslowed)
 		. += HUMAN_SUPERSLOWED_AMOUNT
@@ -85,7 +85,9 @@
 		. += HUMAN_SLOWED_AMOUNT
 
 	. += CONFIG_GET(number/human_delay)
-	move_delay = .
+	var/list/movedata = list("move_delay" = .)
+	SEND_SIGNAL(src, COMSIG_HUMAN_POST_MOVE_DELAY, movedata)
+	move_delay = movedata["move_delay"]
 
 /mob/living/carbon/human/yautja/movement_delay()
 	. = ..()

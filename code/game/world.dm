@@ -106,7 +106,7 @@ var/internal_tick_usage = 0
 			sleep(10)
 
 		// Start the game ASAP
-		SSticker.current_state = GAME_STATE_SETTING_UP
+		SSticker.request_start()
 	return
 
 var/world_topic_spam_protect_ip = "0.0.0.0"
@@ -234,8 +234,8 @@ var/world_topic_spam_protect_time = world.timeofday
 
 	if(SSmapping?.configs)
 		var/datum/map_config/MG = SSmapping.configs[GROUND_MAP]
-		if(MG?.map_name)
-			s += "<br>Map: <b>[SSmapping.configs[GROUND_MAP].map_name]</b>"
+		var/datum/map_config/MS = SSmapping.configs[SHIP_MAP]
+		s += "<br>Maps | [MS?.map_name ? "<b>[MS.map_name]</b> | " : ""][MG?.map_name ? "<b>[MG.map_name]</b>" : ""]"
 
 	if(SSticker?.mode)
 		s += "<br>Mode: <b>[SSticker.mode.name]</b>"

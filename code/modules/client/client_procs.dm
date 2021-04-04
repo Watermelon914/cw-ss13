@@ -244,7 +244,7 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 	if(QDELETED(prefs) || !istype(prefs))
 		prefs = new /datum/preferences(src)
 		preferences_datums[ckey] = prefs
-	prefs.owner = src
+	prefs.client_reconnected(src)
 	prefs.last_ip = address				//these are gonna be used for banning
 	prefs.last_id = computer_id			//these are gonna be used for banning
 	fps = prefs.fps
@@ -269,11 +269,8 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 	view = world_view_size
 	. = ..()	//calls mob.Login()
 
-	// Macros added at runtime
-	runtime_macro_insert(prefs.swap_hand_hotkeymode, "hotkeymode", ".SwapMobHand")
-	runtime_macro_insert(prefs.swap_hand_default, "default", ".SwapMobHand")
-	runtime_macro_insert("Northeast", "hotkeymode", ".SwapMobHand")
-	runtime_macro_insert("Northeast", "default", ".SwapMobHand")
+	if(SSinput.initialized)
+		INVOKE_ASYNC(src, /client/proc/set_macros)
 
 	// Version check below if we ever need to start checking against BYOND versions again.
 
@@ -288,9 +285,9 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 		to_chat(src, FONT_SIZE_HUGE(SPAN_BOLDNOTICE("YOUR BYOND VERSION IS NOT WELL SUITED FOR THIS SERVER. Download latest BETA build or you may suffer random crashes or disconnects.")))
 
 	// Initialize tgui panel
-	tgui_panel.initialize()
 	src << browse(file('html/statbrowser.html'), "window=statbrowser")
 	addtimer(CALLBACK(src, .proc/check_panel_loaded), 30 SECONDS)
+	tgui_panel.initialize()
 
 	var/datum/custom_event_info/CEI = GLOB.custom_event_info_list["Global"]
 	CEI.show_player_event_info(src)
@@ -458,20 +455,6 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 
 	SEND_SIGNAL(src, COMSIG_CLIENT_KEY_UP, key)
 
-/client/verb/fix_swap_hand_macro()
-	set name = "Fix Swap Hand Macros"
-	set category = "OOC.Fix"
-
-	if (!prefs)
-		return
-
-	runtime_macro_remove(prefs.swap_hand_default, "default")
-	runtime_macro_insert(prefs.swap_hand_default, "default", ".SwapMobHand")
-
-	runtime_macro_remove(prefs.swap_hand_default, "hotkeymode")
-	runtime_macro_insert(prefs.swap_hand_default, "hotkeymode", ".SwapMobHand")
-
-	to_chat(src, SPAN_NOTICE("Fixed your swap hand macros!"))
 
 /**
   * Compiles a full list of verbs to be sent to the browser
@@ -511,3 +494,38 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 	if(statbrowser_ready)
 		return
 	to_chat(src, "<span class='userdanger'>Statpanel failed to load, click <a href='?src=[REF(src)];reload_statbrowser=1'>here</a> to reload the panel </span>")
+
+
+/**
+ * Updates the keybinds for special keys
+ *
+ * Handles adding macros for the keys that need it
+ * And adding movement keys to the clients movement_keys list
+ * At the time of writing this, communication(OOC, Say, IC) require macros
+ * Arguments:
+ * * direct_prefs - the preference we're going to get keybinds from
+ */
+/client/proc/update_special_keybinds(datum/preferences/direct_prefs)
+	var/datum/preferences/D = prefs || direct_prefs
+	if(!D?.key_bindings)
+		return
+	movement_keys = list()
+	for(var/key in D.key_bindings)
+		for(var/kb_name in D.key_bindings[key])
+			switch(kb_name)
+				if("North")
+					movement_keys[key] = NORTH
+				if("East")
+					movement_keys[key] = EAST
+				if("West")
+					movement_keys[key] = WEST
+				if("South")
+					movement_keys[key] = SOUTH
+				if("Say")
+					winset(src, "srvkeybinds-[REF(key)]", "parent=default;name=[key];command=\"say\\n.typing\"")
+				if("OOC")
+					winset(src, "srvkeybinds-[REF(key)]", "parent=default;name=[key];command=ooc")
+				if("Me")
+					winset(src, "srvkeybinds-[REF(key)]", "parent=default;name=[key];command=\"me\\n.typing\"")
+				if("Whisper")
+					winset(src, "srvkeybinds-[REF(key)]", "parent=default;name=[key];command=whisper")

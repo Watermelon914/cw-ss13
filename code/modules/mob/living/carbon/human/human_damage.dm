@@ -143,12 +143,12 @@
 
 
 /mob/living/carbon/human/getCloneLoss()
-	if(species && species.flags & (IS_SYNTHETIC|NO_SCAN))
+	if(species && species.flags & (IS_SYNTHETIC|NO_CLONE_LOSS))
 		cloneloss = 0
 	return ..()
 
 /mob/living/carbon/human/setCloneLoss(var/amount)
-	if(species && species.flags & (IS_SYNTHETIC|NO_SCAN))
+	if(species && species.flags & (IS_SYNTHETIC|NO_CLONE_LOSS))
 		cloneloss = 0
 	else
 		..()
@@ -156,7 +156,7 @@
 /mob/living/carbon/human/adjustCloneLoss(var/amount)
 	..()
 
-	if(species && species.flags & (IS_SYNTHETIC|NO_SCAN))
+	if(species && species.flags & (IS_SYNTHETIC|NO_CLONE_LOSS))
 		cloneloss = 0
 		return
 
@@ -361,7 +361,7 @@ This function restores all limbs.
 	if(def_zone)
 		target_limb = get_limb(check_zone(def_zone))
 	else
-		target_limb = get_limb(check_zone(ran_zone()))
+		target_limb = get_limb(check_zone(rand_zone()))
 	if(isnull(target_limb))
 		return FALSE
 
@@ -373,6 +373,8 @@ This function restores all limbs.
 
 	var/modified_damage = armor_damage_reduction(armour_config, damage, armor, penetration, 0, 0)
 	apply_damage(modified_damage, damage_type, target_limb)
+
+	return modified_damage
 
 /*
 	Describes how human mobs get damage applied.
@@ -386,26 +388,28 @@ This function restores all limbs.
 	var/impact_name = null, var/impact_limbs = null, var/permanent_kill = FALSE, var/mob/firer = null, \
 	var/force = FALSE
 )
-	if(protection_aura)
-		damage = round(damage * ((15 - protection_aura) / 15))
+	if(protection_aura && damage > 0)
+		damage = round(damage * ((ORDER_HOLD_CALC_LEVEL - protection_aura) / ORDER_HOLD_CALC_LEVEL))
 
 	//Handle other types of damage
 	if(damage < 0 || (damagetype != BRUTE) && (damagetype != BURN))
 		if(damagetype == HALLOSS && pain.feels_pain)
 			if((damage > 25 && prob(20)) || (damage > 50 && prob(60)))
-				emote("pain")
+				INVOKE_ASYNC(src, .proc/emote, "pain")
 
 		..(damage, damagetype, def_zone)
 		return TRUE
 
-	if(SEND_SIGNAL(src, COMSIG_HUMAN_TAKE_DAMAGE, damage, damagetype) & COMPONENT_BLOCK_DAMAGE) return
+	var/list/damagedata = list("damage" = damage)
+	if(SEND_SIGNAL(src, COMSIG_HUMAN_TAKE_DAMAGE, damagedata, damagetype) & COMPONENT_BLOCK_DAMAGE) return
+	damage = damagedata["damage"]
 
 	var/obj/limb/organ = null
 	if(isorgan(def_zone))
 		organ = def_zone
 	else
 		if(!def_zone)
-			def_zone = ran_zone(def_zone)
+			def_zone = rand_zone(def_zone)
 		organ = get_limb(check_zone(def_zone))
 	if(!organ)
 		return FALSE

@@ -1,5 +1,7 @@
 /datum/caste_datum/boiler
-	caste_name = "Boiler"
+	caste_type = XENO_CASTE_BOILER
+	display_icon = XENO_CASTE_BOILER
+	display_name = XENO_CASTE_BOILER
 	tier = 3
 
 	melee_damage_lower = XENO_DAMAGE_TIER_1
@@ -15,7 +17,7 @@
 	behavior_delegate_type = /datum/behavior_delegate/boiler_base
 
 	evolution_allowed = FALSE
-	deevolves_to = "Spitter"
+	deevolves_to = XENO_CASTE_SPITTER
 	spit_delay = 35
 	caste_desc = "Gross!"
 	acid_level = 3
@@ -28,10 +30,9 @@
 	tacklestrength_max = 4
 
 /mob/living/carbon/Xenomorph/Boiler
-	caste_name = "Boiler"
-	name = "Boiler"
+	caste_type = XENO_CASTE_BOILER
+	name = XENO_CASTE_BOILER
 	desc = "A huge, grotesque xenomorph covered in glowing, oozing acid slime."
-	icon = 'icons/mob/hostiles/boiler.dmi'
 	icon_size = 64
 	icon_state = "Boiler Walking"
 	plasma_types = list(PLASMA_NEUROTOXIN)
@@ -48,7 +49,7 @@
 
 	var/datum/effect_system/smoke_spread/xeno_acid/smoke
 
-	actions = list(
+	base_actions = list(
 		/datum/action/xeno_action/onclick/xeno_resting,
 		/datum/action/xeno_action/onclick/regurgitate,
 		/datum/action/xeno_action/watch_xeno,
@@ -72,35 +73,6 @@
 		qdel(smoke)
 		smoke = null
 	. = ..()
-
-/turf/proc/can_bombard(var/mob/bombarder)
-	if(!can_be_dissolved() && density) return FALSE
-	for(var/atom/A in src)
-		if(istype(A, /obj/structure/machinery)) continue // Machinery shouldn't block boiler gas (e.g. computers)
-		if(ismob(A)) continue // Mobs shouldn't block boiler gas
-
-		if(A && A.unacidable && A.density && !(A.flags_atom & ON_BORDER)) return FALSE
-
-	return TRUE
-
-/mob/living/carbon/Xenomorph/Boiler/proc/can_bombard_turf(var/atom/target, var/length=5) // I couldnt be arsed to do actual raycasting :I This is horribly inaccurate.
-	var/turf/current = get_turf(src)
-	var/turf/target_turf = get_turf(target)
-	var/steps = 0
-
-	while(current != target_turf)
-		if(steps > length) return FALSE
-		if(!current) return FALSE
-
-		if(!current.can_bombard(src)) return FALSE
-		if(current.opacity)	return FALSE
-		for(var/atom/A in current)
-			if(A.opacity) return FALSE
-
-		current = get_step_towards(current, target_turf)
-		steps++
-
-	return TRUE
 
 // No special behavior for boilers
 /datum/behavior_delegate/boiler_base

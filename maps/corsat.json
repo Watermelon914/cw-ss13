@@ -1,19 +1,19 @@
 {
     "map_name": "CORSAT",
-    "map_path": "map_files/Corsat",
+    "map_path": "CORSAT",
     "map_file": "Corsat.dmm",
     "environment_traits": {
         "Lockdown": true,
         "COLD": true
     },
     "survivor_types": [
-        "Survivor - Scientist",
-        "Survivor - Scientist",
-        "Survivor - Scientist",
-        "Survivor - Doctor",
-        "Survivor - Security",
-        "Survivor - Corporate Liaison",
-        "Survivor - Engineer"
+        "Survivor - CORSAT Researcher",
+        "Survivor - CORSAT Researcher",
+        "Survivor - PMC",
+        "Survivor - CORSAT Doctor",
+        "Survivor - CORSAT Security Guard",
+        "Survivor - Interstellar Commerce Commission Liaison CORSAT",
+        "Survivor - Corsat Station Engineer"
     ],
     "defcon_triggers": [
         3300,
@@ -32,5 +32,9 @@
         "neaera",
         "stok"
     ],
-    "traits": [{ "Ground": true }]
+	"traits": [{ "Ground": true }],
+	"nightmare": {
+		"scenario": "maps/Nightmare/maps/CORSAT/scenario.json",
+		"mapgen": "maps/Nightmare/maps/CORSAT/mapgen.json"
+	}
 }

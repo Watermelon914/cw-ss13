@@ -1,15 +1,14 @@
 {
     "map_name": "Solaris Ridge",
-    "map_path": "map_files/BigRed_v2",
-    "map_file": "BigRed_v2.dmm",
+    "map_path": "BigRed",
+    "map_file": "BigRed.dmm",
     "survivor_types": [
         "Survivor - Scientist",
         "Survivor - Doctor",
-        "Survivor - Chef",
         "Survivor - Chaplain",
-        "Survivor - Miner",
         "Survivor - Engineer",
         "Survivor - Trucker",
+        "Survivor - Security",
         "Survivor - Colonial Marshall"
     ],
     "defcon_triggers": [
@@ -24,5 +23,9 @@
     "monkey_types": [
         "neaera"
 	],
-	"traits": [{ "Ground": true }]
+	"traits": [{ "Ground": true }],
+	"nightmare": {
+		"scenario": "maps/Nightmare/maps/BigRed/scenario.json",
+		"mapgen": "maps/Nightmare/maps/BigRed/mapgen.json"
+	}
 }

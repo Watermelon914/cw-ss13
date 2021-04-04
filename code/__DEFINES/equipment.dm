@@ -1,30 +1,27 @@
 //FLAGS BITMASK
 
 
-//turf-only flags
-#define NOJAUNT		1
-
 //==========================================================================================
 
 //flags_atom
 
-#define NOINTERACT				(1<<0)		// You can't interact with it, at all. Useful when doing certain animations.
-#define FPRINT					(1<<1)		// takes a fingerprint
-#define CONDUCT					(1<<2)		// conducts electricity (metal etc.)
-#define ON_BORDER				(1<<3)		// 'border object'. item has priority to check when entering or leaving
-#define NOBLOODY				(1<<4)		// Don't want a blood overlay on this one.
-#define DIRLOCK					(1<<5)		// movable atom won't change direction when Moving()ing. Useful for items that have several dir states.
-#define	NOREACT					(1<<6)		//Reagents dont' react inside this container.
-#define OPENCONTAINER			(1<<7)		//is an open container for chemistry purposes
-#define RELAY_CLICK				(1<<8)		//This is used for /obj/ that relay your clicks via handle_click(), mostly for MGs ~Art
-#define ITEM_UNCATCHABLE		(1<<9) 	// The item can't be caught out of the air.
-#define UNIQUE_ITEM_TYPE		(1<<10) 	// Used for donor items to exclude them for checks.
-#define NO_SNOW_TYPE			(1<<11)	// Used for armors or uniforms that don't have a snow icon state.
-#define INVULNERABLE			(1<<12)
-#define CAN_BE_SYRINGED			(1<<13)	// syringes can inject or drain reagents in this even if it isn't an OPENCONTAINER
-#define CAN_BE_DISPENSED_INTO	(1<<14)	// Chem dispenser can dispense in this even if it isn't an OPENCONTAINER
-#define INITIALIZED				(1<<15)	// Initialized by SSatoms.
-#define ATOM_DECORATED				(1<<16) // Has run Decorate() as part of subsystem init
+#define NOINTERACT                (1<<0)  // You can't interact with it, at all. Useful when doing certain animations.
+#define FPRINT                    (1<<1)  // takes a fingerprint
+#define CONDUCT                   (1<<2)  // conducts electricity (metal etc.)
+#define ON_BORDER                 (1<<3)  // 'border object'. item has priority to check when entering or leaving
+#define NOBLOODY                  (1<<4)  // Don't want a blood overlay on this one.
+#define DIRLOCK                   (1<<5)  // movable atom won't change direction when Moving()ing. Useful for items that have several dir states.
+#define NOREACT                   (1<<6)  //Reagents dont' react inside this container.
+#define OPENCONTAINER             (1<<7)  //is an open container for chemistry purposes
+#define RELAY_CLICK               (1<<8)  //This is used for /obj/ that relay your clicks via handle_click(), mostly for MGs ~Art
+#define ITEM_UNCATCHABLE          (1<<9)  // The item can't be caught out of the air.
+#define NO_NAME_OVERRIDE          (1<<10) // Used for nonstandard marine clothing to ignore 'specialty' var.
+#define NO_SNOW_TYPE              (1<<11) // Used for armors or uniforms that don't have a snow icon state.
+#define INVULNERABLE              (1<<12)
+#define CAN_BE_SYRINGED           (1<<13) // syringes can inject or drain reagents in this even if it isn't an OPENCONTAINER
+#define CAN_BE_DISPENSED_INTO     (1<<14) // Chem dispenser can dispense in this even if it isn't an OPENCONTAINER
+#define INITIALIZED               (1<<15) // Initialized by SSatoms.
+#define ATOM_DECORATED            (1<<16) // Has run Decorate() as part of subsystem init
 //==========================================================================================
 
 #define HANDLE_BARRIER_CHANCE 1
@@ -43,8 +40,8 @@
 #define	ITEM_ABSTRACT			(1<<6)	// The item is abstract (grab, powerloader_clamp, etc)
 #define ITEM_PREDATOR			(1<<7) // Specific predator item interactions.
 #define MOB_LOCK_ON_EQUIP		(1<<8)	// Lock this item to the mob that equips it up until permadeath
-#define BLOCK_KNOCKDOWN			(1<<9)	// Wearing this will stop you from being pushed over
-#define NO_CRYO_STORE			(1<<10) // This item deletes itself when put in cryo storage
+#define NO_CRYO_STORE			(1<<9) // This item deletes itself when put in cryo storage
+#define ITEM_OVERRIDE_NORTHFACE	(1<<10) // For backpacks if they should have unique layering functions
 
 //==========================================================================================
 
@@ -90,6 +87,7 @@
 //To successfully stop taking all pressure damage you must have both a suit and head item with this flag.
 #define BLOCKSHARPOBJ 	(1<<8)  //From /tg: prevents syringes, parapens and hypos if the external suit or helmet (if targeting head) has this flag. Example: space suits, biosuit, bombsuits, thick suits that cover your body.
 #define NOPRESSUREDMAGE (1<<9) //This flag is used on the flags variable for SUIT and HEAD items which stop pressure damage.
+#define BLOCK_KNOCKDOWN (1<<10) //Suits only. Wearing this will stop you from being pushed over.
 //SUITS AND HELMETS====================================================================================
 
 

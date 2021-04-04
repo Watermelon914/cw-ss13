@@ -5,7 +5,7 @@
 	burn_mod = 0.65
 	reagent_tag = IS_YAUTJA
 	mob_flags = KNOWS_TECHNOLOGY
-	flags = IS_WHITELISTED|HAS_SKIN_COLOR|NO_SCAN|NO_POISON|NO_NEURO|SPECIAL_BONEBREAK|NO_SHRAPNEL
+	flags = IS_WHITELISTED|HAS_SKIN_COLOR|NO_CLONE_LOSS|NO_POISON|NO_NEURO|SPECIAL_BONEBREAK|NO_SHRAPNEL|HAS_HARDCRIT
 	unarmed_type = /datum/unarmed_attack/punch/strong
 	secondary_unarmed_type = /datum/unarmed_attack/bite/strong
 	pain_type = /datum/pain/yautja
@@ -17,10 +17,7 @@
 	death_message = "clicks in agony and falls still, motionless and completely lifeless..."
 	darksight = 5
 	slowdown = -0.5
-
-	icobase_source = 'icons/mob/humans/species/r_zombie.dmi'
-	deform_source = 'icons/mob/humans/species/r_zombie.dmi'
-
+	total_health = 150 //more health than regular humans, makes up for hardcrit reintroduction
 	timed_hug = FALSE
 
 	heat_level_1 = 500
@@ -34,8 +31,8 @@
 		/mob/living/carbon/human/proc/remove_from_hunt
 		)
 
-	knock_down_reduction = 2
-	stun_reduction = 2
+	knock_down_reduction = 4
+	stun_reduction = 4
 
 		//Set their special slot priority
 
@@ -71,6 +68,9 @@
 
 /datum/species/yautja/proc/setup_yautja_icons()
 	SIGNAL_HANDLER
+
+	icobase_source = CONFIG_GET(string/species_hunter)
+	deform_source = CONFIG_GET(string/species_hunter)
 	UnregisterSignal(SSdcs, COMSIG_GLOB_MODE_POSTSETUP, .proc/setup_yautja_icons)
 
 /datum/species/yautja/larva_impregnated(var/obj/item/alien_embryo/embryo)
@@ -129,21 +129,21 @@
 	for(var/obj/limb/L in H.limbs)
 		switch(L.name)
 			if("groin","chest")
-				L.min_broken_damage = 80
-				L.max_damage = 200
-				L.time_to_knit = 1200 // 10 mins
+				L.min_broken_damage = 140
+				L.max_damage = 140
+				L.time_to_knit = 1200 // 2 minutes, time is in tenths of a second
 			if("head")
-				L.min_broken_damage = 70
-				L.max_damage = 90
-				L.time_to_knit = 1200 // 10 mins
-			if("l_hand","r_hand","r_foot","l_foot")
-				L.min_broken_damage = 40
-				L.max_damage = 60
-				L.time_to_knit = 600 // 5 mins
-			if("r_leg","r_arm","l_leg","l_arm")
-				L.min_broken_damage = 60
+				L.min_broken_damage = 80
 				L.max_damage = 80
-				L.time_to_knit = 600 // 5 mins
+				L.time_to_knit = 1200 // 2 minutes, time is in tenths of a second
+			if("l_hand","r_hand","r_foot","l_foot")
+				L.min_broken_damage = 55
+				L.max_damage = 55
+				L.time_to_knit = 600 // 1 minute, time is in tenths of a second
+			if("r_leg","r_arm","l_leg","l_arm")
+				L.min_broken_damage = 75
+				L.max_damage = 75
+				L.time_to_knit = 600 // 1 minute, time is in tenths of a second
 
 
 	var/datum/mob_hud/medical/advanced/A = huds[MOB_HUD_MEDICAL_ADVANCED]

@@ -288,7 +288,7 @@
 					var/obj/item/clothing/gloves/yautja/Y = H.gloves
 					if(Y && istype(Y) && Y.cloaked)
 						to_chat(H, SPAN_WARNING(" Your bracers hiss and spark as they short out!"))
-						Y.decloak(H)
+						Y.decloak(H, TRUE)
 
 		else if(isXeno(C))
 			river_slowdown = 1.3
@@ -618,6 +618,10 @@
 	icon = 'icons/turf/escapepods.dmi'
 	icon_state = "floor3"
 
+/turf/open/shuttle/lifeboat
+	icon = 'icons/turf/almayer.dmi'
+	icon_state = "plating"
+	allow_construction = FALSE
 
 // Elevator floors
 /turf/open/shuttle/elevator

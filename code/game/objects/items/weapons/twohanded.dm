@@ -23,10 +23,6 @@
 	..()
 	unwield(user)
 
-/obj/item/weapon/melee/twohanded/pickup(mob/user)
-	. = ..()
-	unwield(user)
-
 /obj/item/proc/wield(var/mob/user)
 	if( !(flags_item & TWOHANDED) || flags_item & WIELDED ) return
 
@@ -120,8 +116,9 @@
 	..()
 	//This hand should be holding the main weapon. If everything worked correctly, it should not be wielded.
 	//If it is, looks like we got our hand torn off or something.
-	var/obj/item/main_hand = user.get_active_hand()
-	if(main_hand) main_hand.unwield(user)
+	if(!QDESTROYING(src))
+		var/obj/item/main_hand = user.get_active_hand()
+		if(main_hand) main_hand.unwield(user)
 
 /*
  * Fireaxe
@@ -234,7 +231,13 @@
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "stabbed", "jabbed", "torn", "gored")
 
-
+/obj/item/weapon/melee/twohanded/spear/hunter
+	name = "hunter spear"
+	desc = "A spear of exquisite design, used by an ancient civilisation."
+	icon_state = "spearhunter"
+	item_state = "spearhunter"
+	force = MELEE_FORCE_TIER_3
+	force_wielded = MELEE_FORCE_TIER_7
 
 /obj/item/weapon/melee/twohanded/glaive
 	name = "war glaive"

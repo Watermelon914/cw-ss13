@@ -135,11 +135,14 @@ Defined in conflicts.dm of the #defines folder.
 		G.fire_sound = "gun_silenced"
 
 	if(attachment_action_type)
-		var/datum/action/A = new attachment_action_type(src, G)
+		var/given_action = FALSE
 		if(isliving(G.loc))
 			var/mob/living/L = G.loc
 			if(G == L.l_hand || G == L.r_hand)
-				A.give_action(G.loc)
+				give_action(L, attachment_action_type, src, G)
+				given_action = TRUE
+		if(!given_action)
+			new attachment_action_type(src, G)
 
 	// Sharp attachments (bayonet) make weapons sharp as well.
 	if(sharp)
@@ -232,6 +235,22 @@ Defined in conflicts.dm of the #defines folder.
 	scatter_unwielded_mod = -SCATTER_AMOUNT_TIER_10
 	damage_falloff_mod = 0.4
 
+/obj/item/attachable/suppressor/m40_integral
+	name = "\improper M40SD integral suppressor"
+	icon_state = "m40sd_suppressor"
+	attach_icon = "m40sd_suppressor_a"
+
+/obj/item/attachable/suppressor/m40_integral/New()
+	..()
+	accuracy_mod = HIT_ACCURACY_MULT_TIER_3
+	damage_mod = -BULLET_DAMAGE_MULT_TIER_1
+	recoil_mod = -RECOIL_AMOUNT_TIER_5
+	scatter_mod = -SCATTER_AMOUNT_TIER_10
+	recoil_unwielded_mod = -RECOIL_AMOUNT_TIER_5
+	scatter_unwielded_mod = -SCATTER_AMOUNT_TIER_10
+	damage_falloff_mod = 0.4
+	attach_icon = "m40sd_suppressor_a"
+
 /obj/item/attachable/bayonet
 	name = "\improper M5 'Night Raider' bayonet"
 	icon_state = "bayonet"
@@ -310,8 +329,6 @@ Defined in conflicts.dm of the #defines folder.
 /obj/item/attachable/heavy_barrel/Attach(obj/item/weapon/gun/G)
 	if(istype(G, /obj/item/weapon/gun/shotgun))
 		damage_mod = BULLET_DAMAGE_MULT_TIER_1
-	else if(istype(G, /obj/item/weapon/gun/rifle/m41a))
-		damage_mod = BULLET_DAMAGE_MULT_TIER_3
 	else
 		damage_mod = BULLET_DAMAGE_MULT_TIER_6
 	..()
@@ -1027,26 +1044,21 @@ Defined in conflicts.dm of the #defines folder.
 
 /obj/item/attachable/stock/smg/collapsible/brace
 	name = "\improper submachinegun arm brace"
-	desc = "A specialized stock for use on an M39 submachine gun. It makes one handing more accurate at the expense of fire rate. Wielding the weapon with this stock attached confers a major inaccuracy and recoil debuff."
+	desc = "A specialized stock for use on an M39 submachine gun. It makes one handing more accurate at the expense of burst amount. Wielding the weapon with this stock attached confers a major inaccuracy and recoil debuff."
 	size_mod = 1
 	icon_state = "smg_brace"
 	attach_icon = "smg_brace_a"
 	pixel_shift_x = 43
 	pixel_shift_y = 11
-	collapse_delay = 15
+	collapse_delay = 2.5 SECONDS
 	activated = FALSE
 	deploy_message = list("unlock","lock")
 
 /obj/item/attachable/stock/smg/collapsible/brace/New()
 	..()
-	//Makes stuff better when one handed by a LOT.
-	burst_scatter_mod = -SCATTER_AMOUNT_TIER_10
-	scatter_unwielded_mod = -SCATTER_AMOUNT_TIER_10
-	accuracy_unwielded_mod = HIT_ACCURACY_MULT_TIER_4
-	recoil_unwielded_mod = -RECOIL_AMOUNT_TIER_3
-	movement_acc_penalty_mod = -MOVEMENT_ACCURACY_PENALTY_MULT_TIER_4
+	//Emulates two-handing an SMG.
+	burst_mod = -BURST_AMOUNT_TIER_3 //2 shots instead of 5.
 
-	delay_mod = FIRE_DELAY_TIER_9
 	accuracy_mod = -HIT_ACCURACY_MULT_TIER_3
 	scatter_mod = SCATTER_AMOUNT_TIER_8
 	recoil_mod = RECOIL_AMOUNT_TIER_2
@@ -1056,13 +1068,26 @@ Defined in conflicts.dm of the #defines folder.
 /obj/item/attachable/stock/smg/collapsible/brace/apply_on_weapon(obj/item/weapon/gun/G)
 	if(activated)
 		G.flags_item |= NODROP
+		accuracy_mod = -HIT_ACCURACY_MULT_TIER_3
+		scatter_mod = SCATTER_AMOUNT_TIER_8
+		recoil_mod = RECOIL_AMOUNT_TIER_2 //Hurts pretty bad if it's wielded.
+		accuracy_unwielded_mod = HIT_ACCURACY_MULT_TIER_4
+		recoil_unwielded_mod = -RECOIL_AMOUNT_TIER_4
+		movement_acc_penalty_mod = -MOVEMENT_ACCURACY_PENALTY_MULT_TIER_4 //Does well if it isn't.
 		icon_state = "smg_brace_on"
 		attach_icon = "smg_brace_a_on"
 	else
 		G.flags_item &= ~NODROP
+		accuracy_mod = 0
+		scatter_mod = 0
+		recoil_mod = 0
+		accuracy_unwielded_mod = 0
+		recoil_unwielded_mod = 0
+		movement_acc_penalty_mod = 0 //Does pretty much nothing if it's not activated.
 		icon_state = "smg_brace"
 		attach_icon = "smg_brace_a"
 
+	G.recalculate_attachment_bonuses()
 	G.update_overlays(src, "stock")
 
 /obj/item/attachable/stock/revolver
@@ -1282,7 +1307,7 @@ Defined in conflicts.dm of the #defines folder.
 	set waitfor = 0
 	var/obj/item/explosive/grenade/G = loaded_grenades[1]
 
-	if(grenade_grief_check(G))
+	if(G.has_iff && grenade_grief_check(G))
 		to_chat(user, SPAN_WARNING("\The [name]'s IFF inhibitor prevents you from firing!"))
 		msg_admin_niche("[key_name(user)] attempted to prime \a [G.name] in [get_area(src)] (<A HREF='?_src_=admin_holder;adminplayerobservecoodjump=1;X=[src.loc.x];Y=[src.loc.y];Z=[src.loc.z]'>JMP</a>)")
 		return
@@ -1480,7 +1505,7 @@ Defined in conflicts.dm of the #defines folder.
 		return internal_extinguisher.afterattack(target, user)
 
 /obj/item/attachable/attached_gun/extinguisher/proc/initialize_internal_extinguisher()
-	internal_extinguisher = new /obj/item/tool/extinguisher/mini()
+	internal_extinguisher = new /obj/item/tool/extinguisher/mini/integrated_flamer()
 	internal_extinguisher.safety = FALSE
 	internal_extinguisher.create_reagents(internal_extinguisher.max_water)
 	internal_extinguisher.reagents.add_reagent("water", internal_extinguisher.max_water)
@@ -1488,7 +1513,7 @@ Defined in conflicts.dm of the #defines folder.
 /obj/item/attachable/attached_gun/extinguisher/pyro
 	name = "HME-88B underbarrel extinguisher"
 	desc = "An experimental Taiho-Technologies HME-88B underbarrel extinguisher integrated with a select few gun models. It is capable of putting out the strongest of flames. Point at flame before applying pressure."
-	flags_attach_features = ATTACH_ACTIVATION|ATTACH_WEAPON|ATTACH_MELEE
+	flags_attach_features = ATTACH_ACTIVATION|ATTACH_WEAPON|ATTACH_MELEE //not removable
 
 /obj/item/attachable/attached_gun/extinguisher/pyro/initialize_internal_extinguisher()
 	internal_extinguisher = new /obj/item/tool/extinguisher/pyro()

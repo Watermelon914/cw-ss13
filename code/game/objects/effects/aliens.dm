@@ -6,12 +6,12 @@
 /obj/effect/xenomorph
 	name = "alien thing"
 	desc = "You shouldn't be seeing this."
-	icon = 'icons/effects/xeno/Effects.dmi'
 	unacidable = TRUE
 	layer = FLY_LAYER
 
 /obj/effect/xenomorph/Initialize(mapload, ...)
 	. = ..()
+	icon = get_icon_from_source(CONFIG_GET(string/alien_effects))
 
 /obj/effect/xenomorph/splatter
 	name = "splatter"
@@ -59,7 +59,10 @@
 
 	var/time_to_live = 10
 
-/obj/effect/xenomorph/spray/Initialize(mapload, new_source_name, mob/new_source_mob) //Self-deletes
+/obj/effect/xenomorph/spray/no_stun
+	stun_duration = 0
+
+/obj/effect/xenomorph/spray/Initialize(mapload, new_source_name, mob/new_source_mob, var/hive) //Self-deletes
 	. = ..()
 
 	// Stats tracking
@@ -72,6 +75,9 @@
 		source_name = new_source_name
 	else
 		source_name = initial(name)
+
+	if(hive)
+		hivenumber = hive
 
 	// check what's in our turf
 	for(var/atom/atm in loc)
@@ -203,6 +209,9 @@
 	time_to_live = 3 SECONDS
 	// Stuns for 2 seconds, lives for 3 seconds. Seems to stun longer than it lives for at 2 seconds
 
+/obj/effect/xenomorph/spray/strong/no_stun
+	stun_duration = 0
+
 /obj/effect/xenomorph/spray/weak/apply_spray(mob/living/carbon/M)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
@@ -328,7 +337,7 @@
 
 	if(++ticks >= strength_t)
 		visible_message(SPAN_XENODANGER("[acid_t] collapses under its own weight into a puddle of goop and undigested debris!"))
-		playsound(src, "acid_hit", 25)
+		playsound(src, "acid_hit", 25, TRUE)
 
 		if(istype(acid_t, /turf))
 			if(istype(acid_t, /turf/closed/wall))
@@ -336,7 +345,7 @@
 				new /obj/effect/acid_hole (W)
 			else
 				var/turf/T = acid_t
-				T.ChangeTurf(/turf/open/floor/plating)
+				T.ScrapeAway()
 		else if (istype(acid_t, /obj/structure/girder))
 			var/obj/structure/girder/G = acid_t
 			G.dismantle()
@@ -350,8 +359,6 @@
 			if(acid_t.contents.len) //Hopefully won't auto-delete things inside melted stuff..
 				for(var/mob/M in acid_t.contents)
 					if(acid_t.loc) M.forceMove(acid_t.loc)
-				for(var/obj/item/document_objective/O in acid_t.contents)
-					if(acid_t.loc) O.forceMove(acid_t.loc)
 			QDEL_NULL(acid_t)
 
 		qdel(src)
@@ -490,9 +497,9 @@
 			H.apply_armoured_damage(damage * XVX_ACID_DAMAGEMULT * xeno_empower_modifier, ARMOR_BIO, BURN)
 		else
 			if(empowered)
-				new /datum/effects/acid(H, linked_xeno, initial(linked_xeno.caste_name))
+				new /datum/effects/acid(H, linked_xeno, initial(linked_xeno.caste_type))
 			var/found = null
-			for (var/datum/effects/xeno_freeze/F in H.effects_list)
+			for (var/datum/effects/boiler_trap/F in H.effects_list)
 				if (F.source_mob == linked_xeno)
 					found = F
 					break

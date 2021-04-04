@@ -159,7 +159,7 @@
 			if(current_mag.chamber_contents[current_mag.chamber_position] == "bullet")
 				current_mag.current_rounds-- //Subtract the round from the mag.
 				in_chamber = create_bullet(ammo, initial(name))
-				apply_traits_to_in_chamber()
+				apply_traits(in_chamber)
 				return in_chamber
 		else if(current_mag.chamber_closed)
 			unload(null)
@@ -506,7 +506,24 @@
 					/obj/item/attachable/mateba/dark,
 					/obj/item/attachable/mateba/long/dark,
 					/obj/item/attachable/mateba/short/dark)
-	starting_attachment_types = list(/obj/item/attachable/mateba/dark)
+	starting_attachment_types = null
+
+/obj/item/weapon/gun/revolver/mateba/admiral/handle_starting_attachment()
+	..()
+	var/obj/item/attachable/mateba/long/dark/barrel = new(src)
+	barrel.flags_attach_features &= ~ATTACH_REMOVABLE
+	barrel.Attach(src)
+	update_attachables()
+
+/obj/item/weapon/gun/revolver/mateba/admiral/santa
+	name = "\improper Festeba"
+	desc = "The Mateba used by SANTA himself. Rumoured to be loaded with explosive ammunition."
+	icon_state = "amateba"
+	item_state = "amateba"
+	current_mag = /obj/item/ammo_magazine/internal/revolver/mateba/explosive
+	color = "#FF0000"
+	fire_sound = 'sound/voice/alien_queen_xmas.ogg'
+	starting_attachment_types = list(/obj/item/attachable/heavy_barrel, /obj/item/attachable/quickfire)
 
 /obj/item/weapon/gun/revolver/mateba/engraved
 	name = "\improper engraved Mateba autorevolver"

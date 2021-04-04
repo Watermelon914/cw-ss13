@@ -24,7 +24,7 @@
 	body_temperature = 350
 
 	mob_flags = KNOWS_TECHNOLOGY
-	flags = IS_WHITELISTED|NO_BREATHE|NO_SCAN|NO_BLOOD|NO_POISON|IS_SYNTHETIC|NO_CHEM_METABOLIZATION|NO_NEURO
+	flags = IS_WHITELISTED|NO_BREATHE|NO_CLONE_LOSS|NO_BLOOD|NO_POISON|IS_SYNTHETIC|NO_CHEM_METABOLIZATION|NO_NEURO
 
 	blood_color = "#EEEEEE"
 
@@ -67,7 +67,7 @@
 
 	pain_type = /datum/pain/synthetic/early_synthetic
 	rarity_value = 1.5
-	slowdown = 1.4
+	slowdown = 0.45
 	total_health = 200 //But more durable
 	insulated = 1
 

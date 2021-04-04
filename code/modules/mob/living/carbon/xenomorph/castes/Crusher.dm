@@ -1,5 +1,7 @@
 /datum/caste_datum/crusher
-	caste_name = "Crusher"
+	caste_type = XENO_CASTE_CRUSHER
+	display_icon = XENO_CASTE_CRUSHER
+	display_name = XENO_CASTE_CRUSHER
 	tier = 3
 
 	melee_damage_lower = XENO_DAMAGE_TIER_5
@@ -20,14 +22,13 @@
 	tackle_chance = 25
 
 	evolution_allowed = FALSE
-	deevolves_to = "Warrior"
+	deevolves_to = XENO_CASTE_WARRIOR
 	caste_desc = "A huge tanky xenomorph."
 
 /mob/living/carbon/Xenomorph/Crusher
-	caste_name = "Crusher"
-	name = "Crusher"
+	caste_type = XENO_CASTE_CRUSHER
+	name = XENO_CASTE_CRUSHER
 	desc = "A huge alien with an enormous armored head crest."
-	icon = 'icons/mob/hostiles/crusher.dmi'
 	icon_size = 64
 	icon_state = "Crusher Walking"
 	plasma_types = list(PLASMA_CHITIN)
@@ -45,7 +46,7 @@
 
 	rebounds = FALSE // no more fucking pinball crooshers
 
-	actions = list(
+	base_actions = list(
 		/datum/action/xeno_action/onclick/xeno_resting,
 		/datum/action/xeno_action/onclick/regurgitate,
 		/datum/action/xeno_action/watch_xeno,
@@ -194,20 +195,17 @@
 		update_icons()
 
 /mob/living/carbon/Xenomorph/Crusher/update_icons()
-	if(stat == DEAD)
-		icon_state = "[mutation_type] Crusher Dead"
-	else if(lying)
-		if((resting || sleeping) && (!knocked_down && !knocked_out && health > 0))
-			icon_state = "[mutation_type] Crusher Sleeping"
-		else
-			icon_state = "[mutation_type] Crusher Knocked Down"
-	else
-		if(throwing) //Let it build up a bit so we're not changing icons every single turf
-			icon_state = "[mutation_type] Crusher Charging"
-		else
-			icon_state = "[mutation_type] Crusher Running"
+	if(stat == DEAD || lying)
+		return ..()
 
-	update_fire() //the fire overlay depends on the xeno's stance, so we must update it.
+	. = ..()
+
+	if(caste.caste_type != caste.display_icon)
+		return
+
+	if(throwing) //Let it build up a bit so we're not changing icons every single turf
+		icon_state = "[mutation_type] [caste.display_icon] Charging"
+
 
 // Mutator delegate for base ravager
 /datum/behavior_delegate/crusher_base

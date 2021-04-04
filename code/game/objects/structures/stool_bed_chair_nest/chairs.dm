@@ -68,20 +68,23 @@
 	hit_bed_sound = 'sound/weapons/bladeslice.ogg'
 	debris = list()
 
-/obj/structure/bed/chair/comfy/brown
-	color = rgb(255,113,0)
+/obj/structure/bed/chair/comfy/orange
+	icon_state = "comfychair_orange"
 
 /obj/structure/bed/chair/comfy/beige
-	color = rgb(255,253,195)
+	icon_state = "comfychair_beige"
 
 /obj/structure/bed/chair/comfy/teal
-	color = rgb(0,255,255)
+	icon_state = "comfychair_teal"
 
 /obj/structure/bed/chair/comfy/black
-	color = rgb(167,164,153)
+	icon_state = "comfychair_black"
 
 /obj/structure/bed/chair/comfy/lime
-	color = rgb(255,251,0)
+	icon_state = "comfychair_lime"
+
+/obj/structure/bed/chair/comfy/blue
+	icon_state = "comfychair_blue"
 
 /obj/structure/bed/chair/office
 	anchored = 0
@@ -95,7 +98,7 @@
 		var/mob/living/occupant = buckled_mob
 		unbuckle()
 
-		var/def_zone = ran_zone()
+		var/def_zone = rand_zone()
 		occupant.throw_atom(A, 3, propelled)
 		occupant.apply_effect(6, STUN)
 		occupant.apply_effect(6, WEAKEN)
@@ -104,7 +107,7 @@
 		playsound(src.loc, 'sound/weapons/punch1.ogg', 25, 1)
 		if(ishuman(A) && !isYautja(A))
 			var/mob/living/victim = A
-			def_zone = ran_zone()
+			def_zone = rand_zone()
 			victim.apply_effect(6, STUN)
 			victim.apply_effect(6, WEAKEN)
 			victim.apply_effect(6, STUTTER)

@@ -823,12 +823,17 @@
 	icon_state = "roburger"
 	filling_color = "#CCCCCC"
 
-/obj/item/reagent_container/food/snacks/roburger/Initialize()
+/obj/item/reagent_container/food/snacks/roburger/Initialize(mapload, ...)
 	. = ..()
 	reagents.add_reagent("nutriment", 2)
+	bitesize = 2
+
+/// Vanilla roburger - the nanites turn people into cyborgs
+/obj/item/reagent_container/food/snacks/roburger/unsafe
+/obj/item/reagent_container/food/snacks/roburger/unsafe/Initialize(mapload, ...)
+	. = ..()
 	if(prob(5))
 		reagents.add_reagent("nanites", 2)
-	bitesize = 2
 
 /obj/item/reagent_container/food/snacks/roburgerbig
 	name = "roburger"
@@ -3105,7 +3110,8 @@
 	name = "CHUNK box"
 	desc = "A bar of \"The <b>CHUNK</b>\" brand chocolate. <i>\"The densest chocolate permitted to exist according to federal law. We are legally required to ask you not to use this blunt object for anything other than nutrition.\"</i>"
 	icon_state = "chunk"
-	force = 10 //LEGAL LIMIT OF CHOCOLATE
+	force = 15 //LEGAL LIMIT OF CHOCOLATE
+	throwforce = 10
 	bitesize = 2
 	wrapper = /obj/item/trash/chunk
 

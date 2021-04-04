@@ -79,11 +79,14 @@ There are several things that need to be remembered:
 	var/image/I = overlays_standing[cache_index]
 	if(I)
 		I.appearance_flags |= RESET_COLOR
+		SEND_SIGNAL(src, COMSIG_HUMAN_OVERLAY_APPLIED, cache_index, I)
 		overlays += I
 
 /mob/living/carbon/human/remove_overlay(cache_index)
 	if(overlays_standing[cache_index])
-		overlays -= overlays_standing[cache_index]
+		var/image/I = overlays_standing[cache_index]
+		SEND_SIGNAL(src, COMSIG_HUMAN_OVERLAY_REMOVED, cache_index, I)
+		overlays -= I
 		overlays_standing[cache_index] = null
 
 
@@ -535,7 +538,6 @@ There are several things that need to be remembered:
 		overlays_standing[FACEMASK_LAYER] = I
 		apply_overlay(FACEMASK_LAYER)
 
-
 /mob/living/carbon/human/update_inv_back()
 	remove_overlay(BACK_LAYER)
 	if(!back)
@@ -546,6 +548,9 @@ There are several things that need to be remembered:
 
 	var/image/I = back.get_mob_overlay(src, WEAR_BACK)
 	I.layer = -BACK_LAYER
+
+	if(dir == NORTH && (back.flags_item & ITEM_OVERRIDE_NORTHFACE))
+		I.layer = -BACK_FRONT_LAYER
 	overlays_standing[BACK_LAYER] = I
 	apply_overlay(BACK_LAYER)
 
@@ -640,9 +645,9 @@ There are several things that need to be remembered:
 	var/image/standing
 	switch(chestburst)
 		if(1)
-			standing = image("icon" = 'icons/effects/xeno/Effects.dmi',"icon_state" = "burst_stand", "layer" = -BURST_LAYER)
+			standing = image("icon" = get_icon_from_source(CONFIG_GET(string/alien_effects)),"icon_state" = "burst_stand", "layer" = -BURST_LAYER)
 		if(2)
-			standing = image("icon" = 'icons/effects/xeno/Effects.dmi',"icon_state" = "bursted_stand", "layer" = -BURST_LAYER)
+			standing = image("icon" = get_icon_from_source(CONFIG_GET(string/alien_effects)),"icon_state" = "bursted_stand", "layer" = -BURST_LAYER)
 		else
 			return
 	overlays_standing[BURST_LAYER] = standing

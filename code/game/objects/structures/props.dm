@@ -104,8 +104,9 @@
 	return
 
 /obj/structure/prop/dam/torii/attackby(obj/item/W, mob/user)
-	..()
 	var/L
+	if(lit)
+		return
 	if(istype(W, /obj/item/tool/weldingtool))
 		var/obj/item/tool/weldingtool/WT = W
 		if(WT.isOn())
@@ -157,9 +158,9 @@
 		if(W.heat_source > 200)
 			L = 1
 	if(L)
-		visible_message("[user] quietly goes from lantern to lantern on to torri, lighting the wicks in each one.")
+		visible_message("[user] quietly goes from lantern to lantern on the torii, lighting the wicks in each one.")
+		lit = TRUE
 		Update()
-	return
 
 /obj/structure/prop/dam/gravestone
 	name = "grave marker"
@@ -434,3 +435,12 @@
 
 /obj/structure/prop/invuln/ex_act(severity, direction)
 	return
+
+/obj/structure/prop/invuln/lifeboat_hatch_placeholder
+	density = 0
+	name = "non-functional hatch"
+	desc = "You'll need more than a prybar for this one."
+	icon = 'icons/obj/structures/machinery/bolt_target.dmi'
+
+/obj/structure/prop/invuln/lifeboat_hatch_placeholder/terminal
+	icon = 'icons/obj/structures/machinery/bolt_terminal.dmi'

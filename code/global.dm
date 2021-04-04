@@ -27,8 +27,8 @@
 // 512.1430 increases maximum bit flags from 16 to 24, so the following flags should be available for future changes:
 //=================================================
 
-#define AHOLD_IS_MENTOR(ahold) (ahold && (ahold.rights & R_MENTOR))
-#define AHOLD_IS_ONLY_MENTOR(ahold) (ahold && (ahold.rights & R_MENTOR) == ahold.rights)
+#define CLIENT_HAS_RIGHTS(cli, flags) ((cli?.admin_holder?.rights & flags) == flags)
+#define CLIENT_IS_STAFF(cli) (cli?.admin_holder?.rights & (R_MOD|R_ADMIN))
 
 #define AHOLD_IS_MOD(ahold) (ahold && (ahold.rights & R_MOD))
 #define AHOLD_IS_ADMIN(ahold) (ahold && (ahold.rights & R_ADMIN))
@@ -79,8 +79,7 @@ var/CELLRATE = 0.002	// multiplier for watts per tick <> cell storage (eg: 0.02 
 var/CHARGELEVEL = 0.0005 // Cap for how fast cells charge, as a percentage-per-tick (0.01 means cellcharge is capped to 1% per second)
 
 var/VehicleElevatorConsole
-var/HangarUpperElevator
-var/HangarLowerElevator
+var/VehicleGearConsole
 
 //Spawnpoints.
 var/list/fallen_list = list()

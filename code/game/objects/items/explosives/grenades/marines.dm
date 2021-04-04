@@ -52,12 +52,12 @@
 
 /obj/item/explosive/grenade/HE/PMC
 	name = "\improper M12 blast grenade"
-	desc = "A high-explosive grenade produced for private security firms. It explodes 3 seconds after the pin has been pulled."
+	desc = "A high-explosive grenade produced for private security firms. It explodes around 3 seconds after the pin has been pulled."
 	icon_state = "grenade_pmc"
 	item_state = "grenade_ex"
 	underslug_launchable = FALSE
-	explosion_power = 130
-	falloff_mode = EXPLOSION_FALLOFF_SHAPE_LINEAR
+	explosion_power = 200
+	falloff_mode = EXPLOSION_FALLOFF_SHAPE_EXPONENTIAL_HALF
 
 
 
@@ -354,9 +354,18 @@
 		throw_range = initial(throw_range)
 		w_class = initial(w_class)
 
-
 /obj/item/explosive/grenade/HE/training/flamer_fire_act()
 	return
+
+
+/obj/item/explosive/grenade/HE/m15/rubber
+	name = "\improper M15 rubber pellet grenade"
+	desc = "A relatively harmless version of the M15 grenade designed for riot control and combat exercises."
+	icon_state = "rubber_grenade"
+	item_state = "rubber_grenade"
+	explosion_power = 0
+	shrapnel_type = /datum/ammo/bullet/shrapnel/rubber
+
 
 /obj/item/explosive/grenade/HE/holy_hand_grenade
 	name = "\improper Holy Hand Grenade of Antioch"

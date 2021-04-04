@@ -1,6 +1,8 @@
 //burrower is COMBAT support
 /datum/caste_datum/burrower
-	caste_name = "Burrower"
+	caste_type = XENO_CASTE_BURROWER
+	display_icon = XENO_CASTE_BURROWER
+	display_name = XENO_CASTE_BURROWER
 	tier = 2
 
 	melee_damage_lower = XENO_DAMAGE_TIER_2
@@ -14,7 +16,7 @@
 	evasion = XENO_EVASION_NONE
 	speed = XENO_SPEED_TIER_4
 
-	deevolves_to = "Drone"
+	deevolves_to = XENO_CASTE_DRONE
 	caste_desc = "A digger and trapper."
 	acid_level = 2
 	weed_level = WEED_LEVEL_STANDARD
@@ -32,10 +34,9 @@
 	tremor_cooldown = 450
 
 /mob/living/carbon/Xenomorph/Burrower
-	caste_name = "Burrower"
-	name = "Burrower"
+	caste_type = XENO_CASTE_BURROWER
+	name = XENO_CASTE_BURROWER
 	desc = "A beefy, alien with sharp claws."
-	icon = 'icons/mob/hostiles/burrower.dmi'
 	icon_size = 64
 	icon_state = "Burrower Walking"
 	layer = MOB_LAYER
@@ -44,7 +45,7 @@
 	pixel_x = -12
 	old_x = -12
 	tier = 2
-	actions = list(
+	base_actions = list(
 		/datum/action/xeno_action/onclick/xeno_resting,
 		/datum/action/xeno_action/onclick/regurgitate,
 		/datum/action/xeno_action/watch_xeno,
@@ -61,6 +62,8 @@
 		/mob/living/carbon/Xenomorph/proc/rename_tunnel,
 		)
 	mutation_type = BURROWER_NORMAL
+
+	var/burrow_alpha = 0
 
 /mob/living/carbon/Xenomorph/Burrower/Initialize(mapload, mob/living/carbon/Xenomorph/oldXeno, h_number)
 	. = ..()
@@ -94,16 +97,8 @@
 		return 0
 
 /mob/living/carbon/Xenomorph/Burrower/update_icons()
-	if (stat == DEAD)
-		icon_state = "[mutation_type] Burrower Dead"
-	else if (lying)
-		if ((resting || sleeping) && (!knocked_down && !knocked_out && health > 0))
-			icon_state = "[mutation_type] Burrower Sleeping"
-		else
-			icon_state = "[mutation_type] Burrower Knocked Down"
-	else if (burrow)
-		icon_state = "[mutation_type] Burrower Burrowed"
+	. = ..()
+	if(burrow)
+		alpha = burrow_alpha
 	else
-		icon_state = "[mutation_type] Burrower Running"
-
-	update_fire() //the fire overlay depends on the xeno's stance, so we must update it.
+		alpha = 255

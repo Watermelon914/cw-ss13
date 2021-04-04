@@ -34,6 +34,15 @@
 	icon_state = "m4a3_incendiary"
 	default_ammo = /datum/ammo/bullet/pistol/incendiary
 
+/obj/item/ammo_magazine/pistol/penetrating
+	name = "\improper M4A3 wall-piercing magazine (9mm)"
+	icon_state = "m4a3_penetrating"
+	default_ammo = /datum/ammo/bullet/pistol/ap/penetrating
+
+/obj/item/ammo_magazine/pistol/toxin
+	name = "\improper M4A3 toxin magazine (9mm)"
+	icon_state = "m4a3_toxin"
+	default_ammo = /datum/ammo/bullet/pistol/ap/toxin
 
 //-------------------------------------------------------
 //M4A3 45 //Inspired by the 1911
@@ -58,9 +67,25 @@
 	max_rounds = 19
 	gun_type = /obj/item/weapon/gun/pistol/mod88
 
+/obj/item/ammo_magazine/pistol/mod88/toxin
+	name = "\improper 88M4 toxic magazine (9mm)"
+	default_ammo = /datum/ammo/bullet/pistol/ap/toxin
+	icon_state = "88m4_mag_toxin"
+
+/obj/item/ammo_magazine/pistol/mod88/penetrating
+	name = "\improper 88M4 wall-piercing magazine (9mm)"
+	default_ammo = /datum/ammo/bullet/pistol/ap/penetrating
+	icon_state = "88m4_mag_penetrating"
+
+/obj/item/ammo_magazine/pistol/mod88/incendiary
+	name = "\improper 88M4 incendiary magazine (9mm)"
+	default_ammo = /datum/ammo/bullet/pistol/incendiary
+	icon_state = "88m4_mag_incendiary"
+
 /obj/item/ammo_magazine/pistol/mod88/rubber
 	name = "\improper 88M4 rubber magazine (9mm)"
 	default_ammo = /datum/ammo/bullet/pistol/rubber
+
 
 //-------------------------------------------------------
 //VP78
@@ -72,6 +97,21 @@
 	icon_state = "vp78" //PLACEHOLDER
 	max_rounds = 14
 	gun_type = /obj/item/weapon/gun/pistol/vp78
+
+/obj/item/ammo_magazine/pistol/vp78/toxin
+	name = "\improper VP78 toxic magazine (9mm)"
+	default_ammo = /datum/ammo/bullet/pistol/squash/toxin
+	icon_state = "vp78_toxin"
+
+/obj/item/ammo_magazine/pistol/vp78/penetrating
+	name = "\improper VP78 wall-piercing magazine (9mm)"
+	default_ammo = /datum/ammo/bullet/pistol/squash/penetrating
+	icon_state = "vp78_penetrating"
+
+/obj/item/ammo_magazine/pistol/vp78/incendiary
+	name = "\improper VP78 incendiary magazine (9mm)"
+	default_ammo = /datum/ammo/bullet/pistol/squash/incendiary
+	icon_state = "vp78_incendiary"
 
 
 //-------------------------------------------------------
@@ -97,7 +137,10 @@
 	max_rounds = 7
 	gun_type = /obj/item/weapon/gun/pistol/heavy
 
-
+/obj/item/ammo_magazine/pistol/heavy/highimpact
+	name = "\improper High Impact Desert Eagle magazine (.50)"
+	default_ammo = /datum/ammo/bullet/pistol/heavy/highimpact
+	icon_state = "deagleE" //PLACEHOLDER
 
 //-------------------------------------------------------
 //MAUSER MERC PISTOL //Inspired by the Makarov.

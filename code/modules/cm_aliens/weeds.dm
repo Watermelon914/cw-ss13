@@ -1,12 +1,11 @@
 #define WEED_BASE_GROW_SPEED (10 SECONDS)
 #define WEED_BASE_DECAY_SPEED (20 SECONDS)
 
+
 /obj/effect/alien/weeds
 	name = "weeds"
 	desc = "Weird black weeds..."
 	icon_state = "base"
-
-	icon = 'icons/obj/xeno/weeds.dmi'
 
 	anchored = 1
 	density = 0
@@ -21,12 +20,14 @@
 
 	var/datum/hive_status/linked_hive = null
 	var/hivenumber = XENO_HIVE_NORMAL
+	var/turf/weeded_turf
 
 	// Which node is responsible for keeping this weed patch alive?
 	var/obj/effect/alien/weeds/node/parent = null
 
 /obj/effect/alien/weeds/Initialize(mapload, obj/effect/alien/weeds/node/node)
 	. = ..()
+	icon = get_icon_from_source(CONFIG_GET(string/alien_weeds))
 	if(node)
 		linked_hive = node.linked_hive
 		weed_strength = node.weed_strength
@@ -45,6 +46,22 @@
 	update_neighbours()
 	if(node && node.loc && (get_dist(node, src) < node.node_range) && !hibernate)
 		addtimer(CALLBACK(src, .proc/weed_expand), WEED_BASE_GROW_SPEED / max(weed_strength, 1))
+
+	var/turf/T = get_turf(src)
+	T.weeds = src
+	weeded_turf = T
+
+	RegisterSignal(src, list(
+		COMSIG_ATOM_TURF_CHANGE,
+		COMSIG_MOVABLE_TURF_ENTERED
+	), .proc/set_turf_weeded)
+
+/obj/effect/alien/weeds/proc/set_turf_weeded(var/datum/source, var/turf/T)
+	SIGNAL_HANDLER
+	if(weeded_turf)
+		weeded_turf.weeds = null
+
+	T.weeds = src
 
 /obj/effect/alien/weeds/initialize_pass_flags(var/datum/pass_flags_container/PF)
 	. = ..()
@@ -94,6 +111,11 @@
 
 	var/oldloc = loc
 	parent = null
+
+	if(weeded_turf)
+		weeded_turf.weeds = null
+
+	weeded_turf = null
 	. = ..()
 	update_neighbours(oldloc)
 
@@ -146,7 +168,9 @@
 
 		var/obj/effect/alien/weeds/W = locate() in T
 		if(W)
-			if(W.weed_strength >= WEED_LEVEL_HIVE)
+			if(W.indestructible)
+				continue
+			else if(W.weed_strength >= WEED_LEVEL_HIVE)
 				continue
 			else if (W.linked_hive == node.linked_hive && W.weed_strength >= node.weed_strength)
 				continue
@@ -240,15 +264,18 @@
 		var/image/secretion
 
 		if(icon_dir >= 0)
-			secretion = image('icons/effects/xeno/Effects.dmi', "secrete[icon_dir]")
+			secretion = image(get_icon_from_source(CONFIG_GET(string/alien_effects)), "secrete[icon_dir]")
 		else if(icon_dir == -15)
-			secretion = image('icons/effects/xeno/Effects.dmi', "secrete_base")
+			secretion = image(get_icon_from_source(CONFIG_GET(string/alien_effects)), "secrete_base")
 		else
-			secretion = image('icons/effects/xeno/Effects.dmi', "secrete_dir[-icon_dir]")
+			secretion = image(get_icon_from_source(CONFIG_GET(string/alien_effects)), "secrete_dir[-icon_dir]")
 
 		overlays += secretion
 
 /obj/effect/alien/weeds/ex_act(severity)
+	if(indestructible)
+		return
+
 	switch(severity)
 		if(0 to EXPLOSION_THRESHOLD_LOW)
 			if(prob(50))
@@ -260,6 +287,9 @@
 			qdel(src)
 
 /obj/effect/alien/weeds/attack_alien(mob/living/carbon/Xenomorph/X)
+	if(indestructible)
+		return
+
 	if(!HIVE_ALLIED_TO_HIVE(X.hivenumber, hivenumber))
 		X.animation_attack_on(src)
 
@@ -272,6 +302,9 @@
 
 
 /obj/effect/alien/weeds/attackby(obj/item/W, mob/living/user)
+	if(indestructible)
+		return FALSE
+
 	if(QDELETED(W) || QDELETED(user) || (W.flags_item & NOBLUDGEON))
 		return 0
 
@@ -299,15 +332,24 @@
 	return TRUE //don't call afterattack
 
 /obj/effect/alien/weeds/proc/healthcheck()
+	if(indestructible)
+		return
+
 	if(health <= 0)
 		qdel(src)
 
 /obj/effect/alien/weeds/flamer_fire_act(dam)
+	if(indestructible)
+		return
+
 	. = ..()
 	if(!QDELETED(src))
 		QDEL_IN(src, rand(1 SECONDS, 2 SECONDS)) // 1-2 seconds
 
 /obj/effect/alien/weeds/acid_spray_act()
+	if(indestructible)
+		return
+
 	. = ..()
 	health -= 20 * WEED_XENO_DAMAGEMULT
 	healthcheck()
@@ -386,6 +428,13 @@
 	else
 		linked_hive = GLOB.hive_datum[hivenumber]
 
+	for(var/obj/effect/alien/weeds/W in loc)
+		if(W != src)
+			if(W.weed_strength > WEED_LEVEL_HIVE)
+				qdel(src)
+				return
+			qdel(W) //replaces the previous weed
+			break
 
 	. = ..(mapload, src)
 
@@ -402,13 +451,6 @@
 
 	create_reagents(30)
 	reagents.add_reagent(PLASMA_PURPLE,30)
-	for(var/obj/effect/alien/weeds/W in loc)
-		if(W != src)
-			if(W.weed_strength > WEED_LEVEL_HIVE)
-				qdel(src)
-				return
-			qdel(W) //replaces the previous weed
-			break
 
 /obj/effect/alien/weeds/node/Destroy()
 	// When the node is removed, weeds should start dying out

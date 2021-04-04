@@ -4,8 +4,10 @@
 	icon_state = "folding_0"
 	health = 350
 	maxhealth = 350
+	burn_multiplier = 1.5
+	brute_multiplier = 1
 	crusher_resistant = TRUE
-	barricade_resistance = 15
+	force_level_absorption = 15
 	barricade_hitsound = "sound/effects/metalhit.ogg"
 	barricade_type = "folding"
 	can_wire = FALSE
@@ -15,6 +17,7 @@
 	anchored = TRUE
 	repair_materials = list("metal" = 0.2, "plasteel" = 0.25)
 	var/build_state = BARRICADE_BSTATE_SECURED //Look at __game.dm for barricade defines
+	var/source_type
 
 /obj/structure/barricade/deployable/examine(mob/user)
 	..()
@@ -30,18 +33,9 @@
 			to_chat(user, SPAN_WARNING("[src] doesn't need repairs."))
 			return
 
-		if(WT.remove_fuel(1, user))
-			user.visible_message(SPAN_NOTICE("[user] begins repairing damage to [src]."),
-			SPAN_NOTICE("You begin repairing the damage to [src]."))
-			playsound(src.loc, 'sound/items/Welder2.ogg', 25, 1)
-			if(do_after(user, 50 * user.get_skill_duration_multiplier(SKILL_CONSTRUCTION), INTERRUPT_NO_NEEDHAND|BEHAVIOR_IMMOBILE, BUSY_ICON_FRIENDLY, src))
-				user.visible_message(SPAN_NOTICE("[user] repairs some damage on [src]."),
-				SPAN_NOTICE("You repair [src]."))
-				update_health(-100)
-				playsound(src.loc, 'sound/items/Welder2.ogg', 25, 1)
-			else
-				WT.remove_fuel(-1)
+		weld_cade(WT, user)
 		return
+
 	else if(iswrench(W))
 		if(user.action_busy)
 			return
@@ -97,7 +91,7 @@
 			to_chat(usr, SPAN_WARNING("You stop collapsing [src]."))
 
 /obj/structure/barricade/deployable/proc/collapse(mob/living/carbon/human/user)
-	var/obj/item/folding_barricade/FB = new(loc)
+	var/obj/item/folding_barricade/FB = new source_type(loc)
 	FB.health = health
 	FB.maxhealth = maxhealth
 	if(istype(user))
@@ -148,4 +142,6 @@
 	cade.setDir(user.dir)
 	cade.health = health
 	cade.maxhealth = maxhealth
+
+	cade.source_type = type
 	qdel(src)

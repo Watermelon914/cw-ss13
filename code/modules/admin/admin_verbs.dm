@@ -39,7 +39,8 @@ var/list/admin_verbs_admin = list(
 	/client/proc/force_ground_shuttle,
 	/client/proc/force_teleporter,
 	/client/proc/toggle_grenade_antigrief,
-	/client/proc/matrix_editor
+	/client/proc/matrix_editor,
+	/datum/admins/proc/open_shuttlepanel
 )
 var/list/admin_verbs_ban = list(
 	/client/proc/unban_panel
@@ -63,7 +64,8 @@ var/list/admin_verbs_fun = list(
 	/client/proc/toogle_door_control,
 	/client/proc/map_template_load,
 	/client/proc/cmd_fun_fire_ob,
-	/client/proc/map_template_upload
+	/client/proc/map_template_upload,
+	/client/proc/enable_podlauncher
 )
 var/list/admin_verbs_spawn = list(
 	/datum/admins/proc/spawn_atom,
@@ -77,6 +79,7 @@ var/list/admin_verbs_server = list(
 	/datum/admins/proc/toggleaban,
 	/datum/admins/proc/end_round,
 	/datum/admins/proc/change_ground_map,
+	/datum/admins/proc/change_ship_map,
 	/datum/admins/proc/vote_ground_map,
 	/client/proc/cmd_admin_delete,		/*delete an instance/object/mob/etc*/
 	/client/proc/cmd_debug_del_all,
@@ -93,8 +96,6 @@ var/list/admin_verbs_debug = list(
 	/client/proc/restart_controller,
 	/client/proc/cmd_debug_toggle_should_check_for_win,
 	/client/proc/enable_debug_verbs,
-	/client/proc/proccall_advanced,
-	/client/proc/proccall_atom,
 	/client/proc/toggledebuglogs,
 	/client/proc/togglenichelogs,
 	/client/proc/cmd_admin_change_hivenumber,
@@ -108,7 +109,15 @@ var/list/admin_verbs_debug = list(
 	/client/proc/sound_debug_query,
 	/client/proc/bulk_fetcher,
 	/client/proc/debug_game_history,
-	/client/proc/construct_env_dmm
+	/client/proc/construct_env_dmm,
+	/client/proc/enter_tree,
+	/client/proc/set_tree_points,
+	/datum/admins/proc/randomize_xeno_castes
+)
+
+var/list/admin_verbs_debug_advanced = list(
+	/client/proc/proccall_advanced,
+	/client/proc/proccall_atom,
 )
 
 var/list/clan_verbs = list(
@@ -124,11 +133,6 @@ var/list/debug_verbs = list(
     /client/proc/view_power_update_stats_machines,
     /client/proc/toggle_power_update_profiling,
 	/client/proc/nanomapgen_DumpImage,
-)
-
-var/list/admin_verbs_paranoid_debug = list(
-	/client/proc/proccall_advanced,
-	/client/proc/proccall_atom,
 )
 
 var/list/admin_verbs_possess = list(
@@ -232,7 +236,7 @@ var/list/admin_verbs_mod = list(
 	/client/proc/cmd_admin_pm_context,
 	/client/proc/cmd_admin_check_contents,
 	/datum/admins/proc/show_player_panel,
-	/client/proc/show_objectives_status,
+	/datum/admins/proc/remove_marine_techtree_leader,
 	/client/proc/hide_admin_mob_verbs,
 	/client/proc/clear_mutineers,
 	/client/proc/cmd_admin_create_AI_report,  //Allows creation of IC reports by the ships AI utilizing Almayer General channel. Relies on ARES being intact and tcomms being powered.
@@ -241,43 +245,44 @@ var/list/admin_verbs_mod = list(
 )
 
 /client/proc/add_admin_verbs()
-	// mentors don't have access to admin verbs
-	if(admin_holder && !AHOLD_IS_ONLY_MENTOR(admin_holder))
+	if(!admin_holder)
+		return
+	if(CLIENT_IS_STAFF(src))
 		add_verb(src, admin_verbs_default)
-		if(admin_holder.rights & R_BUILDMODE)
-			add_verb(src, /client/proc/togglebuildmodeself)
-		if(admin_holder.rights & R_ADMIN)
-			add_verb(src, admin_verbs_admin)
-		if(admin_holder.rights & R_BAN)
-			add_verb(src, admin_verbs_ban+admin_verbs_teleport)
-		if(admin_holder.rights & R_FUN)
-			add_verb(src, admin_verbs_fun)
-		if(admin_holder.rights & R_SERVER)
-			add_verb(src, admin_verbs_server)
-		if(admin_holder.rights & R_DEBUG)
-			add_verb(src, admin_verbs_debug)
-			if(CONFIG_GET(flag/debugparanoid) && !check_rights(R_ADMIN))
-				remove_verb(src, admin_verbs_paranoid_debug) //Right now it's just callproc but we can easily add others later on.
-		if(admin_holder.rights & R_POSSESS)
-			add_verb(src, admin_verbs_possess)
-		if(admin_holder.rights & R_PERMISSIONS)
-			add_verb(src, admin_verbs_permissions)
-		if(admin_holder.rights & R_COLOR)
-			add_verb(src, admin_verbs_color)
-		if(admin_holder.rights & R_SOUNDS)
-			add_verb(src, admin_verbs_sounds)
-		if(admin_holder.rights & R_SPAWN)
-			add_verb(src, admin_verbs_spawn)
-		if(admin_holder.rights & R_MOD)
-			add_verb(src, admin_verbs_mod)
-
-		if(RoleAuthority && (RoleAuthority.roles_whitelist[ckey] & WHITELIST_YAUTJA_LEADER))
-			add_verb(src, clan_verbs)
-	if(admin_holder && admin_holder.rights & R_MENTOR)
+	if(CLIENT_HAS_RIGHTS(src, R_MOD))
+		add_verb(src, admin_verbs_mod)
+	if(CLIENT_HAS_RIGHTS(src, R_ADMIN))
+		add_verb(src, admin_verbs_admin)
+	if(CLIENT_HAS_RIGHTS(src, R_MENTOR))
 		add_verb(src, /client/proc/cmd_mentor_say)
+	if(CLIENT_HAS_RIGHTS(src, R_BUILDMODE))
+		add_verb(src, /client/proc/togglebuildmodeself)
+	if(CLIENT_HAS_RIGHTS(src, R_BAN))
+		add_verb(src, admin_verbs_ban)
+		add_verb(src, admin_verbs_teleport) // ???
+	if(CLIENT_HAS_RIGHTS(src, R_FUN))
+		add_verb(src, admin_verbs_fun)
+	if(CLIENT_HAS_RIGHTS(src, R_SERVER))
+		add_verb(src, admin_verbs_server)
+	if(CLIENT_HAS_RIGHTS(src, R_DEBUG))
+		add_verb(src, admin_verbs_debug)
+		if(!CONFIG_GET(flag/debugparanoid) || CLIENT_HAS_RIGHTS(src, R_ADMIN))
+			add_verb(src, admin_verbs_debug_advanced)  // Right now it's just callproc but we can easily add others later on.
+	if(CLIENT_HAS_RIGHTS(src, R_POSSESS))
+		add_verb(src, admin_verbs_possess)
+	if(CLIENT_HAS_RIGHTS(src, R_PERMISSIONS))
+		add_verb(src, admin_verbs_permissions)
+	if(CLIENT_HAS_RIGHTS(src, R_COLOR))
+		add_verb(src, admin_verbs_color)
+	if(CLIENT_HAS_RIGHTS(src, R_SOUNDS))
+		add_verb(src, admin_verbs_sounds)
+	if(CLIENT_HAS_RIGHTS(src, R_SPAWN))
+		add_verb(src, admin_verbs_spawn)
+	if(RoleAuthority && (RoleAuthority.roles_whitelist[ckey] & WHITELIST_YAUTJA_LEADER))
+		add_verb(src, clan_verbs)
 
 /client/proc/add_admin_whitelists()
-	if(is_mentor(src) || AHOLD_IS_MOD(admin_holder))
+	if(CLIENT_IS_STAFF(src) || CLIENT_HAS_RIGHTS(src, R_MENTOR))
 		RoleAuthority.roles_whitelist[ckey] |= WHITELIST_MENTOR
 
 /client/proc/remove_admin_verbs()
@@ -290,6 +295,7 @@ var/list/admin_verbs_mod = list(
 		admin_verbs_fun,
 		admin_verbs_server,
 		admin_verbs_debug,
+		admin_verbs_debug_advanced,
 		admin_verbs_possess,
 		admin_verbs_permissions,
 		admin_verbs_color,

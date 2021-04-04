@@ -15,12 +15,13 @@
 	var/mob/dead/observer/ghost_of_buckled_mob =  null
 	var/hivenumber = XENO_HIVE_NORMAL
 	layer = RESIN_STRUCTURE_LAYER
-	icon = 'icons/effects/xeno/Effects.dmi'
 
 	var/force_nest = FALSE
 
 /obj/structure/bed/nest/Initialize(mapload, hive)
 	. = ..()
+
+	icon = get_icon_from_source(CONFIG_GET(string/alien_effects))
 
 	if (hive)
 		hivenumber = hive

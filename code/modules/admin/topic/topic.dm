@@ -1135,7 +1135,7 @@
 		message_staff("[src.owner] has cancelled the predator self-destruct sequence [victim ? "of [victim] ([victim.key])":""].")
 
 	else if(href_list["adminspawncookie"])
-		if(!check_rights(R_ADMIN|R_FUN))
+		if(!check_rights(R_MOD))
 			return
 
 		var/mob/living/carbon/human/H = locate(href_list["adminspawncookie"])
@@ -1553,11 +1553,6 @@
 
 		topic_events(href_list["events"])
 
-	else if(href_list["debug"])
-		if(!check_rights(R_DEBUG))
-			return
-		topic_debug(href_list["debug"])
-
 	else if(href_list["teleport"])
 		if(!check_rights(R_MOD))
 			return
@@ -1579,13 +1574,6 @@
 	else if(href_list["ahelp"])
 
 		topic_ahelps(href_list)
-
-	else if(href_list["agent"] == "showobjectives")
-		if(!check_rights(R_MOD))
-			return
-
-		var/mob/M = locate(href_list["extra"])
-		show_agent_objectives(M)
 
 	// player info stuff
 

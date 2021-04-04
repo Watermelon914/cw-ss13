@@ -3,7 +3,6 @@
 /obj/effect/alien/resin/fruit
 	desc = "A fruit that can be eaten to immediately recover health."
 	name = "Lesser resin fruit"
-	icon = 'icons/obj/xeno/fruits.dmi'
 	icon_state = "fruit_lesser_immature"
 	density = 0
 	opacity = 0
@@ -35,6 +34,8 @@
 	//Keep timer value here
 	timer_id = addtimer(CALLBACK(src, .proc/mature), time_to_mature, TIMER_UNIQUE | TIMER_STOPPABLE)
 	. = ..()
+	// Need to do it here because baseline initialize override the icon through config.
+	icon = 'icons/mob/hostiles/fruits.dmi'
 
 /obj/effect/alien/resin/fruit/proc/on_weed_expire()
 	SIGNAL_HANDLER
@@ -143,6 +144,8 @@
 
 
 /obj/effect/alien/resin/fruit/greater/consume_effect(mob/living/carbon/Xenomorph/recipient)
+	if(!mature)
+		return
 	if(recipient && !QDELETED(recipient))
 		recipient.gain_health(heal_amount)
 		to_chat(recipient, SPAN_XENONOTICE("You recover a bit from your injuries, and begin to regenerate rapidly."))

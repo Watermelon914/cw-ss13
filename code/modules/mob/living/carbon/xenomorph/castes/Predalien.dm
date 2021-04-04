@@ -1,5 +1,6 @@
 /datum/caste_datum/predalien
-	caste_name = "Predalien"
+	caste_type = XENO_CASTE_PREDALIEN
+	display_icon = XENO_CASTE_PREDALIEN
 	display_name = "Abomination"
 
 	melee_damage_lower = XENO_DAMAGE_TIER_4
@@ -27,10 +28,9 @@
 	behavior_delegate_type = /datum/behavior_delegate/predalien_base
 
 /mob/living/carbon/Xenomorph/Predalien
-	caste_name = "Predalien"
-	name = "Abomination"
+	caste_type = XENO_CASTE_PREDALIEN
+	name = "Abomination" //snowflake name
 	desc = "A strange looking creature with fleshy strands on its head. It appears like a mixture of armor and flesh, smooth, but well carapaced."
-	icon = 'icons/mob/hostiles/predalien.dmi'
 	icon_state = "Predalien Walking"
 	plasma_types = list(PLASMA_CATECHOLAMINE)
 	faction = FACTION_PREDALIEN
@@ -43,15 +43,15 @@
 	age = XENO_NO_AGE //Predaliens are already in their ultimate form, they don't get even better
 	small_explosives_stun = FALSE
 
-	actions = list(
+	base_actions = list(
 		/datum/action/xeno_action/onclick/xeno_resting,
 		/datum/action/xeno_action/onclick/regurgitate,
 		/datum/action/xeno_action/watch_xeno,
 		/datum/action/xeno_action/activable/pounce/predalien,
 		/datum/action/xeno_action/activable/predalien_roar,
 		/datum/action/xeno_action/activable/smash,
-		/datum/action/xeno_action/activable/devastate
-		)
+		/datum/action/xeno_action/activable/devastate,
+	)
 	mutation_type = "Normal"
 
 	var/butcher_time = 6 SECONDS
@@ -129,9 +129,9 @@ Your health meter will not regenerate normally, so kill and die for the hive!</s
 
 			new /obj/effect/decal/remains/xeno(xeno_victim.loc)
 			var/obj/item/stack/sheet/animalhide/xeno/xenohide = new /obj/item/stack/sheet/animalhide/xeno(xeno_victim.loc)
-			xenohide.name = "[xeno_victim.age_prefix][xeno_victim.caste_name]-hide"
-			xenohide.singular_name = "[xeno_victim.age_prefix][xeno_victim.caste_name]-hide"
-			xenohide.stack_id = "[xeno_victim.age_prefix][xeno_victim.caste_name]-hide"
+			xenohide.name = "[xeno_victim.age_prefix][xeno_victim.caste_type]-hide"
+			xenohide.singular_name = "[xeno_victim.age_prefix][xeno_victim.caste_type]-hide"
+			xenohide.stack_id = "[xeno_victim.age_prefix][xeno_victim.caste_type]-hide"
 
 		playsound(X.loc, 'sound/effects/blobattack.ogg', 25)
 

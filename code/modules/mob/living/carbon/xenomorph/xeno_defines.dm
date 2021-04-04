@@ -1,7 +1,7 @@
-
 // Actual caste datum basedef
 /datum/caste_datum
-	var/caste_name = ""
+	var/caste_type = ""
+	var/display_icon = ""
 	var/display_name = ""
 	var/tier = 0
 	var/dead_icon = "Drone Dead"
@@ -73,6 +73,7 @@
 	var/can_hold_eggs = CANNOT_HOLD_EGGS
 
 	var/can_be_queen_healed = TRUE
+	var/can_be_revived = TRUE
 
 	var/can_vent_crawl = 1
 
@@ -100,6 +101,28 @@
 	var/list/resin_build_order
 	var/minimum_xeno_playtime = 0
 
+/datum/admins/proc/randomize_xeno_castes()
+	set name = "Randomize Xeno Caste Names and Icons"
+	set category = "Debug"
+
+	if(!check_rights(R_DEBUG))
+		return
+
+	if(tgui_alert(usr, "Are you sure you want to randomize all xeno caste names and icons?", \
+		"Reset xeno caste names and icons", list("Yes", "No")) == "No")
+		return
+
+	var/list/L = GLOB.xeno_icons_by_caste.Copy()
+	for(var/i in GLOB.xeno_datum_list)
+		if(!length(L))
+			CRASH("Ran out of xeno_icons_by_caste options on [i]")
+		var/caste = pick(L)
+		L -= caste
+		var/datum/caste_datum/CD = GLOB.xeno_datum_list[i]
+		CD.display_name = caste
+		CD.display_icon = caste
+
+	message_staff("[key_name_admin(usr)] randomized all xeno icons and names.")
 
 /datum/caste_datum/can_vv_modify()
 	return FALSE
@@ -188,6 +211,7 @@
 	var/list/tier_2_xenos = list()//list of living tier2 xenos
 	var/list/tier_3_xenos = list()//list of living tier3 xenos
 	var/list/totalXenos	= list()  //list of living xenos
+	var/xeno_queen_timer
 	var/isSlotOpen = TRUE //Set true for starting alerts only after the hive has reached its full potential
 	var/allowed_nest_distance = 15 //How far away do we allow nests from an ovied Queen. Default 15 tiles.
 	var/obj/effect/alien/resin/special/pylon/core/hive_location = null //Set to ref every time a core is built, for defining the hive location.
@@ -201,8 +225,10 @@
 	var/bonus_larva_spawn_chance = 1.0
 	var/hijack_pooled_surge = FALSE //at hijack, start spawning lots of pooled
 
+	var/ignore_slots = FALSE
 	var/dynamic_evolution = TRUE
 	var/evolution_rate = 3 // Only has use if dynamic_evolution is false
+	var/evolution_bonus = 0
 
 	var/allow_no_queen_actions = FALSE
 	var/allow_queen_evolve = TRUE // Set to true if you want to prevent evolutions into Queens
@@ -272,7 +298,8 @@
 	if(X.hud_list)
 		X.hud_update()
 
-	if(!is_admin_level(X.z))
+	var/area/A = get_area(X)
+	if(!is_admin_level(X.z) || (A.flags_atom & AREA_ALLOW_XENO_JOIN))
 		totalXenos += X
 		if(X.tier == 2)
 			tier_2_xenos += X
@@ -425,18 +452,21 @@
 	// Every caste is manually defined here so you get
 	var/list/xeno_counts = list(
 		// Yes, Queen is technically considered to be tier 0
-		list("Bloody Larva" = 0, "Queen" = 0),
-		list("Drone" = 0, "Runner" = 0, "Sentinel" = 0, "Defender" = 0),
-		list("Hivelord" = 0, "Burrower" = 0, "Carrier" = 0, "Lurker" = 0, "Spitter" = 0, "Warrior" = 0),
-		list("Boiler" = 0, "Crusher" = 0, "Praetorian" = 0, "Ravager" = 0)
+		list(XENO_CASTE_LARVA = 0, "Queen" = 0),
+		list(XENO_CASTE_DRONE = 0, XENO_CASTE_RUNNER = 0, XENO_CASTE_SENTINEL = 0, XENO_CASTE_DEFENDER = 0),
+		list(XENO_CASTE_HIVELORD = 0, XENO_CASTE_BURROWER = 0, XENO_CASTE_CARRIER = 0, XENO_CASTE_LURKER = 0, XENO_CASTE_SPITTER = 0, XENO_CASTE_WARRIOR = 0),
+		list(XENO_CASTE_BOILER = 0, XENO_CASTE_CRUSHER = 0, XENO_CASTE_PRAETORIAN = 0, XENO_CASTE_RAVAGER = 0)
 	)
 
 	for(var/mob/living/carbon/Xenomorph/X in totalXenos)
 		//don't show xenos in the thunderdome when admins test stuff.
 		if(is_admin_level(X.z))
-			continue
+			var/area/A = get_area(X)
+			if(!(A.flags_atom & AREA_ALLOW_XENO_JOIN))
+				continue
+
 		if(X.caste)
-			xeno_counts[X.caste.tier+1][X.caste.caste_name]++
+			xeno_counts[X.caste.tier+1][X.caste.caste_type]++
 
 	return xeno_counts
 
@@ -450,8 +480,10 @@
 	var/useless_slots = 0
 	for(var/mob/living/carbon/Xenomorph/X in totalXenos)
 		if(is_admin_level(X.z))
-			useless_slots++
-			continue
+			var/area/A = get_area(X)
+			if(!(A.flags_atom & AREA_ALLOW_XENO_JOIN))
+				useless_slots++
+				continue
 
 		// Insert without doing list merging
 		xenos[index++] = list(
@@ -459,7 +491,7 @@
 			"tier" = X.tier, // This one is only important for sorting
 			"is_leader" = (IS_XENO_LEADER(X)),
 			"is_queen" = istype(X.caste, /datum/caste_datum/queen),
-			"caste_name" = X.caste_name
+			"caste_type" = X.caste_type
 		)
 
 	// Clear nulls from the xenos list
@@ -516,7 +548,7 @@
 			// Could not think of an elegant way to write this
 			if(!(current["is_leader"]^prev["is_leader"])\
 				&& (prev["tier"] < current["tier"]\
-				|| prev["tier"] == current["tier"] && prev["caste_name"] > current["caste_name"]\
+				|| prev["tier"] == current["tier"] && prev["caste_type"] > current["caste_type"]\
 			))
 				sorted_list.Swap(j-1, j)
 
@@ -530,7 +562,9 @@
 
 	for(var/mob/living/carbon/Xenomorph/X in totalXenos)
 		if(is_admin_level(X.z))
-			continue
+			var/area/A = get_area(X)
+			if(!(A.flags_atom & AREA_ALLOW_XENO_JOIN))
+				continue
 
 		var/xeno_name = X.name
 		// goddamn fucking larvas with their weird ass maturing system
@@ -559,7 +593,9 @@
 
 	for(var/mob/living/carbon/Xenomorph/X in totalXenos)
 		if(is_admin_level(X.z))
-			continue
+			var/area/A = get_area(X)
+			if(!(A.flags_atom & AREA_ALLOW_XENO_JOIN))
+				continue
 
 		if(!(X in GLOB.living_xeno_list))
 			continue
@@ -615,8 +651,8 @@
 			continue
 		var/datum/caste_datum/C = caste_path
 		switch(initial(C.tier))
-			if(2) slots[TIER_2][GUARANTEED_SLOTS][initial(C.caste_name)] = slot_count
-			if(3) slots[TIER_3][GUARANTEED_SLOTS][initial(C.caste_name)] = slot_count
+			if(2) slots[TIER_2][GUARANTEED_SLOTS][initial(C.caste_type)] = slot_count
+			if(3) slots[TIER_3][GUARANTEED_SLOTS][initial(C.caste_type)] = slot_count
 
 	var/effective_total = length(totalXenos) + pooled_factor
 
@@ -729,6 +765,13 @@
 			qdel(embryo)
 		potential_host.death("larva suicide")
 
+/datum/hive_status/proc/free_respawn(var/client/C)
+	stored_larva++
+	if(!spawn_pool || !spawn_pool.spawn_pooled_larva(C.mob))
+		stored_larva--
+	else
+		hive_ui.update_pooled_larva()
+
 /mob/living/carbon/proc/ally_of_hivenumber(var/hivenumber)
 	var/datum/hive_status/H = GLOB.hive_datum[hivenumber]
 	if(!H)
@@ -803,3 +846,64 @@
 
 	dynamic_evolution = FALSE
 
+/datum/hive_status/corrupted/submissive
+	name = "Submissive Hive"
+	hivenumber = XENO_HIVE_SUBMISSIVE
+	prefix = "Submissive "
+	color = "#80ff80"
+
+	dynamic_evolution = FALSE
+	allow_no_queen_actions = TRUE
+	allow_queen_evolve = FALSE
+	ignore_slots = TRUE
+
+	var/mob/living/carbon/human/leader
+	var/list/allied_factions
+
+/datum/hive_status/corrupted/submissive/New()
+	. = ..()
+	hive_structures_limit[XENO_STRUCTURE_EGGMORPH] = 0
+	hive_structures_limit[XENO_STRUCTURE_EVOPOD] = 0
+
+/datum/hive_status/corrupted/submissive/proc/make_leader(var/mob/living/carbon/human/H)
+	if(!istype(H))
+		return
+
+	if(leader)
+		UnregisterSignal(leader, COMSIG_PARENT_QDELETING)
+
+	leader = H
+	RegisterSignal(leader, COMSIG_PARENT_QDELETING, .proc/handle_qdelete)
+
+/datum/hive_status/corrupted/submissive/proc/handle_qdelete(var/mob/living/carbon/human/H)
+	SIGNAL_HANDLER
+
+	if(H == leader)
+		leader = null
+
+	var/list/faction_groups = H.faction_group
+	if(faction_groups)
+		allied_factions = faction_groups.Copy()
+		if(!(H.faction in allied_factions))
+			allied_factions += H.faction
+
+/datum/hive_status/corrupted/submissive/add_xeno(mob/living/carbon/Xenomorph/X)
+	. = ..()
+	X.faction_group = allied_factions
+
+/datum/hive_status/corrupted/submissive/remove_xeno(mob/living/carbon/Xenomorph/X, hard)
+	. = ..()
+	X.faction_group = list(X.faction)
+
+/datum/hive_status/corrupted/submissive/is_ally(mob/living/carbon/C)
+	if(leader)
+		if(C.faction in leader.faction_group)
+			return TRUE
+
+		if(C.faction == leader.faction)
+			return TRUE
+	else
+		if(C.faction in allied_factions)
+			return TRUE
+
+	return ..()

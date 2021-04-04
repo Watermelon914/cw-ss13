@@ -17,7 +17,7 @@
 	if (!X.check_state() || X.agility)
 		return
 
-	if(!isHumanStrict(A) && !ismonkey(A) && (!isXeno(A) || X.can_not_harm(A))) // Can't do isXenoOrHuman because it checks for whether it is strictly human
+	if(X.can_not_harm(A) || !ismob(A))
 		apply_cooldown_override(click_miss_cooldown)
 		return
 
@@ -97,7 +97,7 @@
 	H.apply_effect(get_xeno_stun_duration(H, stun_power), STUN)
 	H.apply_effect(weaken_power, WEAKEN)
 	H.last_damage_mob = X
-	H.last_damage_source = initial(X.caste_name)
+	H.last_damage_source = initial(X.caste_type)
 	shake_camera(H, 2, 1)
 
 	var/facing = get_dir(X, H)
@@ -154,7 +154,7 @@
 		return
 
 	H.last_damage_mob = X
-	H.last_damage_source = initial(X.caste_name)
+	H.last_damage_source = initial(X.caste_type)
 
 	X.visible_message(SPAN_XENOWARNING("\The [X] hits [H] in the [L? L.display_name : "chest"] with a devastatingly powerful punch!"), \
 	SPAN_XENOWARNING("You hit [H] in the [L? L.display_name : "chest"] with a devastatingly powerful punch!"))
@@ -174,7 +174,7 @@
 	var/damage = rand(base_damage, base_damage + damage_variance)
 
 	if(ishuman(H))
-		if(L.status & LIMB_SPLINTED) //If they have it splinted, the splint won't hold.
+		if((L.status & LIMB_SPLINTED) && !(L.status & LIMB_SPLINTED_INDESTRUCTIBLE)) //If they have it splinted, the splint won't hold.
 			L.status &= ~LIMB_SPLINTED
 			to_chat(H, SPAN_DANGER("The splint on your [L.display_name] comes apart!"))
 			H.pain.apply_pain(PAIN_BONE_BREAK_SPLINTED)
@@ -259,7 +259,7 @@
 		return
 
 	H.last_damage_mob = X
-	H.last_damage_source = initial(X.caste_name)
+	H.last_damage_source = initial(X.caste_type)
 	X.visible_message(SPAN_XENOWARNING("\The [X] hits [H] with a powerful jab!"), \
 	SPAN_XENOWARNING("You hit [H] with a powerful jab!"))
 	var/S = pick('sound/weapons/punch1.ogg','sound/weapons/punch2.ogg','sound/weapons/punch3.ogg','sound/weapons/punch4.ogg')
@@ -329,7 +329,7 @@
 		WP.apply_cooldown_override(WP.xeno_cooldown)
 
 	H.last_damage_mob = X
-	H.last_damage_source = initial(X.caste_name)
+	H.last_damage_source = initial(X.caste_type)
 
 	var/ko_counter = BD.ko_counter
 

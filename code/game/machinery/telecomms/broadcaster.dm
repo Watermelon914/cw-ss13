@@ -203,6 +203,7 @@
 				heard_garbled += R
 
 
+
 	/* ###### Begin formatting and sending the message ###### */
 	if (length(heard_masked) || length(heard_normal) || length(heard_voice) || length(heard_garbled) || length(heard_gibberish))
 
@@ -263,8 +264,10 @@
 		else if (display_freq in DEPT_FREQS)
 			part_a = "<span class='deptradio'><span class='name'>"
 
-		// --- Filter the message; place it in quotes apply a verb ---
+		if(display_freq in M.important_radio_channels)
+			command = 3
 
+		// --- Filter the message; place it in quotes apply a verb ---
 
 		/* ###### Send the message ###### */
 

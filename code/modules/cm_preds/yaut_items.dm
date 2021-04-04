@@ -188,6 +188,24 @@
 	remove_from_missing_pred_gear(src)
 	return ..()
 
+/obj/item/clothing/cape/eldercape/verb/recolor()
+	set name = "Dye Cape"
+	set desc = "Allows you to add a custom color to your cape. Single use."
+	set src in usr
+
+	if(color)
+		to_chat(usr, "Your cape is already dyed!")
+		return
+
+	var/new_color = input(usr, "Choose your cape's colour. \nMeme colours may result in action taken by the council. \nSINGLE USE ONLY.", "Dye your cape") as color|null
+	if(!new_color)
+		return
+
+	color = new_color
+	log_game("[key_name(usr)] has changed their cape color to '[color]'")
+	icon_state = "cape_elder_n"
+	to_chat(usr, "Your cape has been dyed!")
+
 /obj/item/clothing/shoes/yautja
 	name = "clan greaves"
 	icon_state = "y-boots1"
@@ -1016,11 +1034,11 @@
 	C.attack_log += text("\[[time_stamp()]\] <font color='orange'>[key_name(C)] was caught in \a [src] at [get_location_in_text(C)].</font>")
 	log_attack("[key_name(C)] was caught in \a [src] at [get_location_in_text(C)].")
 
-	C.KnockDown(2)
 	if(ishuman(C))
 		C.emote("pain")
 	if(isXeno(C))
 		var/mob/living/carbon/Xenomorph/X = C
+		C.emote("needhelp")
 		X.interference = 100 // Some base interference to give pred time to get some damage in, if it cannot land a single hit during this time pred is cheeks
 		RegisterSignal(X, COMSIG_XENO_PRE_HEAL, .proc/block_heal)
 
@@ -1055,6 +1073,7 @@
 		tether_effect = null
 
 /obj/item/hunting_trap/proc/disarm(var/mob/user)
+	SIGNAL_HANDLER
 	armed = FALSE
 	anchored = FALSE
 	icon_state = "yauttrap[armed]"
@@ -1077,7 +1096,7 @@
 	if(!isYautja(H))
 		to_chat(H, SPAN_WARNING("You do not know how to configure the trap."))
 		return
-	var/range = input(H, "Which range would you like to set the hunting trap to?") as null|anything in list(2, 3, 4, 5, 6, 7)
+	var/range = tgui_input_list(H, "Which range would you like to set the hunting trap to?", "Hunting Trap Range", list(2, 3, 4, 5, 6, 7))
 	if(isnull(range))
 		return
 	tether_range = range

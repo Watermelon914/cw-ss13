@@ -1,11 +1,11 @@
-/mob/living/brain/Life()
+/mob/living/brain/Life(delta_time)
 	set invisibility = 0
 	set background = 1
 	..()
 
 	if(stat != DEAD)
 		//Chemicals in the body
-		handle_chemicals_in_body()
+		handle_chemicals_in_body(delta_time)
 
 	//Apparently, the person who wrote this code designed it so that
 	//blinded get reset each cycle and then get activated later in the
@@ -47,11 +47,11 @@
 
 
 
-/mob/living/brain/proc/handle_chemicals_in_body()
+/mob/living/brain/proc/handle_chemicals_in_body(delta_time)
 
 	reagent_move_delay_modifier = 0
 
-	if(reagents) reagents.metabolize(src)
+	if(reagents) reagents.metabolize(src, delta_time=delta_time)
 
 	confused = max(0, confused - 1)
 	// decrement dizziness counter, clamped to 0
@@ -93,7 +93,7 @@
 					ear_deaf = 1
 					silent = 1
 					if(!alert)//Sounds an alarm, but only once per 'level'
-						emote("alarm")
+						INVOKE_ASYNC(src, .proc/emote, "alarm")
 						to_chat(src, SPAN_DANGER("Major electrical distruption detected: System rebooting."))
 						alert = 1
 					if(prob(75))
@@ -109,7 +109,7 @@
 					eye_blurry = 1
 					ear_damage = 1
 					if(!alert)
-						emote("alert")
+						INVOKE_ASYNC(src, .proc/emote, "alert")
 						to_chat(src, SPAN_DANGER("Primary systems are now online."))
 						alert = 1
 					if(prob(50))
@@ -121,7 +121,7 @@
 					emp_damage -= 1
 				if(2 to 9)//Low level of EMP damage, has few effects(handled elsewhere)
 					if(!alert)
-						emote("notice")
+						INVOKE_ASYNC(src, .proc/emote, "notice")
 						to_chat(src, SPAN_DANGER("System reboot nearly complete."))
 						alert = 1
 					if(prob(25))

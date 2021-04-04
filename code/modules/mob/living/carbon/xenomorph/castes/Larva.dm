@@ -1,5 +1,7 @@
 /datum/caste_datum/larva
-	caste_name = "Bloody Larva"
+	caste_type = XENO_CASTE_LARVA
+	display_icon = XENO_CASTE_LARVA
+	display_name = XENO_CASTE_LARVA
 	tier = 0
 	plasma_gain = 0.1
 	plasma_max = 10
@@ -9,17 +11,19 @@
 	caste_desc = "D'awwwww, so cute!"
 	speed = XENO_SPEED_TIER_10
 	innate_healing = TRUE //heals even outside weeds so you're not stuck unable to evolve when hiding on the ship wounded.
-	evolves_to = list("Drone", "Runner", "Sentinel", "Defender") //Add sentinel etc here
+	evolves_to = XENO_T1_CASTES
+
+	can_be_revived = FALSE
 
 /datum/caste_datum/larva/predalien
-	caste_name = "Predalien Larva"
-	evolves_to = list("Predalien")
+	caste_type = XENO_CASTE_PREDALIEN_LARVA
+	display_icon = XENO_CASTE_PREDALIEN_LARVA
+	evolves_to = list(XENO_CASTE_PREDALIEN)
 
 /mob/living/carbon/Xenomorph/Larva
-	name = "Bloody Larva"
-	caste_name = "Bloody Larva"
+	name = XENO_CASTE_LARVA
+	caste_type = XENO_CASTE_LARVA
 	speak_emote = list("hisses")
-	icon = 'icons/mob/hostiles/larva.dmi'
 	icon_state = "Bloody Larva"
 	icon_size = 32
 	layer = MOB_LAYER
@@ -32,7 +36,7 @@
 	crit_health = -25
 	gib_chance = 25
 	mob_size = 0
-	actions = list(
+	base_actions = list(
 		/datum/action/xeno_action/onclick/xeno_resting,
 		/datum/action/xeno_action/watch_xeno,
 		/datum/action/xeno_action/onclick/xenohide,
@@ -59,8 +63,7 @@
 
 /mob/living/carbon/Xenomorph/Larva/predalien
 	icon_state = "Predalien Larva"
-	caste_name = "Predalien Larva"
-	icon = 'icons/mob/xenos_old/1x1_Xenos.dmi'
+	caste_type = XENO_CASTE_PREDALIEN_LARVA
 
 /mob/living/carbon/Xenomorph/Larva/initialize_pass_flags(var/datum/pass_flags_container/PF)
 	..()
@@ -91,8 +94,6 @@
 //Larva code is just a mess, so let's get it over with
 /mob/living/carbon/Xenomorph/Larva/update_icons()
 	var/progress = "" //Naming convention, three different names
-	var/state = "" //Icon convention, two different sprite sets
-
 	var/name_prefix = ""
 
 	if(hive)
@@ -101,32 +102,23 @@
 
 	if(amount_grown < max_grown/2) //We're still bloody
 		progress = "Bloody "
-		state = "Bloody "
+		mutation_type = "Bloody"
 	if(amount_grown >= max_grown/2)
 		progress = ""
-		state = ""
+		mutation_type = null
 	if(amount_grown >= max_grown)
 		progress = "Mature "
 
-	name = "\improper [name_prefix][progress]Larva ([nicknumber])"
+	name = "\improper [name_prefix][progress][caste.display_name] ([nicknumber])"
 
-	if(istype(src,/mob/living/carbon/Xenomorph/Larva/predalien)) state = "Predalien " //Sort of a hack.
+	if(istype(src,/mob/living/carbon/Xenomorph/Larva/predalien)) mutation_type = "Predalien " //Sort of a hack.
 
+	if(caste.caste_type != caste.display_icon)
+		mutation_type = "Normal"
+
+	. = ..()
 	//Update linked data so they show up properly
 	change_real_name(src, name)
-
-	if(stat == DEAD)
-		icon_state = "[state]Larva Dead"
-	else if(handcuffed || legcuffed)
-		icon_state = "[state]Larva Cuff"
-
-	else if(lying)
-		if((resting || sleeping) && (!knocked_down && !knocked_out && health > 0))
-			icon_state = "[state]Larva Sleeping"
-		else
-			icon_state = "[state]Larva Stunned"
-	else
-		icon_state = "[state]Larva"
 
 /mob/living/carbon/Xenomorph/Larva/start_pulling(atom/movable/AM)
 	return

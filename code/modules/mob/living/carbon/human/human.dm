@@ -51,17 +51,6 @@
 	stamina = new /datum/stamina(src)
 
 /mob/living/carbon/human/Destroy()
-	if(assigned_squad)
-		SStracking.stop_tracking(assigned_squad.tracking_id, src)
-		var/n = assigned_squad.marines_list.Find(src)
-		if(n)
-			assigned_squad.marines_list[n] = name //mob reference replaced by name string
-		if(assigned_squad.squad_leader == src)
-			assigned_squad.squad_leader = null
-		if(assigned_squad.overwatch_officer == src)
-			assigned_squad.overwatch_officer = null
-		assigned_squad = null
-
 	if(internal_organs_by_name)
 		for(var/name in internal_organs_by_name)
 			var/datum/internal_organ/I = internal_organs_by_name[name]
@@ -83,14 +72,11 @@
 
 	. = ..()
 
-	QDEL_NULL(agent_holder)
-
 /mob/living/carbon/human/get_status_tab_items()
 	. = ..()
 
 	. += ""
 	. += "Security Level: [uppertext(get_security_level())]"
-	. += "DEFCON Level: [defcon_controller.current_defcon_level]"
 
 	if(!isnull(SSticker) && !isnull(SSticker.mode) && !isnull(SSticker.mode.active_lz) && !isnull(SSticker.mode.active_lz.loc) && !isnull(SSticker.mode.active_lz.loc.loc))
 		. += "Primary LZ: [SSticker.mode.active_lz.loc.loc.name]"
@@ -226,7 +212,7 @@
 		src.attack_log += text("\[[time_stamp()]\] <font color='orange'>was attacked by [key_name(M)]</font>")
 		var/damage = rand(M.melee_damage_lower, M.melee_damage_upper)
 		var/dam_zone = pick("chest", "l_hand", "r_hand", "l_leg", "r_leg")
-		var/obj/limb/affecting = get_limb(ran_zone(dam_zone))
+		var/obj/limb/affecting = get_limb(rand_zone(dam_zone))
 		apply_damage(damage, BRUTE, affecting)
 
 
@@ -1227,6 +1213,10 @@
 	return
 
 /mob/living/carbon/human/update_sight()
+	if(SEND_SIGNAL(src, COMSIG_HUMAN_UPDATE_SIGHT) & COMPONENT_OVERRIDE_UPDATE_SIGHT) return
+
+	sight &= ~BLIND // Never have blind on by default
+
 	if(stat == DEAD)
 		sight |= (SEE_TURFS|SEE_MOBS|SEE_OBJS)
 		see_in_dark = 8
@@ -1240,6 +1230,7 @@
 		else
 			see_invisible = SEE_INVISIBLE_LIVING
 
+	SEND_SIGNAL(src, COMSIG_HUMAN_POST_UPDATE_SIGHT)
 
 
 
@@ -1309,6 +1300,7 @@
 		dat += "Police: [usr.skills.get_skill_level(SKILL_POLICE)]<br/>"
 		dat += "Powerloader: [usr.skills.get_skill_level(SKILL_POWERLOADER)]<br/>"
 		dat += "Vehicles: [usr.skills.get_skill_level(SKILL_VEHICLE)]<br/>"
+		dat += "JTAC: [usr.skills.get_skill_level(SKILL_JTAC)]<br/>"
 
 	show_browser(src, dat, "Skills", "checkskills")
 	return
@@ -1342,7 +1334,7 @@
 			return
 		for(var/bodypart in list("l_leg","r_leg","l_arm","r_arm","r_hand","l_hand","r_foot","l_foot","chest","head","groin"))
 			var/obj/limb/l = HT.get_limb(bodypart)
-			if(l && l.status & LIMB_SPLINTED)
+			if(l && (l.status & LIMB_SPLINTED))
 				if(HS == HT)
 					if((bodypart in list("l_arm", "l_hand")) && (cur_hand == "l_hand"))
 						same_arm_side = TRUE
@@ -1371,7 +1363,10 @@
 						amount_removed += 1
 						l.status &= ~LIMB_SPLINTED
 						pain.recalculate_pain()
-						if(!W.add(1))
+						if(l.status & LIMB_SPLINTED_INDESTRUCTIBLE)
+							new /obj/item/stack/medical/splint/nano(HS.loc, 1)
+							l.status &= ~LIMB_SPLINTED_INDESTRUCTIBLE
+						else if(!W.add(1))
 							W = new /obj/item/stack/medical/splint(HS.loc)//old stack is dropped, time for new one
 							W.amount = 0
 							W.add_fingerprint(HS)
@@ -1535,3 +1530,4 @@
 	if(species)
 		slot_equipment_priority = species.slot_equipment_priority
 	return ..(W,ignore_delay,slot_equipment_priority)
+

@@ -40,6 +40,7 @@
 	if(user)
 		to_chat(user, SPAN_NOTICE("You attach \the [src] to \the [has_suit]."))
 		src.add_fingerprint(user)
+	return TRUE
 
 /obj/item/clothing/accessory/proc/on_removed(mob/living/user, obj/item/clothing/C)
 	if(!has_suit)
@@ -544,7 +545,7 @@
 /obj/item/clothing/accessory/storage/attack_self(mob/user as mob)
 	to_chat(user, SPAN_NOTICE("You empty [src]."))
 	var/turf/T = get_turf(src)
-	hold.hide_from(usr)
+	hold.storage_close(usr)
 	for(var/obj/item/I in hold.contents)
 		hold.remove_from_storage(I, T)
 	src.add_fingerprint(user)

@@ -7,6 +7,9 @@
 	flags_round_type = MODE_INFESTATION|MODE_FOG_ACTIVATED|MODE_NEW_SPAWN
 	var/round_status_flags
 
+	var/passive_increase_interval = 20 MINUTES
+	var/next_passive_increase = 0
+
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -82,6 +85,8 @@
 		round_time_river = rand(-100,100)
 		flags_round_type |= MODE_FOG_ACTIVATED
 
+	..()
+
 	var/obj/structure/tunnel/T
 	var/i = 0
 	var/turf/t
@@ -89,8 +94,6 @@
 		t = get_turf(pick_n_take(GLOB.xeno_tunnels))
 		T = new(t)
 		T.id = "hole[i]"
-
-	..()
 	return TRUE
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -102,8 +105,10 @@
 //Xenos and survivors should not spawn anywhere until we transform them.
 /datum/game_mode/colonialmarines/post_setup()
 	initialize_post_marine_gear_list()
-	initialize_map_resource_list()
 	spawn_smallhosts()
+
+	if(SSmapping.configs[GROUND_MAP].environment_traits[ZTRAIT_BASIC_RT])
+		flags_round_type |= MODE_BASIC_RT
 
 	round_time_lobby = world.time
 
@@ -151,7 +156,24 @@
 	if(--round_started > 0)
 		return FALSE //Initial countdown, just to be safe, so that everyone has a chance to spawn before we check anything.
 
+	if((flags_round_type & MODE_BASIC_RT) && next_passive_increase < world.time)
+		for(var/T in SStechtree.trees)
+			var/datum/techtree/tree = SStechtree.trees[T]
+
+			tree.passive_node.resources_per_second += PASSIVE_INCREASE_AMOUNT
+
+		next_passive_increase = world.time + passive_increase_interval
+
 	if(!round_finished)
+		var/datum/hive_status/hive
+		for(var/hivenumber in GLOB.hive_datum)
+			hive = GLOB.hive_datum[hivenumber]
+			if(!hive.xeno_queen_timer)
+				continue
+
+			if(!hive.living_xeno_queen && hive.xeno_queen_timer < world.time)
+				xeno_message("The Hive is ready for a new Queen to evolve.", 3, hive.hivenumber)
+
 		if(!active_lz && world.time > lz_selection_timer)
 			for(var/obj/structure/machinery/computer/shuttle_control/dropship1/default_console in machines)
 				if(is_ground_level(default_console.z) && !default_console.onboard)
@@ -193,6 +215,12 @@
 
 #undef FOG_DELAY_INTERVAL
 #undef PODLOCKS_OPEN_WAIT
+
+// Resource Towers
+
+/datum/game_mode/colonialmarines/ds_first_drop(var/datum/shuttle/ferry/marine/m_shuttle)
+	SStechtree.activate_passive_nodes()
+	addtimer(CALLBACK(SStechtree, /datum/controller/subsystem/techtree/proc/activate_all_nodes), 20 SECONDS)
 
 ///////////////////////////
 //Checks to see who won///
@@ -282,7 +310,6 @@
 	show_end_statistics(end_icon)
 
 	declare_completion_announce_fallen_soldiers()
-	announce_agents()
 	declare_completion_announce_xenomorphs()
 	declare_completion_announce_predators()
 	declare_completion_announce_medal_awards()

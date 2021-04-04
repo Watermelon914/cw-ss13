@@ -7,6 +7,8 @@
 	name="beam"
 	icon='icons/effects/beam.dmi'
 	icon_state="b_beam"
+	mouse_opacity = FALSE
+
 	var/tmp/atom/BeamSource
 	New()
 		..()
@@ -38,6 +40,8 @@
 	icon = 'icons/obj/items/weapons/grenade.dmi'
 	icon_state = "danger"
 	layer = ABOVE_FLY_LAYER
+
+	appearance_flags = RESET_COLOR|KEEP_APART
 
 /obj/effect/overlay/temp
 	anchored = 1
@@ -83,6 +87,9 @@
 /obj/effect/overlay/temp/point/big
 	icon_state = "big_arrow"
 	effect_duration = 4 SECONDS
+
+/obj/effect/overlay/temp/point/big/greyscale
+	icon_state = "big_arrow_grey"
 
 /obj/effect/overlay/temp/point/big/greyscale
 	icon_state = "big_arrow_grey"
@@ -260,11 +267,12 @@
 
 /obj/effect/overlay/temp/gib_animation/xeno
 	effect_duration = 10
-	icon = 'icons/effects/xeno/Effects.dmi'
 
 /obj/effect/overlay/temp/gib_animation/xeno/Initialize(mapload, mob/source_mob, gib_icon, new_icon)
 	. = ..()
-	if(new_icon)
+	if(!new_icon)
+		icon = get_icon_from_source(CONFIG_GET(string/alien_effects))
+	else
 		icon = new_icon
 
 //dust animation
@@ -285,5 +293,7 @@
 	name = "acid splash"
 	icon_state = "acidpoolsplash"
 	effect_duration = 10 SECONDS
-	icon = 'icons/effects/xeno/Effects.dmi'
 
+/obj/effect/overlay/temp/acid_pool_splash/Initialize(mapload, ...)
+	. = ..()
+	icon = get_icon_from_source(CONFIG_GET(string/alien_effects))

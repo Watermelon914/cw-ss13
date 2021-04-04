@@ -1,5 +1,7 @@
 /datum/caste_datum/carrier
-	caste_name = "Carrier"
+	caste_type = XENO_CASTE_CARRIER
+	display_icon = XENO_CASTE_CARRIER
+	display_name = XENO_CASTE_CARRIER
 	caste_desc = "A carrier of huggies."
 	tier = 2
 
@@ -15,7 +17,7 @@
 	speed = XENO_SPEED_TIER_4
 
 	evolution_allowed = FALSE
-	deevolves_to = "Drone"
+	deevolves_to = XENO_CASTE_DRONE
 	eggs_max = 5
 	throwspeed = SPEED_AVERAGE
 	can_hold_facehuggers = 1
@@ -35,10 +37,9 @@
 	egg_cooldown = 250
 
 /mob/living/carbon/Xenomorph/Carrier
-	caste_name = "Carrier"
-	name = "Carrier"
+	caste_type = XENO_CASTE_CARRIER
+	name = XENO_CASTE_CARRIER
 	desc = "A strange-looking alien creature. It carries a number of scuttling jointed crablike creatures."
-	icon = 'icons/mob/hostiles/carrier.dmi'
 	icon_size = 64
 	icon_state = "Carrier Walking"
 	plasma_types = list(PLASMA_PURPLE)
@@ -50,7 +51,7 @@
 	pixel_x = -16 //Needed for 2x2
 	old_x = -16
 
-	actions = list(
+	base_actions = list(
 		/datum/action/xeno_action/onclick/xeno_resting,
 		/datum/action/xeno_action/onclick/regurgitate,
 		/datum/action/xeno_action/watch_xeno,

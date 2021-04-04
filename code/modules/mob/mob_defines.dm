@@ -131,10 +131,6 @@
 
 	var/inertia_dir = 0
 
-	var/const/blindness = 1//Carbon
-	var/const/deafness = 2//Carbon
-	var/const/muteness = 4//Carbon
-
 	var/voice_name = "unidentifiable voice"
 
 	var/job = null					// Internal job title used when mob is spawned. Preds are "Predator", Xenos are "Xenomorph", Marines have their actual job title
@@ -203,10 +199,20 @@
 	can_block_movement = TRUE
 
 	appearance_flags = TILE_BOUND
+	var/mouse_icon = null
 
 	var/datum/player_panel/mob_panel
+
+	var/datum/focus
 
 	///the current turf being examined in the stat panel
 	var/turf/listed_turf = null
 
 	var/list/list/item_verbs = list()
+
+	var/max_implants = 2
+	var/list/implants
+
+	var/move_on_shuttle = TRUE // Can move on the shuttle.
+
+	var/list/important_radio_channels = list()

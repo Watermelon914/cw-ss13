@@ -24,14 +24,16 @@
 
 // What kind of function to use for Explosions falling off.
 
-#define EXPLOSION_FALLOFF_SHAPE_LINEAR          0
-#define EXPLOSION_FALLOFF_SHAPE_EXPONENTIAL     1
+#define EXPLOSION_FALLOFF_SHAPE_LINEAR              0
+#define EXPLOSION_FALLOFF_SHAPE_EXPONENTIAL         1
+#define EXPLOSION_FALLOFF_SHAPE_EXPONENTIAL_HALF    2
 
 //area flags
 
-#define AREA_AVOID_BIOSCAN      1 //used to make mobs skip bioscans
-#define AREA_NOTUNNEL           4 //makes it so the area can not be tunneled to
-#define AREA_ALLOW_XENO_JOIN    8 //xenos can join whilst in this area (for admin zlevel)
+#define AREA_AVOID_BIOSCAN (1<<0) //used to make mobs skip bioscans
+#define AREA_NOTUNNEL (1<<1) //makes it so the area can not be tunneled to
+#define AREA_ALLOW_XENO_JOIN (1<<2) //xenos can join whilst in this area (for admin zlevel)
+#define AREA_CONTAINMENT (1<<3) // Flags the area as a containment area
 
 // Default number of ticks for do_after
 #define DA_DEFAULT_NUM_TICKS 5
@@ -206,3 +208,6 @@
 #define SHELLEO_ERRORLEVEL 1
 #define SHELLEO_STDOUT 2
 #define SHELLEO_STDERR 3
+
+// Shuttles
+#define isshuttleturf(T) (length(T.baseturfs) && (/turf/baseturf_skipover/shuttle in T.baseturfs))
