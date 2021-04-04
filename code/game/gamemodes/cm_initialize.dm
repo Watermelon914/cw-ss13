@@ -144,8 +144,7 @@ Additional game mode variables.
 			M.roundstart_picked = TRUE
 			predators += M
 			if(M.current && J)
-				if(J.get_whitelist_status(RoleAuthority.roles_whitelist, M.current.client) == WHITELIST_NORMAL)
-					i++
+				i++
 			else
 				i++
 
@@ -171,16 +170,15 @@ Additional game mode variables.
 		else
 			if(!istype(player,/mob/dead)) continue //Otherwise we just want to grab the ghosts.
 
-		if(RoleAuthority.roles_whitelist[player.ckey] & WHITELIST_PREDATOR)  //Are they whitelisted?
-			if(!player.client.prefs)
-				player.client.prefs = new /datum/preferences(player.client) //Somehow they don't have one.
+		if(!player.client.prefs)
+			player.client.prefs = new /datum/preferences(player.client) //Somehow they don't have one.
 
-			if(player.client.prefs.get_job_priority(JOB_PREDATOR) > 0) //Are their prefs turned on?
-				if(!player.mind) //They have to have a key if they have a client.
-					player.mind_initialize() //Will work on ghosts too, but won't add them to active minds.
-				player.mind.setup_human_stats()
-				player.faction = FACTION_YAUTJA
-				players += player.mind
+		if(player.client.prefs.get_job_priority(JOB_PREDATOR) > 0) //Are their prefs turned on?
+			if(!player.mind) //They have to have a key if they have a client.
+				player.mind_initialize() //Will work on ghosts too, but won't add them to active minds.
+			player.mind.setup_human_stats()
+			player.faction = FACTION_YAUTJA
+			players += player.mind
 	return players
 
 /datum/game_mode/proc/attempt_to_join_as_predator(mob/pred_candidate)
@@ -202,11 +200,7 @@ Additional game mode variables.
 		if(show_warning) to_chat(pred_candidate, SPAN_WARNING("Something went wrong!"))
 		return
 
-	if(show_warning && alert(pred_candidate, "Confirm joining the hunt. You will join as \a [lowertext(J.get_whitelist_status(RoleAuthority.roles_whitelist, pred_candidate.client))] predator", "Confirmation", "Yes", "No") == "No")
-		return
-
-	if(!(RoleAuthority.roles_whitelist[pred_candidate.ckey] & WHITELIST_PREDATOR))
-		if(show_warning) to_chat(pred_candidate, SPAN_WARNING("You are not whitelisted! You may apply on the forums to be whitelisted as a predator."))
+	if(show_warning && alert(pred_candidate, "Confirm joining the hunt. You will join as a predator", "Confirmation", "Yes", "No") == "No")
 		return
 
 	if(!(flags_round_type & MODE_PREDATOR))
@@ -217,13 +211,7 @@ Additional game mode variables.
 		if(show_warning) to_chat(pred_candidate, SPAN_WARNING("You already were a Yautja! Give someone else a chance."))
 		return
 
-	if(J.get_whitelist_status(RoleAuthority.roles_whitelist, pred_candidate.client) == WHITELIST_NORMAL)
-		var/pred_max = calculate_pred_max
-		if(pred_current_num >= pred_max)
-			if(show_warning) to_chat(pred_candidate, SPAN_WARNING("Only [pred_max] predators may spawn this round, but Elders and Leaders do not count."))
-			return
-
-	return 1
+	return TRUE
 
 #undef calculate_pred_max
 
@@ -616,12 +604,11 @@ Additional game mode variables.
 			possible_synth_survivors -= A
 			continue
 
-		if(RoleAuthority.roles_whitelist[ckey(A.key)] & WHITELIST_SYNTHETIC)
-			if(A in possible_survivors)
-				continue //they are already applying to be a survivor
-			else
-				possible_survivors += A
-				continue
+		if(A in possible_survivors)
+			continue //they are already applying to be a survivor
+		else
+			possible_survivors += A
+			continue
 
 		possible_synth_survivors -= A
 

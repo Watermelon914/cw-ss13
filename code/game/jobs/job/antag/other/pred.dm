@@ -55,32 +55,6 @@
 
 	return Y
 
-/datum/job/antag/predator/get_whitelist_status(var/list/roles_whitelist, var/client/player) // Might be a problem waiting here, but we've got no choice
-	. = ..()
-	if(!.)
-		return
-
-	if(!player.clan_info)
-		return CLAN_RANK_BLOODED
-
-	player.clan_info.sync() // pause here might be problematic, we'll see. If DB dies, then we're fucked
-
-	var/rank = clan_ranks[player.clan_info.clan_rank]
-
-	if(!rank)
-		return CLAN_RANK_BLOODED
-
-	if(!("[JOB_PREDATOR][rank]" in gear_preset_whitelist))
-		return CLAN_RANK_BLOODED
-
-	if(\
-		(roles_whitelist[player.ckey] & (WHITELIST_YAUTJA_LEADER|WHITELIST_YAUTJA_COUNCIL)) &&\
-		get_desired_status(player.prefs.yautja_status, WHITELIST_COUNCIL) == WHITELIST_NORMAL\
-	)
-		return CLAN_RANK_BLOODED
-
-	return rank
-
 
 /datum/job/antag/predator/announce_entry_message(var/mob/new_predator, var/account, var/whitelist_status)
 	to_chat(new_predator, SPAN_NOTICE("You are <B>Yautja</b>, a great and noble predator!"))

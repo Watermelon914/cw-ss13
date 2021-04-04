@@ -92,7 +92,6 @@ var/list/admin_verbs_debug = list(
 	/client/proc/cmd_admin_delete,
 	/client/proc/cmd_debug_del_all,
 	/client/proc/reload_admins,
-	/client/proc/reload_whitelist,
 	/client/proc/restart_controller,
 	/client/proc/cmd_debug_toggle_should_check_for_win,
 	/client/proc/enable_debug_verbs,
@@ -278,12 +277,8 @@ var/list/admin_verbs_mod = list(
 		add_verb(src, admin_verbs_sounds)
 	if(CLIENT_HAS_RIGHTS(src, R_SPAWN))
 		add_verb(src, admin_verbs_spawn)
-	if(RoleAuthority && (RoleAuthority.roles_whitelist[ckey] & WHITELIST_YAUTJA_LEADER))
+	if(CLIENT_HAS_RIGHTS(src, R_HOST))
 		add_verb(src, clan_verbs)
-
-/client/proc/add_admin_whitelists()
-	if(CLIENT_IS_STAFF(src) || CLIENT_HAS_RIGHTS(src, R_MENTOR))
-		RoleAuthority.roles_whitelist[ckey] |= WHITELIST_MENTOR
 
 /client/proc/remove_admin_verbs()
 	remove_verb(src, list(

@@ -409,31 +409,23 @@ var/const/MAX_SAVE_SLOTS = 10
 		dat += "<b>View Master Controller Tab: <a href='?_src_=prefs;preference=ViewMC'><b>[View_MC ? "TRUE" : "FALSE"]</b></a>"
 	dat += "</div>"
 
-	if(RoleAuthority.roles_whitelist[user.ckey] & WHITELIST_COMMANDER)
-		dat += "<div id='column1'>"
-		dat += "<h2><b><u>Commander Settings:</u></b></h2>"
-		dat += "<b>Commander whitelist status:</b><a href='?_src_=prefs;preference=commander_status;task=input'>[commander_status]</a><br>"
-		dat += "</div>"
+	dat += "<div id='column2'>"
+	dat += "<h2><b><u>Yautja Settings:</u></b></h2>"
+	dat += "<b>Yautja name:</b> <a href='?_src_=prefs;preference=pred_name;task=input'>[predator_name]</a><br>"
+	dat += "<b>Yautja gender:</b> <a href='?_src_=prefs;preference=pred_gender;task=input'>[predator_gender == MALE ? "Male" : "Female"]</a><br>"
+	dat += "<b>Yautja age:</b> <a href='?_src_=prefs;preference=pred_age;task=input'>[predator_age]</a><br>"
+	dat += "<b>Mask style:</b> <a href='?_src_=prefs;preference=pred_mask_type;task=input'>([predator_mask_type])</a><br>"
+	dat += "<b>Armor style:</b> <a href='?_src_=prefs;preference=pred_armor_type;task=input'>([predator_armor_type])</a><br>"
+	dat += "<b>Greave style:</b> <a href='?_src_=prefs;preference=pred_boot_type;task=input'>([predator_boot_type])</a><br><br>"
+	dat += "<b>Yautja whitelist status:</b> <a href='?_src_=prefs;preference=yautja_status;task=input'>[yautja_status]</a><br>"
+	dat += "</div>"
 
-	if(RoleAuthority.roles_whitelist[user.ckey] & WHITELIST_PREDATOR)
-		dat += "<div id='column2'>"
-		dat += "<h2><b><u>Yautja Settings:</u></b></h2>"
-		dat += "<b>Yautja name:</b> <a href='?_src_=prefs;preference=pred_name;task=input'>[predator_name]</a><br>"
-		dat += "<b>Yautja gender:</b> <a href='?_src_=prefs;preference=pred_gender;task=input'>[predator_gender == MALE ? "Male" : "Female"]</a><br>"
-		dat += "<b>Yautja age:</b> <a href='?_src_=prefs;preference=pred_age;task=input'>[predator_age]</a><br>"
-		dat += "<b>Mask style:</b> <a href='?_src_=prefs;preference=pred_mask_type;task=input'>([predator_mask_type])</a><br>"
-		dat += "<b>Armor style:</b> <a href='?_src_=prefs;preference=pred_armor_type;task=input'>([predator_armor_type])</a><br>"
-		dat += "<b>Greave style:</b> <a href='?_src_=prefs;preference=pred_boot_type;task=input'>([predator_boot_type])</a><br><br>"
-		dat += "<b>Yautja whitelist status:</b> <a href='?_src_=prefs;preference=yautja_status;task=input'>[yautja_status]</a><br>"
-		dat += "</div>"
-
-	if(RoleAuthority.roles_whitelist[user.ckey] & WHITELIST_SYNTHETIC)
-		dat += "<div id='column3'>"
-		dat += "<h2><b><u>Synthetic Settings:</u></b></h2>"
-		dat += "<b>Synthetic name:</b> <a href='?_src_=prefs;preference=synth_name;task=input'>[synthetic_name]</a><br>"
-		dat += "<b>Synthetic Type:</b> <a href='?_src_=prefs;preference=synth_type;task=input'>[synthetic_type]</a><br>"
-		dat += "<b>Synthetic whitelist status:</b> <a href='?_src_=prefs;preference=synth_status;task=input'>[synth_status]</a><br>"
-		dat += "</div>"
+	dat += "<div id='column3'>"
+	dat += "<h2><b><u>Synthetic Settings:</u></b></h2>"
+	dat += "<b>Synthetic name:</b> <a href='?_src_=prefs;preference=synth_name;task=input'>[synthetic_name]</a><br>"
+	dat += "<b>Synthetic Type:</b> <a href='?_src_=prefs;preference=synth_type;task=input'>[synthetic_type]</a><br>"
+	dat += "<b>Synthetic whitelist status:</b> <a href='?_src_=prefs;preference=synth_status;task=input'>[synth_status]</a><br>"
+	dat += "</div>"
 
 	dat += "</div></body>"
 
@@ -476,9 +468,6 @@ var/const/MAX_SAVE_SLOTS = 10
 
 		if(jobban_isbanned(user, job.title))
 			HTML += "<b><del>[job.disp_title]</del></b></td><td><b>BANNED</b></td></tr>"
-			continue
-		else if(job.flags_startup_parameters & ROLE_WHITELISTED && !(RoleAuthority.roles_whitelist[user.ckey] & job.flags_whitelist))
-			HTML += "<b><del>[job.disp_title]</del></b></td><td>WHITELISTED</td></tr>"
 			continue
 		else if(!job.can_play_role(user.client))
 			var/list/missing_requirements = job.get_role_requirements(user.client)
@@ -635,8 +624,6 @@ var/const/MAX_SAVE_SLOTS = 10
 	return TRUE
 
 /datum/preferences/proc/process_link(mob/user, list/href_list)
-	var/whitelist_flags = RoleAuthority.roles_whitelist[user.ckey]
-
 	switch(href_list["preference"])
 		if("job")
 			switch(href_list["task"])
@@ -879,51 +866,6 @@ var/const/MAX_SAVE_SLOTS = 10
 				if("pred_boot_type")
 					var/new_predator_boot_type = input(user, "Choose your greaves type:\n(1-3)", "Greave Selection") as num|null
 					if(new_predator_boot_type) predator_boot_type = round(text2num(new_predator_boot_type))
-
-				if("commander_status")
-					var/list/options = list("Normal" = WHITELIST_NORMAL)
-
-					if(whitelist_flags & WHITELIST_COMMANDER_COUNCIL)
-						options += list("Council" = WHITELIST_COUNCIL)
-					if(whitelist_flags & WHITELIST_COMMANDER_LEADER)
-						options += list("Leader" = WHITELIST_LEADER)
-
-					var/new_commander_status = tgui_input_list(user, "Choose your new Commander Whitelist Status.", "Commander Status", options)
-
-					if(!new_commander_status)
-						return
-
-					commander_status = options[new_commander_status]
-
-				if("yautja_status")
-					var/list/options = list("Normal" = WHITELIST_NORMAL)
-
-					if(whitelist_flags & WHITELIST_YAUTJA_COUNCIL)
-						options += list("Council" = WHITELIST_COUNCIL)
-					if(whitelist_flags & WHITELIST_YAUTJA_LEADER)
-						options += list("Leader" = WHITELIST_LEADER)
-
-					var/new_yautja_status = tgui_input_list(user, "Choose your new Yautja Whitelist Status.", "Yautja Status", options)
-
-					if(!new_yautja_status)
-						return
-
-					yautja_status = options[new_yautja_status]
-
-				if("synth_status")
-					var/list/options = list("Normal" = WHITELIST_NORMAL)
-
-					if(whitelist_flags & WHITELIST_SYNTHETIC_COUNCIL)
-						options += list("Council" = WHITELIST_COUNCIL)
-					if(whitelist_flags & WHITELIST_SYNTHETIC_LEADER)
-						options += list("Leader" = WHITELIST_LEADER)
-
-					var/new_synth_status = tgui_input_list(user, "Choose your new Synthetic Whitelist Status.", "Synthetic Status", options)
-
-					if(!new_synth_status)
-						return
-
-					synth_status = options[new_synth_status]
 
 				if("xeno_prefix")
 					if(xeno_name_ban)

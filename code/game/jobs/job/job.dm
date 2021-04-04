@@ -38,12 +38,6 @@
 	minimum_playtimes = setup_requirements(list())
 	if(!disp_title) disp_title = title
 
-/datum/job/proc/get_whitelist_status(var/list/roles_whitelist, var/client/player)
-	if(!roles_whitelist)
-		return FALSE
-
-	return WHITELIST_NORMAL
-
 /datum/timelock
 	var/name
 	var/time_required
@@ -252,20 +246,9 @@
 				H.mind.store_memory(remembered_info)
 				H.mind.initial_account = A
 
-		var/job_whitelist = title
-		var/whitelist_status = get_whitelist_status(RoleAuthority.roles_whitelist, H.client)
-
-		if(whitelist_status)
-			job_whitelist = "[title][whitelist_status]"
-
-		if(gear_preset_whitelist[job_whitelist])
-			arm_equipment(H, gear_preset_whitelist[job_whitelist], FALSE, TRUE)
-			announce_entry_message(H, A, whitelist_status) //Tell them their spawn info.
-			generate_entry_conditions(H, whitelist_status) //Do any other thing that relates to their spawn.
-		else
-			arm_equipment(H, gear_preset, FALSE, TRUE) //After we move them, we want to equip anything else they should have.
-			announce_entry_message(H, A) //Tell them their spawn info.
-			generate_entry_conditions(H) //Do any other thing that relates to their spawn.
+		arm_equipment(H, gear_preset, FALSE, TRUE) //After we move them, we want to equip anything else they should have.
+		announce_entry_message(H, A) //Tell them their spawn info.
+		generate_entry_conditions(H) //Do any other thing that relates to their spawn.
 
 		if(flags_startup_parameters & ROLE_ADD_TO_SQUAD) //Are we a muhreen? Randomize our squad. This should go AFTER IDs. //TODO Robust this later.
 			RoleAuthority.randomize_squad(H)

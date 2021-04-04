@@ -37,7 +37,6 @@ var/global/marines_assigned = 0
 	var/list/roles_by_path //Master list generated when role aithority is created, listing every role by path, including variable roles. Great for manually equipping with.
 	var/list/roles_by_name //Master list generated when role authority is created, listing every default role by name, including those that may not be regularly selected.
 	var/list/roles_for_mode //Derived list of roles only for the game mode, generated when the round starts.
-	var/list/roles_whitelist //Associated list of lists, by ckey. Checks to see if a person is whitelisted for a specific role.
 	var/list/castes_by_path //Master list generated when role aithority is created, listing every caste by path.
 	var/list/castes_by_name //Master list generated when role authority is created, listing every default caste by name.
 
@@ -123,7 +122,6 @@ var/global/marines_assigned = 0
 		var/datum/squad/S = new squad()
 		squads += S
 
-	load_whitelist()
 
 
 /datum/authority/branch/role/proc/replace_jobs(var/list/jobs)
@@ -133,47 +131,6 @@ var/global/marines_assigned = 0
 		roles_for_mode[J.title] = J
 		roles_by_name[J.title] = J
 
-
-/datum/authority/branch/role/proc/load_whitelist(filename = "config/role_whitelist.txt")
-	var/L[] = file2list(filename)
-	var/P[]
-	var/W[] = new //We want a temporary whitelist list, in case we need to reload.
-
-	var/i
-	var/r
-	var/ckey
-	var/role
-	roles_whitelist = list()
-	for(i in L)
-		if(!i)	continue
-		i = trim(i)
-		if(!length(i)) continue
-		else if (copytext(i, 1, 2) == "#") continue
-
-		P = splittext(i, "+")
-		if(!P.len) continue
-		ckey = ckey(P[1]) //Converting their key to canonical form. ckey() does this by stripping all spaces, underscores and converting to lower case.
-
-		role = NO_FLAGS
-		r = 1
-		while(++r <= P.len)
-			switch(ckey(P[r]))
-				if("yautja") 						role |= WHITELIST_YAUTJA
-				if("yautjacouncil")					role |= WHITELIST_YAUTJA_COUNCIL
-				if("yautjaleader")					role |= WHITELIST_YAUTJA_LEADER
-				if("commander") 					role |= WHITELIST_COMMANDER
-				if("commandercouncil")				role |= WHITELIST_COMMANDER_COUNCIL
-				if("commanderleader")				role |= WHITELIST_COMMANDER_LEADER
-				if("synthetic") 					role |= WHITELIST_SYNTHETIC
-				if("syntheticcouncil")				role |= WHITELIST_SYNTHETIC_COUNCIL
-				if("syntheticleader")				role |= WHITELIST_SYNTHETIC_LEADER
-				if("allgeneral")					role |= WHITELISTS_GENERAL
-				if("allcouncil")					role |= (WHITELISTS_COUNCIL|WHITELISTS_GENERAL)
-				if("everything", "allleader") 		role |= WHITELIST_EVERYTHING
-
-		W[ckey] = role
-
-	roles_whitelist = W
 
 //#undef FACTION_TO_JOIN
 
@@ -398,8 +355,6 @@ var/global/marines_assigned = 0
 		return FALSE
 	if(!J.can_play_role(M.client))
 		return FALSE
-	if(J.flags_startup_parameters & ROLE_WHITELISTED && !(roles_whitelist[M.ckey] & J.flags_whitelist))
-		return FALSE
 	if(J.total_positions != -1 && J.get_total_positions(latejoin) <= J.current_positions)
 		return FALSE
 	if(latejoin && !J.late_joinable)
@@ -526,20 +481,9 @@ var/global/marines_assigned = 0
 			H.mind.store_memory(remembered_info)
 			H.mind.initial_account = A
 
-	var/job_whitelist = J.title
-	var/whitelist_status = J.get_whitelist_status(roles_whitelist, H.client)
-
-	if(whitelist_status)
-		job_whitelist = "[J.title][whitelist_status]"
-
-	if(J.gear_preset_whitelist[job_whitelist])
-		arm_equipment(H, J.gear_preset_whitelist[job_whitelist], FALSE, TRUE)
-		J.announce_entry_message(H, A, whitelist_status) //Tell them their spawn info.
-		J.generate_entry_conditions(H, whitelist_status) //Do any other thing that relates to their spawn.
-	else
-		arm_equipment(H, J.gear_preset, FALSE, TRUE) //After we move them, we want to equip anything else they should have.
-		J.announce_entry_message(H, A) //Tell them their spawn info.
-		J.generate_entry_conditions(H) //Do any other thing that relates to their spawn.
+	arm_equipment(H, J.gear_preset, FALSE, TRUE) //After we move them, we want to equip anything else they should have.
+	J.announce_entry_message(H, A) //Tell them their spawn info.
+	J.generate_entry_conditions(H) //Do any other thing that relates to their spawn.
 
 	if(J.flags_startup_parameters & ROLE_ADD_TO_SQUAD) //Are we a muhreen? Randomize our squad. This should go AFTER IDs. //TODO Robust this later.
 		randomize_squad(H)
