@@ -52,6 +52,61 @@
 	mutation_type = WARRIOR_NORMAL
 	claw_type = CLAW_TYPE_SHARP
 
+GLOBAL_LIST_INIT(warrior_target_limbs, list(
+	"head",
+	"chest",
+	"l_leg",
+	"r_leg",
+	"l_arm",
+	"r_arm"
+))
+
+/mob/living/carbon/Xenomorph/Warrior/process_ai(delta_time, game_evaluation)
+	. = ..()
+
+	if(.)
+		return
+
+	a_intent = INTENT_HARM
+	create_hud()
+
+	if(throwing)
+		return
+
+	if(pulling && can_move_and_apply_move_delay())
+		Move(get_step(loc, turn(dir, 180)), turn(dir, 180))
+	else
+		var/turf/T = get_turf(current_target)
+		if(!move_to_next_turf(T) && get_dist(src, current_target) != 0)
+			current_target = null
+			return
+
+		if(get_dist(src, current_target) <= WARRIOR_LUNGE_RANGE && DT_PROB(WARRIOR_LUNGE, delta_time))
+			var/turf/last_turf = loc
+			var/clear = TRUE
+			add_temp_pass_flags(PASS_OVER_THROW_MOB)
+			for(var/i in getline2(src, current_target, FALSE))
+				var/turf/new_turf = i
+				if(LinkBlocked(src, last_turf, new_turf, list(current_target, src)))
+					clear = FALSE
+					break
+			remove_temp_pass_flags(PASS_OVER_THROW_MOB)
+
+			if(clear)
+
+				swap_hand()
+
+	zone_selected = pick(GLOB.warrior_target_limbs)
+	if(get_dist(src, current_target) <= 1)
+		if(DT_PROB(XENO_SLASH, delta_time))
+			INVOKE_ASYNC(src, /mob.proc/do_click, current_target, "", list())
+		if(DT_PROB(WARRIOR_PUNCH, delta_time))
+			var/datum/action/xeno_action/activable/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/warrior_punch)
+			A.use_ability_async(current_target)
+		else if(DT_PROB(WARRIOR_FLING, delta_time))
+			var/datum/action/xeno_action/activable/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/fling)
+			A.use_ability_async(current_target)
+
 /mob/living/carbon/Xenomorph/Warrior/throw_item(atom/target)
 	toggle_throw_mode(THROW_MODE_OFF)
 

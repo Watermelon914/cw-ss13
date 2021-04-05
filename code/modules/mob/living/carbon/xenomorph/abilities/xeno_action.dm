@@ -18,6 +18,11 @@
 
 	var/charges = NO_ACTION_CHARGES
 
+// Used for AI xenos to prevent them from sleeping
+/datum/action/xeno_action/proc/use_ability_async(var/atom/A)
+	set waitfor = FALSE
+	use_ability(A)
+
 /datum/action/xeno_action/New(Target, override_icon_state)
 	. = ..()
 	if(charges != NO_ACTION_CHARGES)
@@ -173,10 +178,10 @@
 	var/mob/living/carbon/Xenomorph/X = owner
 	// Uh oh! STINKY! already on cooldown
 	if (cooldown_timer_id != TIMER_ID_NULL)
-	/* 
+	/*
 		Debug log disabled due to our historical inability at doing anything meaningful about it
 		And to make room for ones that matter more in regard to our ability to fix.
-		The whole of ability code is fucked up, the 'SHOULD NEVER BE OVERRIDEN' note above is 
+		The whole of ability code is fucked up, the 'SHOULD NEVER BE OVERRIDEN' note above is
 		completely ignored as about 20 procs override it ALREADY...
 		This is broken beyond repair and should just be reimplemented
 		log_debug("Xeno action [src] tried to go on cooldown while already on cooldown.")

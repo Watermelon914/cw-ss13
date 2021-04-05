@@ -411,7 +411,7 @@
 	if(istype(AM, /atom/movable/clone))
 		AM = AM.mstr //If AM is a clone, refer to the real target
 
-	if ( QDELETED(AM) || !usr || src==AM || !isturf(loc) || !isturf(AM.loc) )	//if there's no person pulling OR the person is pulling themself OR the object being pulled is inside something: abort!
+	if ( QDELETED(AM) || src==AM || !isturf(loc) || !isturf(AM.loc) )	//if there's no person pulling OR the person is pulling themself OR the object being pulled is inside something: abort!
 		return
 
 	if (AM.anchored || AM.throwing)
@@ -617,7 +617,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 // facing verbs
 /mob/proc/canface()
 	if(!canmove)						return 0
-	if(client.moving)					return 0
+	if(client && client.moving)					return 0
 	if(stat==2)						return 0
 	if(anchored)						return 0
 	if(monkeyizing)						return 0

@@ -45,13 +45,14 @@
 	if (mods["drag"])
 		return
 
-	if(SEND_SIGNAL(client, COMSIG_CLIENT_PRE_CLICK, A, mods) & COMPONENT_INTERRUPT_CLICK)
-		return
+	if(client)
+		if(SEND_SIGNAL(client, COMSIG_CLIENT_PRE_CLICK, A, mods) & COMPONENT_INTERRUPT_CLICK)
+			return
 
 	if(SEND_SIGNAL(src, COMSIG_MOB_PRE_CLICK, A, mods) & COMPONENT_INTERRUPT_CLICK)
 		return
 
-	if (client.buildmode)
+	if (client && client.buildmode)
 		if (istype(A, /obj/effect/bmode) || istype(A, /obj/effect/buildholder))
 			A.clicked(src, mods)
 			return
