@@ -98,6 +98,7 @@
 
 #define SS_PRIORITY_INPUT          1000
 #define SS_PRIORITY_TIMER          700
+#define SS_PRIORITY_XENO_PATHFINDING 500
 #define SS_PRIORITY_SOUND          250
 #define SS_PRIORITY_TICKER         200
 #define SS_PRIORITY_XENO_AI        185

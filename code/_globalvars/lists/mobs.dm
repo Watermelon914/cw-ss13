@@ -19,6 +19,7 @@ GLOBAL_LIST_EMPTY_TYPED(dead_mob_list, /mob) // excludes /mob/new_player
 
 GLOBAL_LIST_EMPTY_TYPED(human_mob_list, /mob/living/carbon/human)
 GLOBAL_LIST_EMPTY_TYPED(alive_human_list, /mob/living/carbon/human) // list of alive marines
+GLOBAL_LIST_EMPTY_TYPED(alive_client_human_list, /mob/living/carbon/human) // list of alive marines with clients
 
 GLOBAL_LIST_EMPTY_TYPED(xeno_mob_list, /mob/living/carbon/Xenomorph)
 GLOBAL_LIST_EMPTY_TYPED(living_xeno_list, /mob/living/carbon/Xenomorph)

@@ -1,6 +1,6 @@
 /datum/job/command/senior
 	title = JOB_SEA
-	flags_startup_parameters = ROLE_ADD_TO_DEFAULT|ROLE_ADD_TO_MODE|ROLE_ADMIN_NOTIFY|ROLE_WHITELISTED
+	flags_startup_parameters = NO_FLAGS
 	flags_whitelist = WHITELIST_MENTOR
 	gear_preset = "USCM Senior Enlisted Advisor (SEA)"
 	entry_message_body = "You are held to a higher standard and are required to obey not only the Server Rules but <a href='"+URL_WIKI_LAW+"'>Marine Law</a> and <a href='"+URL_WIKI_SOP+"'>Standard Operating Procedure</a>. Failure to do so may result in your Mentorship Removal. Your primary job is to teach others the game and its mechanics, and offer advice to all USCM Departments and Personnel on-board."

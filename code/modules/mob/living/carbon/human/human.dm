@@ -2,6 +2,8 @@
 	blood_type = pick(7;"O-", 38;"O+", 6;"A-", 34;"A+", 2;"B-", 9;"B+", 1;"AB-", 3;"AB+")
 	GLOB.human_mob_list += src
 	GLOB.alive_human_list += src
+	if(client)
+		GLOB.alive_client_human_list += src
 	SShuman.processable_human_list += src
 
 	if(!species)
@@ -68,6 +70,7 @@
 	remove_from_all_mob_huds()
 	GLOB.human_mob_list -= src
 	GLOB.alive_human_list -= src
+	GLOB.alive_client_human_list -= src
 	SShuman.processable_human_list -= src
 
 	. = ..()

@@ -28,7 +28,9 @@
 		if(distance > max_travel_distance)
 			return
 
-		calculate_path(get_turf(P.firer), distance, CALLBACK(src, .proc/set_override_path))
+		SSxeno_pathfinding.calculate_path(src, P.firer, distance, src, CALLBACK(src, .proc/set_override_path))
+
+		//calculate_path(get_turf(P.firer), distance, CALLBACK(src, .proc/set_override_path))
 
 /mob/living/carbon/Xenomorph/proc/set_override_path(var/list/path)
 	path_override = path
@@ -75,6 +77,8 @@
 /atom/proc/xeno_ai_act(var/mob/living/carbon/Xenomorph/X)
 	return
 
+// Old way of calculating the path (Doesn't use a subsystem)
+/*
 /mob/living/carbon/Xenomorph/proc/calculate_path(var/turf/target, range, var/datum/callback/CB)
 	// This proc can sleep if a callback is passed. Not recommended in process procs.
 	set waitfor = FALSE
@@ -162,6 +166,7 @@
 		return path
 	else
 		CB.Invoke(path)
+*/
 
 /mob/living/carbon/Xenomorph/proc/can_move_and_apply_move_delay()
 	// Unable to move, try next time.
@@ -176,13 +181,22 @@
 		next_move_slowdown = 0
 	return TRUE
 
+/mob/living/carbon/Xenomorph/proc/set_path(var/list/path)
+	current_path = path
+
 /mob/living/carbon/Xenomorph/proc/move_to_next_turf(var/turf/T, var/max_range = ai_range)
+	if(!T)
+		return FALSE
+
 	if(path_override)
 		current_path = path_override
 	else if(!current_path || (next_path_generation < world.time && current_target_turf != T))
-		current_path = calculate_path(T, max_range)
+		//current_path = calculate_path(T, max_range)
+		if(!XENO_CALCULATING_PATH(src) || current_target_turf != T)
+			SSxeno_pathfinding.calculate_path(src, T, ai_range, src, CALLBACK(src, .proc/set_path))
+			current_target_turf = T
 		next_path_generation = world.time + path_update_per_second
-		current_target_turf = T
+
 
 
 	// No possible path to target.
@@ -220,11 +234,12 @@
 /mob/living/carbon/Xenomorph/proc/get_target(var/range)
 	var/mob/living/carbon/human/closest_human
 	var/smallest_distance = INFINITY
-	for(var/mob/living/carbon/human/H in urange(range, src))
-		if(H.stat == DEAD)
+	for(var/l in GLOB.alive_client_human_list)
+		var/mob/living/carbon/human/H = l
+		var/distance = get_dist(src, H)
+		if(distance > ai_range)
 			continue
 
-		var/distance = get_dist(src, H)
 		if(distance < smallest_distance)
 			smallest_distance = distance
 			closest_human = H

@@ -37,10 +37,21 @@
 /mob/living/carbon/human/dust_animation()
 	new /obj/effect/overlay/temp/dust_animation(loc, src, "dust-h")
 
+
+/mob/living/carbon/human/Login()
+	. = ..()
+	if(stat)
+		GLOB.alive_client_human_list += src
+
+/mob/living/carbon/human/Logout()
+	GLOB.alive_client_human_list -= src
+	return ..()
+
 /mob/living/carbon/human/death(var/cause, var/gibbed)
 	if(stat == DEAD)
 		return
 	GLOB.alive_human_list -= src
+	GLOB.alive_client_human_list -= src
 	if(!gibbed)
 		disable_special_flags()
 		disable_lights()

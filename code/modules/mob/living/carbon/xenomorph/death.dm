@@ -8,6 +8,9 @@
 
 	GLOB.living_xeno_list -= src
 
+	if(mob_flags & AI_CONTROLLED)
+		remove_ai()
+
 	if(is_zoomed)
 		zoom_out()
 

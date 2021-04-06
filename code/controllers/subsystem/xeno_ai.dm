@@ -31,7 +31,7 @@ SUBSYSTEM_DEF(xeno_ai)
 	wait = 0.1 SECONDS
 	/// A list of mobs scheduled to process
 	var/list/current_run = list()
-	/// A list of open UIs
+	/// A list of AI mobs
 	var/list/ai_mobs = list()
 
 	var/game_evaluation = 0
@@ -42,7 +42,7 @@ SUBSYSTEM_DEF(xeno_ai)
 
 /datum/controller/subsystem/xeno_ai/fire(resumed = FALSE)
 	if(!resumed)
-		calculate_eval()
+		//calculate_eval()
 		src.current_run = ai_mobs.Copy()
 	// Cache for sanic speed (lists are references anyways)
 	var/list/current_run = src.current_run
@@ -52,7 +52,8 @@ SUBSYSTEM_DEF(xeno_ai)
 		if(!QDELETED(M) || M.client)
 			M.process_ai(wait * 0.1, game_evaluation)
 		else
-			ai_mobs.Remove(M)
+			remove_ai(M)
+
 		if(MC_TICK_CHECK)
 			return
 

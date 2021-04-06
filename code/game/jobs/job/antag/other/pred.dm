@@ -3,21 +3,10 @@
 /datum/job/antag/predator
 	title = JOB_PREDATOR
 	selection_class = "job_predator"
-	flags_startup_parameters = ROLE_ADD_TO_DEFAULT|ROLE_ADD_TO_MODE|ROLE_WHITELISTED|ROLE_NO_ACCOUNT|ROLE_CUSTOM_SPAWN
+	flags_startup_parameters = NO_FLAGS
 	flags_whitelist = WHITELIST_YAUTJA
 	supervisors = "Ancients"
 	gear_preset = "Yautja Blooded"
-
-/datum/job/antag/predator/New()
-	. = ..()
-	gear_preset_whitelist = list(
-		"[JOB_PREDATOR][CLAN_RANK_YOUNG]" = "Yautja Young",
-		"[JOB_PREDATOR][CLAN_RANK_BLOODED]" = "Yautja Blooded",
-		"[JOB_PREDATOR][CLAN_RANK_ELITE]" = "Yautja Elite",
-		"[JOB_PREDATOR][CLAN_RANK_ELDER]" = "Yautja Elder",
-		"[JOB_PREDATOR][CLAN_RANK_LEADER]" = "Yautja Leader",
-		"[JOB_PREDATOR][CLAN_RANK_ADMIN]" = "Yautja Ancient"
-	)
 
 /datum/job/antag/predator/set_spawn_positions(var/count)
 	spawn_positions = max((round(count * PREDATOR_TO_MARINES_SPAWN_RATIO)), 4)
