@@ -56,7 +56,7 @@
 	mutation_type = RUNNER_NORMAL
 
 	var/turf/travelling_turf
-	var/linger_range
+	var/linger_range = 5
 	var/pull_direction
 
 /mob/living/carbon/Xenomorph/Runner/initialize_pass_flags(var/datum/pass_flags_container/PF)
@@ -104,7 +104,7 @@
 
 			if(clear)
 				var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/pounce)
-				A.use_ability_async(current_target)
+				A.use_ability_async(get_turf(current_target))
 				current_path = null
 				pull_direction = turn(dir, 180)
 
@@ -112,6 +112,6 @@
 	if(get_dist(src, current_target) <= 1)
 		if(DT_PROB(XENO_SLASH, delta_time))
 			INVOKE_ASYNC(src, /mob.proc/do_click, current_target, "", list())
-		if(current_target.is_mob_incapacitated() && !pulling && DT_PROB(RUNNER_GRAB, delta_time))
+		if(current_target.is_mob_incapacitated() && !isXeno(current_target.pulledby) && !pulling && DT_PROB(RUNNER_GRAB, delta_time))
 			CallAsync(src, /mob.proc/start_pulling, list(current_target))
 			swap_hand()

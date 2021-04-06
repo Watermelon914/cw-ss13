@@ -3,8 +3,7 @@
 	return DOOR_PENALTY
 
 /obj/structure/mineral_door/xeno_ai_act(var/mob/living/carbon/Xenomorph/X)
-	if(!isSwitchingStates)
-		Open()
+	X.do_click(src, "", list())
 
 // AIRLOCK
 /obj/structure/machinery/door/airlock/xeno_ai_obstacle(var/mob/living/carbon/Xenomorph/X, direction)
@@ -13,6 +12,10 @@
 	return DOOR_PENALTY
 
 /obj/structure/machinery/door/airlock/xeno_ai_act(var/mob/living/carbon/Xenomorph/X)
+	if(density)
+		X.do_click(src, "", list())
+
+/obj/structure/machinery/door/window/xeno_ai_act(mob/living/carbon/Xenomorph/X, direction)
 	X.do_click(src, "", list())
 
 /*
@@ -28,12 +31,17 @@
 
 // OBJECTS
 /obj/structure/xeno_ai_obstacle(var/mob/living/carbon/Xenomorph/X, direction)
-	if(unslashable)
+	if(unslashable && !climbable)
 		return ..()
 	return OBJECT_PENALTY
 
 /obj/structure/xeno_ai_act(var/mob/living/carbon/Xenomorph/X)
+	if(unslashable)
+		if(!X.action_busy)
+			do_climb(X)
+		return
 	X.do_click(src, "", list())
+
 
 // HUMANS
 /mob/living/carbon/human/xeno_ai_obstacle(mob/living/carbon/Xenomorph/X, direction)
@@ -52,7 +60,8 @@
 
 /obj/structure/window_frame/xeno_ai_act(mob/living/carbon/Xenomorph/X)
 	. = ..()
-	MouseDrop(X)
+	if(!X.action_busy)
+		do_climb(X)
 
 // Avoid barricades if possible.
 /obj/structure/barricade/xeno_ai_obstacle(mob/living/carbon/Xenomorph/X, direction)

@@ -12,6 +12,9 @@
 	var/max_travel_distance = 24
 	var/turf/path_override
 
+	var/ai_timeout_time = 0
+	var/ai_timeout_period = 5 SECONDS
+
 	// Home turf
 	var/next_home_search = 0
 	var/home_search_delay = 5 SECONDS
@@ -113,6 +116,10 @@
 			if(!neighbor.weeds)
 				distance_between += NO_WEED_PENALTY
 
+			for(var/i in neighbor)
+				var/atom/A = i
+				distance_between += A.object_weight
+
 			var/list/L = LinkBlocked(src, current_node, neighbor, list(current_target, src), TRUE)
 			if(length(L))
 				for(var/i in L)
@@ -183,7 +190,7 @@
 		return FALSE
 
 	// We've reached our destination
-	if(!length(current_path) || get_dist(T, src) <= 1)
+	if(!length(current_path) || get_dist(T, src) <= 0)
 		if(current_path == path_override)
 			path_override = null
 		return TRUE
@@ -197,12 +204,18 @@
 	var/list/L = LinkBlocked(src, loc, next_turf, list(src, current_target), TRUE)
 	for(var/a in L)
 		var/atom/A = a
+		if(A.xeno_ai_obstacle(src, get_dir(loc, next_turf)) == INFINITY)
+			return FALSE
 		INVOKE_ASYNC(A, /atom.proc/xeno_ai_act, src)
 	var/successful_move = Move(next_turf, get_dir(src, next_turf))
 	if(successful_move)
+		ai_timeout_time = world.time
 		current_path.len--
 
-	return successful_move
+	if(ai_timeout_time < world.time - ai_timeout_period)
+		return FALSE
+
+	return TRUE
 
 /mob/living/carbon/Xenomorph/proc/get_target(var/range)
 	var/mob/living/carbon/human/closest_human

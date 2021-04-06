@@ -45,8 +45,6 @@
 		UnregisterSignal(X, COMSIG_XENO_SLASH_ADDITIONAL_EFFECTS_SELF)
 		if (freeze_timer_id != TIMER_ID_NULL)
 			end_pounce_freeze()
-			deltimer(freeze_timer_id)
-			freeze_timer_id = TIMER_ID_NULL
 			to_chat(X, SPAN_XENONOTICE("Slashing frenzies you! You feel free to move immediately!"))
 
 /datum/action/xeno_action/onclick/lurker_invisibility

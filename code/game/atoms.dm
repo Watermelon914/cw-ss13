@@ -50,6 +50,8 @@
 	var/list/beams // An assoc list where the keys are ids and their values are TRUE (indicating beam should persist)
 	var/beam_id = 0
 
+	var/object_weight = 0
+
 /atom/New(loc, ...)
 	var/do_initialize = SSatoms.initialized
 	if(do_initialize != INITIALIZATION_INSSATOMS)

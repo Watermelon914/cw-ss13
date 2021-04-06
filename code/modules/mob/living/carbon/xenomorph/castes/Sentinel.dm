@@ -55,7 +55,7 @@
 	var/min_range = 2
 	var/last_spit = 0
 
-/mob/living/carbon/Xenomorph/Spitter/process_ai(delta_time, game_evaluation)
+/mob/living/carbon/Xenomorph/Sentinel/process_ai(delta_time, game_evaluation)
 	. = ..()
 
 	if(.)

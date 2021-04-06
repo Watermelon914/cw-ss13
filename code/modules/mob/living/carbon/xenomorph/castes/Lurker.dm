@@ -51,6 +51,9 @@
 	tackle_min = 2
 	tackle_max = 6
 
+	var/turf/travelling_turf
+	var/linger_range = 5
+
 /datum/behavior_delegate/lurker_base
 	name = "Base Lurker Behavior Delegate"
 
@@ -131,3 +134,57 @@
 	. = list()
 	var/invis_message = (invis_start_time == -1) ? "N/A" : "[(invis_duration-(world.time - invis_start_time))/10] seconds."
 	. += "Invisibility Time Left: [invis_message]"
+
+/mob/living/carbon/Xenomorph/Lurker/process_ai(delta_time, game_evaluation)
+	. = ..()
+
+	if(.)
+		return
+
+	a_intent = INTENT_HARM
+	create_hud()
+
+	if(throwing)
+		return
+
+	if(current_target.is_mob_incapacitated())
+		travelling_turf = pick(RANGE_TURFS(1, current_target))
+	else if(!(src in view(world.view, current_target)))
+		travelling_turf = get_turf(current_target)
+	else if(!travelling_turf || get_dist(travelling_turf, src) <= 0)
+		travelling_turf = get_random_turf_in_range(current_target, linger_range, linger_range)
+		if(!travelling_turf)
+			travelling_turf = get_turf(current_target)
+
+	if(!move_to_next_turf(travelling_turf))
+		travelling_turf = null
+		return
+
+	var/datum/action/xeno_action/onclick/lurker_invisibility/invis = get_xeno_action_by_type(src, /datum/action/xeno_action/onclick/lurker_invisibility)
+
+	if(DT_PROB(LURKER_INVISIBLE, delta_time))
+		invis.use_ability_async()
+
+	if(invis.invis_timer_id != TIMER_ID_NULL && get_dist(src, current_target) <= LURKER_POUNCE_RANGE && DT_PROB(LURKER_POUNCE, delta_time))
+		var/turf/last_turf = loc
+		var/clear = TRUE
+		add_temp_pass_flags(PASS_OVER_THROW_MOB)
+		for(var/i in getline2(src, current_target, FALSE))
+			var/turf/new_turf = i
+			if(LinkBlocked(src, last_turf, new_turf, list(current_target, src)))
+				clear = FALSE
+				break
+		remove_temp_pass_flags(PASS_OVER_THROW_MOB)
+
+		if(clear)
+			var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/pounce/lurker)
+			A.use_ability_async(get_turf(current_target))
+			current_path = null
+
+	zone_selected = pick(GLOB.warrior_target_limbs)
+	if(get_dist(src, current_target) <= 1)
+		if(DT_PROB(XENO_SLASH, delta_time))
+			if(DT_PROB(LURKER_POWER_SLASH, delta_time))
+				var/datum/action/xeno_action/power_slash = get_xeno_action_by_type(src, /datum/action/xeno_action/onclick/lurker_assassinate)
+				power_slash.use_ability_async()
+			INVOKE_ASYNC(src, /mob.proc/do_click, current_target, "", list())

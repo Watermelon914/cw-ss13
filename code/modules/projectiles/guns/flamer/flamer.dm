@@ -326,6 +326,8 @@
 	var/datum/reagents/tied_reagents
 	var/datum/callback/to_call
 
+	object_weight = 100
+
 /obj/flamer_fire/Initialize(mapload, var/source, var/source_mob, var/datum/reagent/R, fire_spread_amount = 0, var/datum/reagents/obj_reagents = null, new_flameshape = FLAMESHAPE_DEFAULT, var/atom/target = null, var/datum/callback/C)
 	. = ..()
 	if(!R)
