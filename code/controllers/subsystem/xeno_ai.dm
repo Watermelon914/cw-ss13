@@ -90,7 +90,7 @@ SUBSYSTEM_DEF(xeno_ai)
 	X.mob_flags |= AI_CONTROLLED
 
 /datum/controller/subsystem/xeno_ai/proc/remove_ai(var/mob/living/carbon/Xenomorph/X)
-	ai_mobs &= ~AI_CONTROLLED
+	X.mob_flags &= ~AI_CONTROLLED
 	ai_mobs -= X
 
 
