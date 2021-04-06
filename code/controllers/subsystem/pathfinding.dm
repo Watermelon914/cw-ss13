@@ -19,11 +19,10 @@ SUBSYSTEM_DEF(xeno_pathfinding)
 /datum/controller/subsystem/xeno_pathfinding/fire(resumed = FALSE)
 	if(!length(paths_to_calculate))
 		return
-	if(current_position <= 0)
-		current_position = length(paths_to_calculate)
-
+	if(current_position <= 0 || current_position > length(paths_to_calculate))
+		current_position = 1
 	current_run = paths_to_calculate[current_position]
-	current_position--
+	current_position++
 
 	// A* Pathfinding. Uses priority queue
 	var/turf/target = current_run.finish

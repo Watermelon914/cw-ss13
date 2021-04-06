@@ -40,7 +40,7 @@
 
 /mob/living/carbon/human/Login()
 	. = ..()
-	if(stat)
+	if(stat != DEAD)
 		GLOB.alive_client_human_list += src
 
 /mob/living/carbon/human/Logout()
