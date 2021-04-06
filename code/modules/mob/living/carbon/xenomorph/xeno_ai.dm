@@ -9,6 +9,8 @@
 	var/ai_move_delay = 0
 	var/path_update_per_second = 0.5 SECONDS
 	var/ai_range = 8
+	var/max_travel_distance = 24
+	var/turf/path_override
 
 	// Home turf
 	var/next_home_search = 0
@@ -16,6 +18,17 @@
 	var/max_distance_from_home = 15
 	var/home_locate_range = 15
 	var/turf/home_turf
+
+/mob/living/carbon/Xenomorph/proc/handle_ai_shot(obj/item/projectile/P)
+	if(P.firer && P.firer != current_target)
+		var/distance = get_dist(src, P.firer)
+		if(distance > max_travel_distance)
+			return
+
+		calculate_path(get_turf(P.firer), distance, CALLBACK(src, .proc/set_override_path))
+
+/mob/living/carbon/Xenomorph/proc/set_override_path(var/list/path)
+	path_override = path
 
 /mob/living/carbon/Xenomorph/proc/process_ai(delta_time, game_evaluation)
 	SHOULD_NOT_SLEEP(TRUE)
@@ -59,7 +72,10 @@
 /atom/proc/xeno_ai_act(var/mob/living/carbon/Xenomorph/X)
 	return
 
-/mob/living/carbon/Xenomorph/proc/calculate_path(var/turf/target, range)
+/mob/living/carbon/Xenomorph/proc/calculate_path(var/turf/target, range, var/datum/callback/CB)
+	// This proc can sleep if a callback is passed. Not recommended in process procs.
+	set waitfor = FALSE
+
 	if(!target)
 		return null
 
@@ -121,6 +137,9 @@
 						visited_nodes.Insert(index_to_check+1, neighbor)
 						break
 
+		if(CB)
+			CHECK_TICK
+
 	if(!prev[target])
 		return null
 
@@ -132,7 +151,10 @@
 		path += current_node
 		current_node = prev[current_node]
 
-	return path
+	if(!CB)
+		return path
+	else
+		CB.Invoke(path)
 
 /mob/living/carbon/Xenomorph/proc/can_move_and_apply_move_delay()
 	// Unable to move, try next time.
@@ -148,10 +170,13 @@
 	return TRUE
 
 /mob/living/carbon/Xenomorph/proc/move_to_next_turf(var/turf/T, var/max_range = ai_range)
-	if(!current_path || (next_path_generation < world.time && current_target_turf != T))
+	if(path_override)
+		current_path = path_override
+	else if(!current_path || (next_path_generation < world.time && current_target_turf != T))
 		current_path = calculate_path(T, max_range)
 		next_path_generation = world.time + path_update_per_second
 		current_target_turf = T
+
 
 	// No possible path to target.
 	if(!current_path && get_dist(T, src) > 0)
@@ -159,11 +184,14 @@
 
 	// We've reached our destination
 	if(!length(current_path) || get_dist(T, src) <= 1)
+		if(current_path == path_override)
+			path_override = null
 		return TRUE
 
 	// Unable to move, try next time.
 	if(!can_move_and_apply_move_delay())
 		return TRUE
+
 
 	var/turf/next_turf = current_path[current_path.len]
 	var/list/L = LinkBlocked(src, loc, next_turf, list(src, current_target), TRUE)

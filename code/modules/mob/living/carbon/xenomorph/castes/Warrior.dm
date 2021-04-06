@@ -93,7 +93,8 @@ GLOBAL_LIST_INIT(warrior_target_limbs, list(
 			remove_temp_pass_flags(PASS_OVER_THROW_MOB)
 
 			if(clear)
-
+				var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/lunge)
+				A.use_ability_async(current_target)
 				swap_hand()
 
 	zone_selected = pick(GLOB.warrior_target_limbs)
@@ -101,10 +102,10 @@ GLOBAL_LIST_INIT(warrior_target_limbs, list(
 		if(DT_PROB(XENO_SLASH, delta_time))
 			INVOKE_ASYNC(src, /mob.proc/do_click, current_target, "", list())
 		if(DT_PROB(WARRIOR_PUNCH, delta_time))
-			var/datum/action/xeno_action/activable/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/warrior_punch)
+			var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/warrior_punch)
 			A.use_ability_async(current_target)
 		else if(DT_PROB(WARRIOR_FLING, delta_time))
-			var/datum/action/xeno_action/activable/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/fling)
+			var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/fling)
 			A.use_ability_async(current_target)
 
 /mob/living/carbon/Xenomorph/Warrior/throw_item(atom/target)

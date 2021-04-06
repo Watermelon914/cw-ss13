@@ -55,7 +55,63 @@
 	)
 	mutation_type = RUNNER_NORMAL
 
+	var/turf/travelling_turf
+	var/linger_range
+	var/pull_direction
+
 /mob/living/carbon/Xenomorph/Runner/initialize_pass_flags(var/datum/pass_flags_container/PF)
 	..()
 	if (PF)
 		PF.flags_pass = PASS_FLAGS_CRAWLER
+
+
+/mob/living/carbon/Xenomorph/Runner/process_ai(delta_time, game_evaluation)
+	. = ..()
+
+	if(.)
+		return
+
+	a_intent = INTENT_HARM
+	create_hud()
+
+	if(throwing)
+		return
+
+	if(pulling && can_move_and_apply_move_delay())
+		Move(get_step(loc, pull_direction), pull_direction)
+	else
+		if(!(src in view(world.view, current_target)))
+			travelling_turf = get_turf(current_target)
+		else if(!travelling_turf || get_dist(travelling_turf, src) <= 0)
+			travelling_turf = get_random_turf_in_range(current_target, linger_range, linger_range)
+			if(!travelling_turf)
+				travelling_turf = get_turf(current_target)
+
+		if(!move_to_next_turf(travelling_turf))
+			travelling_turf = null
+			return
+
+		if(get_dist(src, current_target) <= RUNNER_POUNCE_RANGE && DT_PROB(RUNNER_POUNCE, delta_time))
+			var/turf/last_turf = loc
+			var/clear = TRUE
+			add_temp_pass_flags(PASS_OVER_THROW_MOB)
+			for(var/i in getline2(src, current_target, FALSE))
+				var/turf/new_turf = i
+				if(LinkBlocked(src, last_turf, new_turf, list(current_target, src)))
+					clear = FALSE
+					break
+			remove_temp_pass_flags(PASS_OVER_THROW_MOB)
+
+			if(clear)
+				var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/pounce)
+				A.use_ability_async(current_target)
+				current_path = null
+				pull_direction = turn(dir, 180)
+
+	zone_selected = pick(GLOB.warrior_target_limbs)
+	if(get_dist(src, current_target) <= 1)
+		if(DT_PROB(XENO_SLASH, delta_time))
+			INVOKE_ASYNC(src, /mob.proc/do_click, current_target, "", list())
+		if(current_target.is_mob_incapacitated() && !pulling && DT_PROB(RUNNER_GRAB, delta_time))
+			CallAsync(src, /mob.proc/start_pulling, list(current_target))
+			swap_hand()

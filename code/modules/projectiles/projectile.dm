@@ -962,6 +962,9 @@
 			emote(pain_emote)
 		updatehealth()
 
+	if(mob_flags & AI_CONTROLLED)
+		handle_ai_shot(P)
+
 	SEND_SIGNAL(P, COMSIG_BULLET_ACT_XENO, src, damage, damage_result)
 
 	return TRUE
