@@ -70,6 +70,9 @@ GLOBAL_LIST_INIT(warrior_target_limbs, list(
 	a_intent = INTENT_HARM
 	create_hud()
 
+	if(get_active_hand())
+		swap_hand()
+
 	if(throwing)
 		return
 

@@ -19,6 +19,9 @@ endmap
 map bigredv2
 endmap
 
+map bigredv2_ai
+endmap
+
 map prison_station_fop
 	voteweight 0
 endmap

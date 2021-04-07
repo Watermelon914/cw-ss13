@@ -28,6 +28,8 @@ GLOBAL_LIST_EMPTY(roundstart_leaders)
 		JOB_CO
 	)
 
+	var/zlevel_check = TRUE
+
 	var/faction = FACTION_MARINE
 
 /datum/techtree/marine/New()
@@ -116,7 +118,8 @@ GLOBAL_LIST_EMPTY(roundstart_leaders)
 		return
 	remove_leader()
 
-	RegisterSignal(H, COMSIG_MOVABLE_MOVED, .proc/handle_zlevel_check)
+	if(zlevel_check)
+		RegisterSignal(H, COMSIG_MOVABLE_MOVED, .proc/handle_zlevel_check)
 	RegisterSignal(H, COMSIG_MOB_DEATH, .proc/handle_death)
 
 	leader = H
