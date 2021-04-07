@@ -39,7 +39,7 @@
 			monkey_types = list(/mob/living/carbon/human/yiren)
 			hives = list(XENO_HIVE_ALPHA, XENO_HIVE_BRAVO, XENO_HIVE_CHARLIE, XENO_HIVE_DELTA)
 
-		if(MAP_BIG_RED)
+		if(MAP_BIG_RED, MAP_BIG_RED_AI)
 			monkey_types = list(/mob/living/carbon/human/neaera)
 			hives = list(XENO_HIVE_ALPHA, XENO_HIVE_BRAVO, XENO_HIVE_CHARLIE)
 			if(readied_players > 100)

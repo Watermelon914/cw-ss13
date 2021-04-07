@@ -126,7 +126,7 @@
 			desc = "A satellite printout of the Ice Colony."
 			html_link = "images/1/18/Map_icecolony.png"
 			color = "cyan"
-		if(MAP_BIG_RED)
+		if(MAP_BIG_RED, MAP_BIG_RED_AI)
 			name = "\improper Solaris Ridge Map"
 			desc = "A censored blueprint of the Solaris Ridge facility"
 			html_link = "images/9/9e/Solaris_Ridge.png"
