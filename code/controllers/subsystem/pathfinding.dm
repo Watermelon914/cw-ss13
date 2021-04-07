@@ -1,4 +1,3 @@
-
 SUBSYSTEM_DEF(xeno_pathfinding)
 	name = "Xeno Pathfinding"
 	priority = SS_PRIORITY_XENO_PATHFINDING
@@ -78,11 +77,32 @@ SUBSYSTEM_DEF(xeno_pathfinding)
 							break
 
 						if(f_distance < f_distances[visited_nodes[index_to_check]])
-							visited_nodes.Insert(index_to_check+1, neighbor)
+							visited_nodes.Insert(index_to_check, neighbor)
 							break
 
 			if(MC_TICK_CHECK)
 				return
+
+		#ifdef TESTING
+		for(var/i in distances)
+			var/turf/T = i
+			var/distance = distances[i]
+			if(distance == INFINITY)
+				T.color = "#000000"
+				for(var/l in T)
+					var/atom/A = l
+					A.color = "#000000"
+				continue
+
+			var/red = num2hex(min(distance*10, 255), 2)
+			var/green = num2hex(max(255-distance*10, 0), 2)
+
+			for(var/l in T)
+				var/atom/A = l
+				A.color = "#[red][green]00"
+			T.color = "#[red][green]00"
+			T.maptext = distance
+		#endif
 
 		if(!prev[target])
 			current_run.to_return.Invoke()
@@ -161,8 +181,27 @@ SUBSYSTEM_DEF(xeno_pathfinding)
 	SSxeno_pathfinding.paths_to_calculate -= src
 	SSxeno_pathfinding.current_processing -= src
 
+	#ifdef TESTING
+	addtimer(CALLBACK(src, .proc/clear_colors, distances), 0.5 SECONDS)
+	#endif
+
 	start = null
 	finish = null
 	travelling_xeno = null
 	to_return = null
+	visited_nodes = null
+	distances = null
+	f_distances = null
+	prev = null
 	return ..()
+
+#ifdef TESTING
+/datum/xeno_pathinfo/proc/clear_colors(var/list/L)
+	for(var/i in L)
+		var/turf/T = i
+		for(var/l in T)
+			var/atom/A = l
+			A.color = null
+		T.color = null
+		T.maptext = null
+#endif

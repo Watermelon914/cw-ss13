@@ -5,17 +5,18 @@
 /obj/structure/mineral_door/xeno_ai_act(var/mob/living/carbon/Xenomorph/X)
 	X.do_click(src, "", list())
 
+/obj/structure/mineral_door/resin/xeno_ai_act(mob/living/carbon/Xenomorph/X)
+	if(X.hivenumber != hivenumber)
+		return ..()
+	return 0
+
 // AIRLOCK
 /obj/structure/machinery/door/airlock/xeno_ai_obstacle(var/mob/living/carbon/Xenomorph/X, direction)
 	if(locked || welded || isElectrified())
 		return ..()
 	return DOOR_PENALTY
 
-/obj/structure/machinery/door/airlock/xeno_ai_act(var/mob/living/carbon/Xenomorph/X)
-	if(density)
-		X.do_click(src, "", list())
-
-/obj/structure/machinery/door/window/xeno_ai_act(mob/living/carbon/Xenomorph/X, direction)
+/obj/structure/machinery/door/xeno_ai_act(var/mob/living/carbon/Xenomorph/X)
 	X.do_click(src, "", list())
 
 /*
@@ -31,6 +32,9 @@
 
 // OBJECTS
 /obj/structure/xeno_ai_obstacle(var/mob/living/carbon/Xenomorph/X, direction)
+	if(!density)
+		return 0
+
 	if(unslashable && !climbable)
 		return ..()
 	return OBJECT_PENALTY

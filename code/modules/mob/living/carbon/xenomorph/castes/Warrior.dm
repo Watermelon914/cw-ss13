@@ -77,6 +77,17 @@ GLOBAL_LIST_INIT(warrior_target_limbs, list(
 		Move(get_step(loc, turn(dir, 180)), turn(dir, 180))
 	else
 		var/turf/T = get_turf(current_target)
+		if(get_dist(src, current_target) <= 1)
+			var/list/turfs = RANGE_TURFS(1, T)
+			while(length(turfs))
+				T = pick(turfs)
+				turfs -= T
+				if(!T.density)
+					break
+
+				if(T == get_turf(current_target))
+					break
+
 		if(!move_to_next_turf(T))
 			current_target = null
 			return
