@@ -36,11 +36,26 @@ SUBSYSTEM_DEF(xeno_ai)
 
 	var/game_evaluation = 0
 
+	var/ai_kill = FALSE
+
 /datum/controller/subsystem/xeno_ai/stat_entry(msg)
 	msg = "P:[length(ai_mobs)]|Eval:[game_evaluation]"
 	return ..()
 
+/datum/admins/proc/toggle_ai()
+	set name = "Toggle xeno AI"
+	set category = "Debug"
+
+	if(!check_rights(R_DEBUG))
+		return
+
+	SSxeno_ai.ai_kill = !SSxeno_ai.ai_kill
+	message_admins("[key_name_admin(usr)] [SSxeno_ai.ai_kill? "killed" : "revived"] all xeno AI.")
+
 /datum/controller/subsystem/xeno_ai/fire(resumed = FALSE)
+	if(ai_kill)
+		return
+
 	if(!resumed)
 		//calculate_eval()
 		src.current_run = ai_mobs.Copy()

@@ -55,3 +55,36 @@
 #define LURKER_POUNCE_RANGE 7
 #define LURKER_INVISIBLE 100
 #define LURKER_POWER_SLASH 100
+
+// Defender
+
+#define DEFENDER_TAILWHIP 40
+#define DEFENDER_HEADBUTT 75
+
+// Ravager
+
+#define RAVAGER_SCISSOR_CUT 75
+#define RAVAGER_SCISSOR_CUT_RANGE 3
+/// The chance that rav shield procs
+#define RAVAGER_SHIELD 100
+/// The percentage of health that ravager shield procs at
+#define RAVAGER_SHIELD_PROC_HEALTH 0.25
+/// The number of people that need to be at a minimum for rav to proc his shield
+#define RAVAGER_SHIELD_PROC_PEOPLE 3
+#define RAVAGER_LUNGE 5
+/// The chance that ravager will lunge at someone with enough shield to knock them down.
+#define RAVAGER_LUNGE_SHIELD 95
+/// The range needed for ravager to try lunging
+#define RAVAGER_LUNGE_RANGE 5
+
+// Crusher
+
+/// How often is the crusher going to stomp whilst they're standing over you
+#define CRUSHER_STOMP 100
+/// How often will a crusher stomp after a charge
+#define CRUSHER_STOMP_CHARGE 40
+#define CRUSHER_POUNCE_RANGE 7
+#define CRUSHER_POUNCE 75
+#define CRUSHER_SHIELD 100
+/// At what health percentage to proc crusher's shield.
+#define CRUSHER_SHIELD_HEALTH_PROC 0.25

@@ -58,6 +58,19 @@
 	mutation_type = CRUSHER_NORMAL
 	claw_type = CLAW_TYPE_VERY_SHARP
 
+/mob/living/carbon/Xenomorph/Crusher/make_ai()
+	. = ..()
+	var/datum/action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/pounce/crusher_charge)
+	A.hide_from(src)
+
+	A = new /datum/action/xeno_action/activable/pounce/crusher_charge/ai()
+	A.give_to(src)
+
+/mob/living/carbon/Xenomorph/Crusher/remove_ai()
+	qdel(get_xeno_action_by_type(src, /datum/action/xeno_action/activable/pounce/crusher_charge/ai))
+	give_action(src, /datum/action/xeno_action/activable/pounce/crusher_charge)
+	return
+
 // Refactored to handle all of crusher's interactions with object during charge.
 /mob/living/carbon/Xenomorph/proc/handle_collision(atom/target)
 	if(!target)
@@ -273,3 +286,50 @@
 			shield_total += XS.amount
 
 	. += "Shield: [shield_total]"
+
+/mob/living/carbon/Xenomorph/Crusher/process_ai(delta_time, game_evaluation)
+	. = ..()
+
+	if(.)
+		return
+
+	a_intent = INTENT_HARM
+	create_hud()
+
+	if(DT_PROB(CRUSHER_SHIELD, delta_time))
+		var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/onclick/crusher_shield)
+		if(health/maxHealth < CRUSHER_SHIELD_HEALTH_PROC)
+			A.use_ability_async(null)
+
+	if(throwing || frozen)
+		return
+
+	var/turf/T = get_turf(current_target)
+
+	if(!move_to_next_turf(T))
+		current_target = null
+		return
+
+	if(get_dist(src, current_target) <= CRUSHER_POUNCE_RANGE && DT_PROB(CRUSHER_POUNCE, delta_time))
+		var/turf/last_turf = loc
+		var/clear = TRUE
+		add_temp_pass_flags(PASS_OVER_THROW_MOB)
+		for(var/i in getline2(src, current_target, FALSE))
+			var/turf/new_turf = i
+			if(LinkBlocked(src, last_turf, new_turf, list(current_target, src)))
+				clear = FALSE
+				break
+		remove_temp_pass_flags(PASS_OVER_THROW_MOB)
+
+		if(clear)
+			var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/pounce/crusher_charge/ai)
+			A.use_ability_async(current_target)
+			SSxeno_pathfinding.stop_calculating_path(src)
+			current_path = null
+
+	if(get_dist(src, current_target) <= 1 && DT_PROB(XENO_SLASH, delta_time))
+		INVOKE_ASYNC(src, /mob.proc/do_click, current_target, "", list())
+
+	if(get_dist(src, current_target) <= 0 && DT_PROB(CRUSHER_STOMP, delta_time))
+		var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/onclick/crusher_stomp)
+		A.use_ability_async(null)

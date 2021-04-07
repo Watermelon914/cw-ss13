@@ -87,6 +87,13 @@
 
 			if(istype(T.weeds, /obj/effect/alien/weeds/node))
 				valid_turfs -= RANGE_TURFS(T.weeds.node_range, T)
+				continue
+
+			for(var/a in T)
+				var/atom/movable/AM = a
+				if(AM.density)
+					valid_turfs -= T
+					break
 
 
 		if(!length(valid_turfs))

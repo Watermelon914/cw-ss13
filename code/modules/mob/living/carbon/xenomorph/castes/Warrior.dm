@@ -77,7 +77,7 @@ GLOBAL_LIST_INIT(warrior_target_limbs, list(
 		Move(get_step(loc, turn(dir, 180)), turn(dir, 180))
 	else
 		var/turf/T = get_turf(current_target)
-		if(!move_to_next_turf(T) && get_dist(src, current_target) != 0)
+		if(!move_to_next_turf(T))
 			current_target = null
 			return
 
@@ -95,6 +95,8 @@ GLOBAL_LIST_INIT(warrior_target_limbs, list(
 			if(clear)
 				var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/lunge)
 				A.use_ability_async(current_target)
+				SSxeno_pathfinding.stop_calculating_path(src)
+				current_path = null
 				swap_hand()
 
 	zone_selected = pick(GLOB.warrior_target_limbs)

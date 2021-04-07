@@ -282,7 +282,7 @@ cases. Override_icon_state should be a list.*/
 		var/datum/action/A = X
 		A.remove_from(user)
 
-	if(flags_item & DELONDROP)
+	if((flags_item & DELONDROP) && !QDESTROYING(src))
 		qdel(src)
 
 	SEND_SIGNAL(src, COMSIG_ITEM_DROPPED, user)

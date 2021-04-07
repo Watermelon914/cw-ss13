@@ -111,7 +111,8 @@ var/list/admin_verbs_debug = list(
 	/client/proc/construct_env_dmm,
 	/client/proc/enter_tree,
 	/client/proc/set_tree_points,
-	/datum/admins/proc/randomize_xeno_castes
+	/datum/admins/proc/randomize_xeno_castes,
+	/datum/admins/proc/toggle_ai
 )
 
 var/list/admin_verbs_debug_advanced = list(

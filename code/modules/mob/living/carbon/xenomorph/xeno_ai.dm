@@ -8,6 +8,7 @@
 
 	var/ai_move_delay = 0
 	var/path_update_per_second = 0.5 SECONDS
+	var/no_path_found = FALSE
 	var/ai_range = 8
 	var/max_travel_distance = 24
 	var/turf/path_override
@@ -28,7 +29,7 @@
 		if(distance > max_travel_distance)
 			return
 
-		SSxeno_pathfinding.calculate_path(src, P.firer, distance, src, CALLBACK(src, .proc/set_override_path))
+		SSxeno_pathfinding.calculate_path(src, P.firer, distance, src, CALLBACK(src, .proc/set_override_path), list(src, P.firer))
 
 		//calculate_path(get_turf(P.firer), distance, CALLBACK(src, .proc/set_override_path))
 
@@ -183,9 +184,15 @@
 
 /mob/living/carbon/Xenomorph/proc/set_path(var/list/path)
 	current_path = path
+	if(!path)
+		no_path_found = TRUE
 
 /mob/living/carbon/Xenomorph/proc/move_to_next_turf(var/turf/T, var/max_range = ai_range)
 	if(!T)
+		return FALSE
+
+	if(no_path_found)
+		no_path_found = FALSE
 		return FALSE
 
 	if(path_override)
@@ -193,11 +200,12 @@
 	else if(!current_path || (next_path_generation < world.time && current_target_turf != T))
 		//current_path = calculate_path(T, max_range)
 		if(!XENO_CALCULATING_PATH(src) || current_target_turf != T)
-			SSxeno_pathfinding.calculate_path(src, T, ai_range, src, CALLBACK(src, .proc/set_path))
+			SSxeno_pathfinding.calculate_path(src, T, max_range, src, CALLBACK(src, .proc/set_path), list(src, current_target))
 			current_target_turf = T
 		next_path_generation = world.time + path_update_per_second
 
-
+	if(XENO_CALCULATING_PATH(src))
+		return TRUE
 
 	// No possible path to target.
 	if(!current_path && get_dist(T, src) > 0)

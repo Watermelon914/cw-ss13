@@ -27,6 +27,39 @@
 	// Object types that dont reduce cooldown when hit
 	var/list/not_reducing_objects = list()
 
+/datum/action/xeno_action/activable/pounce/crusher_charge/ai
+	windup = FALSE
+
+	windup_duration = 3 SECONDS
+	// When to acquire target before launching
+	var/when_to_get_turf = 0.5 SECONDS
+	var/charging = FALSE
+
+/datum/action/xeno_action/activable/pounce/crusher_charge/ai/use_ability(atom/A)
+	if(charging || !action_cooldown_check())
+		return
+
+	owner.anchored = TRUE
+	owner.frozen = TRUE
+
+	var/failed = FALSE
+	if(!do_after(owner, windup_duration - when_to_get_turf, INTERRUPT_INCAPACITATED, BUSY_ICON_HOSTILE))
+		failed = TRUE
+
+	A = get_turf(A)
+
+	if(!failed && !do_after(owner, when_to_get_turf, INTERRUPT_INCAPACITATED, BUSY_ICON_HOSTILE))
+		failed = TRUE
+
+	owner.anchored = FALSE
+	owner.frozen = FALSE
+	charging = FALSE
+
+	if(failed)
+		return
+
+	return ..(A)
+
 /datum/action/xeno_action/activable/pounce/crusher_charge/New()
 	. = ..()
 	not_reducing_objects = typesof(/obj/structure/barricade) + typesof(/obj/structure/machinery/defenses)
