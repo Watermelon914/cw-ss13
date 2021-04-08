@@ -1,8 +1,8 @@
 SUBSYSTEM_DEF(xeno_pathfinding)
 	name = "Xeno Pathfinding"
 	priority = SS_PRIORITY_XENO_PATHFINDING
-	flags = SS_NO_INIT|SS_TICKER
-	wait = 0.1 SECONDS
+	flags = SS_NO_INIT|SS_TICKER|SS_BACKGROUND
+	wait = 1
 	/// A list of mobs scheduled to process
 	var/list/datum/xeno_pathinfo/current_processing = list()
 	/// A list of paths to calculate
@@ -21,7 +21,12 @@ SUBSYSTEM_DEF(xeno_pathfinding)
 
 	while(length(current_processing))
 		// A* Pathfinding. Uses priority queue
-		var/datum/xeno_pathinfo/current_run = current_processing[length(current_processing)]
+		if(current_position < 1 || current_position > length(current_processing))
+			current_position = length(current_processing)
+
+		var/datum/xeno_pathinfo/current_run = current_processing[current_position]
+		current_position++
+
 		var/turf/target = current_run.finish
 
 		var/mob/living/carbon/Xenomorph/X = current_run.travelling_xeno

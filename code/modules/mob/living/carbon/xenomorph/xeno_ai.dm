@@ -31,8 +31,8 @@
 		if(distance > max_travel_distance)
 			return
 
-		//SSxeno_pathfinding.calculate_path(src, P.firer, distance, src, CALLBACK(src, .proc/set_path), list(src, P.firer))
-		calculate_path(get_turf(P.firer), distance, CALLBACK(src, .proc/set_path))
+		SSxeno_pathfinding.calculate_path(src, P.firer, distance, src, CALLBACK(src, .proc/set_path), list(src, P.firer))
+		//calculate_path(get_turf(P.firer), distance, CALLBACK(src, .proc/set_path))
 
 
 /mob/living/carbon/Xenomorph/proc/process_ai(delta_time, game_evaluation)
@@ -204,17 +204,18 @@
 		return FALSE
 
 	if(!current_path || (next_path_generation < world.time && current_target_turf != T))
+		/*
 		if(!calculating_path || current_target_turf != T)
 			calculate_path(T, max_range, CALLBACK(src, .proc/set_path))
-		current_target_turf = T
-		/*
+			current_target_turf = T
+		*/
+
 		if(!XENO_CALCULATING_PATH(src) || current_target_turf != T)
 			SSxeno_pathfinding.calculate_path(src, T, max_range, src, CALLBACK(src, .proc/set_path), list(src, current_target))
 			current_target_turf = T
-		*/
 		next_path_generation = world.time + path_update_per_second
 
-	if(calculating_path)
+	if(XENO_CALCULATING_PATH(src))
 		return TRUE
 
 	// No possible path to target.
@@ -269,3 +270,70 @@
 
 /mob/living/carbon/Xenomorph/proc/remove_ai()
 	SSxeno_ai.remove_ai(src)
+
+GLOBAL_LIST_EMPTY_TYPED(xeno_ai_spawns_easy, /obj/effect/landmark/xeno_ai/easy)
+GLOBAL_LIST_EMPTY_TYPED(xeno_ai_spawns_medium, /obj/effect/landmark/xeno_ai/medium)
+GLOBAL_LIST_EMPTY_TYPED(xeno_ai_spawns_hard, /obj/effect/landmark/xeno_ai/hard)
+
+/obj/effect/landmark/xeno_ai
+	name = "Xeno AI Spawn"
+	var/spawn_radius = 5
+	var/list/spawnable_turfs
+
+/obj/effect/landmark/xeno_ai/Initialize(mapload, ...)
+	. = ..()
+	spawnable_turfs = list()
+	for(var/i in RANGE_TURFS(spawn_radius, src))
+		var/turf/T = i
+		if(T == get_turf(src))
+			spawnable_turfs += T
+			continue
+
+		if(T.density)
+			continue
+
+		for(var/t in getline(T, src))
+			var/turf/line = t
+			if(line.density)
+				continue
+
+		spawnable_turfs += T
+
+
+/obj/effect/landmark/xeno_ai/Destroy()
+	spawnable_turfs = null
+	return ..()
+
+/obj/effect/landmark/xeno_ai/easy
+	name = "Easy AI Spawn"
+
+/obj/effect/landmark/xeno_ai/easy/Initialize(mapload, ...)
+	. = ..()
+	GLOB.xeno_ai_spawns_easy += src
+
+
+/obj/effect/landmark/xeno_ai/easy/Destroy()
+	GLOB.xeno_ai_spawns_easy -= src
+	return ..()
+
+/obj/effect/landmark/xeno_ai/medium
+	name = "Medium AI Spawn"
+
+/obj/effect/landmark/xeno_ai/medium/Initialize(mapload, ...)
+	. = ..()
+	GLOB.xeno_ai_spawns_medium += src
+
+/obj/effect/landmark/xeno_ai/medium/Destroy()
+	GLOB.xeno_ai_spawns_medium -= src
+	return ..()
+
+/obj/effect/landmark/xeno_ai/hard
+	name = "Hard AI Spawn"
+
+/obj/effect/landmark/xeno_ai/hard/Initialize(mapload, ...)
+	. = ..()
+	GLOB.xeno_ai_spawns_hard += src
+
+/obj/effect/landmark/xeno_ai/hard/Destroy()
+	GLOB.xeno_ai_spawns_hard -= src
+	return ..()

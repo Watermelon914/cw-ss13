@@ -57,7 +57,7 @@ SUBSYSTEM_DEF(xeno_ai)
 		return
 
 	if(!resumed)
-		//calculate_eval()
+		calculate_eval()
 		src.current_run = ai_mobs.Copy()
 	// Cache for sanic speed (lists are references anyways)
 	var/list/current_run = src.current_run
@@ -71,6 +71,7 @@ SUBSYSTEM_DEF(xeno_ai)
 
 		if(MC_TICK_CHECK)
 			return
+
 
 /datum/controller/subsystem/xeno_ai/proc/calculate_eval()
 	game_evaluation = CONFIG_GET(number/eval_weight_offset)
