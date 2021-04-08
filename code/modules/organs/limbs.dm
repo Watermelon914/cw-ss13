@@ -67,6 +67,9 @@
 
 	var/list/bleeding_effects_list = list()
 
+	var/fracture_fix_time = 2 SECONDS
+	var/can_be_fractured = TRUE
+
 
 /obj/limb/Initialize(mapload, obj/limb/P, mob/mob_owner)
 	. = ..()
@@ -517,9 +520,7 @@ This function completely restores a damaged organ to perfect condition.
 	if(knitting_time > 0)
 		if(world.time > knitting_time)
 			to_chat(owner, SPAN_WARNING("The bones in your [display_name] feel fully knitted."))
-			owner.pain.apply_pain(-PAIN_BONE_BREAK)
-			status &= ~LIMB_BROKEN //Let it be known that this code never unbroke the limb.
-			knitting_time = -1
+			heal_damage(internal = TRUE)
 
 //Updating wounds. Handles wound natural I had some free spachealing, internal bleedings and infections
 /obj/limb/proc/update_wounds()
@@ -898,6 +899,9 @@ This function completely restores a damaged organ to perfect condition.
 	return !not_salved
 
 /obj/limb/proc/fracture(var/bonebreak_probability)
+	if(!can_be_fractured)
+		return
+
 	if(status & (LIMB_BROKEN|LIMB_DESTROYED|LIMB_ROBOT))
 		if (knitting_time != -1)
 			knitting_time = -1
@@ -925,7 +929,7 @@ This function completely restores a damaged organ to perfect condition.
 		owner.recalculate_move_delay = TRUE
 		owner.visible_message(\
 			SPAN_WARNING("You hear a loud cracking sound coming from [owner]!"),
-			SPAN_HIGHDANGER("Something feels like it shattered in your [display_name]!"),
+			SPAN_HIGHDANGER("Something feels like it dislocated in your [display_name]!"),
 			SPAN_HIGHDANGER("You hear a sickening crack!"))
 		playsound(owner, "bone_break", 45, TRUE)
 		start_processing()
@@ -933,7 +937,7 @@ This function completely restores a damaged organ to perfect condition.
 		status |= LIMB_BROKEN
 		status &= ~LIMB_REPAIRED
 		owner.pain.apply_pain(PAIN_BONE_BREAK)
-		broken_description = pick("broken","fracture","hairline fracture")
+		broken_description = "dislocated"
 		perma_injury = brute_dam
 	else
 		owner.visible_message(\
@@ -1096,6 +1100,7 @@ This function completely restores a damaged organ to perfect condition.
 	encased = "ribcage"
 	splint_icon_amount = 4
 	bandage_icon_amount = 4
+	can_be_fractured = FALSE
 
 /obj/limb/groin
 	name = "groin"
@@ -1107,6 +1112,7 @@ This function completely restores a damaged organ to perfect condition.
 	vital = 1
 	splint_icon_amount = 1
 	bandage_icon_amount = 2
+	can_be_fractured = FALSE
 
 /obj/limb/leg
 	name = "leg"
@@ -1222,6 +1228,7 @@ This function completely restores a damaged organ to perfect condition.
 	bandage_icon_amount = 4
 	var/disfigured = 0 //whether the head is disfigured.
 	var/face_surgery_stage = 0
+	can_be_fractured = FALSE
 
 /obj/limb/head/update_overlays()
 	..()

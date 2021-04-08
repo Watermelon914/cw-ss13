@@ -1,8 +1,8 @@
 SUBSYSTEM_DEF(xeno_pathfinding)
 	name = "Xeno Pathfinding"
 	priority = SS_PRIORITY_XENO_PATHFINDING
-	flags = SS_NO_INIT
-	wait = 0.2 SECONDS
+	flags = SS_NO_INIT|SS_TICKER
+	wait = 0.1 SECONDS
 	/// A list of mobs scheduled to process
 	var/list/datum/xeno_pathinfo/current_processing = list()
 	/// A list of paths to calculate

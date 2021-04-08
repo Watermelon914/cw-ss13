@@ -21,8 +21,22 @@
 
 			// If unconcious with oxygen damage, do CPR. If dead, we do CPR
 			if(!(stat == UNCONSCIOUS && getOxyLoss() > 0) && !(stat == DEAD))
-				help_shake_act(M)
-				return 1
+				var/obj/limb/L = get_limb(M.zone_selected)
+				if(L && (L.status & LIMB_BROKEN) && skillcheck(M, SKILL_MEDICAL, SKILL_MEDICAL_MEDIC))
+					M.visible_message(SPAN_NOTICE("[M] grabs [L] of [src] and prepares to relocate it."), \
+						SPAN_HELPFUL("You prepare to relocate [src]'s [L.name]"))
+
+					if(!do_after(M, L.fracture_fix_time, INTERRUPT_ALL, BUSY_ICON_FRIENDLY, src, INTERRUPT_MOVED, BUSY_ICON_MEDICAL))
+						return TRUE
+
+					M.visible_message(SPAN_NOTICE("[M] grabs [L] of [src] and relocates it."), \
+						SPAN_HELPFUL("You relocate [src]'s [L.name]"))
+					playsound(src, "bone_break", 45, TRUE)
+					L.heal_damage(internal = TRUE)
+
+				else
+					help_shake_act(M)
+				return TRUE
 
 			if(M.head && (M.head.flags_inventory & COVERMOUTH) || M.wear_mask && (M.wear_mask.flags_inventory & COVERMOUTH) && !(M.wear_mask.flags_inventory & ALLOWCPR))
 				to_chat(M, SPAN_NOTICE(" <B>Remove your mask!</B>"))
@@ -269,7 +283,7 @@
 			status = "OK"
 
 		if(org.status & LIMB_BROKEN)
-			status += " <b>(BROKEN)</b>"
+			status += " <b>(DISLOCATED)</b>"
 		if(org.status & LIMB_SPLINTED_INDESTRUCTIBLE)
 			status += " <b>(NANOSPLINTED)</b>"
 		else if(org.status & LIMB_SPLINTED)

@@ -11,10 +11,12 @@
 	var/no_path_found = FALSE
 	var/ai_range = 8
 	var/max_travel_distance = 24
-	var/turf/path_override
 
 	var/ai_timeout_time = 0
-	var/ai_timeout_period = 5 SECONDS
+	var/ai_timeout_period = 2 SECONDS
+
+	var/calculating_path = FALSE
+	var/newest_path_time = 0
 
 	// Home turf
 	var/next_home_search = 0
@@ -24,17 +26,14 @@
 	var/turf/home_turf
 
 /mob/living/carbon/Xenomorph/proc/handle_ai_shot(obj/item/projectile/P)
-	if(P.firer && P.firer != current_target)
+	if(!current_target && P.firer)
 		var/distance = get_dist(src, P.firer)
 		if(distance > max_travel_distance)
 			return
 
-		SSxeno_pathfinding.calculate_path(src, P.firer, distance, src, CALLBACK(src, .proc/set_override_path), list(src, P.firer))
+		//SSxeno_pathfinding.calculate_path(src, P.firer, distance, src, CALLBACK(src, .proc/set_path), list(src, P.firer))
+		calculate_path(get_turf(P.firer), distance, CALLBACK(src, .proc/set_path))
 
-		//calculate_path(get_turf(P.firer), distance, CALLBACK(src, .proc/set_override_path))
-
-/mob/living/carbon/Xenomorph/proc/set_override_path(var/list/path)
-	path_override = path
 
 /mob/living/carbon/Xenomorph/proc/process_ai(delta_time, game_evaluation)
 	SHOULD_NOT_SLEEP(TRUE)
@@ -61,6 +60,9 @@
 			return TRUE
 
 	if(!current_target)
+		if(!current_path)
+			return TRUE
+
 		if(move_to_next_turf(home_turf, home_locate_range))
 			if(get_dist(home_turf, src) <= 0 && !resting)
 				lay_down()
@@ -78,14 +80,17 @@
 /atom/proc/xeno_ai_act(var/mob/living/carbon/Xenomorph/X)
 	return
 
-// Old way of calculating the path (Doesn't use a subsystem)
-/*
 /mob/living/carbon/Xenomorph/proc/calculate_path(var/turf/target, range, var/datum/callback/CB)
 	// This proc can sleep if a callback is passed. Not recommended in process procs.
 	set waitfor = FALSE
 
 	if(!target)
-		return null
+		return
+
+	calculating_path = TRUE
+
+	newest_path_time = world.time
+	var/current_path_time = newest_path_time
 
 	// A* Pathfinding. Uses priority queue
 	var/turf/current_node = get_turf(src)
@@ -146,14 +151,17 @@
 						break
 
 					if(f_distance < f_distances[visited_nodes[index_to_check]])
-						visited_nodes.Insert(index_to_check+1, neighbor)
+						visited_nodes.Insert(index_to_check, neighbor)
 						break
 
-		if(CB)
-			CHECK_TICK
+		if(newest_path_time != current_path_time)
+			return
+
+		CHECK_TICK
 
 	if(!prev[target])
-		return null
+		calculating_path = FALSE
+		return
 
 	var/list/path = list()
 	current_node = target
@@ -163,11 +171,11 @@
 		path += current_node
 		current_node = prev[current_node]
 
-	if(!CB)
-		return path
-	else
-		CB.Invoke(path)
-*/
+	calculating_path = FALSE
+	CB.Invoke(path)
+
+/mob/living/carbon/Xenomorph/proc/stop_calculating_path()
+	newest_path_time = 0
 
 /mob/living/carbon/Xenomorph/proc/can_move_and_apply_move_delay()
 	// Unable to move, try next time.
@@ -195,16 +203,18 @@
 		no_path_found = FALSE
 		return FALSE
 
-	if(path_override)
-		current_path = path_override
-	else if(!current_path || (next_path_generation < world.time && current_target_turf != T))
-		//current_path = calculate_path(T, max_range)
+	if(!current_path || (next_path_generation < world.time && current_target_turf != T))
+		if(!calculating_path || current_target_turf != T)
+			calculate_path(T, max_range, CALLBACK(src, .proc/set_path))
+		current_target_turf = T
+		/*
 		if(!XENO_CALCULATING_PATH(src) || current_target_turf != T)
 			SSxeno_pathfinding.calculate_path(src, T, max_range, src, CALLBACK(src, .proc/set_path), list(src, current_target))
 			current_target_turf = T
+		*/
 		next_path_generation = world.time + path_update_per_second
 
-	if(XENO_CALCULATING_PATH(src))
+	if(calculating_path)
 		return TRUE
 
 	// No possible path to target.
@@ -213,8 +223,7 @@
 
 	// We've reached our destination
 	if(!length(current_path) || get_dist(T, src) <= 0)
-		if(current_path == path_override)
-			path_override = null
+		current_path = null
 		return TRUE
 
 	// Unable to move, try next time.

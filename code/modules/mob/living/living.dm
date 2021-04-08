@@ -532,7 +532,7 @@
 		dat += "\nHealth Analyzer results for [src]:\n\tOverall Status: [src.stat > 1 ? "<b>DEAD</b>" : "<b>[src.health - src.halloss]% healthy"]</b>\n"
 	dat += "\tType:    [SET_CLASS("Oxygen", INTERFACE_BLUE)]-[SET_CLASS("Toxin", INTERFACE_GREEN)]-[SET_CLASS("Burns", INTERFACE_ORANGE)]-[SET_CLASS("Brute", INTERFACE_RED)]\n"
 	dat += "\tDamage: \t[SET_CLASS(OX, INTERFACE_BLUE)] - [SET_CLASS(TX, INTERFACE_GREEN)] - [SET_CLASS(BU, INTERFACE_ORANGE)] - [SET_CLASS(BR, INTERFACE_RED)]\n"
-	dat += "\tUntreated: {B}=Burns,{T}=Trauma,{F}=Fracture\n"
+	dat += "\tUntreated: {B}=Burns,{T}=Trauma,{D}=Dislocation\n"
 
 	var/unrevivable = 0
 
@@ -567,7 +567,7 @@
 			brute_info += "[brute_treated ? "" : "{T}"]"
 			var/fracture_info = ""
 			if(org.status & LIMB_BROKEN)
-				fracture_info = "{F}"
+				fracture_info = "{D}"
 				show_limb = 1
 
 			var/org_bleed = ""
@@ -638,7 +638,7 @@
 				if(!((e.name == "l_arm") || (e.name == "r_arm") || (e.name == "l_leg") || (e.name == "r_leg") || (e.name == "l_hand") || (e.name == "r_hand") || (e.name == "l_foot") || (e.name == "r_foot")))
 					core_fracture = 1
 		if(core_fracture)
-			dat += "\t[SPAN_SCANNER("*<b>Bone fractures</b> detected. Advanced scanner required for location.")]\n"
+			dat += "\t[SPAN_SCANNER("*<b>Dislocations</b> detected. Advanced scanner required for location.")]\n"
 		if(internal_bleed_detected)
 			dat += "\t[SPAN_SCANNER("*<b>Internal bleeding</b> detected. Advanced scanner required for location.")]\n"
 		if(embedded_item_detected)
