@@ -110,7 +110,7 @@ GLOBAL_LIST_INIT(warrior_target_limbs, list(
 				var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/lunge)
 				A.use_ability_async(current_target)
 				SSxeno_pathfinding.stop_calculating_path(src)
-				stop_calculating_path()
+				//stop_calculating_path()
 				current_path = null
 				swap_hand()
 

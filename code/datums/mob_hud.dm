@@ -84,7 +84,7 @@ var/list/datum/mob_hud/huds = list(
 //Medical
 
 /datum/mob_hud/medical
-	hud_icons = list(HEALTH_HUD, STATUS_HUD)
+	hud_icons = list(HEALTH_HUD, SHIELD_HUD, STATUS_HUD)
 
 //med hud used by silicons, only shows humans with a uniform with sensor mode activated.
 /datum/mob_hud/medical/basic
@@ -115,12 +115,6 @@ var/list/datum/mob_hud/huds = list(
 
 //med hud used by medical hud glasses
 /datum/mob_hud/medical/advanced
-
-/datum/mob_hud/medical/advanced/add_to_single_hud(mob/user, mob/living/carbon/human/target)
-	if(istype(target))
-		if(target.species && target.species.name == "Yautja") //so you can't tell a pred's health with hud glasses.
-			return
-	..()
 
 //medical hud used by ghosts
 /datum/mob_hud/medical/observer
@@ -297,6 +291,7 @@ var/list/datum/mob_hud/huds = list(
 
 /mob/living/carbon/human/med_hud_set_health()
 	var/image/holder = hud_list[HEALTH_HUD]
+	SEND_SIGNAL(src, COMSIG_HUMAN_MED_HUD_SET_HEALTH)
 	if(stat == DEAD)
 		holder.icon_state = "hudhealth-100"
 	else

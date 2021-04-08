@@ -86,7 +86,7 @@
 // Stopgap usage only. Use to unilaterally buff every Xenomorph.
 // WARNING: These can fuck the entire game
 #define XENO_UNIVERSAL_HPMULT 1.0		// Use to unilaterally buff every caste's total HP.
-#define XENO_UNIVERSAL_PLASMAMULT 1.0	// Use to unilaterally buff every caste's total PLASMA.
+#define XENO_UNIVERSAL_PLASMAMULT 1000	// Use to unilaterally buff every caste's total PLASMA.
 #define XENO_UNIVERSAL_DAMAGEMULT 1.0	// Use to unilaterally buff every caste's DAMAGE.
 #define XENO_UNIVERSAL_VEHICLE_DAMAGEMULT 1.5 // Used to unilaterally buff every caste's DAMAGE against vehicles.
 

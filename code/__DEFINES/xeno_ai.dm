@@ -71,7 +71,7 @@
 #define RAVAGER_SHIELD_PROC_HEALTH 0.25
 /// The number of people that need to be at a minimum for rav to proc his shield
 #define RAVAGER_SHIELD_PROC_PEOPLE 3
-#define RAVAGER_LUNGE 5
+#define RAVAGER_LUNGE 50
 /// The chance that ravager will lunge at someone with enough shield to knock them down.
 #define RAVAGER_LUNGE_SHIELD 95
 /// The range needed for ravager to try lunging
@@ -96,11 +96,8 @@
 #define IDEAL_T2_PERCENT 0.5
 #define IDEAL_T3_PERCENT 0.25
 
-/// Maximum amount of drones
-#define MAX_DRONES 3
-
 /// The maximum amount of xenomorphs that can spawn, scaled up by population.
-#define MAX_XENOMORPHS_PER_PLAYER 5
+#define MAX_XENOMORPHS_PER_PLAYER 2
 /// The minimum range at which a xeno can be spawned from a human
 #define MIN_RANGE_TO_SPAWN_XENO 12
 /// The maximum range at which a xeno can be spawned from a human
@@ -108,3 +105,5 @@
 
 /// When a xeno gets despawned if there is no human within a specific range.
 #define RANGE_TO_DESPAWN_XENO 18
+/// When a xeno gets despawned if they can't find a target within a specific amount of time.
+#define XENO_DESPAWN_NO_TARGET_PERIOD 10 SECONDS

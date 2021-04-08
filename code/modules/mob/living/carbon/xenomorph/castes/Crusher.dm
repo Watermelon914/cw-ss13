@@ -12,7 +12,7 @@
 	xeno_explosion_resistance = XENO_EXPLOSIVE_ARMOR_TIER_10
 	armor_deflection = XENO_ARMOR_TIER_3
 	evasion = XENO_EVASION_NONE
-	speed = XENO_SPEED_TIER_2
+	speed = XENO_SPEED_TIER_3
 	heal_standing = 0.66
 
 	behavior_delegate_type = /datum/behavior_delegate/crusher_base
@@ -57,6 +57,9 @@
 
 	mutation_type = CRUSHER_NORMAL
 	claw_type = CLAW_TYPE_VERY_SHARP
+
+	var/turf/travelling_turf
+	var/linger_range = 6
 
 /mob/living/carbon/Xenomorph/Crusher/make_ai()
 	. = ..()
@@ -304,9 +307,28 @@
 	if(throwing || frozen)
 		return
 
-	var/turf/T = get_turf(current_target)
+	var/datum/action/xeno_action/charge_ability = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/pounce/crusher_charge/ai)
 
-	if(!move_to_next_turf(T))
+	if(current_target.is_mob_incapacitated() || charge_ability.can_use_action())
+		travelling_turf = get_turf(current_target)
+		var/list/turfs = RANGE_TURFS(1, travelling_turf)
+		while(length(turfs))
+			travelling_turf = pick(turfs)
+			turfs -= travelling_turf
+			if(!travelling_turf.density)
+				break
+
+			if(travelling_turf == get_turf(current_target))
+				break
+
+	else if(!(src in view(world.view, current_target)))
+		travelling_turf = get_turf(current_target)
+	else if(!travelling_turf || get_dist(travelling_turf, src) <= 0)
+		travelling_turf = get_random_turf_in_range(current_target, linger_range, linger_range)
+		if(!travelling_turf)
+			travelling_turf = get_turf(current_target)
+
+	if(!move_to_next_turf(travelling_turf))
 		current_target = null
 		return
 
@@ -322,8 +344,7 @@
 		remove_temp_pass_flags(PASS_OVER_THROW_MOB)
 
 		if(clear)
-			var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/pounce/crusher_charge/ai)
-			A.use_ability_async(current_target)
+			charge_ability.use_ability_async(current_target)
 			SSxeno_pathfinding.stop_calculating_path(src)
 			//stop_calculating_path()
 			current_path = null

@@ -201,6 +201,12 @@
 	frequency = PUB_FREQ
 	var/headset_hud_on = 1
 
+	var/list/huds_to_add = list(
+		MOB_HUD_SQUAD,
+		MOB_HUD_XENO_STATUS,
+		MOB_HUD_MEDICAL_ADVANCED
+	)
+
 /obj/item/device/radio/headset/almayer/verb/enter_tree()
 	set name = "Enter Techtree"
 	set desc = "Enter the Marine techtree"
@@ -213,8 +219,9 @@
 /obj/item/device/radio/headset/almayer/equipped(mob/living/carbon/human/user, slot)
 	if(slot == WEAR_EAR)
 		if(headset_hud_on)
-			var/datum/mob_hud/H = huds[MOB_HUD_SQUAD]
-			H.add_hud_to(user)
+			for(var/i in huds_to_add)
+				var/datum/mob_hud/H = huds[i]
+				H.add_hud_to(user)
 			//squad leader locator is no longer invisible on our player HUD.
 			if(user.mind && user.assigned_squad && user.hud_used && user.hud_used.locate_leader)
 				user.hud_used.locate_leader.alpha = 255
@@ -225,8 +232,9 @@
 /obj/item/device/radio/headset/almayer/dropped(mob/living/carbon/human/user)
 	if(istype(user) && headset_hud_on)
 		if(user.wear_ear == src) //dropped() is called before the inventory reference is update.
-			var/datum/mob_hud/H = huds[MOB_HUD_SQUAD]
-			H.remove_hud_from(user)
+			for(var/i in huds_to_add)
+				var/datum/mob_hud/H = huds[i]
+				H.remove_hud_from(user)
 			//squad leader locator is invisible again
 			if(user.hud_used && user.hud_used.locate_leader)
 				user.hud_used.locate_leader.alpha = 0
@@ -245,14 +253,17 @@
 	if(ishuman(usr))
 		var/mob/living/carbon/human/user = usr
 		if(src == user.wear_ear) //worn
-			var/datum/mob_hud/H = huds[MOB_HUD_SQUAD]
 			if(headset_hud_on)
-				H.add_hud_to(usr)
+				for(var/i in huds_to_add)
+					var/datum/mob_hud/H = huds[i]
+					H.add_hud_to(user)
 				if(user.mind && user.assigned_squad && user.hud_used && user.hud_used.locate_leader)
 					user.hud_used.locate_leader.alpha = 255
 					user.hud_used.locate_leader.mouse_opacity = 1
 			else
-				H.remove_hud_from(usr)
+				for(var/i in huds_to_add)
+					var/datum/mob_hud/H = huds[i]
+					H.remove_hud_from(user)
 				if(user.hud_used && user.hud_used.locate_leader)
 					user.hud_used.locate_leader.alpha = 0
 					user.hud_used.locate_leader.mouse_opacity = 0

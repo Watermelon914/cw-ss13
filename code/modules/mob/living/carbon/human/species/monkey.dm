@@ -69,7 +69,7 @@
 				touchables += O
 		if(touchables.len)
 			var/obj/touchy = pick(touchables)
-			touchy.attack_hand(H)
+			touchy.attack_hand(H, list())
 
 	if(prob(1))
 		H.emote(pick("chimper","scratch","jump","roll","tail"))

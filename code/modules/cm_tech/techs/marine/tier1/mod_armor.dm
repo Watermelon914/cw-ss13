@@ -17,7 +17,7 @@
 /datum/tech/droppod/item/modular_armor_upgrade/get_options(mob/living/carbon/human/H, obj/structure/droppod/D)
 	. = ..()
 
-	.["Ceramic Plate"] = /obj/item/clothing/accessory/health/ceramic_plate
+	//.["Ceramic Plate"] = /obj/item/clothing/accessory/health/ceramic_plate
 	.["Metal Plate"] = /obj/item/clothing/accessory/health
 
 /obj/item/clothing/accessory/health
@@ -31,6 +31,10 @@
 	slot = ACCESSORY_SLOT_ARMOR_C
 	var/armor_health = 10
 	var/armor_maxhealth = 10
+
+	var/next_regeneration = 0
+	var/no_damage_period = 5 SECONDS
+	var/regeneration_per_second = AMOUNT_PER_TIME(10, 10 SECONDS)
 
 	var/take_slash_damage = TRUE
 	var/slash_durability_mult = 0.25
@@ -96,16 +100,35 @@
 		if(take_slash_damage)
 			RegisterSignal(user, COMSIG_HUMAN_XENO_ATTACK, .proc/take_slash_damage)
 		RegisterSignal(user, COMSIG_HUMAN_BULLET_ACT, .proc/take_bullet_damage)
+		RegisterSignal(user, COMSIG_HUMAN_MED_HUD_SET_HEALTH, .proc/update_med_hud)
 	else
 		unassign_signals(S, user)
+
+/obj/item/clothing/accessory/health/proc/update_med_hud(var/mob/living/carbon/human/H)
+	SIGNAL_HANDLER
+	var/image/holder = H.hud_list[SHIELD_HUD]
+	var/percentage = round((armor_health/armor_maxhealth)*100, 10)
+	holder.icon_state = "hudshield[percentage]"
 
 /obj/item/clothing/accessory/health/proc/unassign_signals(obj/item/clothing/S, mob/living/user)
 	SIGNAL_HANDLER
 
 	UnregisterSignal(user, list(
 		COMSIG_HUMAN_XENO_ATTACK,
-		COMSIG_HUMAN_BULLET_ACT
+		COMSIG_HUMAN_BULLET_ACT,
+		COMSIG_HUMAN_MED_HUD_SET_HEALTH
 	))
+
+/obj/item/clothing/accessory/health/process(delta_time)
+	if(next_regeneration > world.time)
+		return
+
+	armor_health = min(armor_health + regeneration_per_second*delta_time, armor_maxhealth)
+	update_icon()
+
+	if(armor_health >= armor_maxhealth)
+		return PROCESS_KILL
+
 
 /obj/item/clothing/accessory/health/proc/take_bullet_damage(mob/living/user, damage, ammo_flags)
 	SIGNAL_HANDLER
@@ -116,6 +139,9 @@
 	armor_health = max(armor_health - damage*projectile_durability_mult, 0)
 
 	update_icon()
+
+	next_regeneration = world.time + no_damage_period
+	START_PROCESSING(SSobj, src)
 
 	if(damage_to_nullify)
 		playsound(user, armor_hitsound, 25, 1)
@@ -130,6 +156,9 @@
 	if(!armor_health && damage_to_nullify)
 		user.show_message(SPAN_WARNING("You feel [src] break apart."), null, null, null, CHAT_TYPE_ARMOR_DAMAGE)
 		playsound(user, armor_shattersound, 35, 1)
+
+	next_regeneration = world.time + no_damage_period
+	START_PROCESSING(SSobj, src)
 
 	if(damage_to_nullify)
 		playsound(user, armor_hitsound, 25, 1)

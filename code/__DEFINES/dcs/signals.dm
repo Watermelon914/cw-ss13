@@ -232,6 +232,9 @@
 ///from /mob/living/carbon/human/movement_delay(): (list/movedata)
 #define COMSIG_HUMAN_POST_MOVE_DELAY "human_post_move_delay"
 
+///from /mob/living/carbon/human/med_hud_set_health()
+#define COMSIG_HUMAN_MED_HUD_SET_HEALTH "human_med_hud_set_health"
+
 // /obj/item signals
 ///from base of obj/item/dropped(): (mob/user)
 #define COMSIG_ITEM_DROPPED "item_drop"

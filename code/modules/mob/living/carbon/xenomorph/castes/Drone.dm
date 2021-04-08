@@ -63,10 +63,11 @@
 		)
 	mutation_type = DRONE_NORMAL
 
-	var/range_to_check_for_weeds = 15
+	var/range_to_check_for_weeds = 6
 	var/turf/target_turf
 	var/next_search_time = 0
 	var/search_delay = 3 SECONDS
+	var/pursuing_target = FALSE
 
 // Drone has unique behaviour, it is not a fighting caste
 /mob/living/carbon/Xenomorph/Drone/process_ai(delta_time, game_evaluation)
@@ -74,8 +75,12 @@
 
 	a_intent = INTENT_HARM
 
-	if(!target_turf && next_search_time < world.time)
-		var/list/valid_turfs = RANGE_TURFS(range_to_check_for_weeds, src)
+	. = ..()
+	if(.)
+		return
+
+	if((!target_turf || pursuing_target) && next_search_time < world.time)
+		var/list/valid_turfs = RANGE_TURFS(range_to_check_for_weeds, current_target)
 		var/list/total_turfs = valid_turfs.Copy()
 		for(var/i in total_turfs)
 			var/turf/T = i
@@ -83,10 +88,6 @@
 
 			if(!T.is_weedable() || !A.is_resin_allowed)
 				valid_turfs -= T
-				continue
-
-			if(istype(T.weeds, /obj/effect/alien/weeds/node))
-				valid_turfs -= RANGE_TURFS(T.weeds.node_range, T)
 				continue
 
 			for(var/a in T)
@@ -97,17 +98,25 @@
 
 
 		if(!length(valid_turfs))
-			target_turf = pick(total_turfs)
+			target_turf = get_turf(current_target)
 		else
 			target_turf = pick(valid_turfs)
+			pursuing_target = FALSE
 		next_search_time = world.time + search_delay
+	else if(!target_turf || get_dist(target_turf, src) <= 0)
+		target_turf = get_turf(current_target)
+		pursuing_target = TRUE
 
 	if(!target_turf)
 		return
 
 	if(!move_to_next_turf(target_turf, range_to_check_for_weeds))
 		target_turf = null
+		current_target = null
 		return
+
+	if(get_dist(current_target, src) <= 1 && DT_PROB(XENO_SLASH, delta_time))
+		INVOKE_ASYNC(src, /mob.proc/do_click, current_target, "", list())
 
 	if(get_dist(target_turf, src) <= 0)
 		var/datum/action/xeno_action/onclick/plant_weeds/PW = get_xeno_action_by_type(src, /datum/action/xeno_action/onclick/plant_weeds)

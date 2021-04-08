@@ -25,6 +25,7 @@
 #define XENO_BANISHED_HUD   "23" // indicates that the xeno is banished
 #define STATUS_HUD_XENO_CULTIST "24" // Whether they are a xeno cultist or not
 #define PRED_CLAN   "25"
+#define SHIELD_HUD "26"
 
 
 //data HUD (medhud, sechud) defines

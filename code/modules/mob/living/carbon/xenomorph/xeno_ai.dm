@@ -15,8 +15,7 @@
 	var/ai_timeout_time = 0
 	var/ai_timeout_period = 2 SECONDS
 
-	var/calculating_path = FALSE
-	var/newest_path_time = 0
+	var/last_target_found = 0
 
 	// Home turf
 	var/next_home_search = 0
@@ -69,11 +68,12 @@
 		if(move_to_next_turf(home_turf, home_locate_range))
 			if(get_dist(home_turf, src) <= 0 && !resting)
 				lay_down()
-			return TRUE
 		else
 			home_turf = null
 
 		return TRUE
+	else
+		last_target_found = world.time
 
 /atom/proc/xeno_ai_obstacle(var/mob/living/carbon/Xenomorph/X, direction)
 	return INFINITY
@@ -83,6 +83,7 @@
 /atom/proc/xeno_ai_act(var/mob/living/carbon/Xenomorph/X)
 	return
 
+/*
 /mob/living/carbon/Xenomorph/proc/calculate_path(var/turf/target, range, var/datum/callback/CB)
 	// This proc can sleep if a callback is passed. Not recommended in process procs.
 	set waitfor = FALSE
@@ -179,6 +180,7 @@
 
 /mob/living/carbon/Xenomorph/proc/stop_calculating_path()
 	newest_path_time = 0
+*/
 
 /mob/living/carbon/Xenomorph/proc/can_move_and_apply_move_delay()
 	// Unable to move, try next time.
@@ -192,6 +194,7 @@
 		ai_move_delay += next_move_slowdown
 		next_move_slowdown = 0
 	return TRUE
+
 
 /mob/living/carbon/Xenomorph/proc/set_path(var/list/path)
 	current_path = path
@@ -262,7 +265,7 @@
 			smallest_distance = distance
 			closest_human = H
 
-	if(smallest_distance > RANGE_TO_DESPAWN_XENO)
+	if(smallest_distance > RANGE_TO_DESPAWN_XENO || last_target_found < world.time - XENO_DESPAWN_NO_TARGET_PERIOD)
 		remove_ai()
 		qdel(src)
 		return
@@ -270,9 +273,12 @@
 	if(smallest_distance > ai_range)
 		return
 
+	last_target_found = world.time
 	return closest_human
 
 /mob/living/carbon/Xenomorph/proc/make_ai()
+	// Reset the timer so that they don't despawn immediately
+	last_target_found = world.time
 	if(!client)
 		SSxeno_ai.add_ai(src)
 

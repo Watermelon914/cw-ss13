@@ -12,7 +12,7 @@
 	xeno_explosion_resistance = XENO_EXPLOSIVE_ARMOR_TIER_8
 	armor_deflection = XENO_ARMOR_TIER_2
 	evasion = XENO_EVASION_NONE
-	speed = XENO_SPEED_TIER_3
+	speed = XENO_SPEED_TIER_4
 	heal_standing = 0.66
 
 	tackle_min = 2
@@ -158,7 +158,7 @@
 			var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/pounce/charge)
 			A.use_ability_async(current_target)
 			SSxeno_pathfinding.stop_calculating_path(src)
-			stop_calculating_path()
+			//stop_calculating_path()
 			current_path = null
 
 	if(DT_PROB(RAVAGER_SHIELD, delta_time))
