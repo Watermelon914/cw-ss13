@@ -148,6 +148,7 @@
 		return
 
 	if(current_target.is_mob_incapacitated())
+		travelling_turf = get_turf(current_target)
 		var/list/turfs = RANGE_TURFS(1, travelling_turf)
 		while(length(turfs))
 			travelling_turf = pick(turfs)
@@ -157,6 +158,7 @@
 
 			if(travelling_turf == get_turf(current_target))
 				break
+
 	else if(!(src in view(world.view, current_target)))
 		travelling_turf = get_turf(current_target)
 	else if(!travelling_turf || get_dist(travelling_turf, src) <= 0)

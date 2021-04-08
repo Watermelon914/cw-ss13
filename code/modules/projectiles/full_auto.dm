@@ -4,6 +4,9 @@
 		return
 	var/mob/user = loc
 
+	if(user.client != source)
+		return
+
 	// No FA with mods
 	if(params["shift"] || params["ctrl"] || params["alt"])
 		return

@@ -93,20 +93,18 @@
 	GAME DIRECTOR AI
 */
 
-// These are in favour of marines. If marines are doing better,
-/// The evaluation needed to spawn any xenos in
-#define EVAL_NEEDED_FOR_XENO -1
-/// The evaluation needed to spawn any T2s in
-#define EVAL_NEEDED_FOR_T2 2
-/// The evaluation needed to spawn any T3s in
-#define EVAL_NEEDED_FOR_T3 3
+#define IDEAL_T2_PERCENT 0.5
+#define IDEAL_T3_PERCENT 0.25
+
+/// Maximum amount of drones
+#define MAX_DRONES 3
 
 /// The maximum amount of xenomorphs that can spawn, scaled up by population.
 #define MAX_XENOMORPHS_PER_PLAYER 5
 /// The minimum range at which a xeno can be spawned from a human
-#define MIN_RANGE_TO_SPAWN_XENO 8
+#define MIN_RANGE_TO_SPAWN_XENO 12
 /// The maximum range at which a xeno can be spawned from a human
-#define MAX_RANGE_TO_SPAWN_XENO 30
+#define MAX_RANGE_TO_SPAWN_XENO 18
 
 /// When a xeno gets despawned if there is no human within a specific range.
-#define RANGE_TO_DESPAWN_XENO 30
+#define RANGE_TO_DESPAWN_XENO 18

@@ -13,13 +13,15 @@ Format:
 endmap
 
 map lv624
-	default
+	voteweight 0
 endmap
 
 map bigredv2
+	voteweight 0
 endmap
 
 map bigredv2_ai
+	default
 endmap
 
 map prison_station_fop
@@ -27,6 +29,7 @@ map prison_station_fop
 endmap
 
 map fiorina_sciannex
+	voteweight 0
 endmap
 
 map corsat
@@ -44,6 +47,7 @@ map ice_colony_v2
 endmap
 
 map kutjevo
+	voteweight 0
 endmap
 
 map sorokyne_strata

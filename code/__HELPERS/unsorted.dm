@@ -156,7 +156,7 @@
 		A = obstacle
 		blocking_dir |= A.BlockedExitDirs(mover, fdir)
 		if ((!fd1 || blocking_dir & fd1) && (!fd2 || blocking_dir & fd2))
-			if(!list_to_return)
+			if(!return_list)
 				return A
 			else
 				list_to_return += A
@@ -167,7 +167,7 @@
 		if (T.BlockedExitDirs(mover, fd2) || T.BlockedPassDirs(mover, fd1))
 			blocking_dir |= fd1
 			if ((!fd1 || blocking_dir & fd1) && (!fd2 || blocking_dir & fd2))
-				if(!list_to_return)
+				if(!return_list)
 					return T
 				else
 					list_to_return += T
@@ -180,7 +180,7 @@
 			if (A.BlockedExitDirs(mover, fd2) || A.BlockedPassDirs(mover, fd1))
 				blocking_dir |= fd1
 				if ((!fd1 || blocking_dir & fd1) && (!fd2 || blocking_dir & fd2))
-					if(!list_to_return)
+					if(!return_list)
 						return A
 					else
 						list_to_return += A
@@ -192,7 +192,7 @@
 		if (T.BlockedExitDirs(mover, fd1) || T.BlockedPassDirs(mover, fd2))
 			blocking_dir |= fd2
 			if ((!fd1 || blocking_dir & fd1) && (!fd2 || blocking_dir & fd2))
-				if(!list_to_return)
+				if(!return_list)
 					return T
 				else
 					list_to_return += T
@@ -205,7 +205,7 @@
 			if (A.BlockedExitDirs(mover, fd1) || A.BlockedPassDirs(mover, fd2))
 				blocking_dir |= fd2
 				if ((!fd1 || blocking_dir & fd1) && (!fd2 || blocking_dir & fd2))
-					if(!list_to_return)
+					if(!return_list)
 						return A
 					else
 						list_to_return += A
@@ -214,7 +214,7 @@
 	// Check the turf itself
 	blocking_dir |= target_turf.BlockedPassDirs(mover, fdir)
 	if ((!fd1 || blocking_dir & fd1) && (!fd2 || blocking_dir & fd2))
-		if(!list_to_return)
+		if(!return_list)
 			return target_turf
 		else
 			list_to_return += target_turf
@@ -226,7 +226,7 @@
 		A = obstacle
 		blocking_dir |= A.BlockedPassDirs(mover, fdir)
 		if ((!fd1 || blocking_dir & fd1) && (!fd2 || blocking_dir & fd2))
-			if(!list_to_return)
+			if(!return_list)
 				return A
 			else
 				list_to_return += A

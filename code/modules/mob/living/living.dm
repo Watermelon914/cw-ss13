@@ -429,9 +429,9 @@
 	var/old_icon = attack_icon.icon_state
 	var/old_pix_x = attack_icon.pixel_x
 	var/old_pix_y = attack_icon.pixel_y
-	addtimer(CALLBACK(src, /mob/living/proc/finish_attack_overlay, target, old_icon, old_pix_x, old_pix_y), 4)
+	addtimer(CALLBACK(GLOBAL_PROC, /proc/finish_attack_overlay, attack_icon, target, old_icon, old_pix_x, old_pix_y), 4)
 
-/mob/living/proc/finish_attack_overlay(atom/target, old_icon, old_pix_x, old_pix_y)
+/proc/finish_attack_overlay(var/image/attack_icon, atom/target, old_icon, old_pix_x, old_pix_y)
 	if(!attack_icon || !target)
 		return FALSE
 

@@ -36,23 +36,25 @@
 	var/charging = FALSE
 
 /datum/action/xeno_action/activable/pounce/crusher_charge/ai/use_ability(atom/A)
-	if(charging || !action_cooldown_check())
+	if(charging || !action_cooldown_check() || !can_use_action())
 		return
 
-	owner.anchored = TRUE
-	owner.frozen = TRUE
+	var/mob/M = owner
+
+	M.anchored = TRUE
+	M.frozen = TRUE
 
 	var/failed = FALSE
-	if(!do_after(owner, windup_duration - when_to_get_turf, INTERRUPT_INCAPACITATED, BUSY_ICON_HOSTILE))
+	if(!do_after(M, windup_duration - when_to_get_turf, INTERRUPT_INCAPACITATED, BUSY_ICON_HOSTILE))
 		failed = TRUE
 
 	A = get_turf(A)
 
-	if(!failed && !do_after(owner, when_to_get_turf, INTERRUPT_INCAPACITATED, BUSY_ICON_HOSTILE))
+	if(!failed && !do_after(M, when_to_get_turf, INTERRUPT_INCAPACITATED, BUSY_ICON_HOSTILE))
 		failed = TRUE
 
-	owner.anchored = FALSE
-	owner.frozen = FALSE
+	M.anchored = FALSE
+	M.frozen = FALSE
 	charging = FALSE
 
 	if(failed)

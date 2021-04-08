@@ -130,8 +130,12 @@ SUBSYSTEM_DEF(xeno_pathfinding)
 	qdel(data)
 
 /datum/controller/subsystem/xeno_pathfinding/proc/calculate_path(var/atom/start, var/atom/finish, var/path_range, var/mob/living/carbon/Xenomorph/travelling_xeno, var/datum/callback/CB, var/list/ignore)
+	if(!get_turf(start) || !get_turf(finish))
+		return
+
 	var/datum/xeno_pathinfo/data = hash_path[travelling_xeno]
 	SSxeno_pathfinding.current_processing -= data
+
 
 	if(!data)
 		data = new()

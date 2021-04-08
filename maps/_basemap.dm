@@ -6,6 +6,7 @@
 #ifndef LOWMEMORYMODE
 	#ifdef ALL_MAPS
 		#include "BigRed\BigRed.dmm"
+		#include "BigRed\BigRed_AI.dmm"
 		#include "CORSAT\Corsat.dmm"
 		#include "DesertDam\Desert_Dam.dmm"
 		#include "map_files\Ice_Colony_v2\Ice_Colony_v2.dmm"

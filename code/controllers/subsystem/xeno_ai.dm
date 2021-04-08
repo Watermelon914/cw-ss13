@@ -57,14 +57,14 @@ SUBSYSTEM_DEF(xeno_ai)
 		return
 
 	if(!resumed)
-		calculate_eval()
+		//calculate_eval()
 		src.current_run = ai_mobs.Copy()
 	// Cache for sanic speed (lists are references anyways)
 	var/list/current_run = src.current_run
 	while(current_run.len)
 		var/mob/living/carbon/Xenomorph/M = current_run[current_run.len]
 		current_run.len--
-		if(!QDELETED(M) || M.client)
+		if(!QDELETED(M) && !M.client && M.stat != DEAD)
 			M.process_ai(wait * 0.1, game_evaluation)
 		else
 			remove_ai(M)

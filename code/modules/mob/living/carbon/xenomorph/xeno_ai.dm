@@ -55,6 +55,9 @@
 
 	if(QDELETED(current_target) || current_target.stat == DEAD || get_dist(current_target, src) > ai_range)
 		current_target = get_target(ai_range)
+		if(QDELETED(src))
+			return TRUE
+
 		if(current_target)
 			resting = FALSE
 			return TRUE
@@ -255,12 +258,17 @@
 	for(var/l in GLOB.alive_client_human_list)
 		var/mob/living/carbon/human/H = l
 		var/distance = get_dist(src, H)
-		if(distance > ai_range)
-			continue
-
 		if(distance < smallest_distance)
 			smallest_distance = distance
 			closest_human = H
+
+	if(smallest_distance > RANGE_TO_DESPAWN_XENO)
+		remove_ai()
+		qdel(src)
+		return
+
+	if(smallest_distance > ai_range)
+		return
 
 	return closest_human
 
@@ -271,10 +279,7 @@
 /mob/living/carbon/Xenomorph/proc/remove_ai()
 	SSxeno_ai.remove_ai(src)
 
-GLOBAL_LIST_EMPTY_TYPED(xeno_ai_spawns_easy, /obj/effect/landmark/xeno_ai/easy)
-GLOBAL_LIST_EMPTY_TYPED(xeno_ai_spawns_medium, /obj/effect/landmark/xeno_ai/medium)
-GLOBAL_LIST_EMPTY_TYPED(xeno_ai_spawns_hard, /obj/effect/landmark/xeno_ai/hard)
-
+GLOBAL_LIST_EMPTY_TYPED(xeno_ai_spawns, /obj/effect/landmark/xeno_ai)
 /obj/effect/landmark/xeno_ai
 	name = "Xeno AI Spawn"
 	var/spawn_radius = 5
@@ -282,6 +287,7 @@ GLOBAL_LIST_EMPTY_TYPED(xeno_ai_spawns_hard, /obj/effect/landmark/xeno_ai/hard)
 
 /obj/effect/landmark/xeno_ai/Initialize(mapload, ...)
 	. = ..()
+	GLOB.xeno_ai_spawns += src
 	spawnable_turfs = list()
 	for(var/i in RANGE_TURFS(spawn_radius, src))
 		var/turf/T = i
@@ -292,48 +298,29 @@ GLOBAL_LIST_EMPTY_TYPED(xeno_ai_spawns_hard, /obj/effect/landmark/xeno_ai/hard)
 		if(T.density)
 			continue
 
+		var/failed = FALSE
+		for(var/a in T)
+			var/atom/A = a
+			if(A.density)
+				failed = TRUE
+				break
+
+		if(failed)
+			continue
+
 		for(var/t in getline(T, src))
 			var/turf/line = t
 			if(line.density)
-				continue
+				failed = TRUE
+				break
+
+		if(failed)
+			continue
 
 		spawnable_turfs += T
 
 
 /obj/effect/landmark/xeno_ai/Destroy()
 	spawnable_turfs = null
-	return ..()
-
-/obj/effect/landmark/xeno_ai/easy
-	name = "Easy AI Spawn"
-
-/obj/effect/landmark/xeno_ai/easy/Initialize(mapload, ...)
-	. = ..()
-	GLOB.xeno_ai_spawns_easy += src
-
-
-/obj/effect/landmark/xeno_ai/easy/Destroy()
-	GLOB.xeno_ai_spawns_easy -= src
-	return ..()
-
-/obj/effect/landmark/xeno_ai/medium
-	name = "Medium AI Spawn"
-
-/obj/effect/landmark/xeno_ai/medium/Initialize(mapload, ...)
-	. = ..()
-	GLOB.xeno_ai_spawns_medium += src
-
-/obj/effect/landmark/xeno_ai/medium/Destroy()
-	GLOB.xeno_ai_spawns_medium -= src
-	return ..()
-
-/obj/effect/landmark/xeno_ai/hard
-	name = "Hard AI Spawn"
-
-/obj/effect/landmark/xeno_ai/hard/Initialize(mapload, ...)
-	. = ..()
-	GLOB.xeno_ai_spawns_hard += src
-
-/obj/effect/landmark/xeno_ai/hard/Destroy()
-	GLOB.xeno_ai_spawns_hard -= src
+	GLOB.xeno_ai_spawns -= src
 	return ..()

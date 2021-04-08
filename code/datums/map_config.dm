@@ -52,6 +52,8 @@
 
 	var/force_mode
 
+	var/include_ship_map = TRUE
+
 	var/list/monkey_types = list(/mob/living/carbon/human/monkey)
 
 /proc/load_map_config(filename, default, delete_after, error_if_missing = TRUE)
@@ -207,6 +209,9 @@
 	if(json["force_mode"])
 		force_mode = json["force_mode"]
 
+	if(json["no_ship_map"])
+		include_ship_map = !json["no_ship_map"]
+
 	if(json["announce_text"])
 		announce_text = replacetext(json["announce_text"], "###SHIPNAME###", MAIN_SHIP_NAME)
 
@@ -225,7 +230,7 @@
 	if(json["nightmare"])
 		if(!islist(json["nightmare"]))
 			log_world("map_config nightmare is not a list!")
-			return			
+			return
 		nightmare = json["nightmare"]
 
 	if(islist(json["environment_traits"]))

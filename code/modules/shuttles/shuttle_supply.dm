@@ -25,6 +25,10 @@
 
 /datum/shuttle/ferry/supply/New()
 	..()
+	if(!pick_loc())
+		qdel(src)
+		return
+
 	Elevator_x = pick_loc().x
 	Elevator_y = pick_loc().y
 	Elevator_z = pick_loc().z

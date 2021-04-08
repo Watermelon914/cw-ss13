@@ -24,5 +24,6 @@
         "neaera"
 	],
 	"traits": [{ "Ground": true }],
-    "force_mode": "Distress Signal: Lowpop"
+    "force_mode": "Distress Signal: Lowpop",
+    "no_ship_map": true
 }
