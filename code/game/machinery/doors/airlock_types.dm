@@ -649,6 +649,27 @@
 		return
 	..()
 
+/obj/structure/machinery/door/airlock/dropship_hatch/proc/lockdown()
+	unlock()
+	close()
+	lock()
+
+/obj/structure/machinery/door/airlock/dropship_hatch/proc/release()
+	unlock()
+
+/obj/structure/machinery/door/airlock/dropship_hatch/ex_act(severity)
+	return
+
+/obj/structure/machinery/door/airlock/dropship_hatch/close(forced=0)
+	if(forced)
+		for(var/mob/living/L in loc)
+			step(L, pick(EAST,WEST)) // bump them off the tile
+		safe = 0 // in case anyone tries to run into the closing door~
+		..()
+		safe = 1 // without having to rewrite closing proc~spookydonut
+	else
+		..()
+
 /obj/structure/machinery/door/airlock/dropship_hatch/two
 	icon = 'icons/obj/structures/doors/dropship2_side.dmi' //Tiles with is here FOR SAFETY PURPOSES
 	id = "sh_dropship2"

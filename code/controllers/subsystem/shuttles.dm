@@ -11,6 +11,7 @@ SUBSYSTEM_DEF(shuttle)
 	var/list/mobile = list()
 	var/list/stationary = list()
 	var/list/transit = list()
+	var/list/dropships = list()
 
 	/// For ID generation
 	var/list/assoc_mobile = list()

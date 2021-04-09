@@ -100,6 +100,15 @@
 	if(movement_force)
 		M.movement_force = movement_force.Copy()
 
+// Shuttles start here:
 /datum/map_template/shuttle/vehicle
 	shuttle_id = "vehicle_elevator"
 	name = "Vehicle Elevator"
+
+/datum/map_template/shuttle/dropship_one
+	shuttle_id = "alamo"
+	name = "Alamo"
+
+/datum/map_template/shuttle/dropship_two
+	shuttle_id = "normandy"
+	name = "Normandy"

@@ -207,6 +207,7 @@
 		MOB_HUD_MEDICAL_ADVANCED
 	)
 
+/*
 /obj/item/device/radio/headset/almayer/verb/enter_tree()
 	set name = "Enter Techtree"
 	set desc = "Enter the Marine techtree"
@@ -215,6 +216,7 @@
 
 	var/datum/techtree/T = GET_TREE(TREE_MARINE)
 	T.enter_mob(usr)
+*/
 
 /obj/item/device/radio/headset/almayer/equipped(mob/living/carbon/human/user, slot)
 	if(slot == WEAR_EAR)

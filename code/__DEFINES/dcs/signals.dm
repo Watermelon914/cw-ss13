@@ -34,6 +34,9 @@
 ///from /datum/controller/subsystem/ticker/PostSetup
 #define COMSIG_GLOB_POST_SETUP "!post_setup"
 
+///from /obj/docking_port/mobile/marine_dropship/enterTransit()
+#define COMSIG_GLOB_DROPSHIP_TRANSIT "!dropship_transit"
+
 //////////////////////////////////////////////////////////////////
 
 #define COMSIG_CLIENT_LMB_DOWN "client_lmb_down"
@@ -356,3 +359,6 @@
 
 /// from /obj/structure/transmitter/update_icon()
 #define COMSIG_TRANSMITTER_UPDATE_ICON "transmitter_update_icon"
+
+/// from /obj/structure/resource_node/set_tree(): (datum/techtree/tree)
+#define COMSIG_RESOURCE_NODE_SET_TREE "resource_node_set_tree"

@@ -18,6 +18,9 @@
 
 #define MODE_GENERIC_DRAW_NUKE			"DRAW: Nuclear Explosion"
 
+#define MODE_PVE_WIN "Marine Victory"
+#define MODE_PVE_LOSE "Marine Loss"
+
 /*
 Like with cm_initialize.dm, these procs exist to quickly populate classic CM game modes.
 Specifically for processing, announcing completion, and so on. Simply plug in these procs

@@ -189,6 +189,28 @@
 		return // in orbit
 	..()
 
+/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/proc/lockdown()
+	unlock()
+	close()
+	lock()
+
+/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/proc/release()
+	unlock()
+
+/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/ex_act(severity)
+	return
+
+/obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/close(forced=0)
+	if(forced)
+		for(var/turf/T in get_filler_turfs())
+			for(var/mob/living/L in T)
+				step(L, pick(NORTH,SOUTH)) // bump them off the tile
+		safe = FALSE // in case anyone tries to run into the closing door~
+		..()
+		safe = TRUE // without having to rewrite closing proc~spookydonut
+	else
+		..()
+
 /obj/structure/machinery/door/airlock/multi_tile/almayer/dropshiprear/ds1
 	name = "\improper Alamo cargo door"
 	icon = 'icons/obj/structures/doors/dropship1_cargo.dmi'
@@ -254,3 +276,4 @@
 
 /obj/structure/machinery/door/airlock/multi_tile/elevator/access/freight
 	name = "\improper Freight Elevator Hatch"
+

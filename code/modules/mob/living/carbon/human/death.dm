@@ -68,22 +68,4 @@
 	if(!gibbed && species.death_sound)
 		playsound(loc, species.death_sound, 50, 1)
 
-	// Finding the last guy for anti-delay.
-	if(SSticker.mode && SSticker.mode.is_in_endgame)
-		var/mob/last_living_human
-		for(var/i in GLOB.alive_human_list)
-			var/mob/M = i
-			if(!is_mainship_level(M.z))
-				continue
-			if(last_living_human)
-				last_living_human = null
-				break
-			last_living_human = M
-		if(last_living_human)
-			// Tell the xenos where the human is.
-			xeno_announcement("I sense the last tallhost hiding in [get_area(last_living_human)].", XENO_HIVE_NORMAL, SPAN_ANNOUNCEMENT_HEADER_BLUE("[QUEEN_MOTHER_ANNOUNCE]"))
-			// Tell the human he is the last guy.
-			if(last_living_human.client)
-				to_chat(last_living_human, SPAN_ANNOUNCEMENT_HEADER_BLUE("Panic creeps up your spine. You realize that you are the last survivor."))
-
 	return ..(cause, gibbed, species.death_message)

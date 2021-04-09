@@ -93,11 +93,16 @@
 	GAME DIRECTOR AI
 */
 
+/datum/config_entry/number/ai_director
+	abstract_type = /datum/config_entry/number/ai_director
+
 #define IDEAL_T2_PERCENT 0.5
 #define IDEAL_T3_PERCENT 0.25
 
 /// The maximum amount of xenomorphs that can spawn, scaled up by population.
-#define MAX_XENOMORPHS_PER_PLAYER 2
+/datum/config_entry/number/ai_director/max_xeno_per_player
+	config_entry_value = 2
+
 /// The minimum range at which a xeno can be spawned from a human
 #define MIN_RANGE_TO_SPAWN_XENO 12
 /// The maximum range at which a xeno can be spawned from a human
@@ -107,3 +112,8 @@
 #define RANGE_TO_DESPAWN_XENO 18
 /// When a xeno gets despawned if they can't find a target within a specific amount of time.
 #define XENO_DESPAWN_NO_TARGET_PERIOD 10 SECONDS
+
+// Director flags
+#define XENO_SPAWN_T1 (1<<0)
+#define XENO_SPAWN_T2 (1<<1)
+#define XENO_SPAWN_T3 (1<<2)

@@ -281,10 +281,10 @@
 	var/musical_track
 	var/end_icon = "draw"
 	switch(round_finished)
-		if(MODE_INFESTATION_X_MAJOR)
+		if(MODE_INFESTATION_X_MAJOR, MODE_PVE_LOSE)
 			musical_track = pick('sound/theme/sad_loss1.ogg','sound/theme/sad_loss2.ogg')
 			end_icon = "xeno_major"
-		if(MODE_INFESTATION_M_MAJOR)
+		if(MODE_INFESTATION_M_MAJOR, MODE_PVE_WIN)
 			musical_track = pick('sound/theme/winning_triumph1.ogg','sound/theme/winning_triumph2.ogg')
 			end_icon = "marine_major"
 		if(MODE_INFESTATION_X_MINOR)

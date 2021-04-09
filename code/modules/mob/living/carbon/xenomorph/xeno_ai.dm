@@ -288,11 +288,16 @@
 GLOBAL_LIST_EMPTY_TYPED(xeno_ai_spawns, /obj/effect/landmark/xeno_ai)
 /obj/effect/landmark/xeno_ai
 	name = "Xeno AI Spawn"
+	var/list/spawned_xenos
+	var/remaining_spawns = 5
+
 	var/spawn_radius = 5
 	var/list/spawnable_turfs
 
 /obj/effect/landmark/xeno_ai/Initialize(mapload, ...)
 	. = ..()
+	spawned_xenos = list()
+
 	GLOB.xeno_ai_spawns += src
 	spawnable_turfs = list()
 	for(var/i in RANGE_TURFS(spawn_radius, src))
@@ -325,6 +330,13 @@ GLOBAL_LIST_EMPTY_TYPED(xeno_ai_spawns, /obj/effect/landmark/xeno_ai)
 
 		spawnable_turfs += T
 
+/obj/effect/landmark/xeno_ai/proc/reduce_remaining_spawns(var/mob/living/carbon/Xenomorph/X)
+	SIGNAL_HANDLER
+	remaining_spawns--
+
+/obj/effect/landmark/xeno_ai/proc/handle_xeno_delete(var/mob/living/carbon/Xenomorph/X)
+	SIGNAL_HANDLER
+	spawned_xenos -= X
 
 /obj/effect/landmark/xeno_ai/Destroy()
 	spawnable_turfs = null

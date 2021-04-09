@@ -162,6 +162,8 @@
 	if(!T)
 		return
 
+	SEND_SIGNAL(src, COMSIG_RESOURCE_NODE_SET_TREE, T)
+
 	START_PROCESSING(SSobj, src)
 
 	if(tree)

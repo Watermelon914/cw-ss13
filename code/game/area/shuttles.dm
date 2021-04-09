@@ -32,3 +32,9 @@
 
 /area/shuttle/vehicle_elevator
 	name = "Vehicle ASRS"
+
+/area/shuttle/dropship
+	name = "Dropship"
+
+/area/shuttle/dropship/alamo
+	name = "Dropship Alamo"

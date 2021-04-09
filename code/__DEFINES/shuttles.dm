@@ -85,6 +85,7 @@
 
 #define HIJACK_STATE_NORMAL "hijack_state_normal"
 #define HIJACK_STATE_CALLED_DOWN "hijack_state_called_down"
+#define HIJACK_STATE_UNLOCKED "hijack_state_unlocked"
 #define HIJACK_STATE_QUEEN_LOCKED "hijack_state_queen_locked"
 #define HIJACK_STATE_CRASHING "hijack_state_crashing"
 

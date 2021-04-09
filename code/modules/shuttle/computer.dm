@@ -8,6 +8,9 @@
 	var/possible_destinations = ""
 	var/admin_controlled
 
+/obj/structure/machinery/computer/shuttle/attack_hand(var/mob/user)
+	. = ..()
+	tgui_interact(user)
 
 /obj/structure/machinery/computer/shuttle/tgui_interact(mob/user)
 	. = ..()
