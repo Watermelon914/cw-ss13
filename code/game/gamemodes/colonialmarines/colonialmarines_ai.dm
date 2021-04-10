@@ -3,11 +3,19 @@
 	config_tag = "Distress Signal: Lowpop"
 	required_players = 1 //Need at least one player, but really we need 2.
 
-	flags_round_type = MODE_DISABLE_ACID_BLOOD|MODE_INFESTATION|MODE_NEW_SPAWN
+	flags_round_type = MODE_DISABLE_ACID_BLOOD|MODE_INFESTATION|MODE_NEW_SPAWN|MODE_INFINITE_REVIVE_GRACE_PERIOD
+
+	medic_set = list(
+		/obj/item/bodybag/cryobag,
+		/obj/item/device/defibrillator/powerful,
+		/obj/item/storage/firstaid/adv,
+		/obj/item/device/healthanalyzer,
+		/obj/item/roller/medevac,
+		/obj/item/roller,
+	)
 
 	var/list/squad_limit = list(
-		SQUAD_NAME_1,
-		SQUAD_NAME_2
+		SQUAD_NAME_1
 	)
 
 	var/outpost_name = "USCM Outpost Alpha"
@@ -63,10 +71,10 @@
 		enter_endgame()
 
 /datum/game_mode/colonialmarines/ai/proc/enter_endgame()
-	marine_announcement("Dropship landing shortly arriving to LZ2. You have [] to board before it launches. You may launch earlier. The xeno horde has been unleashed.", "Marine Broadcast", 'sound/misc/queen_alarm.ogg')
+	marine_announcement("Dropship landing shortly arriving to LZ2. You have [DisplayTimeText(endgame_launch_time)] to board before it launches. You may launch earlier. The xeno horde has been unleashed.", "Marine Broadcast", 'sound/misc/queen_alarm.ogg')
 	for(var/i in GLOB.xeno_ai_spawns)
 		var/obj/effect/landmark/xeno_ai/XA = i
-		XA.remaining_spawns = INFINITY
+		XA.remaining_spawns = 500
 
 	CONFIG_SET(number/ai_director/max_xeno_per_player, endgame_spawn_amount)
 	var/obj/docking_port/mobile/marine_dropship/ship = SSshuttle.getShuttle(endgame_shuttle)
@@ -124,15 +132,16 @@ GLOBAL_LIST_INIT(t3_ais, list(
 	while(total_amount < length(GLOB.alive_client_human_list)*CONFIG_GET(number/ai_director/max_xeno_per_player))
 		var/current_amount = total_amount
 		total_amount++
-		if(!current_amount || (t3_amount/current_amount) < IDEAL_T3_PERCENT)
-			xenos_to_spawn += pick(GLOB.t3_ais)
-			t3_amount++
-			continue
+		if(current_amount >= XENOS_NEEDED_FOR_OTHER_TIERS)
+			if((t3_amount/current_amount) < IDEAL_T3_PERCENT)
+				xenos_to_spawn += pick(GLOB.t3_ais)
+				t3_amount++
+				continue
 
-		if((t2_amount/current_amount) < IDEAL_T2_PERCENT)
-			xenos_to_spawn += pick(GLOB.t2_ais)
-			t2_amount++
-			continue
+			if((t2_amount/current_amount) < IDEAL_T2_PERCENT)
+				xenos_to_spawn += pick(GLOB.t2_ais)
+				t2_amount++
+				continue
 
 		xenos_to_spawn += pick(GLOB.t1_ais)
 

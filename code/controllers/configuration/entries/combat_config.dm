@@ -30,3 +30,6 @@
 
 /datum/config_entry/number/surv_number_divider
 	config_entry_value = 10
+
+/datum/config_entry/number/human_revives_left
+	config_entry_value = 3

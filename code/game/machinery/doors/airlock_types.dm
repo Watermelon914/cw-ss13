@@ -413,7 +413,7 @@
 
 /obj/structure/machinery/door/airlock/almayer/marine/alpha
 	name = "\improper Alpha Squad Preparations"
-	icon = 'icons/obj/structures/doors/prepdoor_alpha.dmi'
+	icon = 'icons/obj/structures/doors/prepdoor.dmi'
 	req_access = list(ACCESS_MARINE_PREP)
 	req_one_access = list(ACCESS_MARINE_LOGISTICS, ACCESS_MARINE_CARGO, ACCESS_MARINE_ALPHA)
 	opacity = 0

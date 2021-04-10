@@ -133,7 +133,7 @@ GLOBAL_LIST_INIT(cm_vending_clothing_engi, list(
 /obj/structure/machinery/cm_vending/clothing/engi/alpha
 	squad_tag = SQUAD_NAME_1
 	req_access = list(ACCESS_MARINE_ENGPREP, ACCESS_MARINE_ALPHA)
-	gloves_type = /obj/item/clothing/gloves/marine/alpha/insulated
+	gloves_type = /obj/item/clothing/gloves/marine/insulated
 	headset_type = /obj/item/device/radio/headset/almayer/marine/alpha/engi
 
 /obj/structure/machinery/cm_vending/clothing/engi/bravo

@@ -163,8 +163,8 @@
 /obj/item/storage/box/masks,
 /turf/open/floor/almayer{
 	dir = 1;
-	icon_state = "red";
-	tag = "icon-red (NORTH)"
+	icon_state = "silver";
+	tag = "icon-silver"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "aay" = (
@@ -281,19 +281,8 @@
 	},
 /turf/open/floor/almayer{
 	dir = 1;
-	icon_state = "red";
-	tag = "icon-red (NORTH)"
-	},
-/area/almayer/squads/alpha_bravo_shared)
-"aaN" = (
-/obj/structure/machinery/light{
-	dir = 4;
-	tag = "icon-tube1 (EAST)"
-	},
-/turf/open/floor/almayer{
-	dir = 4;
-	icon_state = "red";
-	tag = "icon-red (EAST)"
+	icon_state = "silver";
+	tag = "icon-silver (NORTH)"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "aaO" = (
@@ -302,18 +291,8 @@
 	},
 /turf/open/floor/almayer{
 	dir = 8;
-	icon_state = "red";
-	tag = "icon-red (WEST)"
-	},
-/area/almayer/squads/alpha_bravo_shared)
-"aaQ" = (
-/obj/structure/machinery/light{
-	dir = 4
-	},
-/turf/open/floor/almayer{
-	dir = 4;
-	icon_state = "red";
-	tag = "icon-red (EAST)"
+	icon_state = "silver";
+	tag = "icon-silver (NORTHWEST)"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "aaR" = (
@@ -520,19 +499,6 @@
 	},
 /turf/open/floor/plating,
 /area/bigredv2/outside/space_port)
-"abx" = (
-/obj/structure/machinery/light{
-	dir = 4;
-	tag = "icon-tube1 (EAST)"
-	},
-/obj/structure/surface/table/almayer,
-/obj/item/tool/hand_labeler,
-/turf/open/floor/almayer{
-	dir = 4;
-	icon_state = "red";
-	tag = "icon-red (EAST)"
-	},
-/area/almayer/squads/alpha_bravo_shared)
 "abA" = (
 /obj/structure/surface/table,
 /obj/item/disk/nuclear,
@@ -549,21 +515,14 @@
 	tag = "icon-sterile"
 	},
 /area/almayer/squads/alpha_bravo_shared)
-"abC" = (
-/obj/structure/machinery/door/airlock/almayer/marine/alpha/engineer,
-/turf/open/floor/almayer{
-	icon_state = "plate";
-	tag = "icon-sterile"
-	},
-/area/almayer/squads/alpha_bravo_shared)
 "abD" = (
 /obj/structure/sign/poster{
 	pixel_y = 32
 	},
 /turf/open/floor/almayer{
 	dir = 8;
-	icon_state = "red";
-	tag = "icon-red (WEST)"
+	icon_state = "silver";
+	tag = "icon-silver (NORTHWEST)"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "abE" = (
@@ -611,8 +570,8 @@
 /obj/effect/landmark/start/marine,
 /turf/open/floor/almayer{
 	dir = 1;
-	icon_state = "red";
-	tag = "icon-red (NORTH)"
+	icon_state = "silver";
+	tag = "icon-silver (NORTH)"
 	},
 /area/almayer/living/cryo_cells)
 "abM" = (
@@ -704,8 +663,8 @@
 	},
 /turf/open/floor/almayer{
 	dir = 1;
-	icon_state = "redcorner";
-	tag = "icon-redcorner (NORTH)"
+	icon_state = "silvercorner";
+	tag = "icon-silver (NORTHWEST)"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "abZ" = (
@@ -721,8 +680,8 @@
 	},
 /turf/open/floor/almayer{
 	dir = 1;
-	icon_state = "red";
-	tag = "icon-red (NORTH)"
+	icon_state = "silver";
+	tag = "icon-silver (NORTH)"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "acb" = (
@@ -731,22 +690,10 @@
 	},
 /turf/open/floor/almayer{
 	dir = 1;
-	icon_state = "redcorner";
-	tag = "icon-redcorner (NORTH)"
+	icon_state = "silvercorner";
+	tag = "icon-silver (NORTHWEST)"
 	},
 /area/almayer/squads/alpha_bravo_shared)
-"acc" = (
-/obj/effect/decal/warning_stripes{
-	icon_state = "E";
-	tag = "icon-E"
-	},
-/obj/effect/landmark/start/marine,
-/turf/open/floor/almayer{
-	dir = 4;
-	icon_state = "red";
-	tag = "icon-red"
-	},
-/area/almayer/living/cryo_cells)
 "acd" = (
 /obj/structure/machinery/cm_vending/gear/medic,
 /turf/open/floor/almayer{
@@ -794,19 +741,13 @@
 /obj/effect/decal/cleanable/blood/oil,
 /turf/open/floor/almayer,
 /area/almayer/squads/alpha_bravo_shared)
-"acm" = (
-/turf/open/floor/almayer{
-	dir = 8;
-	icon_state = "redcorner";
-	tag = "icon-redcorner (WEST)"
-	},
-/area/almayer/squads/alpha_bravo_shared)
 "acn" = (
+/obj/structure/machinery/cryopod,
 /turf/open/floor/almayer{
-	icon_state = "red";
-	tag = "icon-red"
+	icon_state = "silver";
+	tag = "icon-silver"
 	},
-/area/almayer/squads/alpha_bravo_shared)
+/area/almayer/living/cryo_cells)
 "aco" = (
 /obj/structure/machinery/cm_vending/gear/engi,
 /turf/open/floor/almayer{
@@ -918,13 +859,6 @@
 	tag = "icon-white"
 	},
 /area/bigredv2/outside/marshall_office)
-"acF" = (
-/obj/structure/machinery/door/airlock/almayer/marine/alpha,
-/turf/open/floor/almayer{
-	icon_state = "red";
-	tag = "icon-red"
-	},
-/area/almayer/squads/alpha_bravo_shared)
 "acG" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -933,17 +867,6 @@
 	tag = "icon-white"
 	},
 /area/bigredv2/outside/marshall_office)
-"acH" = (
-/obj/effect/decal/warning_stripes{
-	icon_state = "NE-out";
-	tag = "icon-NE-out"
-	},
-/turf/open/floor/almayer{
-	dir = 6;
-	icon_state = "red";
-	tag = "icon-red"
-	},
-/area/almayer/living/cryo_cells)
 "acI" = (
 /obj/structure/pipes/standard/simple/hidden/green{
 	dir = 4
@@ -994,8 +917,9 @@
 /area/bigredv2/outside/marshall_office)
 "acN" = (
 /turf/open/floor/almayer{
-	icon_state = "redfull";
-	tag = "icon-redfull"
+	dir = 10;
+	icon_state = "silverfull";
+	tag = null
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "acO" = (
@@ -1024,18 +948,6 @@
 "acS" = (
 /obj/structure/machinery/light,
 /obj/structure/machinery/cm_vending/clothing/marine/alpha,
-/turf/open/floor/almayer{
-	icon_state = "plate";
-	tag = "icon-sterile"
-	},
-/area/almayer/squads/alpha_bravo_shared)
-"acT" = (
-/obj/structure/machinery/cm_vending/clothing/marine/alpha,
-/obj/structure/machinery/camera/autoname/almayer{
-	dir = 1;
-	name = "ship-grade camera";
-	tag = "icon-camera (NORTH)"
-	},
 /turf/open/floor/almayer{
 	icon_state = "plate";
 	tag = "icon-sterile"
@@ -1362,8 +1274,9 @@
 	dir = 8
 	},
 /turf/open/floor/almayer{
-	icon_state = "orangefull";
-	tag = "icon-orangefull"
+	dir = 10;
+	icon_state = "silverfull";
+	tag = null
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "adK" = (
@@ -1386,8 +1299,8 @@
 	},
 /turf/open/floor/almayer{
 	dir = 1;
-	icon_state = "red";
-	tag = "icon-red (NORTH)"
+	icon_state = "silver";
+	tag = "icon-silver"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "adM" = (
@@ -1434,8 +1347,8 @@
 	},
 /turf/open/floor/almayer{
 	dir = 5;
-	icon_state = "orange";
-	tag = "icon-orange (NORTHEAST)"
+	icon_state = "silver";
+	tag = "icon-silver (NORTHWEST)"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "adS" = (
@@ -1445,7 +1358,7 @@
 /obj/structure/machinery/firealarm{
 	pixel_y = 28
 	},
-/obj/structure/machinery/cm_vending/clothing/marine/bravo,
+/obj/structure/machinery/cm_vending/clothing/marine/alpha,
 /turf/open/floor/almayer{
 	icon_state = "plate";
 	tag = "icon-sterile"
@@ -1470,7 +1383,7 @@
 	dir = 1;
 	tag = "icon-tube1 (NORTH)"
 	},
-/obj/structure/machinery/cm_vending/clothing/marine/bravo,
+/obj/structure/machinery/cm_vending/clothing/marine/alpha,
 /turf/open/floor/almayer{
 	icon_state = "plate";
 	tag = "icon-sterile"
@@ -1493,7 +1406,7 @@
 	name = "ship-grade camera";
 	tag = ""
 	},
-/obj/structure/machinery/cm_vending/clothing/marine/bravo,
+/obj/structure/machinery/cm_vending/clothing/marine/alpha,
 /turf/open/floor/almayer{
 	icon_state = "plate";
 	tag = "icon-sterile"
@@ -1511,7 +1424,7 @@
 /obj/structure/machinery/status_display{
 	pixel_y = 30
 	},
-/obj/structure/machinery/cm_vending/clothing/marine/bravo,
+/obj/structure/machinery/cm_vending/clothing/marine/alpha,
 /turf/open/floor/almayer{
 	icon_state = "plate";
 	tag = "icon-sterile"
@@ -1678,8 +1591,8 @@
 "aew" = (
 /turf/open/floor/almayer{
 	dir = 1;
-	icon_state = "orangecorner";
-	tag = "icon-orangecorner (NORTH)"
+	icon_state = "silvercorner";
+	tag = "icon-silver (NORTHWEST)"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "aex" = (
@@ -1689,8 +1602,8 @@
 "aey" = (
 /turf/open/floor/almayer{
 	dir = 1;
-	icon_state = "orange";
-	tag = "icon-orange (NORTH)"
+	icon_state = "silver";
+	tag = "icon-silver"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "aez" = (
@@ -1720,11 +1633,11 @@
 	},
 /area/bigredv2/outside/telecomm)
 "aeD" = (
-/obj/structure/machinery/door/airlock/almayer/marine/bravo,
+/obj/structure/machinery/door/airlock/almayer/marine,
 /turf/open/floor/almayer{
 	dir = 1;
-	icon_state = "orange";
-	tag = "icon-orange (EAST)"
+	icon_state = "silver";
+	tag = "icon-silver (NORTH)"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "aeE" = (
@@ -1765,17 +1678,6 @@
 	icon_state = "delivery"
 	},
 /area/bigredv2/outside/marshall_office)
-"aeK" = (
-/obj/effect/decal/warning_stripes{
-	icon_state = "SE-out";
-	tag = "icon-SE-out"
-	},
-/turf/open/floor/almayer{
-	dir = 5;
-	icon_state = "orange";
-	tag = "icon-orange (EAST)"
-	},
-/area/almayer/living/cryo_cells)
 "aeL" = (
 /obj/structure/pipes/standard/simple/hidden/green,
 /turf/open/floor{
@@ -1907,8 +1809,8 @@
 /obj/structure/machinery/light,
 /turf/open/floor/almayer{
 	dir = 8;
-	icon_state = "orangecorner";
-	tag = "icon-orangecorner (WEST)"
+	icon_state = "silvercorner";
+	tag = "icon-silver (NORTHWEST)"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "afd" = (
@@ -1922,15 +1824,15 @@
 	tag = "icon-camera (NORTH)"
 	},
 /turf/open/floor/almayer{
-	icon_state = "orange";
-	tag = "icon-orange"
+	icon_state = "silver";
+	tag = "icon-silver"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "afg" = (
 /turf/open/floor/almayer{
 	dir = 8;
-	icon_state = "orangecorner";
-	tag = "icon-orangecorner (WEST)"
+	icon_state = "silvercorner";
+	tag = "icon-silver (NORTHWEST)"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "afh" = (
@@ -1963,8 +1865,8 @@
 /obj/effect/landmark/start/marine,
 /turf/open/floor/almayer{
 	dir = 4;
-	icon_state = "orange";
-	tag = "icon-orange (EAST)"
+	icon_state = "silver";
+	tag = "icon-silver (WEST)"
 	},
 /area/almayer/living/cryo_cells)
 "afk" = (
@@ -2060,12 +1962,12 @@
 /turf/open/floor/plating,
 /area/bigredv2/outside/telecomm)
 "afw" = (
-/obj/structure/machinery/door/airlock/almayer/marine/bravo/rto,
+/obj/structure/machinery/cryopod/right,
 /turf/open/floor/almayer{
-	icon_state = "plate";
-	tag = "icon-sterile"
+	icon_state = "silver";
+	tag = "icon-silver"
 	},
-/area/almayer/squads/alpha_bravo_shared)
+/area/almayer/living/cryo_cells)
 "afx" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "W-corner";
@@ -2098,8 +2000,8 @@
 /obj/item/tool/hand_labeler,
 /turf/open/floor/almayer{
 	dir = 4;
-	icon_state = "orange";
-	tag = "icon-orange (EAST)"
+	icon_state = "silver";
+	tag = "icon-silver (WEST)"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "afB" = (
@@ -2141,15 +2043,8 @@
 	tag = "icon-platingdmg3 (WEST)"
 	},
 /area/bigredv2/caves/lambda/xenobiology)
-"afH" = (
-/obj/structure/machinery/door/airlock/almayer/marine/bravo/medic,
-/turf/open/floor/almayer{
-	icon_state = "plate";
-	tag = "icon-sterile"
-	},
-/area/almayer/squads/alpha_bravo_shared)
 "afI" = (
-/obj/structure/machinery/door/airlock/almayer/marine/bravo/engineer,
+/obj/structure/machinery/door/airlock/almayer/marine/alpha/engineer,
 /turf/open/floor/almayer{
 	icon_state = "plate";
 	tag = "icon-sterile"
@@ -2158,8 +2053,8 @@
 "afJ" = (
 /turf/open/floor/almayer{
 	dir = 8;
-	icon_state = "orange";
-	tag = "icon-orange (WEST)"
+	icon_state = "silver";
+	tag = "icon-silver (WEST)"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "afK" = (
@@ -2186,16 +2081,16 @@
 /obj/effect/landmark/late_join,
 /obj/effect/landmark/start/marine/leader,
 /turf/open/floor/almayer{
-	icon_state = "orange";
-	tag = "icon-orange"
+	icon_state = "silver";
+	tag = "icon-silver"
 	},
 /area/almayer/living/cryo_cells)
 "afP" = (
 /obj/effect/landmark/late_join,
 /obj/effect/landmark/start/marine,
 /turf/open/floor/almayer{
-	icon_state = "orange";
-	tag = "icon-orange"
+	icon_state = "silver";
+	tag = "icon-silver"
 	},
 /area/almayer/living/cryo_cells)
 "afQ" = (
@@ -2452,13 +2347,6 @@
 	tag = "null"
 	},
 /area/almayer/squads/alpha_bravo_shared)
-"agu" = (
-/obj/structure/machinery/cm_vending/clothing/rto/bravo{
-	density = 0;
-	pixel_x = 32
-	},
-/turf/open/floor/plating/plating_catwalk,
-/area/almayer/squads/alpha_bravo_shared)
 "agv" = (
 /obj/structure/window/framed/solaris/reinforced,
 /obj/structure/machinery/door/poddoor/shutters/almayer{
@@ -2490,26 +2378,12 @@
 	tag = "icon-darkgreen2"
 	},
 /area/bigredv2/outside/space_port)
-"agy" = (
-/obj/structure/machinery/door/airlock/almayer/marine/bravo/smart,
-/turf/open/floor/almayer{
-	icon_state = "plate";
-	tag = "icon-sterile"
-	},
-/area/almayer/squads/alpha_bravo_shared)
 "agz" = (
 /turf/open/floor{
 	dir = 4;
 	icon_state = "redcorner"
 	},
 /area/bigredv2/outside/marshall_office)
-"agA" = (
-/obj/structure/machinery/door/airlock/almayer/marine/bravo/spec,
-/turf/open/floor/almayer{
-	icon_state = "plate";
-	tag = "icon-sterile"
-	},
-/area/almayer/squads/alpha_bravo_shared)
 "agB" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor{
@@ -2517,13 +2391,6 @@
 	icon_state = "redcorner"
 	},
 /area/bigredv2/outside/marshall_office)
-"agC" = (
-/obj/structure/machinery/door/airlock/almayer/marine/bravo/sl,
-/turf/open/floor/almayer{
-	icon_state = "plate";
-	tag = "icon-sterile"
-	},
-/area/almayer/squads/alpha_bravo_shared)
 "agD" = (
 /turf/open/mars_cave{
 	icon_state = "mars_cave_20";
@@ -2705,13 +2572,13 @@
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "agZ" = (
-/obj/structure/machinery/cm_vending/clothing/rto/bravo{
+/obj/structure/machinery/cm_vending/clothing/rto/alpha{
 	density = 0;
 	pixel_x = 32
 	},
 /turf/open/floor/almayer{
-	icon_state = "orange";
-	tag = "icon-orange"
+	icon_state = "silver";
+	tag = "icon-silver"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "aha" = (
@@ -2721,8 +2588,8 @@
 	},
 /turf/open/floor/almayer{
 	dir = 4;
-	icon_state = "orange";
-	tag = "icon-orange (EAST)"
+	icon_state = "silver";
+	tag = "icon-silver (WEST)"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "ahb" = (
@@ -2742,8 +2609,8 @@
 	},
 /turf/open/floor/almayer{
 	dir = 8;
-	icon_state = "orange";
-	tag = "icon-orange (WEST)"
+	icon_state = "silver";
+	tag = "icon-silver (WEST)"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "ahd" = (
@@ -2771,12 +2638,9 @@
 	},
 /turf/open/floor/almayer{
 	dir = 4;
-	icon_state = "orange";
-	tag = "icon-orange (EAST)"
+	icon_state = "silver";
+	tag = "icon-silver (WEST)"
 	},
-/area/almayer/squads/alpha_bravo_shared)
-"ahh" = (
-/turf/closed/wall/almayer,
 /area/almayer/squads/alpha_bravo_shared)
 "ahi" = (
 /turf/open/mars{
@@ -2821,15 +2685,8 @@
 	},
 /turf/open/floor/almayer{
 	dir = 8;
-	icon_state = "orange";
-	tag = "icon-orange (WEST)"
-	},
-/area/almayer/squads/alpha_bravo_shared)
-"ahp" = (
-/obj/structure/machinery/cm_vending/clothing/specialist/bravo,
-/turf/open/floor/almayer{
-	icon_state = "plate";
-	tag = "icon-sterile"
+	icon_state = "silver";
+	tag = "icon-silver (WEST)"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "ahq" = (
@@ -2844,13 +2701,6 @@
 	tag = "icon-dark"
 	},
 /area/bigredv2/outside/general_offices)
-"ahs" = (
-/obj/structure/machinery/cm_vending/clothing/leader/bravo,
-/turf/open/floor/almayer{
-	icon_state = "plate";
-	tag = "icon-sterile"
-	},
-/area/almayer/squads/alpha_bravo_shared)
 "aht" = (
 /obj/structure/surface/table/almayer,
 /obj/item/roller,
@@ -2917,19 +2767,12 @@
 	tag = "icon-mars_cave_11"
 	},
 /area/bigredv2/caves/lambda/xenobiology)
-"ahA" = (
-/obj/structure/machinery/cm_vending/clothing/smartgun/bravo,
-/turf/open/floor/almayer{
-	icon_state = "plate";
-	tag = "icon-sterile"
-	},
-/area/almayer/squads/alpha_bravo_shared)
 "ahB" = (
 /obj/structure/surface/table/almayer,
 /obj/item/storage/box/masks,
 /turf/open/floor/almayer{
-	icon_state = "orange";
-	tag = "icon-orange"
+	icon_state = "silver";
+	tag = "icon-silver"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "ahC" = (
@@ -3001,8 +2844,8 @@
 "ahM" = (
 /obj/structure/machinery/light,
 /turf/open/floor/almayer{
-	icon_state = "orange";
-	tag = "icon-orange"
+	icon_state = "silver";
+	tag = "icon-silver"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "ahN" = (
@@ -3096,8 +2939,8 @@
 	},
 /turf/open/floor/almayer{
 	dir = 9;
-	icon_state = "red";
-	tag = "icon-red (NORTHWEST)"
+	icon_state = "silver";
+	tag = "icon-silver (NORTHWEST)"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "ahZ" = (
@@ -27792,8 +27635,8 @@
 	},
 /turf/open/floor/almayer{
 	dir = 4;
-	icon_state = "redcorner";
-	tag = "icon-redcorner (EAST)"
+	icon_state = "silvercorner";
+	tag = "icon-silver (NORTHWEST)"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "cTj" = (
@@ -28403,8 +28246,8 @@
 	},
 /turf/open/floor/almayer{
 	dir = 1;
-	icon_state = "red";
-	tag = "icon-red (NORTH)"
+	icon_state = "silver";
+	tag = "icon-silver (NORTH)"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "eLh" = (
@@ -28422,13 +28265,6 @@
 	tag = "icon-mars_dirt_11"
 	},
 /area/bigredv2/outside/space_port_lz2)
-"eMx" = (
-/turf/open/floor/almayer{
-	dir = 4;
-	icon_state = "redcorner";
-	tag = "icon-redcorner (EAST)"
-	},
-/area/almayer/squads/alpha_bravo_shared)
 "eMX" = (
 /obj/structure/machinery/light{
 	dir = 1
@@ -28485,12 +28321,6 @@
 /obj/effect/landmark/corpsespawner/security,
 /turf/open/floor,
 /area/bigredv2/outside/cargo)
-"eUU" = (
-/turf/open/floor/almayer{
-	icon_state = "orange";
-	tag = "icon-orange"
-	},
-/area/almayer/living/cryo_cells)
 "eWd" = (
 /turf/open/floor{
 	dir = 1;
@@ -28626,7 +28456,7 @@
 /obj/structure/machinery/alarm/almayer{
 	dir = 1
 	},
-/obj/structure/machinery/cm_vending/clothing/marine/bravo,
+/obj/structure/machinery/cm_vending/clothing/marine/alpha,
 /turf/open/floor/almayer{
 	icon_state = "plate";
 	tag = "icon-sterile"
@@ -28689,8 +28519,8 @@
 	},
 /turf/open/floor/almayer{
 	dir = 1;
-	icon_state = "red";
-	tag = "icon-red (NORTH)"
+	icon_state = "silver";
+	tag = "icon-silver (NORTH)"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "fte" = (
@@ -28752,10 +28582,6 @@
 	tag = "icon-cargo_arrow (NORTH)"
 	},
 /area/almayer/squads/alpha_bravo_shared)
-"fyn" = (
-/obj/structure/machinery/door/airlock/almayer/marine/alpha,
-/turf/open/floor/almayer,
-/area/almayer/squads/alpha_bravo_shared)
 "fyp" = (
 /obj/effect/landmark/crap_item,
 /turf/open/floor{
@@ -28803,8 +28629,8 @@
 	pixel_y = -32
 	},
 /turf/open/floor/almayer{
-	icon_state = "red";
-	tag = "icon-red"
+	icon_state = "silver";
+	tag = "icon-silver"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "fHv" = (
@@ -29575,8 +29401,8 @@
 /obj/structure/machinery/light,
 /turf/open/floor/almayer{
 	dir = 8;
-	icon_state = "red";
-	tag = "icon-red (WEST)"
+	icon_state = "silver";
+	tag = "icon-silver (NORTHWEST)"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "hNc" = (
@@ -29807,8 +29633,8 @@
 	},
 /turf/open/floor/almayer{
 	dir = 9;
-	icon_state = "orange";
-	tag = "icon-orange (NORTHWEST)"
+	icon_state = "silver";
+	tag = "icon-silver (NORTHWEST)"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "isj" = (
@@ -29858,8 +29684,8 @@
 	},
 /turf/open/floor/almayer{
 	dir = 1;
-	icon_state = "red";
-	tag = "icon-red (NORTH)"
+	icon_state = "silver";
+	tag = "icon-silver (NORTH)"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "ixR" = (
@@ -30262,13 +30088,6 @@
 	tag = "icon-darkgreen2 (SOUTHEAST)"
 	},
 /area/bigredv2/caves/eta/xenobiology)
-"jyW" = (
-/obj/structure/machinery/door/airlock/almayer/marine/bravo,
-/turf/open/floor/almayer{
-	icon_state = "plate";
-	tag = "icon-sterile"
-	},
-/area/almayer/squads/alpha_bravo_shared)
 "jAo" = (
 /obj/structure/surface/rack,
 /obj/effect/spawner/random/toolbox,
@@ -30622,8 +30441,8 @@
 	},
 /turf/open/floor/almayer{
 	dir = 5;
-	icon_state = "red";
-	tag = "icon-red (NORTHEAST)"
+	icon_state = "silver";
+	tag = "icon-silver (NORTH)"
 	},
 /area/almayer/living/cryo_cells)
 "kBn" = (
@@ -30809,10 +30628,10 @@
 /turf/open/floor,
 /area/bigredv2/outside/engineering)
 "kXR" = (
-/obj/structure/machinery/door/airlock/almayer/marine/bravo,
+/obj/structure/machinery/door/airlock/almayer/marine,
 /turf/open/floor/almayer{
-	icon_state = "orange";
-	tag = "icon-orange"
+	icon_state = "silver";
+	tag = "icon-silver"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "kYd" = (
@@ -31042,8 +30861,8 @@
 	},
 /turf/open/floor/almayer{
 	dir = 10;
-	icon_state = "orange";
-	tag = "icon-orange (SOUTHWEST)"
+	icon_state = "silver";
+	tag = "icon-silver (NORTHWEST)"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "lQU" = (
@@ -31120,8 +30939,8 @@
 	},
 /turf/open/floor/almayer{
 	dir = 10;
-	icon_state = "red";
-	tag = "icon-red (SOUTHWEST)"
+	icon_state = "silver";
+	tag = "icon-silver (NORTHWEST)"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "lVR" = (
@@ -31322,16 +31141,6 @@
 /obj/item/tool/lighter/zippo,
 /turf/open/floor,
 /area/bigredv2/outside/engineering)
-"mUL" = (
-/obj/structure/bed/chair{
-	dir = 4;
-	tag = "icon-chair (EAST)"
-	},
-/turf/open/floor/almayer{
-	icon_state = "orangefull";
-	tag = "icon-orangefull"
-	},
-/area/almayer/squads/alpha_bravo_shared)
 "mUO" = (
 /obj/structure/machinery/chem_master,
 /turf/open/floor{
@@ -31483,8 +31292,8 @@
 	},
 /turf/open/floor/almayer{
 	dir = 6;
-	icon_state = "red";
-	tag = "icon-red (SOUTHEAST)"
+	icon_state = "silver";
+	tag = "icon-silver"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "nJt" = (
@@ -31626,7 +31435,7 @@
 	name = "General Listening Channel";
 	pixel_y = 28
 	},
-/obj/structure/machinery/cm_vending/clothing/marine/bravo,
+/obj/structure/machinery/cm_vending/clothing/marine/alpha,
 /turf/open/floor/almayer{
 	icon_state = "plate";
 	tag = "icon-sterile"
@@ -31663,13 +31472,6 @@
 	},
 /turf/open/floor,
 /area/bigredv2/outside/engineering)
-"okG" = (
-/obj/structure/machinery/cm_vending/clothing/marine/bravo,
-/turf/open/floor/almayer{
-	icon_state = "plate";
-	tag = "icon-sterile"
-	},
-/area/almayer/squads/alpha_bravo_shared)
 "onu" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/landmark/objective_landmark,
@@ -31693,8 +31495,8 @@
 	},
 /turf/open/floor/almayer{
 	dir = 8;
-	icon_state = "orange";
-	tag = "icon-orange (WEST)"
+	icon_state = "silver";
+	tag = "icon-silver (NORTHWEST)"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "otb" = (
@@ -32473,8 +32275,8 @@
 "qPp" = (
 /turf/open/floor/almayer{
 	dir = 1;
-	icon_state = "red";
-	tag = "icon-red (NORTH)"
+	icon_state = "silver";
+	tag = "icon-silver (NORTH)"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "qQn" = (
@@ -32486,12 +32288,6 @@
 	},
 /turf/open/floor,
 /area/bigredv2/outside/engineering)
-"qQz" = (
-/turf/open/floor/almayer{
-	icon_state = "orangecorner";
-	tag = "icon-orangecorner"
-	},
-/area/almayer/squads/alpha_bravo_shared)
 "qTs" = (
 /obj/effect/alien/weeds/node,
 /turf/open/floor{
@@ -32535,7 +32331,7 @@
 /turf/open/floor,
 /area/bigredv2/caves_sw)
 "qWH" = (
-/obj/structure/machinery/door/airlock/almayer/marine/bravo,
+/obj/structure/machinery/door/airlock/almayer/marine,
 /turf/open/floor/almayer,
 /area/almayer/squads/alpha_bravo_shared)
 "qXE" = (
@@ -33010,8 +32806,8 @@
 	},
 /turf/open/floor/almayer{
 	dir = 6;
-	icon_state = "orange";
-	tag = "icon-orange (SOUTHEAST)"
+	icon_state = "silver";
+	tag = "icon-silver (NORTHWEST)"
 	},
 /area/almayer/living/cryo_cells)
 "slG" = (
@@ -33173,7 +32969,7 @@
 	},
 /area/bigredv2/caves_sw)
 "sEu" = (
-/obj/structure/machinery/door/airlock/almayer/marine/alpha,
+/obj/structure/machinery/door/airlock/almayer/marine,
 /turf/open/floor/almayer{
 	dir = 1;
 	icon_state = "red";
@@ -33702,12 +33498,6 @@
 	icon_state = "wood"
 	},
 /area/bigredv2/caves/eta/living)
-"uhq" = (
-/turf/open/floor/almayer{
-	icon_state = "orange";
-	tag = "icon-orange"
-	},
-/area/almayer/squads/alpha_bravo_shared)
 "ujd" = (
 /obj/structure/bed,
 /obj/effect/landmark/corpsespawner/scientist,
@@ -33801,13 +33591,6 @@
 	},
 /turf/open/floor,
 /area/bigredv2/outside/engineering)
-"uwI" = (
-/obj/structure/machinery/cm_vending/clothing/engi/bravo,
-/turf/open/floor/almayer{
-	icon_state = "plate";
-	tag = "icon-sterile"
-	},
-/area/almayer/squads/alpha_bravo_shared)
 "uzv" = (
 /obj/item/ore,
 /turf/open/mars_cave{
@@ -33884,7 +33667,7 @@
 /turf/open/floor,
 /area/bigredv2/outside/filtration_plant)
 "uIW" = (
-/obj/structure/machinery/door/airlock/almayer/marine/alpha,
+/obj/structure/machinery/door/airlock/almayer/marine,
 /turf/open/floor/almayer{
 	icon_state = "plate";
 	tag = "icon-sterile"
@@ -33981,8 +33764,8 @@
 	},
 /turf/open/floor/almayer{
 	dir = 1;
-	icon_state = "orange";
-	tag = "icon-orange (EAST)"
+	icon_state = "silver";
+	tag = "icon-silver (NORTH)"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "vbh" = (
@@ -34093,8 +33876,8 @@
 /obj/effect/landmark/start/marine/leader,
 /turf/open/floor/almayer{
 	dir = 1;
-	icon_state = "red";
-	tag = "icon-red (NORTH)"
+	icon_state = "silver";
+	tag = "icon-silver (NORTH)"
 	},
 /area/almayer/living/cryo_cells)
 "vnd" = (
@@ -34309,13 +34092,6 @@
 	tag = "icon-mars_cave_2"
 	},
 /area/bigredv2/caves_se)
-"vUK" = (
-/turf/open/floor/almayer{
-	dir = 1;
-	icon_state = "orange";
-	tag = "icon-orange (EAST)"
-	},
-/area/almayer/living/cryo_cells)
 "vUL" = (
 /turf/open/mars_cave{
 	icon_state = "mars_cave_23";
@@ -34785,8 +34561,8 @@
 "wQs" = (
 /turf/open/floor/almayer{
 	dir = 4;
-	icon_state = "orangecorner";
-	tag = "icon-orangecorner (EAST)"
+	icon_state = "silvercorner";
+	tag = "icon-silver (NORTHWEST)"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "wQC" = (
@@ -34933,8 +34709,8 @@
 /area/almayer/squads/alpha_bravo_shared)
 "xjV" = (
 /turf/open/floor/almayer{
-	icon_state = "red";
-	tag = "icon-red"
+	icon_state = "silver";
+	tag = "icon-silver"
 	},
 /area/almayer/living/cryo_cells)
 "xpl" = (
@@ -34981,8 +34757,9 @@
 	tag = "icon-chair (EAST)"
 	},
 /turf/open/floor/almayer{
-	icon_state = "redfull";
-	tag = "icon-redfull"
+	dir = 10;
+	icon_state = "silverfull";
+	tag = null
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "xuU" = (
@@ -35046,8 +34823,8 @@
 "xGP" = (
 /turf/open/floor/almayer{
 	dir = 1;
-	icon_state = "red";
-	tag = "icon-red (NORTH)"
+	icon_state = "silver";
+	tag = "icon-silver (NORTH)"
 	},
 /area/almayer/living/cryo_cells)
 "xIx" = (
@@ -35093,13 +34870,6 @@
 	tag = "icon-dark"
 	},
 /area/bigredv2/caves/eta/living)
-"xNp" = (
-/obj/structure/machinery/cm_vending/clothing/medic/bravo,
-/turf/open/floor/almayer{
-	icon_state = "plate";
-	tag = "icon-sterile"
-	},
-/area/almayer/squads/alpha_bravo_shared)
 "xNF" = (
 /obj/structure/surface/table,
 /obj/structure/machinery/light{
@@ -35157,8 +34927,8 @@
 /area/bigredv2/outside/engineering)
 "xVn" = (
 /turf/open/floor/almayer{
-	icon_state = "redcorner";
-	tag = "icon-redcorner"
+	icon_state = "silvercorner";
+	tag = "icon-silver (NORTHWEST)"
 	},
 /area/almayer/squads/alpha_bravo_shared)
 "xWm" = (
@@ -46567,8 +46337,8 @@ aaU
 aaU
 aaU
 aaU
-jyW
-jyW
+uIW
+uIW
 aaU
 aaU
 aaU
@@ -47216,7 +46986,7 @@ ahZ
 vWk
 xsx
 qXE
-mUL
+xsx
 vWk
 ahZ
 ahZ
@@ -48077,7 +47847,7 @@ aao
 aao
 aap
 aaU
-ahh
+aaU
 aba
 qPp
 jZm
@@ -48948,8 +48718,8 @@ aaU
 aaU
 aaU
 aaU
-fyn
-fyn
+qWH
+qWH
 iKj
 aaU
 iKj
@@ -49166,7 +48936,7 @@ ahY
 hNa
 aaU
 abY
-acm
+afg
 lVy
 aaU
 iqP
@@ -49389,8 +49159,8 @@ aaU
 vaO
 vwP
 ahZ
-afw
-agu
+abt
+abd
 agZ
 aaU
 aao
@@ -49817,16 +49587,16 @@ ahZ
 abe
 ahZ
 ahZ
-acn
+lcY
 acR
 aaU
 acR
 aey
 ahZ
 ahZ
-agy
+abe
 vwP
-ahA
+abN
 aaU
 aao
 aao
@@ -50030,16 +49800,16 @@ aao
 aao
 aaU
 aav
-aaN
+aha
 aaU
-abx
-eMx
+afA
+wQs
 sce
 wkC
 aaU
-okG
+wkC
 iMg
-qQz
+xVn
 afA
 aaU
 aha
@@ -50256,7 +50026,7 @@ wkC
 aaU
 adT
 iMg
-uhq
+lcY
 aaU
 aaU
 aaU
@@ -50471,11 +50241,11 @@ aca
 vwP
 wkC
 aaU
-okG
+wkC
 aeA
 aff
 aaU
-xNp
+juF
 ahc
 acd
 aaU
@@ -50688,11 +50458,11 @@ qPp
 sce
 wkC
 aaU
-okG
+wkC
 iMg
-uhq
+lcY
 aaU
-xNp
+juF
 vwP
 acd
 aaU
@@ -50908,7 +50678,7 @@ aaU
 ofP
 iMg
 ahZ
-afH
+abB
 vWk
 vwP
 ahB
@@ -51124,9 +50894,9 @@ acS
 aaU
 adX
 vwP
-uhq
+lcY
 aaU
-xNp
+juF
 vwP
 acd
 aaU
@@ -51332,18 +51102,18 @@ aao
 aao
 aaU
 acd
-aaQ
+ahg
 juF
 aaU
 qPp
 sce
 wkC
 aaU
-okG
+wkC
 iMg
-uhq
+lcY
 aaU
-xNp
+juF
 ahg
 acd
 aaU
@@ -51556,9 +51326,9 @@ qPp
 sce
 wkC
 aaU
-okG
+wkC
 iMg
-uhq
+lcY
 aaU
 aaU
 aaU
@@ -51771,13 +51541,13 @@ koG
 aaU
 qPp
 vwP
-acT
+wkC
 aaU
 aea
 vwP
-uhq
+lcY
 aaU
-uwI
+koG
 aho
 aco
 aaU
@@ -51990,11 +51760,11 @@ qPp
 sce
 wkC
 aaU
-okG
+wkC
 iMg
-uhq
+lcY
 aaU
-uwI
+koG
 ahZ
 aco
 aaU
@@ -52202,12 +51972,12 @@ aaU
 xNM
 ahZ
 vWk
-abC
+afI
 ahZ
 sce
 wkC
 aaU
-okG
+wkC
 iMg
 ahZ
 afI
@@ -52417,7 +52187,7 @@ aao
 aao
 aaU
 aco
-aaN
+aha
 koG
 aaU
 eKz
@@ -52426,9 +52196,9 @@ wkC
 aaU
 fjX
 aeB
-uhq
+lcY
 aaU
-uwI
+koG
 aha
 aco
 aaU
@@ -52643,7 +52413,7 @@ wkC
 aaU
 aec
 iMg
-uhq
+lcY
 aaU
 aaU
 aaU
@@ -52863,7 +52633,7 @@ iMg
 afg
 afJ
 aaU
-ahp
+aaR
 acB
 aaU
 aao
@@ -53075,11 +52845,11 @@ ahZ
 vwP
 wkC
 aaU
-okG
+wkC
 vwP
 ahZ
 vwP
-agA
+abj
 ahZ
 ahM
 aaU
@@ -53292,7 +53062,7 @@ vwP
 sce
 wkC
 aaU
-okG
+wkC
 iMg
 vwP
 afK
@@ -53509,11 +53279,11 @@ ahZ
 sce
 wkC
 aaU
-okG
+wkC
 iMg
 ahZ
 vwP
-agC
+abn
 ahZ
 ahM
 aaU
@@ -53726,12 +53496,12 @@ vwP
 xVn
 wkC
 aaU
-okG
+wkC
 wQs
 vwP
-qQz
+xVn
 aaU
-ahs
+aaT
 aaC
 aaU
 aao
@@ -53939,8 +53709,8 @@ aaU
 aaU
 aaU
 sEu
-fyn
-acF
+qWH
+kXR
 aaU
 aaU
 aaU
@@ -54161,9 +53931,9 @@ xjV
 acV
 adp
 acV
-vUK
+xGP
 whB
-eUU
+xjV
 pbq
 aao
 aao
@@ -54378,7 +54148,7 @@ xjV
 cvN
 woa
 cvN
-vUK
+xGP
 whB
 afO
 pbq
@@ -54595,9 +54365,9 @@ xjV
 cvN
 rnm
 cvN
-vUK
+xGP
 tFU
-woa
+acn
 uqe
 aao
 aao
@@ -54812,9 +54582,9 @@ xjV
 whB
 xTB
 whB
-vUK
+xGP
 afi
-uqe
+xjV
 uqe
 aao
 aao
@@ -55029,9 +54799,9 @@ xjV
 cvN
 woa
 cvN
-vUK
+xGP
 tFU
-rnm
+afw
 uqe
 aao
 aao
@@ -55246,7 +55016,7 @@ xjV
 cvN
 rnm
 cvN
-vUK
+xGP
 whB
 afP
 uqe
@@ -55463,9 +55233,9 @@ xjV
 whB
 xTB
 whB
-vUK
+xGP
 whB
-eUU
+xjV
 uqe
 aao
 aao
@@ -55675,12 +55445,12 @@ aao
 aao
 uqe
 kAO
-acc
-acH
+afj
+sjv
 acX
 ads
 ael
-aeK
+kAO
 afj
 sjv
 uqe

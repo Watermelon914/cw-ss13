@@ -419,6 +419,7 @@ There are several things that need to be remembered:
 
 		if(istype(head, /obj/item/clothing/head/helmet/marine))
 			var/obj/item/clothing/head/helmet/marine/marine_helmet = head
+			/*
 			if(assigned_squad && marine_helmet.flags_marine_helmet & HELMET_SQUAD_OVERLAY)
 				var/datum/squad/S = assigned_squad
 				var/leader = S.squad_leader == src
@@ -427,6 +428,7 @@ There are several things that need to be remembered:
 					J.layer = -HEAD_SQUAD_LAYER
 					overlays_standing[HEAD_SQUAD_LAYER] = J
 					apply_overlay(HEAD_SQUAD_LAYER)
+			*/
 
 			var/num_helmet_overlays = 0
 			for(var/i in 1 to marine_helmet.helmet_overlays.len)
@@ -477,6 +479,7 @@ There are several things that need to be remembered:
 
 		if(istype(wear_suit, /obj/item/clothing/suit/storage/marine))
 			var/obj/item/clothing/suit/storage/marine/marine_armor = wear_suit
+			/*
 			if(marine_armor.flags_marine_armor & ARMOR_SQUAD_OVERLAY)
 				if(assigned_squad)
 					var/datum/squad/S = assigned_squad
@@ -486,6 +489,7 @@ There are several things that need to be remembered:
 						J.layer = -SUIT_SQUAD_LAYER
 						overlays_standing[SUIT_SQUAD_LAYER] = J
 						apply_overlay(SUIT_SQUAD_LAYER)
+			*/
 
 			if(marine_armor.armor_overlays.len)
 				var/image/K

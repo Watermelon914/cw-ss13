@@ -710,9 +710,9 @@ IN_USE						used for vending/denying
 			sleep(vend_delay)
 
 		var/prod_type = L[3]
-		if(prod_type == /obj/item/device/radio/headset/almayer/marine)
+		if(headset_type && prod_type == /obj/item/device/radio/headset/almayer/marine)
 			prod_type = headset_type
-		else if(prod_type == /obj/item/clothing/gloves/marine)
+		else if(gloves_type && prod_type == /obj/item/clothing/gloves/marine)
 			prod_type = gloves_type
 
 		var/obj/item/O = new prod_type(loc)

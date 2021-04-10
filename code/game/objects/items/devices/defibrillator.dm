@@ -10,7 +10,7 @@
 	throwforce = 5
 	w_class = SIZE_MEDIUM
 
-	var/blocked_by_suit = TRUE
+	var/blocked_by_suit = FALSE
 	var/heart_damage_to_deal = 5
 	var/ready = 0
 	var/damage_threshold = 12 //This is the maximum non-oxy damage the defibrillator will heal to get a patient above -100, in all categories
@@ -21,7 +21,9 @@
 	var/defib_cooldown = 0 //Cooldown for toggling the defib
 
 /mob/living/carbon/human/proc/check_tod()
-	if(!undefibbable && world.time <= timeofdeath + revive_grace_period)
+	if(!undefibbable && (world.time <= timeofdeath + revive_grace_period \
+		|| SSticker?.mode?.flags_round_type & MODE_INFINITE_REVIVE_GRACE_PERIOD)\
+		&& revives_left > 0)
 		return TRUE
 	return FALSE
 
@@ -54,6 +56,10 @@
 	..()
 	var/maxuses = 0
 	var/currentuses = 0
+	if(!charge_cost)
+		to_chat(user, SPAN_INFO("It has an infinite amount of charge."))
+		return
+
 	maxuses = round(dcell.maxcharge / charge_cost)
 	currentuses = round(dcell.charge / charge_cost)
 	to_chat(user, SPAN_INFO("It has [currentuses] out of [maxuses] uses left in its internal battery."))
@@ -114,7 +120,7 @@
 		user.visible_message(SPAN_WARNING("[icon2html(src, viewers(src))] \The [src] buzzes: Patient's general condition does not allow reviving."))
 		return
 
-	if(blocked_by_suit && H.wear_suit && (istype(H.wear_suit, /obj/item/clothing/suit/armor) || istype(H.wear_suit, /obj/item/clothing/suit/storage/marine)) && prob(95))
+	if(blocked_by_suit && (istype(H.wear_suit, /obj/item/clothing/suit/armor) || istype(H.wear_suit, /obj/item/clothing/suit/storage/marine)))
 		user.visible_message(SPAN_WARNING("[icon2html(src, viewers(src))] \The [src] buzzes: Paddles registering >100,000 ohms, Possible cause: Suit or Armor interferring."))
 		return
 
@@ -188,6 +194,8 @@
 	if(isobserver(H.mind?.current) && !H.client) //Let's call up the correct ghost! Also, bodies with clients only, thank you.
 		H.mind.transfer_to(H, TRUE)
 
+	pre_defib_apply(H)
+	H.revives_left--
 
 	//At this point, the defibrillator is ready to work
 	H.apply_damage(-damage_threshold, BRUTE)
@@ -211,6 +219,8 @@
 	else
 		user.visible_message(SPAN_WARNING("[icon2html(src, viewers(src))] \The [src] buzzes: Defibrillation failed. Vital signs are too weak, repair damage and try again.")) //Freak case
 
+/obj/item/device/defibrillator/proc/pre_defib_apply(var/mob/living/carbon/human/H)
+	return
 
 /obj/item/device/defibrillator/compact
 	name = "compact defibrillator"
@@ -221,3 +231,15 @@
 	w_class = SIZE_SMALL
 
 	charge_cost = 132 //How much energy is used.
+
+/obj/item/device/defibrillator/powerful
+	heart_damage_to_deal = 0
+	var/damage_to_set_to = 50
+
+	charge_cost = 0
+	blocked_by_suit = FALSE
+
+/obj/item/device/defibrillator/powerful/pre_defib_apply(var/mob/living/carbon/human/H)
+	. = ..()
+	H.apply_damage(-max(H.getFireLoss()-damage_to_set_to, 0), BURN)
+	H.apply_damage(-max(H.getBruteLoss()-damage_to_set_to, 0), BRUTE)

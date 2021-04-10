@@ -118,7 +118,7 @@ var/list/datum/mob_hud/huds = list(
 
 //medical hud used by ghosts
 /datum/mob_hud/medical/observer
-	hud_icons = list(HEALTH_HUD, STATUS_HUD_OOC, STATUS_HUD_XENO_CULTIST)
+	hud_icons = list(HEALTH_HUD, SHIELD_HUD, STATUS_HUD_OOC, STATUS_HUD_XENO_CULTIST)
 
 
 //infection status that appears on humans, viewed by xenos only and observers.

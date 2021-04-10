@@ -241,7 +241,7 @@
 				if(i > mob_max)
 					break //Some logic. Hopefully this will never happen..
 				create_member(M)
-			
+
 
 		if(spawn_max_amount && i < mob_max)
 			for(var/c in i to mob_max)

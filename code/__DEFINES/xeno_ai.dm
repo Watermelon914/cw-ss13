@@ -96,6 +96,8 @@
 /datum/config_entry/number/ai_director
 	abstract_type = /datum/config_entry/number/ai_director
 
+/// Amount of xenos needed before T2s and T3s can spawn
+#define XENOS_NEEDED_FOR_OTHER_TIERS 2
 #define IDEAL_T2_PERCENT 0.5
 #define IDEAL_T3_PERCENT 0.25
 

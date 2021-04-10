@@ -15,8 +15,6 @@
 	var/ai_timeout_time = 0
 	var/ai_timeout_period = 2 SECONDS
 
-	var/last_target_found = 0
-
 	// Home turf
 	var/next_home_search = 0
 	var/home_search_delay = 5 SECONDS
@@ -72,8 +70,6 @@
 			home_turf = null
 
 		return TRUE
-	else
-		last_target_found = world.time
 
 /atom/proc/xeno_ai_obstacle(var/mob/living/carbon/Xenomorph/X, direction)
 	return INFINITY
@@ -265,20 +261,16 @@
 			smallest_distance = distance
 			closest_human = H
 
-	if(smallest_distance > RANGE_TO_DESPAWN_XENO || last_target_found < world.time - XENO_DESPAWN_NO_TARGET_PERIOD)
+	if(smallest_distance > RANGE_TO_DESPAWN_XENO)
 		remove_ai()
 		qdel(src)
 		return
 
 	if(smallest_distance > ai_range)
 		return
-
-	last_target_found = world.time
 	return closest_human
 
 /mob/living/carbon/Xenomorph/proc/make_ai()
-	// Reset the timer so that they don't despawn immediately
-	last_target_found = world.time
 	if(!client)
 		SSxeno_ai.add_ai(src)
 

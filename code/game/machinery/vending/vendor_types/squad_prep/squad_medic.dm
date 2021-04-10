@@ -151,7 +151,7 @@ GLOBAL_LIST_INIT(cm_vending_clothing_medic, list(
 /obj/structure/machinery/cm_vending/clothing/medic/alpha
 	squad_tag = SQUAD_NAME_1
 	req_access = list(ACCESS_MARINE_MEDPREP, ACCESS_MARINE_ALPHA)
-	gloves_type = /obj/item/clothing/gloves/marine/alpha
+	gloves_type = /obj/item/clothing/gloves/marine
 	headset_type = /obj/item/device/radio/headset/almayer/marine/alpha/med
 
 /obj/structure/machinery/cm_vending/clothing/medic/bravo
@@ -183,3 +183,8 @@ GLOBAL_LIST_INIT(cm_vending_clothing_medic, list(
 		/obj/item/roller/medevac,
 		/obj/item/roller,
 	)
+
+/obj/effect/essentials_set/medic/New(loc)
+	if(SSticker.mode?.medic_set)
+		spawned_gear_list = SSticker.mode?.medic_set
+	. = ..()

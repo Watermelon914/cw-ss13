@@ -6,6 +6,8 @@
 		GLOB.alive_client_human_list += src
 	SShuman.processable_human_list += src
 
+	revives_left = CONFIG_GET(number/human_revives_left)
+
 	if(!species)
 		if(new_species)
 			set_species(new_species)
@@ -972,6 +974,7 @@
 		if(client)
 			GLOB.alive_client_human_list += src
 		GLOB.alive_human_list += src
+	revives_left = CONFIG_GET(number/human_revives_left)
 	. = ..()
 
 

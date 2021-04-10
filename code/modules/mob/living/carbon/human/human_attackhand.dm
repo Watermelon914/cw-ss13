@@ -23,14 +23,14 @@
 			if(!(stat == UNCONSCIOUS && getOxyLoss() > 0) && !(stat == DEAD))
 				var/obj/limb/L = get_limb(M.zone_selected)
 				if(L && (L.status & LIMB_BROKEN) && skillcheck(M, SKILL_MEDICAL, SKILL_MEDICAL_MEDIC))
-					M.visible_message(SPAN_NOTICE("[M] grabs [L] of [src] and prepares to relocate it."), \
-						SPAN_HELPFUL("You prepare to relocate [src]'s [L.name]"))
+					M.visible_message(SPAN_NOTICE("[M] grabs [L.display_name] of [src] and prepares to relocate it."), \
+						SPAN_HELPFUL("You prepare to relocate [src]'s [L.display_name]"))
 
 					if(!do_after(M, L.fracture_fix_time, INTERRUPT_ALL, BUSY_ICON_FRIENDLY, src, INTERRUPT_MOVED, BUSY_ICON_MEDICAL))
 						return TRUE
 
-					M.visible_message(SPAN_NOTICE("[M] grabs [L] of [src] and relocates it."), \
-						SPAN_HELPFUL("You relocate [src]'s [L.name]"))
+					M.visible_message(SPAN_NOTICE("[M] grabs [L.display_name] of [src] and relocates it."), \
+						SPAN_HELPFUL("You relocate [src]'s [L.display_name]"))
 					playsound(src, "bone_break", 45, TRUE)
 					L.heal_damage(internal = TRUE)
 
