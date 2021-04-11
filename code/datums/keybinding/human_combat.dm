@@ -1,13 +1,14 @@
 /datum/keybinding/human/combat
 	category = CATEGORY_HUMAN_COMBAT
 	weight = WEIGHT_MOB
+	var/requires_gun = TRUE
 
 /datum/keybinding/human/combat/can_use(client/user)
 	. = ..()
 	if(!.)
 		return
 	var/mob/M = user.mob
-	return isgun(M.get_held_item())
+	return !requires_gun || isgun(M.get_held_item())
 
 /datum/keybinding/human/combat/field_strip_weapon
 	hotkey_keys = list()
@@ -169,3 +170,11 @@
 	var/obj/item/weapon/gun/G = H.get_held_item()
 	G.activate_rail_attachment_verb()
 	return TRUE
+
+/datum/keybinding/human/combat/parry
+	hotkey_keys = list("Space")
+	classic_keys = list()
+	name = "human_parry"
+	full_name = "Parry"
+	keybind_signal = COMSIG_KB_HUMAN_PARRY
+	requires_gun = FALSE

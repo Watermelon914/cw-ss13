@@ -1,4 +1,4 @@
-/datum/action/xeno_action/activable/lunge/use_ability(atom/A)
+/datum/action/xeno_action/activable/pounce/lunge/use_ability(atom/A)
 	var/mob/living/carbon/Xenomorph/X = owner
 
 	if (!action_cooldown_check())
@@ -7,14 +7,8 @@
 			twitch_message_cooldown = world.time + 5 SECONDS
 		return //this gives a little feedback on why your lunge didn't hit other than the lunge button going grey. Plus, it might spook marines that almost got lunged if they know why the message appeared, and extra spookiness is always good.
 
-	if (!A)
-		return
-
 	if (!isturf(X.loc))
 		to_chat(X, SPAN_XENOWARNING("You can't lunge from here!"))
-		return
-
-	if (!X.check_state() || X.agility)
 		return
 
 	if(X.can_not_harm(A) || !ismob(A))
@@ -25,15 +19,7 @@
 	if(H.stat == DEAD)
 		return
 
-	if (!check_and_use_plasma_owner())
-		return
-
-	apply_cooldown()
-	..()
-
-	X.visible_message(SPAN_XENOWARNING("\The [X] lunges towards [H]!"), SPAN_XENOWARNING("You lunge at [H]!"))
-
-	X.throw_atom(get_step_towards(A, X), grab_range, SPEED_FAST, X)
+	. = ..()
 
 	if (X.Adjacent(H))
 		X.start_pulling(H,1)

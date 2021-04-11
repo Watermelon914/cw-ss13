@@ -32,6 +32,8 @@
 	plasma_cost = 25
 
 	// Pounce config
+
+	windup = FALSE
 	distance = 5
 	knockdown = FALSE				// Should we knock down the target?
 	slash = FALSE					// Do we slash upon reception?

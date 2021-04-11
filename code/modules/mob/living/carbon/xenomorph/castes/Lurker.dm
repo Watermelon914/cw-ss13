@@ -188,7 +188,7 @@
 
 		if(clear)
 			var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/pounce/lurker)
-			A.use_ability_async(get_turf(current_target))
+			A.use_ability_async(current_target)
 			SSxeno_pathfinding.stop_calculating_path(src)
 			//stop_calculating_path()
 			current_path = null

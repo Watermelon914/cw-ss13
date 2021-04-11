@@ -45,7 +45,7 @@
 		/datum/action/xeno_action/onclick/regurgitate,
 		/datum/action/xeno_action/watch_xeno,
 		/datum/action/xeno_action/activable/warrior_punch,
-		/datum/action/xeno_action/activable/lunge,
+		/datum/action/xeno_action/activable/pounce/lunge,
 		/datum/action/xeno_action/activable/fling,
 	)
 
@@ -78,6 +78,7 @@ GLOBAL_LIST_INIT(warrior_target_limbs, list(
 
 	if(pulling && can_move_and_apply_move_delay())
 		Move(get_step(loc, turn(dir, 180)), turn(dir, 180))
+		current_path = null
 	else
 		var/turf/T = get_turf(current_target)
 		if(get_dist(src, current_target) <= 1)
@@ -107,7 +108,7 @@ GLOBAL_LIST_INIT(warrior_target_limbs, list(
 			remove_temp_pass_flags(PASS_OVER_THROW_MOB)
 
 			if(clear)
-				var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/lunge)
+				var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/pounce/lunge)
 				A.use_ability_async(current_target)
 				SSxeno_pathfinding.stop_calculating_path(src)
 				//stop_calculating_path()

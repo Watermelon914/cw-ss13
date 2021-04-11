@@ -1,8 +1,10 @@
 // Set a client's focus to an object and override these procs on that object to let it handle keypresses
 
 /datum/proc/key_down(key, client/user) // Called when a key is pressed down initially
+	SEND_SIGNAL(src, COMSIG_DATUM_KEY_DOWN, key, user)
 	return
 /datum/proc/key_up(key, client/user) // Called when a key is released
+	SEND_SIGNAL(src, COMSIG_DATUM_KEY_UP, key, user)
 	return
 /datum/proc/keyLoop(client/user) // Called once every frame
 	set waitfor = FALSE

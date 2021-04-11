@@ -30,7 +30,7 @@
 
 
 // Warrior Lunge
-/datum/action/xeno_action/activable/lunge
+/datum/action/xeno_action/activable/pounce/lunge
 	name = "Lunge"
 	action_icon_state = "lunge"
 	ability_name = "lunge"
@@ -38,9 +38,13 @@
 	action_type = XENO_ACTION_CLICK
 	ability_primacy = XENO_PRIMARY_ACTION_2
 	xeno_cooldown = 100
-	
+	plasma_cost = 0
+
 	// Configurables
-	var/grab_range = 6
+	distance = 6
+	knockdown = FALSE
+	freeze_self = FALSE
+
 	var/click_miss_cooldown = 15
 	var/twitch_message_cooldown = 0 //apparently this is necessary for a tiny code that makes the lunge message on cooldown not be spammable, doesn't need to be big so 5 will do.
 

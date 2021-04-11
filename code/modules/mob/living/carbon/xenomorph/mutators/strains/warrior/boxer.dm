@@ -6,7 +6,7 @@
 	caste_whitelist = list(XENO_CASTE_WARRIOR)
 	mutator_actions_to_remove = list(
 		/datum/action/xeno_action/activable/fling,
-		/datum/action/xeno_action/activable/lunge,
+		/datum/action/xeno_action/activable/pounce/lunge,
 	)
 	mutator_actions_to_add = list(
 		/datum/action/xeno_action/activable/jab,

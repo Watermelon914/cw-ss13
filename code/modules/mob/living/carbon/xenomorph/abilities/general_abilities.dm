@@ -161,9 +161,10 @@
 	var/freeze_time = 5					// 5 for runners, 15 for lurkers
 	var/freeze_timer_id = TIMER_ID_NULL	// Timer to cancel the end freeze if it can be cancelled earlier
 
-	var/windup = FALSE					// Is there a do_after before we pounce?
-	var/windup_duration = 20			// How long to wind up, if applicable
+	var/windup = TRUE					// Is there a do_after before we pounce?
+	var/windup_duration = 0.5 SECONDS			// How long to wind up, if applicable
 	var/windup_interruptable = TRUE		// Can the windup be interrupted?
+	var/windup_interrupt_flags = INTERRUPT_INCAPACITATED
 
 	var/can_be_shield_blocked = FALSE	// Some legacy stuff, self explanatory
 	var/should_destroy_objects = FALSE  // Only used for ravager charge
@@ -173,6 +174,9 @@
 
 	var/list/pounce_callbacks = null	// Specific callbacks to invoke when a pounce lands on an atom of a specific type
 										// (note that if a collided atom does not match any of the key types, defaults to the appropriate X_launch_collision proc)
+
+	var/successful_parry = FALSE
+	var/atom/current_pounce_target
 
 /datum/action/xeno_action/activable/pounce/New()
 	. = ..()

@@ -2,6 +2,7 @@
 	// Parameters
 	var/pass_flags = NO_FLAGS // Pass flags to add temporarily
 	var/call_all = FALSE // Whether to perform all callback calls or none of them
+	var/ignore_collision_behaviour = FALSE
 
 	var/atom/target
 	var/range
@@ -52,6 +53,11 @@
 /atom/movable/proc/launch_impact(atom/hit_atom)
 	if (isnull(launch_metadata))
 		CRASH("launch_impact called without any stored metadata")
+
+	if(launch_metadata.ignore_collision_behaviour)
+		throwing = FALSE
+		rebounding = FALSE
+		return
 
 	var/list/collision_callbacks = launch_metadata.get_collision_callbacks(hit_atom)
 	if (islist(collision_callbacks))
@@ -180,8 +186,10 @@
 			break
 		sleep(delay)
 
+	var/result = SEND_SIGNAL(src, COMSIG_MOVABLE_POST_LAUNCH, LM)
+
 	//done throwing, either because it hit something or it finished moving
-	if ((isobj(src) || ismob(src)) && throwing && !early_exit)
+	if (!(result & COMPONENT_ABORT_COLLISION_CALLBACKS) && (isobj(src) || ismob(src)) && throwing && !early_exit)
 		var/turf/T = get_turf(src)
 		if(!istype(T))
 			return

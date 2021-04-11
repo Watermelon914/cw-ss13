@@ -283,13 +283,17 @@
 
 	apply_cooldown()
 
+	cleanup_pounce_target()
+	current_pounce_target = A
+	RegisterSignal(A, COMSIG_KB_HUMAN_PARRY, .proc/handle_parry)
+
 	if (windup)
 		if (!windup_interruptable)
 			X.frozen = TRUE
 			X.anchored = TRUE
 			X.update_canmove()
 
-		if (!do_after(X, windup_duration, INTERRUPT_NO_NEEDHAND, BUSY_ICON_HOSTILE))
+		if (!do_after(X, windup_duration, windup_interrupt_flags, BUSY_ICON_HOSTILE))
 			to_chat(X, SPAN_XENODANGER("You cancel your [ability_name]!"))
 			if (!windup_interruptable)
 				X.frozen = 0
@@ -316,6 +320,9 @@
 	LM.spin = FALSE
 	LM.pass_flags = pounce_pass_flags
 	LM.collision_callbacks = pounce_callbacks
+	LM.ignore_collision_behaviour = successful_parry
+	RegisterSignal(A, COMSIG_PARENT_QDELETING, .proc/cleanup_pounce_target)
+	RegisterSignal(owner, COMSIG_MOVABLE_POST_LAUNCH, .proc/handle_finish_launch, TRUE)
 
 	X.launch_towards(LM) //Victim, distance, speed
 
@@ -323,6 +330,57 @@
 	..()
 
 	return
+
+/datum/action/xeno_action/activable/pounce/proc/handle_finish_launch()
+	SIGNAL_HANDLER
+	var/parried = successful_parry
+	var/mob/living/carbon/human/H = current_pounce_target
+
+	cleanup_pounce_target()
+	if(!H || !parried)
+		return
+	if(H.get_active_hand() && H.Adjacent(owner))
+		INVOKE_ASYNC(H, /mob.proc/do_click, owner, list())
+	var/turf/valid_turf
+	var/direction_between = get_dir(owner, H)
+	for(var/dir in GLOB.cardinals)
+		if(dir & direction_between)
+			continue
+
+		var/turf/T = get_step(H, dir)
+		if(LinkBlocked(H, get_turf(H), T, list(H)))
+			continue
+
+		valid_turf = T
+		break
+
+	if(valid_turf)
+		var/turf/prev_turf = get_turf(H)
+		H.Move(valid_turf, get_dir(H, valid_turf))
+		owner.Move(prev_turf, get_dir(owner, prev_turf))
+	return COMPONENT_ABORT_COLLISION_CALLBACKS
+
+/datum/action/xeno_action/activable/pounce/proc/cleanup_pounce_target()
+	SIGNAL_HANDLER
+	if(!current_pounce_target)
+		return
+	successful_parry = FALSE
+	UnregisterSignal(current_pounce_target, list(
+		COMSIG_KB_HUMAN_PARRY,
+		COMSIG_PARENT_QDELETING
+	))
+	current_pounce_target = null
+
+/datum/action/xeno_action/activable/pounce/proc/handle_parry(var/mob/living/carbon/human/H)
+	SIGNAL_HANDLER
+	if(!owner)
+		return
+
+	successful_parry = TRUE
+	if(owner.launch_metadata)
+		owner.launch_metadata.ignore_collision_behaviour = TRUE
+	UnregisterSignal(H, COMSIG_KB_HUMAN_PARRY)
+	return COMPONENT_KB_ACTIVATED
 
 // Massive, customizable spray_acid
 /datum/action/xeno_action/activable/spray_acid/use_ability(atom/A)

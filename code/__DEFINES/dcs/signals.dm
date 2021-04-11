@@ -46,6 +46,11 @@
 #define COMSIG_CLIENT_KEY_DOWN "client_key_down"
 #define COMSIG_CLIENT_KEY_UP "client_key_up"
 
+///from /datum/key_down(): (key, client/user)
+#define COMSIG_DATUM_KEY_DOWN "datum_key_down"
+///from /datum/key_up(): (key, client/user)
+#define COMSIG_DATUM_KEY_UP "datum_key_up"
+
 ///from /datum/controller/subsystem/radio/get_available_tcomm_zs(): (list/tcomms)
 #define COMSIG_SSRADIO_GET_AVAILABLE_TCOMMS_ZS "ssradio_get_available_tcomms_zs"
 
@@ -297,6 +302,10 @@
 
 #define COMSIG_MOVABLE_PRE_LAUNCH "movable_pre_launch"
 	#define COMPONENT_LAUNCH_CANCEL (1<<0)
+
+///from /atom/movable/launch_towards(): (datum/launch_metadata/LM)
+#define COMSIG_MOVABLE_POST_LAUNCH "movable_post_launch"
+	#define COMPONENT_ABORT_COLLISION_CALLBACKS (1<<0)
 
 // Return non-zero value to override original behaviour
 #define COMSIG_MOB_SCREECH_ACT "mob_screech_act"
