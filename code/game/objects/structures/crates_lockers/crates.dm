@@ -37,36 +37,28 @@
 
 /obj/structure/closet/crate/open()
 	if(opened)
-		return 0
+		return FALSE
 	if(!can_open())
-		return 0
-
-	if(rigged && locate(/obj/item/device/radio/electropack) in src)
-		if(isliving(usr))
-			var/mob/living/L = usr
-			if(L.electrocute_act(17, src))
-				var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
-				s.set_up(5, 1, src)
-				s.start()
-				return 2
+		return FALSE
 
 	playsound(src.loc, 'sound/machines/click.ogg', 15, 1)
-	for(var/obj/O in src)
-		O.forceMove(get_turf(src))
-	opened = 1
+	for(var/o in src)
+		var/atom/movable/A = o
+		A.forceMove(get_turf(src))
+	opened = TRUE
 	update_icon()
 	if(climbable)
 		structure_shaken()
-		climbable = 0 //Open crate is not a surface that works when climbing around
-	return 1
+		climbable = FALSE //Open crate is not a surface that works when climbing around
+	return TRUE
 
 /obj/structure/closet/crate/close()
 	if(!opened)
-		return 0
+		return FALSE
 	if(!can_close())
-		return 0
+		return FALSE
 
-	playsound(src.loc, 'sound/machines/click.ogg', 15, 1)
+	playsound(loc, 'sound/machines/click.ogg', 15, 1)
 	var/itemcount = 0
 	for(var/obj/O in get_turf(src))
 		if(itemcount >= storage_capacity)
@@ -80,8 +72,8 @@
 		O.forceMove(src)
 		itemcount++
 
-	opened = 0
-	climbable = 1
+	opened = FALSE
+	climbable = TRUE
 	update_icon()
 	return 1
 
