@@ -5,6 +5,10 @@
 	abstract_type = /datum/config_entry/string/alien
 	var/associated_caste_type
 
+/datum/config_entry/string/alien/New()
+	. = ..()
+	GLOB.xeno_icons_by_caste[associated_caste_type] = get_icon_from_source(config_entry_value)
+
 /datum/config_entry/string/alien/ValidateAndSet(str_val)
 	. = ..()
 	if(!.)

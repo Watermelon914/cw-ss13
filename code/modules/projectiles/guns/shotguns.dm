@@ -119,6 +119,7 @@ can cause issues with ammo types getting mixed up during the burst.
 	var/mag_caliber = magazine.default_ammo //Handfuls can get deleted, so we need to keep this on hand for later.
 	if(current_mag.transfer_ammo(magazine,user,1))
 		add_to_tube(user,mag_caliber) //This will check the other conditions.
+		return TRUE
 
 /obj/item/weapon/gun/shotgun/unload(mob/user)
 	if(flags_gun_features & GUN_BURST_FIRING) return
@@ -347,7 +348,7 @@ can cause issues with ammo types getting mixed up during the burst.
 /obj/item/weapon/gun/shotgun/double/unique_action(mob/user)
 	if(flags_item & WIELDED)
 		unwield(user)
-	open_chamber(user)
+	toggle_chamber()
 
 /obj/item/weapon/gun/shotgun/double/check_chamber_position()
 	if(!current_mag)
@@ -376,7 +377,7 @@ can cause issues with ammo types getting mixed up during the burst.
 	if(!current_mag)
 		return
 	if(current_mag.chamber_closed)
-		open_chamber(user)
+		toggle_chamber()
 	else
 		..()
 
@@ -396,10 +397,19 @@ can cause issues with ammo types getting mixed up during the burst.
 
 /obj/item/weapon/gun/shotgun/double/delete_bullet(obj/item/projectile/projectile_to_fire, refund = 0)
 	qdel(projectile_to_fire)
+
 	if(!current_mag)
 		return
-	if(refund) current_mag.current_rounds++
-	return 1
+
+	if(refund)
+		current_mag.current_rounds++
+
+	return TRUE
+
+/obj/item/weapon/gun/shotgun/double/reload(mob/user, obj/item/ammo_magazine/magazine)
+	. = ..()
+	if(. && current_mag.current_rounds >= current_mag.max_rounds && !current_mag.chamber_closed)
+		toggle_chamber()
 
 /obj/item/weapon/gun/shotgun/double/reload_into_chamber(mob/user)
 	if(!current_mag)
@@ -407,18 +417,18 @@ can cause issues with ammo types getting mixed up during the burst.
 	in_chamber = null
 	current_mag.chamber_contents[current_mag.chamber_position] = "empty"
 	current_mag.chamber_position--
-	return 1
+	return TRUE
 
-/obj/item/weapon/gun/shotgun/double/proc/open_chamber(mob/user)
+/obj/item/weapon/gun/shotgun/double/proc/toggle_chamber()
 	if(!current_mag)
 		return
 	current_mag.chamber_closed = !current_mag.chamber_closed
 	update_icon()
 
 	if (current_mag.chamber_closed)
-		playsound(user, break_sound, 25, 1)
+		playsound(get_turf(loc), break_sound, 25, 1)
 	else
-		playsound(user, seal_sound, 25, 1)
+		playsound(get_turf(loc), seal_sound, 25, 1)
 
 
 /obj/item/weapon/gun/shotgun/double/sawn
@@ -440,7 +450,7 @@ can cause issues with ammo types getting mixed up during the burst.
 	scatter = SCATTER_AMOUNT_TIER_6
 	burst_scatter_mult = SCATTER_AMOUNT_TIER_10
 	scatter_unwielded = SCATTER_AMOUNT_TIER_2
-	damage_mult = BASE_BULLET_DAMAGE_MULT + BULLET_DAMAGE_MULT_TIER_7
+	damage_mult = 2.5 // Very high damage
 	recoil = RECOIL_AMOUNT_TIER_3
 	recoil_unwielded = RECOIL_AMOUNT_TIER_1
 

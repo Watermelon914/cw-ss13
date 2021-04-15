@@ -1329,6 +1329,8 @@
 
 /datum/ammo/bullet/minigun
 	name = "minigun bullet"
+	bonus_projectiles_amount = 3
+	bonus_projectiles_type = /datum/ammo/bullet/minigun/additional
 
 	accuracy = -HIT_ACCURACY_TIER_3
 	accuracy_var_low = PROJECTILE_VARIANCE_TIER_6
@@ -1336,6 +1338,9 @@
 	accurate_range = 12
 	damage = BULLET_DAMAGE_TIER_7
 	penetration = ARMOR_PENETRATION_TIER_7
+
+/datum/ammo/bullet/minigun/additional
+	bonus_projectiles_type = null
 
 /datum/ammo/bullet/minigun/tank
 	accuracy = -HIT_ACCURACY_TIER_1
@@ -1370,10 +1375,13 @@
 	var/datum/effect_system/smoke_spread/smoke
 
 	accuracy = HIT_ACCURACY_TIER_2
-	accurate_range = 7
-	max_range = 7
-	damage = BULLET_DAMAGE_TIER_3
+	accurate_range = 14
+	max_range = 14
+	damage = BULLET_DAMAGE_TIER_20
 	shell_speed = AMMO_SPEED_TIER_1
+
+	var/power = 300
+	var/falloff = 100
 
 /datum/ammo/rocket/New()
 	..()
@@ -1385,24 +1393,22 @@
 	. = ..()
 
 /datum/ammo/rocket/on_hit_mob(mob/M, obj/item/projectile/P)
-	cell_explosion(get_turf(M), 150, 50, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, P.weapon_source, P.weapon_source_mob)
+	cell_explosion(get_turf(M), power, falloff, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, P.weapon_source, P.weapon_source_mob)
 	smoke.set_up(1, get_turf(M))
-	if(isHumanStrict(M)) // No yautya or synths. Makes humans gib on direct hit.
-		M.ex_act(350, P.dir, P.weapon_source, P.weapon_source_mob, 100)
 	smoke.start()
 
 /datum/ammo/rocket/on_hit_obj(obj/O, obj/item/projectile/P)
-	cell_explosion(get_turf(O), 150, 50, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, P.weapon_source, P.weapon_source_mob)
+	cell_explosion(get_turf(O), power, falloff, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, P.weapon_source, P.weapon_source_mob)
 	smoke.set_up(1, get_turf(O))
 	smoke.start()
 
 /datum/ammo/rocket/on_hit_turf(turf/T, obj/item/projectile/P)
-	cell_explosion(T, 150, 50, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, P.weapon_source, P.weapon_source_mob)
+	cell_explosion(T, power, falloff, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, P.weapon_source, P.weapon_source_mob)
 	smoke.set_up(1, T)
 	smoke.start()
 
 /datum/ammo/rocket/do_at_max_range(obj/item/projectile/P)
-	cell_explosion(get_turf(P), 150, 50, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, P.weapon_source, P.weapon_source_mob)
+	cell_explosion(get_turf(P), power, falloff, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, P.weapon_source, P.weapon_source_mob)
 	smoke.set_up(1, get_turf(P))
 	smoke.start()
 
@@ -1412,71 +1418,13 @@
 	flags_ammo_behavior = AMMO_EXPLOSIVE|AMMO_ROCKET
 
 	accuracy = HIT_ACCURACY_TIER_8
-	accuracy_var_low = PROJECTILE_VARIANCE_TIER_9
-	accurate_range = 6
-	max_range = 6
-	damage = BULLET_DAMAGE_TIER_2
+	accurate_range = 12
+	max_range = 12
+	damage = BULLET_DAMAGE_TIER_20
 	penetration= ARMOR_PENETRATION_TIER_10
 
-/datum/ammo/rocket/ap/on_hit_mob(mob/M, obj/item/projectile/P)
-	var/turf/T = get_turf(M)
-	M.ex_act(150, P.dir, P.weapon_source, P.weapon_source_mob, 100)
-	M.KnockDown(2)
-	M.KnockOut(2)
-	if(isHumanStrict(M)) // No yautya or synths. Makes humans gib on direct hit.
-		M.ex_act(300, P.dir, P.weapon_source, P.weapon_source_mob, 100)
-	cell_explosion(T, 100, 50, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, P.weapon_source, P.weapon_source_mob)
-	smoke.set_up(1, T)
-	smoke.start()
-
-/datum/ammo/rocket/ap/on_hit_obj(obj/O, obj/item/projectile/P)
-	var/turf/T = get_turf(O)
-	O.ex_act(150, P.dir, P.weapon_source, P.weapon_source_mob, 100)
-	cell_explosion(T, 100, 50, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, P.weapon_source, P.weapon_source_mob)
-	smoke.set_up(1, T)
-	smoke.start()
-
-/datum/ammo/rocket/ap/on_hit_turf(turf/T, obj/item/projectile/P)
-	var/hit_something = 0
-	for(var/mob/M in T)
-		M.ex_act(150, P.dir, P.weapon_source, P.weapon_source_mob, 100)
-		M.KnockDown(4)
-		M.KnockOut(4)
-		hit_something = 1
-		continue
-	if(!hit_something)
-		for(var/obj/O in T)
-			if(O.density)
-				O.ex_act(150, P.dir, P.weapon_source, P.weapon_source_mob, 100)
-				hit_something = 1
-				continue
-	if(!hit_something)
-		T.ex_act(150, P.dir, P.weapon_source, P.weapon_source_mob, 200)
-
-	cell_explosion(T, 100, 50, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, P.weapon_source, P.weapon_source_mob)
-	smoke.set_up(1, T)
-	smoke.start()
-
-/datum/ammo/rocket/ap/do_at_max_range(obj/item/projectile/P)
-	var/turf/T = get_turf(P)
-	var/hit_something = 0
-	for(var/mob/M in T)
-		M.ex_act(250, P.dir, P.weapon_source, P.weapon_source_mob, 100)
-		M.KnockDown(2)
-		M.KnockOut(2)
-		hit_something = 1
-		continue
-	if(!hit_something)
-		for(var/obj/O in T)
-			if(O.density)
-				O.ex_act(250, P.dir, P.weapon_source, P.weapon_source_mob, 100)
-				hit_something = 1
-				continue
-	if(!hit_something)
-		T.ex_act(250, P.dir, P.weapon_source, P.weapon_source_mob)
-	cell_explosion(T, 100, 50, EXPLOSION_FALLOFF_SHAPE_LINEAR, null, P.weapon_source, P.weapon_source_mob)
-	smoke.set_up(1, T)
-	smoke.start()
+	power = 1000
+	falloff = 550
 
 /datum/ammo/rocket/ltb
 	name = "cannon round"
@@ -1511,9 +1459,7 @@
 	damage_type = BURN
 
 	accuracy_var_low = PROJECTILE_VARIANCE_TIER_6
-	accurate_range = 8
 	damage = BULLET_DAMAGE_TIER_18
-	max_range = 8
 
 /datum/ammo/rocket/wp/set_bullet_traits()
 	. = ..()

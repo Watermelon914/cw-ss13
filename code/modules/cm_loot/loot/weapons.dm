@@ -69,14 +69,14 @@ GLOBAL_DATUM_INIT(loot_weapons, /datum/loot_table/weapons, new())
 	item_to_spawn = /obj/item/weapon/gun/rifle/m41a/elite/m40_sd
 	rarity = LOOT_VERY_RARE
 
-/datum/loot_entry/weapon/m41a_elite
-	name = "M41A/2 pulse rifle"
-	item_to_spawn = /obj/item/weapon/gun/rifle/m41a/elite
-	rarity = LOOT_VERY_RARE
-
 /datum/loot_entry/weapon/m39_elite
 	name = "M39B/2 submachinegun"
 	item_to_spawn = /obj/item/weapon/gun/smg/m39/elite
+	rarity = LOOT_VERY_RARE
+
+/datum/loot_entry/weapon/m41a_elite
+	name = "M41A/2 pulse rifle"
+	item_to_spawn = /obj/item/weapon/gun/rifle/m41a/elite
 	rarity = LOOT_RARE
 
 /datum/loot_entry/weapon/fp9000
@@ -87,16 +87,11 @@ GLOBAL_DATUM_INIT(loot_weapons, /datum/loot_table/weapons, new())
 /datum/loot_entry/weapon/m46c
 	name = "M46C pulse rifle"
 	item_to_spawn = /obj/item/weapon/gun/rifle/m46c
-	rarity = LOOT_RARE
+	rarity = LOOT_COMMON
 
 /datum/loot_entry/weapon/m4ra
 	name = "M4RA battle rifle"
 	item_to_spawn = /obj/item/weapon/gun/rifle/m4ra
-	rarity = LOOT_COMMON
-
-/datum/loot_entry/weapon/mateba
-	name = "Mateba autorevolver"
-	item_to_spawn = /obj/item/weapon/gun/revolver/mateba
 	rarity = LOOT_COMMON
 
 /*
