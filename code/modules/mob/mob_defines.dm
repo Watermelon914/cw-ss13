@@ -216,3 +216,7 @@
 	var/move_on_shuttle = TRUE // Can move on the shuttle.
 
 	var/list/important_radio_channels = list()
+
+	var/list/progressbars
+
+	var/can_parry = TRUE

@@ -973,7 +973,7 @@ var/global/image/action_blue_power_up
  *				Note: 'delay' should be divisible by numticks in order for the timing to work as intended. numticks should also be a whole number.
  */
 /proc/do_after(mob/user, delay, user_flags = INTERRUPT_ALL, show_busy_icon, atom/movable/target, target_flags = INTERRUPT_MOVED, show_target_icon, max_dist = 1, \
-		show_remaining_time = FALSE, numticks = DA_DEFAULT_NUM_TICKS) // These args should primarily be named args, since you only modify them in niche situations
+		show_remaining_time = FALSE) // These args should primarily be named args, since you only modify them in niche situations
 	if(!istype(user) || delay < 0)
 		return FALSE
 
@@ -997,7 +997,10 @@ var/global/image/action_blue_power_up
 		target_is_mob = TRUE
 
 	var/image/busy_icon
-	if(show_busy_icon)
+	var/datum/progressbar/progbar
+	if(show_busy_icon == BUSY_ICON_PROGBAR)
+		progbar = new(user, delay, user)
+	else if(show_busy_icon)
 		busy_icon = get_busy_icon(show_busy_icon)
 		if(busy_icon)
 			busy_icon.appearance_flags = RESET_ALPHA|KEEP_APART
@@ -1005,7 +1008,10 @@ var/global/image/action_blue_power_up
 			L.overlays += busy_icon
 
 	var/image/target_icon
-	if(show_target_icon) //putting a busy overlay on top of the target
+	var/datum/progressbar/progbar_target
+	if(show_busy_icon == BUSY_ICON_PROGBAR)
+		progbar_target = new(user, delay, target)
+	else if(show_target_icon) //putting a busy overlay on top of the target
 		target_icon = get_busy_icon(show_target_icon)
 		if(target_icon)
 			target_icon.appearance_flags = RESET_ALPHA|KEEP_APART
@@ -1026,7 +1032,6 @@ var/global/image/action_blue_power_up
 	var/cur_target_zone_sel
 	if(has_target && istype(T))
 		cur_target_zone_sel = T.zone_selected
-	var/delayfraction = round(delay/numticks)
 	var/user_orig_loc = L.loc
 	var/user_orig_turf = get_turf(L)
 	var/target_orig_loc
@@ -1038,13 +1043,18 @@ var/global/image/action_blue_power_up
 	var/obj/target_holding
 	if(has_target && istype(T))
 		target_holding = T.get_active_hand()
-	var/expected_total_time = delayfraction*(numticks+1)
-	var/time_remaining = expected_total_time
+	var/endtime = world.time + delay
+	var/starttime = world.time
 
 	. = TRUE
-	for(var/i = 0 to numticks)
-		sleep(delayfraction)
-		time_remaining -= delayfraction
+	while(world.time < endtime)
+		stoplag(1)
+
+		if(!QDELETED(progbar))
+			progbar.update(world.time - starttime)
+		if(!QDELETED(progbar_target))
+			progbar_target.update(world.time - starttime)
+
 		if(!istype(L) || has_target && !istype(target)) // Checks if L exists and is not dead and if the target exists and is not destroyed
 			. = FALSE
 			break
@@ -1150,8 +1160,10 @@ var/global/image/action_blue_power_up
 		T.resisting = FALSE
 	L.status_flags &= ~IMMOBILE_ACTION
 
-	if (show_remaining_time)
-		return (. ? 0 : time_remaining/expected_total_time) // If action was not interrupted, return 0 for no time left, otherwise return ratio of time remaining
+	if(!QDELETED(progbar))
+		progbar.end_progress()
+	if(!QDELETED(progbar_target))
+		progbar_target.end_progress()
 
 //Takes: Anything that could possibly have variables and a varname to check.
 //Returns: 1 if found, 0 if not.

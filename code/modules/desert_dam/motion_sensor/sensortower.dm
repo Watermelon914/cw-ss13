@@ -134,7 +134,7 @@
 			playsound(loc, 'sound/items/Wirecutter.ogg', 25, 1)
 			user.visible_message(SPAN_NOTICE("[user] starts securing [src]'s wiring."),
 			SPAN_NOTICE("You start securing [src]'s wiring."))
-			if(do_after(user, 120 * user.get_skill_duration_multiplier(SKILL_ENGINEER), INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD, numticks = 12))
+			if(do_after(user, 120 * user.get_skill_duration_multiplier(SKILL_ENGINEER), INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD))
 				if(buildstate != 2 || is_on)
 					return FALSE
 				playsound(loc, 'sound/items/Wirecutter.ogg', 25, 1)

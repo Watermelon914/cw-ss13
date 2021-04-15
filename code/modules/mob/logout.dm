@@ -28,4 +28,6 @@
 			var/datum/callback/CB = foo
 			CB.Invoke()
 
+	SEND_SIGNAL(src, COMSIG_MOB_LOGOUT)
+
 	return TRUE

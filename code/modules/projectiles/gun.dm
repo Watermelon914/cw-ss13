@@ -77,6 +77,7 @@
 	var/burst_amount 	= 1						//How many shots can the weapon shoot in burst? Anything less than 2 and you cannot toggle burst.
 	var/burst_delay 	= 1						//The delay in between shots. Lower = less delay = faster.
 	var/extra_delay 	= 0						//When burst-firing, this number is extra time before the weapon can fire again. Depends on number of rounds fired.
+	var/additional_bullets_to_fire = 0
 	///When PB burst firing and handing off to /fire after a target moves out of range, this is how many bullets have been fired.
 	var/PB_burst_bullets_fired		= 0
 
@@ -940,10 +941,14 @@ and you're good to go.
 	var/bullets_to_fire = 1
 	if(!check_for_attachment_fire && (flags_gun_features & GUN_BURST_ON) && burst_amount > 1)
 		bullets_to_fire = burst_amount
-		flags_gun_features |= GUN_BURST_FIRING
 		if(PB_burst_bullets_fired) //Has a burst been carried over from a PB?
 			bullets_to_fire -= PB_burst_bullets_fired
 			PB_burst_bullets_fired = 0 //Don't need this anymore. The torch is passed.
+
+	bullets_to_fire += additional_bullets_to_fire
+
+	if(bullets_to_fire > 1)
+		flags_gun_features |= GUN_BURST_FIRING
 
 	var/bullets_fired
 	for(bullets_fired = 1 to bullets_to_fire)
@@ -1130,6 +1135,10 @@ and you're good to go.
 
 	if(!check_for_attachment_fire && (flags_gun_features & GUN_BURST_ON) && burst_amount > 1)
 		bullets_to_fire = burst_amount
+
+	bullets_to_fire += additional_bullets_to_fire
+
+	if(bullets_to_fire > 1)
 		flags_gun_features |= GUN_BURST_FIRING
 
 	var/bullets_fired

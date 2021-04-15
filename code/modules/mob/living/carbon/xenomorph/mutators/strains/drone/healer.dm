@@ -81,7 +81,7 @@
 
 	to_chat(src, SPAN_NOTICE("You start transfering some of your health towards [target]."))
 	to_chat(target, SPAN_NOTICE("You feel that [src] starts transferring some of their health to you."))
-	if(!do_after(src, transfer_delay, INTERRUPT_ALL, BUSY_ICON_FRIENDLY, target, INTERRUPT_MOVED, BUSY_ICON_MEDICAL, numticks = 10))
+	if(!do_after(src, transfer_delay, INTERRUPT_ALL, BUSY_ICON_FRIENDLY, target, INTERRUPT_MOVED, BUSY_ICON_MEDICAL))
 		return
 
 	if(!check_state())

@@ -155,7 +155,10 @@
 #define COMSIG_MOB_PRE_CLICK "mob_pre_click"
 	#define COMPONENT_INTERRUPT_CLICK (1<<0)
 
+///from base of /mob/Login(): ()
 #define COMSIG_MOB_LOGIN "mob_login"
+///from base of /mob/Logout(): ()
+#define COMSIG_MOB_LOGOUT "mob_logout"
 
 /// From /mob/living/rejuvenate
 #define COMSIG_LIVING_REJUVENATED "living_rejuvenated"

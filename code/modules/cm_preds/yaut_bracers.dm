@@ -200,7 +200,7 @@
 	to_chat(user, SPAN_NOTICE("You press a few buttons..."))
 	//Add a little delay so the user wouldn't be just spamming all the buttons
 	user.next_move = world.time + 3
-	if(do_after(usr, 3, INTERRUPT_ALL, BUSY_ICON_FRIENDLY, numticks = 1))
+	if(do_after(usr, 3, INTERRUPT_ALL, BUSY_ICON_FRIENDLY))
 		var/chance = rand(1, 100)
 		if(chance <= randomProbability)
 			return 1

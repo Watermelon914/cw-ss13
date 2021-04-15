@@ -371,7 +371,7 @@ As sniper rifles have both and weapon mods can change them as well. ..() deals w
 
 	user.visible_message(SPAN_NOTICE("[user] begins attaching [attachment] to [src]."),
 	SPAN_NOTICE("You begin attaching [attachment] to [src]."), null, 4)
-	if(do_after(user, 1.5 SECONDS, INTERRUPT_ALL, BUSY_ICON_FRIENDLY, numticks = 2))
+	if(do_after(user, 1.5 SECONDS, INTERRUPT_ALL, BUSY_ICON_FRIENDLY))
 		if(attachment && attachment.loc)
 			user.visible_message(SPAN_NOTICE("[user] attaches [attachment] to [src]."),
 			SPAN_NOTICE("You attach [attachment] to [src]."), null, 4)

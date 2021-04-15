@@ -404,6 +404,9 @@ can cause issues with ammo types getting mixed up during the burst.
 	if(refund)
 		current_mag.current_rounds++
 
+	if(current_mag.current_rounds <= 0 && current_mag.chamber_closed)
+		toggle_chamber()
+
 	return TRUE
 
 /obj/item/weapon/gun/shotgun/double/reload(mob/user, obj/item/ammo_magazine/magazine)

@@ -26,6 +26,8 @@
 	accuracy_mult = BASE_ACCURACY_MULT + HIT_ACCURACY_MULT_TIER_3
 
 	scatter = SCATTER_AMOUNT_TIER_9 // Most of the scatter should come from the recoil
+	burst_scatter_mult = SCATTER_AMOUNT_TIER_8
+	additional_bullets_to_fire = 3
 
 	damage_mult = BASE_BULLET_DAMAGE_MULT
 	recoil = RECOIL_AMOUNT_TIER_5

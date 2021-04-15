@@ -178,3 +178,19 @@
 	full_name = "Parry"
 	keybind_signal = COMSIG_KB_HUMAN_PARRY
 	requires_gun = FALSE
+	var/parry_cooldown = 1.5 SECONDS
+
+/datum/keybinding/human/combat/parry/down(client/user)
+	var/mob/M = user.mob
+	if(M.stat == DEAD)
+		return ..()
+
+	if(!M.can_parry)
+		return TRUE
+	M.can_parry = FALSE
+	TIMED_PROGRESS_BAR(M, parry_cooldown, M, CALLBACK(src, .proc/reset_parry_cooldown, M))
+
+	return ..()
+
+/datum/keybinding/human/combat/parry/proc/reset_parry_cooldown(var/mob/M)
+	M.can_parry = TRUE

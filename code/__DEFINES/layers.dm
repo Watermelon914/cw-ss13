@@ -128,5 +128,7 @@
 #define HUD_LAYER 19
 #define ABOVE_HUD_LAYER 20
 
+#define ABOVE_HUD_PLANE 1100
+
 #define CINEMATIC_LAYER 21
 

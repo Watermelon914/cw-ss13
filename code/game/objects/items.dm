@@ -333,7 +333,7 @@ cases. Override_icon_state should be a list.*/
 	if(item_action_slot_check(user, slot))
 		add_verb(user, verbs)
 		for(var/v in verbs)
-			LAZYDISTINCTADD(user.item_verbs[v], src)
+			LAZYOR(user.item_verbs[v], src)
 	else
 		remove_item_verbs(user)
 

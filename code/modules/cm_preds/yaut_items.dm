@@ -661,6 +661,7 @@
 	if(isYautja(src.loc))
 		var/mob/living/user = loc
 		to_chat(user, SPAN_NOTICE("You lower the [src]."))
+
 /obj/item/weapon/melee/yautja_scythe
 	name = "double war scythe"
 	desc = "A huge, incredibly sharp double blade used for hunting dangerous prey. This weapon is commonly carried by Yautja who wish to disable and slice apart their foes.."

@@ -179,7 +179,7 @@
 			return FALSE
 		else if(stat & BROKEN)
 			to_chat(user, SPAN_NOTICE("You start to unscrew \the [src]'s broken panel."))
-			if(!do_after(user, 3 SECONDS, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD, numticks = 3))
+			if(!do_after(user, 3 SECONDS, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD))
 				to_chat(user, SPAN_WARNING("You stop unscrewing \the [src]'s broken panel."))
 				return FALSE
 			to_chat(user, SPAN_NOTICE("You unscrew \the [src]'s broken panel and remove it, exposing many broken wires."))
@@ -188,7 +188,7 @@
 			return TRUE
 		else if(stat & REPAIR_STEP_FOUR)
 			to_chat(user, SPAN_NOTICE("You start to fasten \the [src]'s new panel."))
-			if(!do_after(user, 3 SECONDS, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD, numticks = 3))
+			if(!do_after(user, 3 SECONDS, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD))
 				to_chat(user, SPAN_WARNING("You stop fastening \the [src]'s new panel."))
 				return FALSE
 			to_chat(user, SPAN_NOTICE("You fasten \the [src]'s new panel, fully repairing the vendor."))
@@ -209,7 +209,7 @@
 			return
 		else if(stat & REPAIR_STEP_ONE)
 			to_chat(user, SPAN_NOTICE("You start to remove \the [src]'s broken wires."))
-			if(!do_after(user, 3 SECONDS, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD, numticks = 3))
+			if(!do_after(user, 3 SECONDS, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD))
 				to_chat(user, SPAN_WARNING("You stop removing \the [src]'s broken wires."))
 				return FALSE
 			to_chat(user, SPAN_NOTICE("You remove \the [src]'s broken broken wires."))
@@ -229,7 +229,7 @@
 			if(CC.amount < 5)
 				to_chat(user, SPAN_WARNING("You need more cable coil to replace the removed wires."))
 			to_chat(user, SPAN_NOTICE("You start to replace \the [src]'s removed wires."))
-			if(!do_after(user, 3 SECONDS, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD, numticks = 3))
+			if(!do_after(user, 3 SECONDS, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD))
 				to_chat(user, SPAN_WARNING("You stop replacing \the [src]'s removed wires."))
 				return FALSE
 			if(!CC || !CC.use(5))
@@ -250,7 +250,7 @@
 		var/obj/item/stack/sheet/metal/M = W
 		if(stat & REPAIR_STEP_THREE)
 			to_chat(user, SPAN_NOTICE("You start to construct a new panel for \the [src]."))
-			if(!do_after(user, 3 SECONDS, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD, numticks = 3))
+			if(!do_after(user, 3 SECONDS, INTERRUPT_ALL|BEHAVIOR_IMMOBILE, BUSY_ICON_BUILD))
 				to_chat(user, SPAN_WARNING("You stop constructing a new panel for \the [src]."))
 				return FALSE
 			if(!M || !M.use(1))

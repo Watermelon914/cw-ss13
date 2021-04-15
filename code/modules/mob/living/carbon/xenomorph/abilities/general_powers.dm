@@ -293,13 +293,24 @@
 			X.anchored = TRUE
 			X.update_canmove()
 
-		if (!do_after(X, windup_duration, windup_interrupt_flags, BUSY_ICON_HOSTILE))
+		X.xeno_jitter(windup_duration)
+		X.add_filter("xeno_pounce", 1, list("type" = "outline", "color" = "#ff0000", "size" = 1))
+		var/filter = X.get_filter("xeno_pounce")
+		animate(filter, alpha=0, time = 0.1 SECONDS, loop = -1, flags = ANIMATION_PARALLEL)
+		animate(alpha = 255, time = 0.1 SECONDS)
+
+		if (!do_after(X, windup_duration, windup_interrupt_flags))
+			animate(filter)
+			X.remove_filter("xeno_pounce")
 			to_chat(X, SPAN_XENODANGER("You cancel your [ability_name]!"))
 			if (!windup_interruptable)
 				X.frozen = 0
 				X.anchored = 0
 				X.update_canmove()
 			return
+
+		animate(filter)
+		X.remove_filter("xeno_pounce")
 
 		if (!windup_interruptable)
 			X.frozen = 0
@@ -358,6 +369,7 @@
 		var/turf/prev_turf = get_turf(H)
 		H.Move(valid_turf, get_dir(H, valid_turf))
 		owner.Move(prev_turf, get_dir(owner, prev_turf))
+	H.visible_message(SPAN_NOTICE("[H] parries [owner]'s [ability_name] and counter-attacks!"), SPAN_NOTICE("You parry [owner] and perform a counter attack!"))
 	return COMPONENT_ABORT_COLLISION_CALLBACKS
 
 /datum/action/xeno_action/activable/pounce/proc/cleanup_pounce_target()

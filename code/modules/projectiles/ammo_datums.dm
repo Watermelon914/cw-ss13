@@ -1329,18 +1329,12 @@
 
 /datum/ammo/bullet/minigun
 	name = "minigun bullet"
-	bonus_projectiles_amount = 3
-	bonus_projectiles_type = /datum/ammo/bullet/minigun/additional
-
 	accuracy = -HIT_ACCURACY_TIER_3
 	accuracy_var_low = PROJECTILE_VARIANCE_TIER_6
 	accuracy_var_high = PROJECTILE_VARIANCE_TIER_6
 	accurate_range = 12
 	damage = BULLET_DAMAGE_TIER_7
 	penetration = ARMOR_PENETRATION_TIER_7
-
-/datum/ammo/bullet/minigun/additional
-	bonus_projectiles_type = null
 
 /datum/ammo/bullet/minigun/tank
 	accuracy = -HIT_ACCURACY_TIER_1
