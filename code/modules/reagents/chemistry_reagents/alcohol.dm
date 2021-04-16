@@ -280,17 +280,6 @@
 			M.druggy = max(M.druggy, 60)
 			if(prob(10)) M.emote(pick("twitch","giggle"))
 			if(prob(30)) M.apply_damage(2, TOX)
-			if(prob(5)) if(ishuman(M))
-				var/mob/living/carbon/human/H = M
-				var/datum/internal_organ/heart/L = H.internal_organs_by_name["heart"]
-				if(L && istype(L))
-					L.take_damage(5, 0)
-		if(300 to INFINITY)
-			if(ishuman(M))
-				var/mob/living/carbon/human/H = M
-				var/datum/internal_organ/heart/L = H.internal_organs_by_name["heart"]
-				if(L && istype(L))
-					L.take_damage(100, 0)
 	holder.remove_reagent(src.id, FOOD_METABOLISM)
 	return 1
 

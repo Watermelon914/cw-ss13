@@ -172,24 +172,6 @@
 	else
 		take_damage(damage, 0, 1, 1, used_weapon = "EMP")
 
-
-/obj/limb/proc/take_damage_organ_damage(brute, sharp)
-	if(!owner)
-		return
-
-	var/armor = owner.getarmor_organ(src, ARMOR_INTERNALDAMAGE)
-	if(owner.mind && owner.skills)
-		armor += owner.skills.get_skill_level(SKILL_ENDURANCE)*5
-
-	var/damage = armor_damage_reduction(GLOB.marine_organ_damage, brute, armor, sharp ? ARMOR_SHARP_INTERNAL_PENETRATION : 0, 0, 0, max_damage ? (100*(max_damage-brute_dam) / max_damage) : 100)
-
-	if(internal_organs && prob(damage*DMG_ORGAN_DAM_PROB_MULT + brute_dam*BRUTE_ORGAN_DAM_PROB_MULT))
-		//Damage an internal organ
-		var/datum/internal_organ/I = pick(internal_organs)
-		I.take_damage(brute / 2)
-		return TRUE
-	return FALSE
-
 /obj/limb/proc/take_damage_bone_break(brute)
 	if(!owner)
 		return
@@ -217,10 +199,6 @@
 	var/is_ff = FALSE
 	if(istype(attack_source) && attack_source.faction == owner.faction)
 		is_ff = TRUE
-
-	//High brute damage or sharp objects may damage internal organs
-	if(!is_ff && take_damage_organ_damage(brute, sharp))
-		brute /= 2
 
 	if(CONFIG_GET(flag/bones_can_break) && !(status & LIMB_ROBOT))
 		take_damage_bone_break(brute)

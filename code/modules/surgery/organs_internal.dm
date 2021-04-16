@@ -123,19 +123,13 @@
 	SPAN_WARNING("Your hand slips, getting mess and tearing the inside of [target]'s [affected.display_name] with \the [tool]!"))
 	log_interact(user, target, "[key_name(user)] failed to treat damage to the inside of [key_name(target)]'s [affected.display_name] with \the [tool].")
 
-	var/dam_amt = 2
-
 	if(istype(tool, /obj/item/stack/medical/advanced/bruise_pack))
 		target.apply_damage(5, TOX)
 
 	else if(istype(tool, /obj/item/stack/medical/bruise_pack))
-		dam_amt = 5
 		target.apply_damage(10, TOX)
 		affected.createwound(CUT, 5)
 
-	for(var/datum/internal_organ/I in affected.internal_organs)
-		if(I && I.damage > 0)
-			I.take_damage(dam_amt,0)
 	target.updatehealth()
 	affected.update_wounds()
 
@@ -186,9 +180,6 @@
 	target.apply_damage(5, TOX)
 	affected.createwound(CUT, 5)
 
-	for(var/datum/internal_organ/I in affected.internal_organs)
-		if(I)
-			I.take_damage(rand(3, 5), 0)
 	target.updatehealth()
 	affected.update_wounds()
 
@@ -444,10 +435,6 @@
 	user.visible_message(SPAN_WARNING("[user]'s hand slips, damaging \the [tool]!"), \
 	SPAN_WARNING("Your hand slips, damaging \the [tool]!"))
 	log_interact(user, target, "[key_name(user)] failed to transplant \the [tool] into [key_name(target)]'s [affected.display_name].")
-
-	var/obj/item/organ/I = tool
-	if(istype(I))
-		I.organ_data.take_damage(rand(3, 5), 0)
 	target.updatehealth()
 
 

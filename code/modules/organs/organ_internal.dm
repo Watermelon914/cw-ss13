@@ -52,6 +52,8 @@
 			E.internal_organs |= src
 
 /datum/internal_organ/proc/take_damage(amount, var/silent=0)
+
+
 	if(src.robotic == ORGAN_ROBOT)
 		src.damage += (amount * 0.8)
 	else

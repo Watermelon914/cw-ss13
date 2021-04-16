@@ -49,13 +49,11 @@
 	target.disabilities |= NEARSIGHTED // code\#define\mobs.dm
 
 /datum/surgery_step/eye/cut_open/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool, obj/limb/affected)
-	var/datum/internal_organ/eyes/E = target.internal_organs_by_name["eyes"]
 	user.visible_message(SPAN_WARNING("[user]'s hand slips, slicing [target]'s eyes with \the [tool]!") , \
 	SPAN_WARNING("Your hand slips, slicing [target]'s eyes with \the [tool]!") )
 	log_interact(user, target, "[key_name(user)] failed to separate the cornea on [key_name(target)]'s eyes with \the [tool].")
 
 	affected.createwound(CUT, 10)
-	E.take_damage(5, 0)
 	target.updatehealth()
 	affected.update_wounds()
 
@@ -86,13 +84,11 @@
 	E.eye_surgery_stage = 2
 
 /datum/surgery_step/eye/lift_eyes/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool, obj/limb/affected)
-	var/datum/internal_organ/eyes/eyes = target.internal_organs_by_name["eyes"]
 	user.visible_message(SPAN_WARNING("[user]'s hand slips, damaging [target]'s eyes with \the [tool]!"), \
 	SPAN_WARNING("Your hand slips, damaging [target]'s eyes with \the [tool]!"))
 	log_interact(user, target, "[key_name(user)] failed to lift the cornea from [key_name(target)]'s eyes with \the [tool].")
 
 	target.apply_damage(10, BRUTE, affected)
-	eyes.take_damage(5, 0)
 	target.updatehealth()
 
 /datum/surgery_step/eye/mend_eyes
@@ -123,13 +119,11 @@
 	E.eye_surgery_stage = 3
 
 /datum/surgery_step/eye/mend_eyes/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool, obj/limb/affected)
-	var/datum/internal_organ/eyes/E = target.internal_organs_by_name["eyes"]
 	user.visible_message(SPAN_WARNING("[user]'s hand slips, stabbing \the [tool] into [target]'s eye!"), \
 	SPAN_WARNING("Your hand slips, stabbing \the [tool] into [target]'s eye!"))
 	log_interact(user, target, "[key_name(user)] failed to mend the nerves and lenses in [key_name(target)]'s eyes with \the [tool].")
 
 	target.apply_damage(10, BRUTE, affected, sharp = 1)
-	E.take_damage(5, 0)
 	target.updatehealth()
 
 
@@ -165,11 +159,9 @@
 
 
 /datum/surgery_step/eye/cauterize/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool, obj/limb/affected)
-	var/datum/internal_organ/eyes/E = target.internal_organs_by_name["eyes"]
 	user.visible_message(SPAN_WARNING("[user]'s hand slips, searing [target]'s eyes with \the [tool]!"), \
 	SPAN_WARNING("Your hand slips, searing [target]'s eyes with \the [tool]!"))
 	log_interact(user, target, "[key_name(user)] failed to cauterize the incision around [key_name(target)]'s eyes with \the [tool].")
 
 	target.apply_damage(5, BURN, affected)
-	E.take_damage(5, 0)
 	target.updatehealth()
