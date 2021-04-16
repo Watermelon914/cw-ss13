@@ -17,16 +17,16 @@
 /datum/tech/droppod/item/modular_armor_upgrade/get_options(mob/living/carbon/human/H, obj/structure/droppod/D)
 	. = ..()
 
-	//.["Ceramic Plate"] = /obj/item/clothing/accessory/health/ceramic_plate
-	.["Metal Plate"] = /obj/item/clothing/accessory/health
+	//.["Ceramic Plate"] = /obj/item/clothing/accessory/health/ceramic
+	.["Metal Plate"] = /obj/item/clothing/accessory/health/metal
 
 /obj/item/clothing/accessory/health
-	name = "armor plate"
-	desc = "A durable plate, able to absorb a lot of damage. Attach it to a uniform to use."
+	name = "abstract plate"
+	desc = "This is an abstract item. If you are seeing this, tell a dev"
 
 	icon = 'icons/obj/items/items.dmi'
 	var/base_icon_state
-	icon_state = "regular2"
+	icon_state = "regular"
 
 	slot = ACCESSORY_SLOT_ARMOR_C
 	var/armor_health = 10
@@ -45,8 +45,6 @@
 		50,
 		100
 	)
-
-	var/scrappable = TRUE
 
 	var/armor_hitsound = 'sound/effects/metalhit.ogg'
 	var/armor_shattersound = 'sound/effects/metal_shatter.ogg'
@@ -119,6 +117,9 @@
 		COMSIG_HUMAN_MED_HUD_SET_HEALTH
 	))
 
+	var/image/holder = user.hud_list[SHIELD_HUD]
+	holder.icon_state = "hudblank"
+
 /obj/item/clothing/accessory/health/process(delta_time)
 	if(next_regeneration > world.time)
 		return
@@ -182,47 +183,36 @@
 	else
 		src.forceMove(get_turf(src))
 
-/obj/item/clothing/accessory/health/attackby(obj/item/I, mob/user)
-	if(has_suit || !scrappable)
-		return ..()
-
-	if(!istype(I, /obj/item/clothing/accessory/health)) // Only works for matching types
-		return ..()
-
-	var/obj/item/clothing/accessory/health/H = I
-
-	if(H.has_suit || !H.scrappable)
-		return ..()
-
-	if(!H.armor_health && !armor_health)
-		new /obj/item/clothing/accessory/health/scrap(get_turf(user))
-
-		qdel(H)
-		qdel(src)
-
-/obj/item/clothing/accessory/health/ceramic_plate
+/obj/item/clothing/accessory/health/ceramic
 	name = "ceramic plate"
-	desc = "A strong plate, able to protect the user from a large amount of bullets. Ineffective against sharp objects."
+	desc = "A very strong and durable plate, stronger than the kevlar and metal variations. Able to resist a lot of damage before breaking. Takes longer to regenerate. Attach it to a uniform to use."
 
 	icon_state = "ceramic2"
 
-	take_slash_damage = FALSE
-	scrappable = FALSE
-
 	armor_health = 100
 	armor_maxhealth = 100
+	regeneration_per_second = AMOUNT_PER_TIME(10, 15 SECONDS)
 
 	armor_shattersound = 'sound/effects/ceramic_shatter.ogg'
 
-/obj/item/clothing/accessory/health/ceramic_plate/take_bullet_damage(var/mob/living/user, damage, ammo_flags)
-	if(ammo_flags & AMMO_XENO_ACID)
-		return
+/obj/item/clothing/accessory/health/kevlar
+	name = "kevlar plate"
+	desc = "A very durable plate, able to absorb a lot of damage before breaking. Attach it to a uniform to use."
+	icon_state = "regular2"
+	armor_health = 40
+	armor_maxhealth = 40
 
-	return ..()
+/obj/item/clothing/accessory/health/metal
+	name = "metal plate"
+	desc = "A durable plate, able to absorb a lot of damage. Attach it to a uniform to use."
+	icon_state = "regular"
+
+	armor_health = 25
+	armor_maxhealth = 25
 
 /obj/item/clothing/accessory/health/scrap
 	name = "scrap metal"
-	desc = "A weak plate, only able to protect from a little bit of damage."
+	desc = "A weak plate, only able to protect from a little bit of damage. Attach it to a uniform to use."
 
 	icon_state = "scrap"
 	health_states = list(
@@ -230,13 +220,5 @@
 		100
 	)
 
-	scrappable = FALSE
-
-	armor_health = 7.5
-	armor_maxhealth = 7.5
-
-/obj/item/clothing/accessory/health/scrap/on_removed(mob/living/user, obj/item/clothing/C)
-	. = ..()
-
-	if(!armor_health)
-		qdel(src)
+	armor_health = 15
+	armor_maxhealth = 15

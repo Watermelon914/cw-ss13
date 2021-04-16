@@ -38,6 +38,10 @@
 	if(!hive)
 		return TRUE
 
+	if(is_mob_incapacitated(TRUE))
+		current_path = null
+		return TRUE
+
 	if(next_home_search < world.time && (!home_turf || !home_turf.weeds || get_dist(home_turf, src) > max_distance_from_home))
 		var/turf/T = get_turf(loc)
 		next_home_search = world.time + home_search_delay

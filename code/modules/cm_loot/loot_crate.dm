@@ -30,3 +30,16 @@
 /obj/structure/closet/crate/loot/Destroy()
 	possible_items = null
 	return ..()
+
+GLOBAL_LIST_EMPTY_TYPED(loot_landmarks, /obj/effect/landmark/loot_landmark)
+/obj/effect/landmark/loot_landmark
+	name = "Loot Landmark"
+	icon_state = "random_kit"
+
+/obj/effect/landmark/loot_landmark/Initialize(mapload, ...)
+	. = ..()
+	GLOB.loot_landmarks += src
+
+/obj/effect/landmark/loot_landmark/Destroy()
+	GLOB.loot_landmarks -= src
+	return ..()

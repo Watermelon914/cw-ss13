@@ -88,7 +88,7 @@ GLOBAL_LIST_INIT(cm_vending_clothing_medic, list(
 		list("Medical HUD Glasses", 0, /obj/item/clothing/glasses/hud/health, MARINE_CAN_BUY_GLASSES, VENDOR_ITEM_MANDATORY),
 		list("Headset", 0, /obj/item/device/radio/headset/almayer/marine, MARINE_CAN_BUY_EAR, VENDOR_ITEM_MANDATORY),
 		list("Helmet", 0, /obj/item/clothing/head/helmet/marine/medic, MARINE_CAN_BUY_HELMET, VENDOR_ITEM_MANDATORY),
-		list("Armor Plate", 0, /obj/item/clothing/accessory/health, MARINE_CAN_BUY_ARMOR_PLATE, VENDOR_ITEM_MANDATORY),
+		list("Armor Plate", 0, /obj/item/clothing/accessory/health/scrap, MARINE_CAN_BUY_ARMOR_PLATE, VENDOR_ITEM_MANDATORY),
 		list("MRE", 0, /obj/item/storage/box/MRE, MARINE_CAN_BUY_MRE, VENDOR_ITEM_MANDATORY),
 
 		list("ARMOR (CHOOSE 1)", 0, null, null, null),

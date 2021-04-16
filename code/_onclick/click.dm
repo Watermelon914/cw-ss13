@@ -112,17 +112,6 @@
 		click_adjacent(A, W, mods)
 		return
 
-	if(A.loc)
-		var/obj/structure/surface/S
-		if(istype(A.loc, /obj/structure/surface))
-			S = A.loc
-		else if(A.loc.loc && istype(A.loc.loc, /obj/structure/surface))//for items inside storage containers
-			S = A.loc.loc
-		if(S && S.Adjacent(src))
-			click_adjacent(A, W, mods)
-			S.draw_item_overlays()
-			return
-
 	// If not standing next to the atom clicked.
 	if(W)
 		W.afterattack(A, src, 0, mods)

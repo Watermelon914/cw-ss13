@@ -59,7 +59,7 @@ GLOBAL_LIST_INIT(cm_vending_clothing_rto, list(
 		list("Headset", 0, /obj/item/device/radio/headset/almayer/marine, MARINE_CAN_BUY_EAR, VENDOR_ITEM_MANDATORY),
 		list("Radio Telephone Pack", 0, /obj/item/storage/backpack/marine/satchel/rto, MARINE_CAN_BUY_BACKPACK, VENDOR_ITEM_MANDATORY),
 		list("Laser Designator",0,/obj/item/device/binoculars/range/designator,MARINE_CAN_BUY_ESSENTIALS,VENDOR_ITEM_MANDATORY),
-		list("Armor Plate", 0, /obj/item/clothing/accessory/health, MARINE_CAN_BUY_ARMOR_PLATE, VENDOR_ITEM_MANDATORY),
+		list("Armor Plate", 0, /obj/item/clothing/accessory/health/scrap, MARINE_CAN_BUY_ARMOR_PLATE, VENDOR_ITEM_MANDATORY),
 		list("MRE", 0, /obj/item/storage/box/MRE, MARINE_CAN_BUY_MRE, VENDOR_ITEM_MANDATORY),
 
 		list("PERSONAL SIDEARM (CHOOSE 1)", 0, null, null, null),

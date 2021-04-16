@@ -23,6 +23,12 @@
 	var/spawn_flags = XENO_SPAWN_T1
 
 	var/list/objectives = list()
+	var/initial_objectives = 0
+
+	var/list/lootbox_amounts = list(
+		/obj/structure/closet/crate/loot/objects = 4,
+		/obj/structure/closet/crate/loot/weapons = 4
+	)
 
 	var/endgame_launch_time = 5 MINUTES
 	var/endgame_spawn_amount = 4
@@ -49,6 +55,19 @@
 		), .proc/finish_objective)
 		objectives += RN
 
+	initial_objectives = length(objectives)
+
+	while(length(GLOB.loot_landmarks) && length(lootbox_amounts))
+		var/obj/effect/landmark/loot_landmark/L = pick(GLOB.loot_landmarks)
+		GLOB.loot_landmarks -= L
+		var/type = pick(lootbox_amounts)
+		new type(get_turf(L))
+
+		var/amount_of_type_left = --lootbox_amounts[type]
+		if(amount_of_type_left <= 0)
+			lootbox_amounts -= type
+	lootbox_amounts = null
+
 	. = ..()
 
 /datum/game_mode/colonialmarines/ai/map_announcement()
@@ -61,11 +80,20 @@
 	return
 
 /datum/game_mode/colonialmarines/ai/proc/finish_objective(var/obj/structure/resource_node/RN)
+	SIGNAL_HANDLER
+
 	objectives -= RN
 
 	for(var/i in GLOB.xeno_ai_spawns)
 		var/obj/effect/landmark/xeno_ai/XA = i
 		XA.remaining_spawns = initial(XA.remaining_spawns)
+
+	var/finished_percentage = 1-(length(objectives)/initial_objectives)
+	if(finished_percentage > CONFIG_GET(number/ai_director/t2_spawn_at_percentage))
+		spawn_flags |= XENO_SPAWN_T2
+
+	if(finished_percentage > CONFIG_GET(number/ai_director/t3_spawn_at_percentage))
+		spawn_flags |= XENO_SPAWN_T3
 
 	if(!length(objectives))
 		enter_endgame()
@@ -132,18 +160,21 @@ GLOBAL_LIST_INIT(t3_ais, list(
 	while(total_amount < length(GLOB.alive_client_human_list)*CONFIG_GET(number/ai_director/max_xeno_per_player))
 		var/current_amount = total_amount
 		total_amount++
-		if(current_amount >= XENOS_NEEDED_FOR_OTHER_TIERS)
-			if((t3_amount/current_amount) < IDEAL_T3_PERCENT)
+		if(current_amount)
+			if((t3_amount/current_amount) < IDEAL_T3_PERCENT && (spawn_flags & XENO_SPAWN_T3))
 				xenos_to_spawn += pick(GLOB.t3_ais)
 				t3_amount++
 				continue
 
-			if((t2_amount/current_amount) < IDEAL_T2_PERCENT)
+			if((t2_amount/current_amount) < IDEAL_T2_PERCENT && (spawn_flags & XENO_SPAWN_T2))
 				xenos_to_spawn += pick(GLOB.t2_ais)
 				t2_amount++
 				continue
 
-		xenos_to_spawn += pick(GLOB.t1_ais)
+		if(spawn_flags & XENO_SPAWN_T1)
+			xenos_to_spawn += pick(GLOB.t1_ais)
+			continue
+		break
 
 	for(var/i in GLOB.xeno_ai_spawns)
 		var/obj/effect/landmark/xeno_ai/XA = i
@@ -189,6 +220,7 @@ GLOBAL_LIST_EMPTY_TYPED(objective_landmarks, /obj/effect/landmark/objective_land
 
 /obj/effect/landmark/objective_landmark
 	name = "Objective Landmark"
+	icon_state = "landmark_node"
 
 /obj/effect/landmark/objective_landmark/Initialize(mapload, ...)
 	. = ..()

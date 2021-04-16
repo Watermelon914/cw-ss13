@@ -96,14 +96,19 @@
 /datum/config_entry/number/ai_director
 	abstract_type = /datum/config_entry/number/ai_director
 
-/// Amount of xenos needed before T2s and T3s can spawn
-#define XENOS_NEEDED_FOR_OTHER_TIERS 2
 #define IDEAL_T2_PERCENT 0.5
 #define IDEAL_T3_PERCENT 0.25
 
 /// The maximum amount of xenomorphs that can spawn, scaled up by population.
 /datum/config_entry/number/ai_director/max_xeno_per_player
 	config_entry_value = 2
+
+// Xenos spawn
+/datum/config_entry/number/ai_director/t2_spawn_at_percentage
+	config_entry_value = 0.25
+
+/datum/config_entry/number/ai_director/t3_spawn_at_percentage
+	config_entry_value = 0.5
 
 /// The minimum range at which a xeno can be spawned from a human
 #define MIN_RANGE_TO_SPAWN_XENO 12
@@ -119,3 +124,4 @@
 #define XENO_SPAWN_T1 (1<<0)
 #define XENO_SPAWN_T2 (1<<1)
 #define XENO_SPAWN_T3 (1<<2)
+

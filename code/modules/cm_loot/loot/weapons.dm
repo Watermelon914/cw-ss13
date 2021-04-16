@@ -27,7 +27,7 @@ GLOBAL_DATUM_INIT(loot_weapons, /datum/loot_table/weapons, new())
 /datum/loot_entry/weapon/spawn_item(var/atom/spawn_location)
 	if(!item_to_spawn)
 		return
-	return new item_to_spawn(spawn_location)
+	new item_to_spawn(spawn_location)
 
 /*
   SHOTGUN WEAPONS

@@ -65,11 +65,13 @@
 	name = "medical upgrade kit"
 	max_w_class = SIZE_MEDIUM
 
-	storage_slots = 2
+	storage_slots = 4
 
 /obj/item/storage/box/medic_upgraded_kits/Initialize()
 	. = ..()
 	new /obj/item/stack/medical/advanced/bruise_pack/upgraded(src)
+	new /obj/item/stack/medical/advanced/bruise_pack/upgraded(src)
+	new /obj/item/stack/medical/advanced/ointment/upgraded(src)
 	new /obj/item/stack/medical/advanced/ointment/upgraded(src)
 
 /obj/item/stack/medical/advanced/ointment/upgraded
@@ -78,6 +80,7 @@
 	stack_id = "upgraded advanced burn kit"
 
 	icon_state = "burnkit_upgraded"
+	time_to_apply = 1 SECONDS
 
 	max_amount = 10
 	amount = 10
@@ -92,6 +95,7 @@
 	stack_id = "upgraded advanced trauma kit"
 
 	icon_state = "traumakit_upgraded"
+	time_to_apply = 1 SECONDS
 
 	max_amount = 10
 	amount = 10

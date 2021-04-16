@@ -291,6 +291,8 @@ cases. Override_icon_state should be a list.*/
 /obj/item/proc/pickup(mob/user)
 	SHOULD_CALL_PARENT(TRUE)
 	SEND_SIGNAL(src, COMSIG_ITEM_PICKUP, user)
+	pixel_x = 0
+	pixel_y = 0
 	setDir(SOUTH)//Always rotate it south. This resets it to default position, so you wouldn't be putting things on backwards
 	return
 

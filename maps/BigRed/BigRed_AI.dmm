@@ -1066,12 +1066,14 @@
 	},
 /area/bigredv2/outside/marshall_office)
 "adi" = (
-/obj/structure/techpod_vendor{
-	req_one_access_txt = null
-	},
 /obj/structure/sign/prop1{
 	pixel_x = -32;
 	pixel_y = 2
+	},
+/obj/structure/machinery/cm_vending/sorted/uniform_supply/squad_prep/delta{
+	req_access = null;
+	req_one_access = null;
+	req_one_access_txt = "15;16;21"
 	},
 /turf/open/floor/almayer,
 /area/almayer/squads/alpha_bravo_shared)
@@ -3867,7 +3869,7 @@
 	},
 /area/bigredv2/outside/marshall_office)
 "akB" = (
-/obj/structure/surface/table/reinforced,
+/obj/effect/landmark/loot_landmark,
 /turf/open/floor{
 	dir = 1;
 	icon_state = "whitepurple";
@@ -10693,11 +10695,7 @@
 	},
 /area/bigredv2/caves/lambda/research)
 "aDp" = (
-/obj/structure/closet/crate/medical,
-/obj/item/storage/firstaid/adv,
-/obj/item/storage/firstaid/o2,
-/obj/item/storage/firstaid/toxin,
-/obj/item/storage/firstaid/rad,
+/obj/effect/landmark/loot_landmark,
 /turf/open/floor{
 	dir = 1;
 	icon_state = "elevatorshaft";
@@ -28633,6 +28631,12 @@
 	tag = "icon-silver"
 	},
 /area/almayer/squads/alpha_bravo_shared)
+"fHq" = (
+/obj/effect/landmark/loot_landmark,
+/turf/open/floor{
+	icon_state = "white"
+	},
+/area/bigredv2/outside/medical)
 "fHv" = (
 /obj/effect/decal/warning_stripes{
 	icon_state = "SE-in";
@@ -28750,6 +28754,14 @@
 	tag = "icon-mars_dirt_10"
 	},
 /area/bigredv2/outside/eta)
+"gcE" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/landmark/loot_landmark,
+/turf/open/floor{
+	icon_state = "whitepurplefull";
+	tag = "icon-whitepurplefull"
+	},
+/area/bigredv2/outside/medical)
 "gcP" = (
 /obj/effect/alien/weeds/node,
 /obj/effect/landmark/structure_spawner/xvx_hive/xeno_door,
@@ -29260,13 +29272,6 @@
 /obj/structure/closet/toolcloset,
 /turf/open/floor/plating,
 /area/bigredv2/caves/eta/storage)
-"htZ" = (
-/obj/effect/landmark/objective_landmark,
-/turf/open/mars_cave{
-	icon_state = "mars_cave_2";
-	tag = "icon-mars_cave_2"
-	},
-/area/bigredv2/outside/space_port)
 "hvQ" = (
 /obj/structure/machinery/chem_dispenser,
 /turf/open/floor{
@@ -30113,6 +30118,10 @@
 	tag = "icon-asteroidwarning (NORTH)"
 	},
 /area/bigredv2/outside/s)
+"jDp" = (
+/obj/effect/landmark/loot_landmark,
+/turf/open/floor/plating,
+/area/bigredv2/outside/nw)
 "jDG" = (
 /obj/structure/machinery/door/airlock/almayer/research/glass{
 	dir = 1;
@@ -31366,6 +31375,14 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor,
 /area/bigredv2/outside/engineering)
+"nXg" = (
+/obj/effect/landmark/loot_landmark,
+/turf/open/floor{
+	dir = 1;
+	icon_state = "darkblue2";
+	tag = "icon-darkblue2 (NORTH)"
+	},
+/area/bigredv2/outside/admin_building)
 "nXw" = (
 /obj/structure/machinery/light{
 	dir = 8
@@ -32378,6 +32395,14 @@
 	tag = "icon-darkgreen2 (NORTH)"
 	},
 /area/bigredv2/outside/space_port)
+"rbb" = (
+/obj/effect/landmark/loot_landmark,
+/turf/open/floor{
+	dir = 1;
+	icon_state = "asteroidfloor";
+	tag = "icon-asteroidfloor (NORTH)"
+	},
+/area/bigred/ground/garage)
 "rbU" = (
 /obj/effect/landmark/crap_item,
 /turf/open/mars_cave{
@@ -34501,6 +34526,12 @@
 	tag = "icon-asteroidwarning (EAST)"
 	},
 /area/bigredv2/outside/s)
+"wMg" = (
+/obj/effect/landmark/loot_landmark,
+/turf/open/floor{
+	icon_state = "dark"
+	},
+/area/bigredv2/outside/se)
 "wMk" = (
 /obj/effect/landmark/crap_item,
 /obj/effect/landmark/queen_spawn,
@@ -34870,6 +34901,13 @@
 	tag = "icon-dark"
 	},
 /area/bigredv2/caves/eta/living)
+"xMH" = (
+/obj/effect/landmark/loot_landmark,
+/turf/open/mars_cave{
+	icon_state = "mars_cave_14";
+	tag = "icon-mars_cave_14"
+	},
+/area/bigredv2/caves_north)
 "xNF" = (
 /obj/structure/surface/table,
 /obj/structure/machinery/light{
@@ -35023,6 +35061,13 @@
 	tag = "icon-dark"
 	},
 /area/bigredv2/caves/eta/research)
+"yil" = (
+/obj/effect/landmark/loot_landmark,
+/turf/open/mars_cave{
+	icon_state = "mars_cave_2";
+	tag = "icon-mars_cave_2"
+	},
+/area/bigredv2/outside/space_port)
 "yix" = (
 /obj/structure/fence,
 /turf/open/mars{
@@ -39202,7 +39247,7 @@ aae
 aao
 qsE
 qsE
-clB
+rbb
 ast
 ats
 aun
@@ -43567,7 +43612,7 @@ axZ
 avT
 azo
 avT
-avT
+jDp
 anp
 ahP
 aDy
@@ -45677,7 +45722,7 @@ aao
 aao
 aao
 tFM
-htZ
+tFM
 tFM
 tFM
 tFM
@@ -46110,7 +46155,7 @@ aab
 aao
 aao
 aao
-tFM
+yil
 aaE
 tFM
 tFM
@@ -48109,7 +48154,7 @@ aeI
 aeI
 ajz
 alu
-auH
+gcE
 auH
 arP
 asB
@@ -50941,7 +50986,7 @@ aDG
 aEJ
 awO
 amj
-aqw
+fHq
 aqw
 azv
 aAv
@@ -54584,7 +54629,7 @@ xTB
 whB
 xGP
 afi
-xjV
+uqe
 uqe
 aao
 aao
@@ -54873,7 +54918,7 @@ beg
 beg
 bkG
 aof
-aVU
+nXg
 aOM
 aOM
 bql
@@ -57192,7 +57237,7 @@ aao
 aao
 oRs
 aad
-vRR
+xMH
 akX
 akX
 aao
@@ -65976,7 +66021,7 @@ bqa
 bqa
 bqa
 ejP
-brD
+wMg
 brD
 brD
 brD

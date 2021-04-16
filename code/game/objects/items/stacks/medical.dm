@@ -127,6 +127,8 @@
 			else
 				to_chat(user, SPAN_NOTICE("The [affecting.display_name] is cut open, you'll need more than a bandage!"))
 
+/obj/item/stack/medical/advanced
+	var/time_to_apply = 3 SECONDS
 
 /obj/item/stack/medical/advanced/attack(mob/living/carbon/M, mob/user)
 	if(..())
@@ -143,7 +145,7 @@
 		to_chat(user, SPAN_WARNING("[M] is already at full health!"))
 		return
 
-	if(!do_after(user, 30, INTERRUPT_NO_NEEDHAND, BUSY_ICON_FRIENDLY, M, INTERRUPT_MOVED, BUSY_ICON_MEDICAL))
+	if(!do_after(user, time_to_apply, INTERRUPT_NO_NEEDHAND, BUSY_ICON_FRIENDLY, M, INTERRUPT_MOVED, BUSY_ICON_MEDICAL))
 		return
 
 	for(var/i in H.limbs)

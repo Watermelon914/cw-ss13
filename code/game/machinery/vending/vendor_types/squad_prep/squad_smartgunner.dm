@@ -38,7 +38,7 @@ GLOBAL_LIST_INIT(cm_vending_clothing_smartgun, list(
 		list("Gloves", 0, /obj/item/clothing/gloves/marine, MARINE_CAN_BUY_GLOVES, VENDOR_ITEM_MANDATORY),
 		list("Headset", 0, /obj/item/device/radio/headset/almayer/marine, MARINE_CAN_BUY_EAR, VENDOR_ITEM_MANDATORY),
 		list("Helmet", 0, /obj/item/clothing/head/helmet/marine, MARINE_CAN_BUY_HELMET, VENDOR_ITEM_MANDATORY),
-		list("Armor Plate", 0, /obj/item/clothing/accessory/health, MARINE_CAN_BUY_ARMOR_PLATE, VENDOR_ITEM_MANDATORY),
+		list("Armor Plate", 0, /obj/item/clothing/accessory/health/scrap, MARINE_CAN_BUY_ARMOR_PLATE, VENDOR_ITEM_MANDATORY),
 		list("MRE", 0, /obj/item/storage/box/MRE, MARINE_CAN_BUY_MRE, VENDOR_ITEM_MANDATORY),
 
 		list("BELT", 0, null, null, null),
