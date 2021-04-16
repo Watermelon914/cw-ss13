@@ -32,6 +32,18 @@ GLOBAL_DATUM_INIT(loot_objects, /datum/loot_table/objects, new())
 		return
 	new item_to_spawn(spawn_location)
 
+/datum/loot_entry/object/multiple
+	name = "multiple items"
+	abstract_type = /datum/loot_entry/object/multiple
+
+/datum/loot_entry/object/multiple/spawn_item(atom/spawn_location)
+	if(!item_to_spawn)
+		return
+	for(var/i in item_to_spawn)
+		new i(spawn_location)
+
+
+
 /*
   STIMS ITEMS
 */
@@ -114,3 +126,15 @@ GLOBAL_DATUM_INIT(loot_objects, /datum/loot_table/objects, new())
 	name = "Medical Kit"
 	item_to_spawn = /obj/item/storage/box/medic_upgraded_kits
 	rarity = LOOT_VERY_RARE
+
+/*
+  Special armours
+*/
+
+/datum/loot_entry/object/multiple/marsoc_armor
+	name = "MARSOC Armor"
+	item_to_spawn = list(
+		/obj/item/clothing/suit/storage/marine/marsoc,
+		/obj/item/clothing/head/helmet/marine/marsoc/nvg
+	)
+	rarity = LOOT_LEGENDARY

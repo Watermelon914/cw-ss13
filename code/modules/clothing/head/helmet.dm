@@ -688,6 +688,10 @@ GLOBAL_LIST_INIT(allowed_helmet_items, list(
 	specialty = "M10 pattern MARSOC"
 	flags_atom = NO_SNOW_TYPE
 
+/obj/item/clothing/head/helmet/marine/marsoc/nvg/Initialize(mapload)
+	. = ..()
+	var/obj/O = new /obj/item/prop/helmetgarb/helmet_nvg/functional()
+	pockets.handle_item_insertion(O)
 
 //=============================//PMCS\\==================================\\
 //=======================================================================\\
