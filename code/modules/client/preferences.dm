@@ -155,6 +155,7 @@ var/const/MAX_SAVE_SLOTS = 10
 	var/tgui_lock = FALSE
 
 	var/hear_vox = TRUE
+	var/music_volume = 30
 
 /datum/preferences/New(client/C)
 	key_bindings = deepCopyList(GLOB.hotkey_keybinding_list_by_key) // give them default keybinds and update their movement keys
@@ -370,6 +371,7 @@ var/const/MAX_SAVE_SLOTS = 10
 
 	dat += "<div id='column3'>"
 	dat += "<h2><b><u>Game Settings:</u></b></h2>"
+	dat += "<b>Music Volume:</b> <a href='?_src_=prefs;preference=set_music_volume'>[music_volume]</a><br>"
 	dat += "<b>tgui Window Mode:</b> <a href='?_src_=prefs;preference=tgui_fancy'>[(tgui_fancy) ? "Fancy (default)" : "Compatible (slower)"]</a><br>"
 	dat += "<b>tgui Window Placement:</b> <a href='?_src_=prefs;preference=tgui_lock'>[(tgui_lock) ? "Primary monitor" : "Free (default)"]</a><br>"
 	dat += "<b>Play Admin Midis:</b> <a href='?_src_=prefs;preference=hear_midis'><b>[(toggles_sound & SOUND_MIDI) ? "Yes" : "No"]</b></a><br>"
@@ -1282,6 +1284,8 @@ var/const/MAX_SAVE_SLOTS = 10
 					tgui_fancy = !tgui_fancy
 				if("tgui_lock")
 					tgui_lock = !tgui_lock
+				if("set_music_volume")
+					music_volume = min(max(input(user, "Select new music volume", "Music Volume", music_volume) as num, 0), 100)
 
 	ShowChoices(user)
 	return 1

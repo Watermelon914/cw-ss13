@@ -1719,54 +1719,18 @@
 
 	neuro_callback = CALLBACK(GLOBAL_PROC, .proc/apply_neuro)
 
-/proc/apply_neuro(mob/M, power, insta_neuro)
-	var/pass_down_the_line = FALSE
-	if(skillcheck(M, SKILL_ENDURANCE, SKILL_ENDURANCE_SURVIVOR) && !insta_neuro)
-		M.visible_message(SPAN_DANGER("[M] withstands the neurotoxin!"))
-		return //endurance 5 makes you immune to weak neurotoxin
+/proc/apply_neuro(mob/M, power)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(H.chem_effect_flags & CHEM_EFFECT_RESIST_NEURO || H.species.flags & NO_NEURO)
 			H.visible_message(SPAN_DANGER("[M] shrugs off the neurotoxin!"))
 			return //species like zombies or synths are immune to neurotoxin
 
-	if(M.knocked_out || pass_down_the_line) //second part is always false, but consistency is a great thing
+	var/pass_down_the_line = FALSE
+	if(M.knocked_out) //second part is always false, but consistency is a great thing
 		pass_down_the_line = TRUE
 
-	if(!isXeno(M))
-		if(insta_neuro)
-			if(M.knocked_down < 3)
-				M.AdjustKnockeddown(1 * power)
-			return
-
-		if(M.knocked_down > 4 || pass_down_the_line)
-			if(!pass_down_the_line)
-				M.visible_message(SPAN_DANGER("[M] falls limp on the ground."))
-			M.KnockOut(30) //KO them. They already got rekt too much
-			pass_down_the_line = TRUE
-
-		var/no_clothes_neuro = FALSE
-
-		if(ishuman(M))
-			var/mob/living/carbon/human/H = M
-			if(!H.wear_suit || H.wear_suit.slowdown == 0)
-				no_clothes_neuro = TRUE
-
-		if(M.dazed || pass_down_the_line || no_clothes_neuro)
-			if(M.knocked_down < 5)
-				M.AdjustKnockeddown(1 * power) // KD them a bit more
-				if(!pass_down_the_line)
-					M.visible_message(SPAN_DANGER("[M] falls prone."))
-			pass_down_the_line = TRUE
-
-		if(M.superslowed || pass_down_the_line)
-			if(M.dazed < 6)
-				M.AdjustDazed(3 * power) // Daze them a bit more
-				if(!pass_down_the_line)
-					M.visible_message(SPAN_DANGER("[M] is visibly confused."))
-			pass_down_the_line = TRUE
-
-	if(M.superslowed < 10)
+	if(M.superslowed < (3 * power))
 		M.AdjustSuperslowed(3 * power) // Superslow them a bit more
 		if(!pass_down_the_line)
 			M.visible_message(SPAN_DANGER("[M] movements are slowed."))

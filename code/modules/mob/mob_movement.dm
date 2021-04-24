@@ -131,6 +131,10 @@
 		next_movement = world.time + MINIMAL_MOVEMENT_INTERVAL
 		return
 
+	if(mob.stat == DEAD)
+		mob.ghostize(TRUE)
+		return
+
 	if(!mob.canmove || mob.is_mob_incapacitated(TRUE) || !mob.on_movement())
 		return
 

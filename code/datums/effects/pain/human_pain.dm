@@ -22,7 +22,7 @@
 	pain_message = "You grimace in pain."
 
 
-/datum/effects/pain/human/discomforting 
+/datum/effects/pain/human/discomforting
 	pain_message = "You could use some painkillers."
 
 
@@ -57,15 +57,9 @@
 		return FALSE
 
 	var/mob/living/carbon/affected_mob = affected_atom
-	if(do_once)
-		affected_mob.KnockOut(3)
-		do_once = FALSE
-
 	affected_mob.EyeBlur(2)
 	if(affected_mob.pain && affected_mob.pain.feels_pain)
 		affected_mob.TalkStutter(2)
-	if(!affected_mob.reagents || !affected_mob.reagents.has_reagent("inaprovaline"))
-		affected_mob.apply_damage(0.1, OXY)
 
 	return TRUE
 
@@ -83,8 +77,5 @@
 	affected_mob.EyeBlur(2)
 	if(affected_mob.pain && affected_mob.pain.feels_pain)
 		affected_mob.TalkStutter(2)
-	affected_mob.KnockOut(2)
-	if(!affected_mob.reagents || !affected_mob.reagents.has_reagent("inaprovaline"))
-		affected_mob.apply_damage(0.5, OXY)
 
 	return TRUE

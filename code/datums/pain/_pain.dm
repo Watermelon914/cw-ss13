@@ -32,10 +32,10 @@
 #define PAIN_REDUCTION_DECREASE_RATE 0.25
 
 // Movespeed levels, how much is the pain slowing you
-#define PAIN_SPEED_VERYSLOW	4.50
-#define PAIN_SPEED_SLOW		3.75
-#define PAIN_SPEED_HIGH		2.75
-#define PAIN_SPEED_MED		1.50
+#define PAIN_SPEED_VERYSLOW	1.5
+#define PAIN_SPEED_SLOW		1.3
+#define PAIN_SPEED_HIGH		1.2
+#define PAIN_SPEED_MED		1.1
 #define PAIN_SPEED_LOW		1
 
 // Multipliers for how much pain the different types give
@@ -193,11 +193,6 @@
 			if(!isnull(threshold_horrible))
 				activate_horrible()
 
-	if(new_level >= PAIN_LEVEL_SEVERE)
-		RegisterSignal(source_mob, COMSIG_MOB_DRAGGED, .proc/oxyloss_drag, override = TRUE)
-		RegisterSignal(source_mob, COMSIG_MOB_DEVOURED, .proc/handle_devour, override = TRUE)
-		RegisterSignal(source_mob, COMSIG_MOVABLE_PRE_THROW, .proc/oxy_kill, override = TRUE)
-
 	last_level = new_level
 	addtimer(CALLBACK(src, .proc/before_update), PAIN_UPDATE_FREQUENCY)
 
@@ -228,13 +223,6 @@
 			new_level = PAIN_LEVEL_SEVERE
 			if(!isnull(threshold_severe))
 				activate_severe()
-
-	if(new_level < PAIN_LEVEL_SEVERE)
-		UnregisterSignal(source_mob, list(
-			COMSIG_MOB_DRAGGED,
-			COMSIG_MOB_DEVOURED,
-			COMSIG_MOVABLE_PRE_THROW
-		))
 
 	last_level = new_level
 	addtimer(CALLBACK(src, .proc/before_update), PAIN_UPDATE_FREQUENCY)
@@ -282,25 +270,6 @@
 /datum/pain/proc/activate_horrible()
 	pain_slowdown = PAIN_SPEED_VERYSLOW
 	new /datum/effects/pain/human/horrible(source_mob)
-
-/datum/pain/proc/oxyloss_drag(mob/living/source, mob/puller)
-	SIGNAL_HANDLER
-	if(isXeno(puller) && source.stat == UNCONSCIOUS)
-		if(source.get_species())
-			var/mob/living/carbon/human/H = source
-			if(H.species.flags & HAS_HARDCRIT)
-				source.apply_damage(20, OXY)
-
-/datum/pain/proc/handle_devour(mob/living/source)
-	SIGNAL_HANDLER
-	if(source.chestburst)
-		return
-	oxy_kill(source)
-	return COMPONENT_CANCEL_DEVOUR
-
-/datum/pain/proc/oxy_kill(mob/living/source)
-	SIGNAL_HANDLER
-	INVOKE_ASYNC(source, /mob.proc/death)
 
 /datum/pain/Destroy()
 	. = ..()

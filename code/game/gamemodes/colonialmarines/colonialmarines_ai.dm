@@ -33,6 +33,7 @@
 	var/endgame_launch_time = 5 MINUTES
 	var/endgame_spawn_amount = 4
 	var/endgame_shuttle = "alamo"
+	var/music_range = 12
 
 /datum/game_mode/colonialmarines/ai/pre_setup()
 	RegisterSignal(SSdcs, COMSIG_GLOB_XENO_SPAWN, .proc/handle_xeno_spawn)
@@ -143,9 +144,11 @@ GLOBAL_LIST_INIT(t3_ais, list(
 
 /datum/game_mode/colonialmarines/ai/process(delta_time)
 	. = ..()
+
 	var/t2_amount = 0
 	var/t3_amount = 0
 	var/total_amount = length(GLOB.living_xeno_list)
+	var/list/targetted_players = GLOB.clients.Copy()
 
 	for(var/i in GLOB.living_xeno_list)
 		var/mob/living/carbon/Xenomorph/X = i
@@ -154,6 +157,24 @@ GLOBAL_LIST_INIT(t3_ais, list(
 				t2_amount++
 			if(3)
 				t3_amount++
+
+		if(X.health > 0)
+			for(var/h in GLOB.clients)
+				var/client/C = h
+				if(get_dist(X, C.mob) <= music_range)
+					targetted_players[h] += X.tier
+
+	for(var/i in targetted_players)
+		var/client/C = i
+
+		if(!total_amount)
+			C.set_queued_music(null) // Remove queued music
+			continue
+
+		var/new_threat = targetted_players[C]
+		if(!new_threat)
+			new_threat = 0
+		SET_THREAT(C, new_threat)
 
 	var/list/xenos_to_spawn = list()
 

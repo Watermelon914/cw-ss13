@@ -162,7 +162,7 @@
 	var/freeze_timer_id = TIMER_ID_NULL	// Timer to cancel the end freeze if it can be cancelled earlier
 
 	var/windup = TRUE					// Is there a do_after before we pounce?
-	var/windup_duration = 0.5 SECONDS			// How long to wind up, if applicable
+	var/windup_duration = 1 SECONDS			// How long to wind up, if applicable
 	var/windup_interruptable = TRUE		// Can the windup be interrupted?
 	var/windup_interrupt_flags = INTERRUPT_INCAPACITATED
 

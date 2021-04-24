@@ -529,3 +529,20 @@ GLOBAL_LIST_INIT(whitelisted_client_procs, list(
 					winset(src, "srvkeybinds-[REF(key)]", "parent=default;name=[key];command=\"me\\n.typing\"")
 				if("Whisper")
 					winset(src, "srvkeybinds-[REF(key)]", "parent=default;name=[key];command=whisper")
+
+/client/proc/set_queued_music(var/file)
+	if(file)
+		GLOB.processing_music_clients += src
+	queued_music = file
+
+GLOBAL_LIST_INIT(danger_music, list(
+	'sound/ambience/beats/1.ogg',
+	'sound/ambience/beats/2.ogg',
+	'sound/ambience/beats/3.ogg',
+	'sound/ambience/beats/4.ogg',
+	'sound/ambience/beats/5.ogg',
+	'sound/ambience/beats/6.ogg',
+	'sound/ambience/beats/7.ogg',
+	'sound/ambience/beats/8.ogg',
+	'sound/ambience/beats/9.ogg'
+))

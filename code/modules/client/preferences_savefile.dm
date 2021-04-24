@@ -102,6 +102,7 @@
 	S["lang_chat_disabled"]	>> lang_chat_disabled
 	S["hear_vox"] >> hear_vox
 	S["hotkeys"] >> hotkeys
+	S["music_volume"] >> music_volume
 
 	//Sanitize
 	ooccolor		= sanitize_hexcolor(ooccolor, CONFIG_GET(string/ooc_color_default))
@@ -133,6 +134,7 @@
 	key_bindings 		= sanitize_keybindings(key_bindings)
 	remembered_key_bindings = sanitize_islist(remembered_key_bindings, null)
 	hotkeys  			= sanitize_integer(hotkeys, FALSE, TRUE, TRUE)
+	music_volume = sanitize_integer(music_volume, 0, 100, initial(music_volume))
 	vars["fps"] = fps
 
 	if(remembered_key_bindings)
@@ -206,6 +208,7 @@
 	S["hotkeys"] << hotkeys
 
 	S["hear_vox"] << hear_vox
+	S["music_volume"] << music_volume
 
 	return TRUE
 

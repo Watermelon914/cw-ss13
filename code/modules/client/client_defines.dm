@@ -113,4 +113,11 @@
 	/// On next move, subtract this dir from the move that would otherwise be done
 	var/next_move_dir_sub
 
-	var/next_parry = 0
+	/// Current music that is playing on the client. Do not touch.
+	var/sound/current_music
+
+	/// Current file being played
+	var/current_music_file
+
+	/// Queued music to play next when possible.
+	var/queued_music

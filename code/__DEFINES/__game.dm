@@ -433,3 +433,6 @@
 /// `time` - The time period in which to gain this amount
 /// To be used with delta_time. Multiplied by 10 to convert from deciseconds to seconds
 #define AMOUNT_PER_TIME(amount, time) ((amount / (time))*10)
+
+#define SET_THREAT(C, T) C.set_queued_music(GLOB.danger_music[max(min(T, length(GLOB.danger_music)), 1)])\
+
