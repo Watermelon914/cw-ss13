@@ -18,25 +18,22 @@ SUBSYSTEM_DEF(music)
 
 		if(!C.queued_music || C.prefs?.music_volume == 0)
 			if(C.current_music)
-				sound_to(C, C.current_music)
+				var/sound/stop_music = sound(C.queued_music, FALSE)
+				stop_music.status = SOUND_UPDATE
+				stop_music.repeat = FALSE
+				sound_to(C, stop_music)
 				C.current_music = null
 			GLOB.processing_music_clients -= C
 			continue
 
-		if(C.current_music)
-			if(C.queued_music == C.current_music_file)
+		if(C.current_music && C.queued_music == C.current_music)
+			continue
 
-				continue
-			else
-				sound_to(C, C.current_music)
 
 		var/sound/S = sound(C.queued_music, TRUE, FALSE, SOUND_CHANNEL_MUSIC, C.prefs.music_volume)
-		C.current_music = S
-		C.current_music_file = C.queued_music
+		C.current_music = C.queued_music
 		S.status = SOUND_STREAM
 		sound_to(C, S)
-		S.status |= SOUND_UPDATE
-		S.repeat = FALSE
 
 		if(MC_TICK_CHECK)
 			return

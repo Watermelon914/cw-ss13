@@ -155,7 +155,7 @@ var/const/MAX_SAVE_SLOTS = 10
 	var/tgui_lock = FALSE
 
 	var/hear_vox = TRUE
-	var/music_volume = 30
+	var/music_volume = 15
 
 /datum/preferences/New(client/C)
 	key_bindings = deepCopyList(GLOB.hotkey_keybinding_list_by_key) // give them default keybinds and update their movement keys

@@ -6,6 +6,12 @@
 	soundscape_playlist = SCAPE_PL_THUNDER
 	soundscape_interval = 50
 
+/area/bigred/New()
+	. = ..()
+	if(ceiling > CEILING_GLASS && ambience_exterior == AMBIENCE_BIGRED)
+		ambience_exterior = AMBIENCE_BIGRED_INDOOR
+		soundscape_playlist += SCAPE_PL_SCARY
+
 /area/bigred/ground
 	name = "ground"
 	icon_state = "blue"
@@ -283,6 +289,7 @@
 	name = "\improper Unknown Area"
 	icon_state = "blue"
 
+GLOBAL_DATUM_INIT(rain_effect, /obj/effect/weather_vfx_holder/rain, new)
 
 //Big Red V2
 /area/bigredv2
@@ -290,6 +297,20 @@
 	ambience_exterior = AMBIENCE_BIGRED
 	soundscape_playlist = SCAPE_PL_THUNDER
 	soundscape_interval = 50
+	var/outside_light = 2
+
+/area/bigredv2/Initialize()
+	. = ..()
+	if(ceiling >= CEILING_GLASS)
+		soundscape_playlist += SCAPE_PL_SCARY
+	return INITIALIZE_HINT_LATELOAD
+
+/area/bigredv2/LateInitialize()
+	. = ..()
+	if(ceiling < CEILING_GLASS)
+		for(var/turf/T in contents)
+			T.vis_contents += GLOB.rain_effect
+			T.update_lumcount(outside_light)
 
 /area/bigredv2/outside
 	name = "\improper Colony Grounds"

@@ -121,6 +121,8 @@
 
 	appearance_flags = TILE_BOUND
 
+GLOBAL_LIST_EMPTY(apc_list)
+
 /obj/structure/machinery/power/apc/Initialize(mapload, var/ndir, var/building=0)
 	. = ..()
 
@@ -148,6 +150,8 @@
 	if(!start_charge && is_ground_level(z) && prob(10))
 		set_broken()
 
+	GLOB.apc_list += src
+
 /obj/structure/machinery/power/apc/set_pixel_location()
 	tdir = dir //To fix Vars bug
 	setDir(SOUTH)
@@ -160,6 +164,7 @@
 		terminal.master = null
 		terminal = null
 	QDEL_NULL(cell)
+	GLOB.apc_list -= src
 	. = ..()
 
 // the very fact that i have to override this screams to me that apcs shouldnt be under machinery - spookydonut

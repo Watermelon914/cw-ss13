@@ -255,6 +255,7 @@
 
 	var/activation_delay = FALSE		// Is there an activation delay?
 	var/activation_delay_length = 0		// Only used if activation_delay is TRUE.
+	var/activation_interrupt = INTERRUPT_NO_NEEDHAND
 
 
 /datum/action/xeno_action/activable/transfer_plasma

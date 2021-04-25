@@ -226,6 +226,8 @@
 	slash = FALSE
 	freeze_self = FALSE
 
+	windup = FALSE
+
 /datum/action/xeno_action/activable/prae_acid_ball
 	name = "Acid Ball"
 	action_icon_state = "prae_acid_ball"
@@ -255,7 +257,8 @@
 	spray_distance = 7
 	spray_effect_type = /obj/effect/xenomorph/spray/praetorian
 	activation_delay = TRUE
-	activation_delay_length = 5
+	activation_delay_length = 0.5 SECONDS
+	activation_interrupt = INTERRUPT_INCAPACITATED
 
 
 ///////////////////////// WARDEN PRAE
@@ -272,7 +275,7 @@
 	spray_distance = 7 				// Distance to spray
 
 	activation_delay = TRUE
-	activation_delay_length = 5
+	activation_delay_length = 0.5 SECONDS
 
 /datum/action/xeno_action/activable/warden_heal
 	name = "Protect"

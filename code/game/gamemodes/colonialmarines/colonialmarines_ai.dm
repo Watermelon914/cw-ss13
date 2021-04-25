@@ -69,6 +69,11 @@
 			lootbox_amounts -= type
 	lootbox_amounts = null
 
+	for(var/i in GLOB.apc_list)
+		var/obj/structure/machinery/power/apc/A = i
+		if(A.start_charge == initial(A.start_charge))
+			A.cell?.charge = 0
+
 	. = ..()
 
 /datum/game_mode/colonialmarines/ai/map_announcement()
@@ -139,7 +144,8 @@ GLOBAL_LIST_INIT(t2_ais, list(
 
 GLOBAL_LIST_INIT(t3_ais, list(
 	/mob/living/carbon/Xenomorph/Ravager,
-	/mob/living/carbon/Xenomorph/Crusher
+	/mob/living/carbon/Xenomorph/Crusher,
+	/mob/living/carbon/Xenomorph/Praetorian
 ))
 
 /datum/game_mode/colonialmarines/ai/process(delta_time)

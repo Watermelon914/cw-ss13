@@ -1,6 +1,6 @@
 #define FALLOFF_SOUNDS		1
 
-#define FREE_CHAN_END 1015
+#define FREE_CHAN_END 1016
 #define INITIAL_SOUNDSCAPE_COOLDOWN 20
 
 #define EAR_DEAF_MUTE 			1
@@ -13,7 +13,7 @@
 
 #define MUFFLE_LOW -500
 #define MUFFLE_MEDIUM -2000
-#define MUFFLE_HIGH -10000
+#define MUFFLE_HIGH -6000
 
 #define SOUND_FREQ_HIGH 55000
 #define SOUND_FREQ_LOW 32000
@@ -21,7 +21,6 @@
 #define ITEM_EQUIP_VOLUME 50
 //Reserved channels
 
-#define SOUND_CHANNEL_MUSIC 		1016
 #define SOUND_CHANNEL_VOX           1017
 #define SOUND_CHANNEL_MUSIC 		1018
 #define SOUND_CHANNEL_AMBIENCE 		1019
@@ -35,14 +34,15 @@
 #define AMBIENCE_JUNGLE 'sound/ambience/ambienceLV624.ogg'
 #define AMBIENCE_RIVER  'sound/ambience/ambienceriver.ogg'
 #define AMBIENCE_MALL 'sound/ambience/medbay1.ogg'
-#define AMBIENCE_CAVE 'sound/ambience/desert.ogg'
+#define AMBIENCE_CAVE 'sound/ambience/desert2.ogg'
 #define AMBIENCE_YAUTJA 'sound/ambience/yautja_ship.ogg'
 
 #define SOUND_MARINE_DRUMS 'sound/effects/drums.ogg'
 
 #define AMBIENCE_ALMAYER 'sound/ambience/shipambience1.ogg'
 #define AMBIENCE_LV624 'sound/ambience/ambienceLV624.ogg'
-#define AMBIENCE_BIGRED 'sound/ambience/desert.ogg'
+#define AMBIENCE_BIGRED 'sound/ambience/desert_raining.ogg'
+#define AMBIENCE_BIGRED_INDOOR 'sound/ambience/raining_indoor.ogg'
 #define AMBIENCE_PRISON 'sound/ambience/shipambience.ogg'
 #define AMBIENCE_TRIJENT 'sound/ambience/desert.ogg'
 
@@ -51,3 +51,4 @@
 #define SCAPE_PL_ELEVATOR_MUSIC list('sound/soundscape/medbay1.ogg','sound/soundscape/medbay2.ogg', 'sound/soundscape/medbay3.ogg')
 #define SCAPE_PL_THUNDER list('sound/soundscape/thunderclap1.ogg', 'sound/soundscape/thunderclap2.ogg')
 #define SCAPE_PL_DESERT_STORM list('sound/soundscape/thunderclap1.ogg', 'sound/soundscape/thunderclap2.ogg', 'sound/soundscape/wind1.ogg','sound/soundscape/wind2.ogg')
+#define SCAPE_PL_SCARY list('sound/ambience/ambigen11.ogg', 'sound/ambience/ambigen7.ogg', 'sound/ambience/ambigen9.ogg', 'sound/ambience/ambigen14.ogg')

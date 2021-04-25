@@ -116,8 +116,5 @@
 	/// Current music that is playing on the client. Do not touch.
 	var/sound/current_music
 
-	/// Current file being played
-	var/current_music_file
-
 	/// Queued music to play next when possible.
 	var/queued_music

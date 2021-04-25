@@ -414,7 +414,7 @@
 		return
 
 	if (activation_delay)
-		if(!do_after(X, activation_delay_length, INTERRUPT_NO_NEEDHAND, BUSY_ICON_HOSTILE))
+		if(!do_after(X, activation_delay_length, activation_interrupt, BUSY_ICON_HOSTILE))
 			to_chat(X, SPAN_XENOWARNING("You decide to cancel your acid spray."))
 			end_cooldown()
 			return

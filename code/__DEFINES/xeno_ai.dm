@@ -89,6 +89,12 @@
 /// At what health percentage to proc crusher's shield.
 #define CRUSHER_SHIELD_HEALTH_PROC 0.25
 
+// Praetorian
+
+#define PRAETORIAN_DASH 100
+#define PRAETORIAN_SPIT 80
+#define PRAETORIAN_SPRAY 80
+
 /*
 	GAME DIRECTOR AI
 */
