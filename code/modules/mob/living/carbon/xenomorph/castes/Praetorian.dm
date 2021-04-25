@@ -107,6 +107,8 @@
 	if(DT_PROB(PRAETORIAN_DASH, delta_time))
 		var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/pounce/base_prae_dash)
 		A.use_ability_async(current_target)
+		current_path = null
+		SSxeno_pathfinding.stop_calculating_path(src)
 
 	if(DT_PROB(PRAETORIAN_SPIT, delta_time) && (loc in view(current_target)))
 		var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/xeno_spit)
