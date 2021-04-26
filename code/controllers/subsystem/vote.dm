@@ -280,7 +280,7 @@ SUBSYSTEM_DEF(vote)
 					maps += i
 
 				choices.Add(maps)
-				if(length(choices) < 2)
+				if(length(choices) < 1)
 					return FALSE
 				SSentity_manager.filter_then(/datum/entity/map_vote, null, CALLBACK(src, .proc/carry_over_callback))
 

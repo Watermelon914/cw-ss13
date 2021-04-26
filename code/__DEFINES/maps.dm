@@ -28,6 +28,7 @@ require only minor tweaks.
 #define ZTRAIT_LOWORBIT "LowOrbit"
 #define ZTRAIT_INTERIORS "Interiors"
 #define ZTRAIT_TECHTREE	"TechTree"
+#define ZTRAIT_HIVE "Hive"
 
 #define ZTRAIT_FOG "Fog"
 #define ZTRAIT_LOCKDOWN "Lockdown"
@@ -68,6 +69,7 @@ require only minor tweaks.
 #define ZTRAITS_LOWORBIT list(ZTRAIT_LOWORBIT = TRUE)
 #define ZTRAITS_SPACE list(ZTRAIT_LINKAGE = CROSSLINKED, ZTRAIT_SPACE_RUINS = TRUE)
 #define ZTRAITS_INTERIORS list(ZTRAIT_INTERIORS = TRUE)
+#define ZTRAITS_HIVE list(ZTRAIT_HIVE = TRUE)
 
 #define DL_NAME "name"
 #define DL_TRAITS "traits"

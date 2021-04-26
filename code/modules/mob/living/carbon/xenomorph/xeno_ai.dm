@@ -260,6 +260,8 @@
 	var/smallest_distance = INFINITY
 	for(var/l in GLOB.alive_client_human_list)
 		var/mob/living/carbon/human/H = l
+		if(z != H.z)
+			continue
 		var/distance = get_dist(src, H)
 		if(distance < smallest_distance)
 			smallest_distance = distance

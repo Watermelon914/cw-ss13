@@ -47,6 +47,18 @@ SUBSYSTEM_DEF(ticker)
 
 /datum/controller/subsystem/ticker/Initialize(timeofday)
 	load_mode()
+	mode = config.pick_mode(GLOB.master_mode)
+	var/list/FailedZs
+	mode.load_maps(FailedZs)
+
+	if(LAZYLEN(FailedZs))	//but seriously, unless the server's filesystem is messed up this will never happen
+		var/msg = "RED ALERT! The following map files failed to load: [FailedZs[1]]"
+		if(FailedZs.len > 1)
+			for(var/I in 2 to FailedZs.len)
+				msg += ", [FailedZs[I]]"
+		msg += ". Yell at your server host!"
+		to_chat(world, SPAN_WARNING(msg))
+		log_world(msg)
 
 	if(CONFIG_GET(flag/nightmare_enabled))
 		NM = new
@@ -170,8 +182,6 @@ SUBSYSTEM_DEF(ticker)
 /datum/controller/subsystem/ticker/proc/setup()
 	to_chat(world, SPAN_BOLDNOTICE("Enjoy the game!"))
 	var/init_start = world.timeofday
-	//Create and announce mode
-	mode = config.pick_mode(GLOB.master_mode)
 
 	CHECK_TICK
 	if(!mode.can_start(bypass_checks))
@@ -183,7 +193,7 @@ SUBSYSTEM_DEF(ticker)
 	CHECK_TICK
 	if(!mode.pre_setup() && !bypass_checks)
 		QDEL_NULL(mode)
-		to_chat(world, "<b>Error in pre-setup for [GLOB.master_mode].</b> Reverting to pre-game lobby.")
+		to_chat(world, "<b>Error in pre-setup for [mode.name].</b> Reverting to pre-game lobby.")
 		RoleAuthority.reset_roles()
 		return FALSE
 

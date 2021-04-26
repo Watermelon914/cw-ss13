@@ -659,8 +659,8 @@
 		if(!check_rights(R_ADMIN|R_SERVER))	return
 
 		GLOB.master_mode = href_list["c_mode2"]
-		message_staff("[key_name_admin(usr)] set the mode as [GLOB.master_mode].")
-		to_world(SPAN_NOTICE("<b><i>The mode is now: [GLOB.master_mode]!</i></b>"))
+		message_staff("[key_name_admin(usr)] set the mode as [GLOB.master_mode] for next round.")
+		to_world(SPAN_NOTICE("<b><i>Mode set to [GLOB.master_mode] for next round!</i></b>"))
 		Game() // updates the main game menu
 		SSticker.save_mode(GLOB.master_mode)
 		.(href, list("c_mode"=1))

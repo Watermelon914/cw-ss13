@@ -18,24 +18,35 @@
 		SQUAD_NAME_1
 	)
 
-	var/outpost_name = "USCM Outpost Alpha"
-
 	var/spawn_flags = XENO_SPAWN_T1
 
 	var/list/objectives = list()
 	var/initial_objectives = 0
 
 	var/list/lootbox_amounts = list(
-		/obj/structure/closet/crate/loot/objects = 4,
-		/obj/structure/closet/crate/loot/weapons = 4
+		/obj/structure/closet/crate/loot/objects = 200,
+		/obj/structure/closet/crate/loot/weapons = 200
 	)
 
-	var/endgame_launch_time = 5 MINUTES
-	var/endgame_spawn_amount = 4
-	var/endgame_shuttle = "alamo"
+	var/endgame_spawn_amount = 3
+	var/endgame_remaining_spawns = 8
+	var/game_shuttle_id = "alamo"
+
+	var/endgame_map_path = "map_files/Hive"
+	var/endgame_map_file = "Hive.dmm"
+	var/list/endgame_map_traits = list()
+
+	var/game_started = FALSE
+
+	var/obj/docking_port/mobile/marine_dropship/game_shuttle
 	var/music_range = 12
 
+/datum/game_mode/colonialmarines/ai/load_maps(var/list/FailedZs)
+	SSmapping.LoadGroup(FailedZs, "The Hive", endgame_map_path, endgame_map_file, endgame_map_traits, ZTRAITS_HIVE, TRUE)
+
 /datum/game_mode/colonialmarines/ai/pre_setup()
+	game_shuttle = SSshuttle.getShuttle(game_shuttle_id)
+
 	RegisterSignal(SSdcs, COMSIG_GLOB_XENO_SPAWN, .proc/handle_xeno_spawn)
 	for(var/i in RoleAuthority.squads.Copy())
 		var/datum/squad/S = i
@@ -74,13 +85,13 @@
 		if(A.start_charge == initial(A.start_charge))
 			A.cell?.charge = 0
 
-	. = ..()
+	RegisterSignal(game_shuttle, COMSIG_SHUTTLE_CAN_MOVE_TOPIC, .proc/shuttle_launch_handler)
+	RegisterSignal(game_shuttle, COMSIG_SHUTTLE_ON_DOCK, .proc/handle_dock)
+	for(var/i in GLOB.shuttle_controls_list)
+		var/obj/structure/machinery/computer/shuttle/S = i
+		S.possible_destinations = "lz1;lz2"
 
-/datum/game_mode/colonialmarines/ai/map_announcement()
-	if(SSmapping.configs[GROUND_MAP].announce_text)
-		var/announce_text = SSmapping.configs[GROUND_MAP].announce_text
-		announce_text = replacetext(announce_text, "####OUTPOSTNAME####", outpost_name)
-		marine_announcement(SSmapping.configs[GROUND_MAP].announce_text, outpost_name)
+	. = ..()
 
 /datum/game_mode/colonialmarines/ai/announce_bioscans()
 	return
@@ -102,24 +113,47 @@
 		spawn_flags |= XENO_SPAWN_T3
 
 	if(!length(objectives))
-		enter_endgame()
+		INVOKE_ASYNC(src, .proc/enter_endgame)
 
 /datum/game_mode/colonialmarines/ai/proc/enter_endgame()
-	marine_announcement("Dropship landing shortly arriving to LZ2. You have [DisplayTimeText(endgame_launch_time)] to board before it launches. You may launch earlier. The xeno horde has been unleashed.", "Marine Broadcast", 'sound/misc/queen_alarm.ogg')
+	marine_announcement("Massive biosignatures detected. Xenomorph hive located. Please board the dropship and launch as soon as possible. Autopilot co-ordinates set for Xenomorph Hive", "Outpost Alpha AI", 'sound/misc/queen_alarm.ogg')
 	for(var/i in GLOB.xeno_ai_spawns)
 		var/obj/effect/landmark/xeno_ai/XA = i
-		XA.remaining_spawns = 500
+		XA.remaining_spawns = endgame_remaining_spawns
 
 	CONFIG_SET(number/ai_director/max_xeno_per_player, endgame_spawn_amount)
-	var/obj/docking_port/mobile/marine_dropship/ship = SSshuttle.getShuttle(endgame_shuttle)
-	addtimer(CALLBACK(src, .proc/launch_and_end, ship), endgame_launch_time)
 
-/datum/game_mode/colonialmarines/ai/proc/launch_and_end(var/obj/docking_port/mobile/marine_dropship/ship)
-	if(QDELETED(ship))
-		return
+	for(var/i in GLOB.shuttle_controls_list)
+		var/obj/structure/machinery/computer/shuttle/S = i
+		S.possible_destinations = "hive"
 
-	ship.jumpToNullSpace()
-	round_finished = MODE_PVE_WIN
+/datum/game_mode/colonialmarines/ai/proc/shuttle_launch_handler(var/obj/docking_port/mobile/marine_dropship/DS, var/mob/user)
+	SIGNAL_HANDLER
+	if(is_mainship_level(DS.z))
+		for(var/i in GLOB.alive_client_human_list)
+			var/mob/M = i
+			if(is_ground_level(M.z))
+				continue
+
+			if(!istype(get_area(M), /area/shuttle))
+				to_chat(user, SPAN_WARNING("You must wait for everyone else to be on the dropship!"))
+				return COMPONENT_SHUTTLE_PREVENT_MOVE
+
+/datum/game_mode/colonialmarines/ai/proc/handle_dock(var/obj/docking_port/mobile/marine_dropship/DS, var/obj/docking_port/stationary/current_dock)
+	SIGNAL_HANDLER
+	if(!game_started)
+		for(var/i in GLOB.human_mob_list)
+			var/mob/M = i
+			if(M.z == DS.z)
+				continue
+
+			if(!M.client)
+				qdel(M)
+				continue
+			M.forceMove(get_turf(DS))
+		flags_round_type |= MODE_NO_LATEJOIN
+		game_started = TRUE
+
 
 /datum/game_mode/colonialmarines/ai/end_round_message()
 	switch(round_finished)
@@ -167,8 +201,11 @@ GLOBAL_LIST_INIT(t3_ais, list(
 		if(X.health > 0)
 			for(var/h in GLOB.clients)
 				var/client/C = h
-				if(get_dist(X, C.mob) <= music_range)
-					targetted_players[h] += X.tier
+				if(get_dist(X, C.mob) <= music_range && X.z == C.mob.z)
+					if(X.current_target || X.current_path)
+						targetted_players[h] += X.tier
+					else
+						targetted_players[h] = max(targetted_players[h], 1)
 
 	for(var/i in targetted_players)
 		var/client/C = i
@@ -179,7 +216,9 @@ GLOBAL_LIST_INIT(t3_ais, list(
 
 		var/new_threat = targetted_players[C]
 		if(!new_threat)
-			new_threat = 0
+			C.set_queued_music(null)
+			continue
+
 		SET_THREAT(C, new_threat)
 
 	var/list/xenos_to_spawn = list()
@@ -210,6 +249,10 @@ GLOBAL_LIST_INIT(t3_ais, list(
 			continue
 
 		for(var/h in GLOB.alive_client_human_list)
+			var/mob/M = h
+			if(M.z != XA.z)
+				continue
+
 			var/distance = get_dist(h, XA)
 			if(distance < MIN_RANGE_TO_SPAWN_XENO)
 				within_range = 0

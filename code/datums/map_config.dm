@@ -52,7 +52,7 @@
 
 	var/force_mode
 
-	var/include_ship_map = TRUE
+	var/datum/map_config/ship_map_override
 
 	var/list/monkey_types = list(/mob/living/carbon/human/monkey)
 
@@ -209,8 +209,16 @@
 	if(json["force_mode"])
 		force_mode = json["force_mode"]
 
-	if(json["no_ship_map"])
-		include_ship_map = !json["no_ship_map"]
+	temp = json["ship_map"]
+	if(temp)
+		for(var/i in config.maplist[SHIP_MAP])
+			var/datum/map_config/VM = config.maplist[SHIP_MAP][i]
+			if(VM.map_name == temp)
+				ship_map_override = VM
+				break
+
+		if(!ship_map_override)
+			log_world("map_config ship_map is set to an incorrect map! ([temp])")
 
 	if(json["announce_text"])
 		announce_text = replacetext(json["announce_text"], "###SHIPNAME###", MAIN_SHIP_NAME)

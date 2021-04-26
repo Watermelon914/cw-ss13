@@ -374,3 +374,8 @@
 
 /// from /obj/structure/resource_node/set_tree(): (datum/techtree/tree)
 #define COMSIG_RESOURCE_NODE_SET_TREE "resource_node_set_tree"
+
+#define COMSIG_SHUTTLE_CAN_MOVE_TOPIC "shuttle_can_move_topic"
+	#define COMPONENT_SHUTTLE_PREVENT_MOVE (1<<0)
+
+#define COMSIG_SHUTTLE_ON_DOCK "shuttle_on_dock"

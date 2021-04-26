@@ -1,0 +1,7331 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aJ" = (
+/obj/structure/machinery/light{
+	dir = 4;
+	tag = "icon-tube1 (EAST)"
+	},
+/turf/open/floor/almayer{
+	dir = 4;
+	icon_state = "silver";
+	tag = "icon-silver (WEST)"
+	},
+/area/almayer/squads/alpha)
+"bA" = (
+/obj/structure/machinery/cm_vending/clothing/marine/alpha,
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"bM" = (
+/obj/structure/machinery/light{
+	dir = 8;
+	tag = "icon-tube1 (EAST)"
+	},
+/turf/open/floor/almayer{
+	dir = 8;
+	icon_state = "silver";
+	tag = "icon-silver (WEST)"
+	},
+/area/almayer/squads/alpha)
+"cc" = (
+/obj/structure/machinery/landinglight/ds1/delaytwo{
+	dir = 8;
+	icon_state = "landingstripe";
+	tag = "icon-landingstripe (WEST)"
+	},
+/turf/open/floor/plating/plating_catwalk,
+/area/almayer/hallways/hangar)
+"cs" = (
+/obj/structure/machinery/cm_vending/clothing/rto/alpha{
+	density = 0;
+	pixel_x = 32
+	},
+/turf/open/floor/plating/plating_catwalk,
+/area/almayer/squads/alpha)
+"cv" = (
+/obj/structure/machinery/cm_vending/gear/spec,
+/obj/structure/machinery/light,
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"cF" = (
+/obj/structure/window/framed/almayer/hull,
+/turf/open/floor/plating,
+/area/almayer/hallways/hangar)
+"cO" = (
+/obj/structure/machinery/light{
+	dir = 8
+	},
+/turf/open/floor/almayer{
+	dir = 8;
+	icon_state = "silver";
+	tag = "icon-silver (NORTHWEST)"
+	},
+/area/almayer/squads/alpha)
+"dd" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "W";
+	tag = "icon-W"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"df" = (
+/turf/open/floor/almayer_hull,
+/area/space)
+"ds" = (
+/obj/structure/machinery/cm_vending/sorted/cargo_guns/squad_prep,
+/obj/structure/machinery/light{
+	dir = 1;
+	tag = "icon-tube1 (NORTH)"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"dx" = (
+/obj/structure/machinery/cm_vending/clothing/rto/alpha{
+	density = 0;
+	pixel_x = 32
+	},
+/turf/open/floor/almayer{
+	icon_state = "silver";
+	tag = "icon-silver"
+	},
+/area/almayer/squads/alpha)
+"dC" = (
+/obj/structure/machinery/cm_vending/clothing/leader/alpha,
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"dY" = (
+/obj/structure/machinery/landinglight/ds1/delayone{
+	dir = 8;
+	icon_state = "landingstripe";
+	tag = "icon-landingstripe (WEST)"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"ed" = (
+/obj/structure/machinery/disposal,
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"et" = (
+/obj/structure/machinery/landinglight/ds1/delayone{
+	dir = 4;
+	icon_state = "landingstripe";
+	tag = "icon-landingstripe (EAST)"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"gb" = (
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"gh" = (
+/obj/structure/bed/chair{
+	dir = 8
+	},
+/turf/open/floor/almayer{
+	dir = 10;
+	icon_state = "silverfull";
+	tag = null
+	},
+/area/almayer/squads/alpha)
+"gl" = (
+/obj/structure/machinery/cm_vending/sorted/cargo_guns/squad_prep,
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"gp" = (
+/turf/open/floor/almayer{
+	icon_state = "cargo_arrow";
+	tag = "null"
+	},
+/area/almayer/squads/alpha)
+"gW" = (
+/obj/structure/machinery/landinglight/ds1{
+	dir = 4;
+	icon_state = "landingstripe";
+	tag = "icon-landingstripe (EAST)"
+	},
+/turf/open/floor/plating/plating_catwalk,
+/area/almayer/hallways/hangar)
+"hx" = (
+/obj/structure/surface/table/reinforced/prison,
+/obj/item/device/multitool{
+	desc = "A large handheld tool used to override various machine functions. Primarily used to pulse Airlock and APC wires on a shortwave frequency. It contains a small data buffer as well. This one is comically oversized. Made in Texas.";
+	icon_state = "multitool_big";
+	name = "\improper Oversized Security Access Tuner";
+	pixel_y = 8
+	},
+/turf/open/floor/almayer,
+/area/almayer/squads/alpha)
+"ii" = (
+/obj/structure/machinery/cm_vending/gear/engi,
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"iA" = (
+/obj/structure/bed/chair{
+	dir = 4
+	},
+/turf/open/floor/almayer,
+/area/almayer/squads/alpha)
+"iD" = (
+/obj/structure/machinery/camera/autoname/almayer{
+	dir = 1;
+	name = "ship-grade camera";
+	tag = "icon-camera (NORTH)"
+	},
+/turf/open/floor/almayer,
+/area/almayer/squads/alpha)
+"iO" = (
+/obj/structure/machinery/cm_vending/gear/medic,
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"jg" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "E";
+	tag = "icon-E"
+	},
+/obj/effect/landmark/start/marine,
+/turf/open/floor/almayer{
+	icon_state = "cargo";
+	tag = "icon-bluecorner (NORTH)"
+	},
+/area/almayer/squads/alpha)
+"jI" = (
+/obj/structure/surface/table/reinforced/prison,
+/obj/structure/sign/prop3{
+	pixel_x = 28
+	},
+/obj/structure/machinery/light{
+	dir = 4;
+	tag = "icon-tube1 (EAST)"
+	},
+/obj/item/clothing/mask/gas{
+	pixel_y = 7
+	},
+/obj/item/clothing/mask/gas{
+	pixel_y = 3
+	},
+/obj/item/storage/fancy/candle_box{
+	pixel_x = 6;
+	pixel_y = -2
+	},
+/turf/open/floor/almayer,
+/area/almayer/squads/alpha)
+"jY" = (
+/obj/structure/flora/pottedplant{
+	desc = "It is made of Fiberbush(tm). It contains asbestos.";
+	icon_state = "pottedplant_22";
+	name = "synthetic potted plant";
+	pixel_y = 8
+	},
+/turf/open/floor/almayer{
+	dir = 9;
+	icon_state = "silver";
+	tag = "icon-silver (NORTHWEST)"
+	},
+/area/almayer/squads/alpha)
+"kj" = (
+/obj/structure/machinery/landinglight/ds1/delaythree{
+	icon_state = "landingstripe";
+	tag = "icon-landingstripe"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"kn" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "SE-out";
+	tag = "icon-SE-out"
+	},
+/turf/open/floor/plating/plating_catwalk,
+/area/almayer/squads/alpha)
+"lG" = (
+/turf/open/floor/plating,
+/area/shuttle/drop1/sulaco)
+"lH" = (
+/obj/structure/machinery/landinglight/ds1/delaytwo{
+	dir = 4;
+	icon_state = "landingstripe";
+	tag = "icon-landingstripe (EAST)"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"mj" = (
+/obj/structure/machinery/door/airlock/almayer/marine/alpha/medic,
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"mk" = (
+/obj/structure/bed/chair{
+	dir = 8
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"ml" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "S";
+	tag = "icon-S"
+	},
+/obj/structure/prop/almayer/hangar_stencil,
+/obj/effect/decal/warning_stripes{
+	icon_state = "W";
+	tag = "icon-W"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"my" = (
+/obj/structure/bed/chair{
+	dir = 4;
+	tag = "icon-chair (EAST)"
+	},
+/turf/open/floor/almayer{
+	dir = 10;
+	icon_state = "silverfull";
+	tag = null
+	},
+/area/almayer/squads/alpha)
+"mF" = (
+/turf/open/floor/almayer_hull{
+	dir = 4;
+	icon_state = "outerhull_dir"
+	},
+/area/space)
+"mJ" = (
+/obj/structure/machinery/cm_vending/gear/rto{
+	density = 0;
+	pixel_x = -32;
+	vend_x_offset = 1
+	},
+/obj/structure/machinery/light{
+	dir = 1;
+	tag = "icon-tube1 (NORTH)"
+	},
+/turf/open/floor/almayer{
+	dir = 8;
+	icon_state = "silver";
+	tag = "icon-silver (NORTHWEST)"
+	},
+/area/almayer/squads/alpha)
+"mN" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "E";
+	tag = "icon-E"
+	},
+/obj/effect/decal/warning_stripes{
+	icon_state = "S";
+	tag = "icon-S"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"mQ" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "W";
+	tag = "icon-W"
+	},
+/obj/effect/decal/warning_stripes{
+	icon_state = "N";
+	tag = "icon-N"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"mT" = (
+/obj/structure/machinery/camera/autoname/almayer{
+	name = "ship-grade camera";
+	tag = ""
+	},
+/obj/structure/machinery/cm_vending/clothing/marine/alpha,
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"nG" = (
+/obj/structure/sign/poster{
+	pixel_y = -32
+	},
+/turf/open/floor/almayer{
+	icon_state = "silver";
+	tag = "icon-silver"
+	},
+/area/almayer/squads/alpha)
+"nW" = (
+/obj/structure/pipes/vents/scrubber{
+	dir = 4
+	},
+/turf/open/floor/almayer,
+/area/almayer/squads/alpha)
+"ou" = (
+/obj/structure/window/reinforced{
+	dir = 4;
+	health = 80
+	},
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/turf/open/floor/almayer{
+	dir = 1;
+	icon_state = "cargo_arrow";
+	tag = "icon-cargo_arrow (NORTH)"
+	},
+/area/almayer/squads/alpha)
+"oE" = (
+/obj/structure/machinery/cm_vending/gear/rto{
+	density = 0;
+	pixel_x = -32;
+	vend_x_offset = 1
+	},
+/turf/open/floor/almayer{
+	dir = 10;
+	icon_state = "silver";
+	tag = "icon-silver (NORTHWEST)"
+	},
+/area/almayer/squads/alpha)
+"pl" = (
+/obj/structure/machinery/landinglight/ds1/delaytwo{
+	dir = 8;
+	icon_state = "landingstripe";
+	tag = "icon-landingstripe (WEST)"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"pC" = (
+/obj/structure/bed/chair,
+/turf/open/floor/almayer,
+/area/almayer/squads/alpha)
+"pJ" = (
+/obj/structure/bed/chair{
+	dir = 8
+	},
+/turf/open/floor/almayer,
+/area/almayer/squads/alpha)
+"pL" = (
+/obj/structure/machinery/light,
+/turf/open/floor/almayer{
+	dir = 8;
+	icon_state = "silvercorner";
+	tag = "icon-silver (NORTHWEST)"
+	},
+/area/almayer/squads/alpha)
+"pX" = (
+/obj/structure/machinery/landinglight/ds1{
+	dir = 4;
+	icon_state = "landingstripe";
+	tag = "icon-landingstripe (EAST)"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"qi" = (
+/obj/structure/machinery/light,
+/obj/structure/machinery/cm_vending/clothing/marine/alpha,
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"qo" = (
+/turf/open/floor/almayer{
+	icon_regular_floor = "cargo_arrow";
+	icon_state = "cargo_arrow"
+	},
+/area/almayer/squads/alpha)
+"qq" = (
+/obj/structure/machinery/landinglight/ds1/delaytwo{
+	dir = 1;
+	icon_state = "landingstripe";
+	tag = "icon-landingstripe (NORTH)"
+	},
+/turf/open/floor/plating/plating_catwalk,
+/area/almayer/hallways/hangar)
+"rl" = (
+/obj/structure/machinery/camera/autoname/almayer{
+	name = "ship-grade camera";
+	tag = "icon-camera (NORTH)"
+	},
+/turf/open/floor/almayer,
+/area/almayer/squads/alpha)
+"ry" = (
+/obj/structure/machinery/light{
+	dir = 1;
+	tag = "icon-tube1 (NORTH)"
+	},
+/obj/effect/landmark/late_join,
+/obj/effect/landmark/start/marine/medic,
+/obj/effect/landmark/start/marine/engineer,
+/turf/open/floor/plating/plating_catwalk,
+/area/almayer/squads/alpha)
+"rz" = (
+/obj/structure/machinery/camera/autoname/almayer{
+	dir = 8;
+	name = "ship-grade camera";
+	tag = "icon-camera (EAST)"
+	},
+/obj/effect/decal/warning_stripes{
+	icon_state = "E";
+	tag = "icon-E"
+	},
+/obj/structure/machinery/light{
+	dir = 4;
+	tag = "icon-tube1 (EAST)"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"rC" = (
+/obj/structure/pipes/vents/scrubber{
+	dir = 4
+	},
+/turf/open/floor/almayer{
+	dir = 1;
+	icon_state = "silvercorner";
+	tag = "icon-silver (NORTHWEST)"
+	},
+/area/almayer/squads/alpha)
+"rQ" = (
+/obj/structure/window/reinforced{
+	dir = 8;
+	health = 80
+	},
+/obj/structure/window/reinforced{
+	dir = 4;
+	health = 80
+	},
+/turf/open/floor/almayer{
+	icon_state = "cargo_arrow";
+	tag = "null"
+	},
+/area/almayer/squads/alpha)
+"rR" = (
+/obj/structure/sign/nosmoking_1,
+/turf/closed/wall/almayer/outer,
+/area/almayer/squads/alpha)
+"rW" = (
+/obj/structure/surface/rack,
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/effect/spawner/random/supply_kit,
+/obj/effect/spawner/random/supply_kit,
+/obj/structure/machinery/camera/autoname/almayer{
+	name = "ship-grade camera";
+	tag = "icon-camera (NORTH)"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"sa" = (
+/obj/structure/machinery/camera/autoname/almayer{
+	name = "ship-grade camera";
+	tag = "icon-camera (NORTH)"
+	},
+/turf/open/floor/almayer{
+	dir = 1;
+	icon_state = "silver";
+	tag = "icon-silver (NORTH)"
+	},
+/area/almayer/squads/alpha)
+"sd" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "SE-out";
+	tag = "icon-SE-out"
+	},
+/turf/open/floor/almayer{
+	dir = 5;
+	icon_state = "silver";
+	tag = "icon-silver (NORTH)"
+	},
+/area/almayer/squads/alpha)
+"sp" = (
+/obj/structure/machinery/landinglight/ds1/delayone{
+	dir = 1;
+	icon_state = "landingstripe";
+	tag = "icon-landingstripe (NORTH)"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"sq" = (
+/obj/structure/machinery/cryopod,
+/turf/open/floor/almayer{
+	icon_state = "silver";
+	tag = "icon-silver"
+	},
+/area/almayer/squads/alpha)
+"sw" = (
+/obj/structure/window/reinforced{
+	dir = 4;
+	health = 80
+	},
+/obj/structure/window/reinforced{
+	dir = 8;
+	health = 80
+	},
+/turf/open/floor/almayer{
+	icon_state = "cargo_arrow";
+	tag = "null"
+	},
+/area/almayer/squads/alpha)
+"tr" = (
+/obj/structure/machinery/door/airlock/almayer/marine/alpha/sl,
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"tF" = (
+/turf/open/floor/plating/plating_catwalk,
+/area/almayer/hallways/hangar)
+"tN" = (
+/obj/structure/machinery/light{
+	dir = 8;
+	tag = "icon-tube1 (EAST)"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"tP" = (
+/obj/structure/bed/chair{
+	dir = 4;
+	tag = "icon-chair (EAST)"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"tY" = (
+/obj/structure/machinery/cryopod/right,
+/turf/open/floor/almayer{
+	icon_state = "silver";
+	tag = "icon-silver"
+	},
+/area/almayer/squads/alpha)
+"ud" = (
+/obj/structure/machinery/door/airlock/almayer/marine/alpha/rto,
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"uj" = (
+/obj/effect/landmark/late_join,
+/obj/effect/landmark/start/marine/leader,
+/turf/open/floor/almayer{
+	icon_state = "silver";
+	tag = "icon-silver"
+	},
+/area/almayer/squads/alpha)
+"uB" = (
+/obj/structure/machinery/landinglight/ds1/delayone{
+	dir = 1;
+	icon_state = "landingstripe";
+	tag = "icon-landingstripe (NORTH)"
+	},
+/turf/open/floor/plating/plating_catwalk,
+/area/almayer/hallways/hangar)
+"uY" = (
+/obj/structure/machinery/landinglight/ds1/delaythree{
+	dir = 8;
+	icon_state = "landingstripe";
+	tag = "icon-landingstripe (WEST)"
+	},
+/turf/open/floor/plating/plating_catwalk,
+/area/almayer/hallways/hangar)
+"uZ" = (
+/obj/structure/machinery/firealarm{
+	pixel_y = 28
+	},
+/turf/open/floor/almayer,
+/area/almayer/squads/alpha)
+"vn" = (
+/obj/structure/machinery/alarm/almayer{
+	dir = 1
+	},
+/obj/structure/machinery/cm_vending/clothing/marine/alpha,
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"vr" = (
+/obj/structure/machinery/landinglight/ds1{
+	icon_state = "landingstripe";
+	tag = "icon-landingstripe"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"vP" = (
+/obj/structure/window/reinforced{
+	dir = 4;
+	health = 80
+	},
+/turf/open/floor/almayer{
+	dir = 1;
+	icon_state = "cargo_arrow";
+	tag = "icon-cargo_arrow (NORTH)"
+	},
+/area/almayer/squads/alpha)
+"wb" = (
+/obj/structure/surface/table/reinforced/prison,
+/obj/item/book/manual/engineering_guide{
+	pixel_x = 6;
+	pixel_y = 6
+	},
+/obj/item/prop/helmetgarb/gunoil{
+	pixel_x = -8
+	},
+/turf/open/floor/almayer,
+/area/almayer/squads/alpha)
+"wm" = (
+/obj/structure/machinery/door/airlock/almayer/marine,
+/turf/open/floor/almayer{
+	dir = 1;
+	icon_state = "red";
+	tag = "icon-red (NORTH)"
+	},
+/area/almayer/squads/alpha)
+"wD" = (
+/obj/structure/machinery/cm_vending/gear/spec,
+/obj/structure/machinery/light{
+	dir = 1
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"wE" = (
+/obj/structure/machinery/cm_vending/gear/leader,
+/obj/structure/machinery/light,
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"xo" = (
+/obj/structure/machinery/landinglight/ds1/delayone{
+	icon_state = "landingstripe";
+	tag = "icon-landingstripe"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"xy" = (
+/turf/open/floor/almayer_hull{
+	dir = 1;
+	icon_state = "outerhull_dir"
+	},
+/area/space)
+"xz" = (
+/obj/docking_port/stationary/marine_dropship/hangar/one{
+	name = "Outpost Alpha Hangar Pad"
+	},
+/turf/open/floor/plating,
+/area/shuttle/drop1/sulaco)
+"xR" = (
+/obj/structure/machinery/light,
+/obj/effect/landmark/late_join,
+/obj/effect/landmark/start/marine/medic,
+/obj/effect/landmark/start/marine/engineer,
+/turf/open/floor/plating/plating_catwalk,
+/area/almayer/squads/alpha)
+"yh" = (
+/obj/structure/machinery/landinglight/ds1{
+	dir = 8;
+	icon_state = "landingstripe";
+	tag = "icon-landingstripe (WEST)"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"yu" = (
+/obj/structure/sign/prop1{
+	pixel_x = -32;
+	pixel_y = 2
+	},
+/obj/structure/machinery/cm_vending/sorted/uniform_supply/squad_prep/delta{
+	req_access = null;
+	req_one_access = null;
+	req_one_access_txt = "15;16;21"
+	},
+/turf/open/floor/almayer,
+/area/almayer/squads/alpha)
+"yC" = (
+/obj/structure/machinery/cryopod/right,
+/obj/structure/machinery/light{
+	dir = 4
+	},
+/turf/open/floor/almayer{
+	icon_state = "cargo";
+	tag = "icon-bluecorner (NORTH)"
+	},
+/area/almayer/squads/alpha)
+"yP" = (
+/obj/structure/sign/poster{
+	pixel_y = 32
+	},
+/turf/open/floor/almayer{
+	dir = 1;
+	icon_state = "silver";
+	tag = "icon-silver (NORTH)"
+	},
+/area/almayer/squads/alpha)
+"yR" = (
+/obj/structure/surface/table/reinforced/prison,
+/obj/item/tool/surgery/scalpel{
+	pixel_x = -1;
+	pixel_y = 10
+	},
+/obj/item/stack/cable_coil,
+/turf/open/floor/almayer,
+/area/almayer/squads/alpha)
+"zH" = (
+/obj/structure/surface/table/reinforced/prison,
+/obj/item/device/flashlight/pen{
+	pixel_x = 7;
+	pixel_y = 3
+	},
+/obj/item/paper_bin/uscm{
+	pixel_x = -5;
+	pixel_y = 8
+	},
+/turf/open/floor/almayer,
+/area/almayer/squads/alpha)
+"zO" = (
+/obj/structure/machinery/landinglight/ds1/delaythree{
+	dir = 4;
+	icon_state = "landingstripe";
+	tag = "icon-landingstripe (EAST)"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"Aq" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "NE-out";
+	tag = "icon-NE-out"
+	},
+/turf/open/floor/almayer{
+	dir = 6;
+	icon_state = "silver";
+	tag = "icon-silver (NORTHWEST)"
+	},
+/area/almayer/squads/alpha)
+"At" = (
+/obj/structure/machinery/door/airlock/almayer/marine,
+/turf/open/floor/almayer,
+/area/almayer/squads/alpha)
+"AW" = (
+/turf/open/floor/almayer,
+/area/almayer/squads/alpha)
+"Bk" = (
+/obj/structure/machinery/landinglight/ds1/delaythree{
+	dir = 8;
+	icon_state = "landingstripe";
+	tag = "icon-landingstripe (WEST)"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"By" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "E";
+	tag = "icon-E"
+	},
+/obj/effect/landmark/start/marine,
+/turf/open/floor/almayer{
+	dir = 4;
+	icon_state = "silver";
+	tag = "icon-silver (WEST)"
+	},
+/area/almayer/squads/alpha)
+"BB" = (
+/obj/structure/machinery/cm_vending/sorted/cargo_guns/squad{
+	req_access = null;
+	req_one_access = null;
+	req_one_access_txt = "15;16;21";
+	vend_x_offset = 0;
+	vend_y_offset = 0
+	},
+/obj/structure/machinery/light,
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"BC" = (
+/obj/structure/machinery/landinglight/ds1/delaytwo{
+	icon_state = "landingstripe";
+	tag = "icon-landingstripe"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"BM" = (
+/obj/effect/landmark/start/marine/smartgunner,
+/obj/structure/machinery/light{
+	dir = 8
+	},
+/turf/open/floor/almayer{
+	icon_state = "cargo";
+	tag = "icon-bluecorner (NORTH)"
+	},
+/area/almayer/squads/alpha)
+"BR" = (
+/obj/structure/flora/pottedplant{
+	desc = "It is made of Fiberbush(tm). It contains asbestos.";
+	icon_state = "pottedplant_22";
+	name = "synthetic potted plant";
+	pixel_y = 8
+	},
+/turf/open/floor/almayer{
+	dir = 6;
+	icon_state = "silver";
+	tag = "icon-silver"
+	},
+/area/almayer/squads/alpha)
+"BS" = (
+/obj/item/tool/crowbar/red,
+/turf/open/floor/almayer,
+/area/almayer/squads/alpha)
+"Ce" = (
+/obj/structure/window/reinforced{
+	dir = 4;
+	health = 80
+	},
+/turf/open/floor/almayer{
+	icon_state = "cargo_arrow";
+	tag = "null"
+	},
+/area/almayer/squads/alpha)
+"Cf" = (
+/obj/structure/window/reinforced{
+	dir = 4;
+	health = 80
+	},
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/turf/open/floor/almayer{
+	icon_state = "cargo_arrow";
+	tag = "null"
+	},
+/area/almayer/squads/alpha)
+"Ck" = (
+/obj/structure/surface/table/almayer,
+/obj/item/storage/box/masks,
+/turf/open/floor/almayer{
+	icon_state = "silver";
+	tag = "icon-silver"
+	},
+/area/almayer/squads/alpha)
+"Cu" = (
+/obj/effect/landmark/start/marine/smartgunner,
+/turf/open/floor/almayer{
+	icon_state = "cargo";
+	tag = "icon-bluecorner (NORTH)"
+	},
+/area/almayer/squads/alpha)
+"CD" = (
+/turf/open/floor/almayer{
+	icon_state = "cargo";
+	tag = "icon-bluecorner (NORTH)"
+	},
+/area/almayer/squads/alpha)
+"CV" = (
+/obj/structure/surface/table/reinforced/prison,
+/obj/item/tool/wrench{
+	pixel_x = 1;
+	pixel_y = 10
+	},
+/obj/item/storage/bible{
+	pixel_x = 7;
+	pixel_y = 4
+	},
+/obj/item/storage/bible{
+	pixel_x = 7;
+	pixel_y = 7
+	},
+/obj/item/reagent_container/food/drinks/cans/souto/diet/grape{
+	pixel_x = -6;
+	pixel_y = 4
+	},
+/turf/open/floor/almayer,
+/area/almayer/squads/alpha)
+"Dn" = (
+/turf/open/floor/plating,
+/area/almayer/hallways/hangar)
+"Ds" = (
+/turf/open/floor/almayer_hull{
+	dir = 5;
+	icon_state = "outerhull_dir"
+	},
+/area/space)
+"DJ" = (
+/obj/effect/landmark/start/marine,
+/obj/effect/landmark/late_join,
+/obj/structure/machinery/light,
+/turf/open/floor/plating/plating_catwalk,
+/area/almayer/squads/alpha)
+"DR" = (
+/obj/structure/machinery/cm_vending/clothing/engi/alpha,
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"Eb" = (
+/obj/item/device/radio/intercom{
+	freerange = 1;
+	name = "General Listening Channel";
+	pixel_y = 28
+	},
+/obj/structure/machinery/cm_vending/clothing/marine/alpha,
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"EF" = (
+/obj/structure/bed/chair{
+	dir = 1;
+	tag = "icon-chair (NORTH)"
+	},
+/turf/open/floor/almayer,
+/area/almayer/squads/alpha)
+"EJ" = (
+/obj/effect/landmark/start/marine,
+/obj/effect/landmark/late_join,
+/turf/open/floor/plating/plating_catwalk,
+/area/almayer/squads/alpha)
+"EM" = (
+/obj/structure/surface/table/almayer,
+/obj/item/storage/box/masks,
+/turf/open/floor/almayer{
+	dir = 1;
+	icon_state = "silver";
+	tag = "icon-silver"
+	},
+/area/almayer/squads/alpha)
+"EN" = (
+/obj/structure/machinery/firealarm{
+	pixel_y = -28
+	},
+/turf/open/floor/almayer,
+/area/almayer/squads/alpha)
+"EV" = (
+/obj/structure/machinery/light{
+	dir = 4;
+	tag = "icon-tube1 (EAST)"
+	},
+/obj/structure/surface/table/almayer,
+/obj/item/tool/hand_labeler,
+/turf/open/floor/almayer{
+	dir = 4;
+	icon_state = "silver";
+	tag = "icon-silver (WEST)"
+	},
+/area/almayer/squads/alpha)
+"Fh" = (
+/obj/structure/machinery/cm_vending/gear/leader,
+/obj/structure/machinery/light{
+	dir = 1
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"Fw" = (
+/obj/structure/surface/table/reinforced/prison,
+/obj/item/stack/sheet/metal{
+	layer = 2.9;
+	pixel_y = 6
+	},
+/obj/item/tool/shovel/etool/folded,
+/turf/open/floor/almayer,
+/area/almayer/squads/alpha)
+"FN" = (
+/obj/structure/extinguisher_cabinet{
+	pixel_x = 26
+	},
+/turf/open/floor/almayer{
+	icon_state = "cargo_arrow";
+	tag = "null"
+	},
+/area/almayer/squads/alpha)
+"FQ" = (
+/obj/structure/machinery/power/apc/almayer{
+	dir = 1;
+	start_charge = 100
+	},
+/obj/effect/landmark/late_join,
+/obj/effect/landmark/start/marine,
+/turf/open/floor/almayer{
+	dir = 1;
+	icon_state = "silver";
+	tag = "icon-silver (NORTH)"
+	},
+/area/almayer/squads/alpha)
+"FX" = (
+/turf/open/floor/almayer{
+	dir = 1;
+	icon_state = "silvercorner";
+	tag = "icon-silver (NORTHWEST)"
+	},
+/area/almayer/squads/alpha)
+"GY" = (
+/obj/structure/pipes/vents/pump{
+	dir = 4
+	},
+/turf/open/floor/almayer,
+/area/almayer/squads/alpha)
+"Hd" = (
+/turf/open/floor/almayer_hull{
+	dir = 8;
+	icon_state = "outerhull_dir"
+	},
+/area/space)
+"HD" = (
+/turf/open/floor/almayer{
+	dir = 1;
+	icon_state = "cargo_arrow";
+	tag = "icon-cargo_arrow (NORTH)"
+	},
+/area/almayer/squads/alpha)
+"HE" = (
+/obj/effect/landmark/start/marine/engineer,
+/obj/effect/landmark/start/marine/medic,
+/turf/open/floor/plating/plating_catwalk,
+/area/almayer/squads/alpha)
+"HI" = (
+/obj/structure/machinery/cm_vending/sorted/cargo_guns/squad_prep,
+/obj/structure/machinery/light,
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"HJ" = (
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"Ie" = (
+/obj/structure/machinery/cm_vending/clothing/rto/alpha{
+	density = 0;
+	pixel_x = 32
+	},
+/turf/open/floor/almayer{
+	dir = 1;
+	icon_state = "silver";
+	tag = "icon-silver (NORTH)"
+	},
+/area/almayer/squads/alpha)
+"Iv" = (
+/turf/open/floor/almayer{
+	dir = 1;
+	icon_regular_floor = "cargo_arrow";
+	icon_state = "cargo_arrow"
+	},
+/area/almayer/squads/alpha)
+"IT" = (
+/obj/item/trash/uscm_mre,
+/turf/open/floor/almayer,
+/area/almayer/squads/alpha)
+"IU" = (
+/obj/structure/machinery/landinglight/ds1/delaythree{
+	dir = 1;
+	icon_state = "landingstripe";
+	tag = "icon-landingstripe (NORTH)"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"Ja" = (
+/obj/structure/machinery/light{
+	dir = 1;
+	tag = "icon-tube1 (NORTH)"
+	},
+/obj/structure/machinery/cm_vending/clothing/marine/alpha,
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"JM" = (
+/obj/structure/machinery/power/apc/almayer{
+	dir = 1;
+	start_charge = 100
+	},
+/turf/open/floor/almayer,
+/area/almayer/squads/alpha)
+"JY" = (
+/obj/structure/machinery/cm_vending/sorted/cargo_guns/squad{
+	req_access = null;
+	req_one_access = null;
+	req_one_access_txt = "15;16;21";
+	vend_x_offset = 0;
+	vend_y_offset = 0
+	},
+/obj/structure/machinery/light{
+	dir = 1;
+	tag = "icon-tube1 (NORTH)"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"Ke" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "NE-out";
+	tag = "icon-NE-out"
+	},
+/turf/open/floor/plating/plating_catwalk,
+/area/almayer/squads/alpha)
+"Kk" = (
+/obj/structure/machinery/cm_vending/gear/rto{
+	density = 0;
+	pixel_x = -32;
+	vend_x_offset = 1
+	},
+/turf/open/floor/almayer{
+	dir = 9;
+	icon_state = "silver";
+	tag = "icon-silver (NORTHWEST)"
+	},
+/area/almayer/squads/alpha)
+"KC" = (
+/obj/structure/sign/poster{
+	pixel_y = 32
+	},
+/turf/open/floor/almayer{
+	dir = 4;
+	icon_state = "silvercorner";
+	tag = "icon-silver (NORTHWEST)"
+	},
+/area/almayer/squads/alpha)
+"KI" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "E";
+	tag = "icon-E"
+	},
+/obj/structure/bed/chair{
+	dir = 8;
+	tag = "icon-chair (NORTH)"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"Ld" = (
+/obj/structure/machinery/firealarm{
+	pixel_y = 28
+	},
+/obj/structure/machinery/cm_vending/clothing/marine/alpha,
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"LB" = (
+/obj/structure/machinery/light{
+	dir = 4
+	},
+/turf/open/floor/almayer{
+	dir = 4;
+	icon_state = "silver";
+	tag = "icon-silver (WEST)"
+	},
+/area/almayer/squads/alpha)
+"LF" = (
+/obj/structure/surface/rack,
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/effect/spawner/random/supply_kit,
+/obj/effect/spawner/random/supply_kit,
+/obj/structure/machinery/camera/autoname/almayer{
+	dir = 1;
+	name = "ship-grade camera";
+	tag = "icon-camera (NORTH)"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"LR" = (
+/obj/structure/machinery/light{
+	tag = "icon-tube1 (EAST)"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"Ma" = (
+/obj/structure/machinery/light{
+	dir = 1;
+	tag = "icon-tube1 (NORTH)"
+	},
+/turf/open/floor/almayer{
+	dir = 1;
+	icon_state = "silvercorner";
+	tag = "icon-silver (NORTHWEST)"
+	},
+/area/almayer/squads/alpha)
+"Ms" = (
+/obj/effect/landmark/late_join,
+/obj/effect/landmark/start/marine/leader,
+/turf/open/floor/almayer{
+	dir = 1;
+	icon_state = "silver";
+	tag = "icon-silver (NORTH)"
+	},
+/area/almayer/squads/alpha)
+"MB" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "S";
+	tag = "icon-S"
+	},
+/obj/structure/prop/almayer/hangar_stencil,
+/obj/structure/machinery/landinglight/ds1/delaytwo{
+	dir = 8;
+	icon_state = "landingstripe";
+	tag = "icon-landingstripe (WEST)"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"MN" = (
+/obj/structure/machinery/cm_vending/sorted/cargo_ammo/squad{
+	req_access = null;
+	req_one_access = null;
+	req_one_access_txt = "15;16;21";
+	vend_x_offset = 0
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"MP" = (
+/turf/open/floor/almayer{
+	dir = 8;
+	icon_state = "silvercorner";
+	tag = "icon-silver (NORTHWEST)"
+	},
+/area/almayer/squads/alpha)
+"MQ" = (
+/obj/structure/machinery/landinglight/ds1/delaythree{
+	dir = 4;
+	icon_state = "landingstripe";
+	tag = "icon-landingstripe (EAST)"
+	},
+/turf/open/floor/plating/plating_catwalk,
+/area/almayer/hallways/hangar)
+"MY" = (
+/obj/structure/window/framed/almayer/hull,
+/turf/open/space/basic,
+/area/almayer/hallways/hangar)
+"Nk" = (
+/obj/structure/machinery/cm_vending/clothing/medic/alpha,
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"Nl" = (
+/obj/structure/machinery/landinglight/ds1/delaytwo{
+	dir = 1;
+	icon_state = "landingstripe";
+	tag = "icon-landingstripe (NORTH)"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"Nt" = (
+/turf/open/floor/almayer{
+	dir = 4;
+	icon_state = "silvercorner";
+	tag = "icon-silver (NORTHWEST)"
+	},
+/area/almayer/squads/alpha)
+"NS" = (
+/obj/structure/machinery/landinglight/ds1{
+	dir = 1;
+	icon_state = "landingstripe";
+	tag = "icon-landingstripe (NORTH)"
+	},
+/turf/open/floor/plating/plating_catwalk,
+/area/almayer/hallways/hangar)
+"NY" = (
+/obj/structure/machinery/cm_vending/gear/smartgun,
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"Ow" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "E";
+	tag = "icon-E"
+	},
+/obj/effect/decal/warning_stripes{
+	icon_state = "N";
+	tag = "icon-N"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"Oz" = (
+/obj/structure/machinery/door/airlock/almayer/marine/alpha/smart,
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"OO" = (
+/obj/structure/machinery/cryopod/right,
+/turf/open/floor/almayer{
+	icon_state = "cargo";
+	tag = "icon-bluecorner (NORTH)"
+	},
+/area/almayer/squads/alpha)
+"OW" = (
+/obj/structure/machinery/door/airlock/almayer/marine,
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"PT" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "W";
+	tag = "icon-W"
+	},
+/obj/effect/decal/warning_stripes{
+	icon_state = "S";
+	tag = "icon-S"
+	},
+/obj/structure/prop/almayer/hangar_stencil,
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"PY" = (
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/structure/window/reinforced{
+	dir = 4;
+	health = 80
+	},
+/turf/open/floor/almayer{
+	dir = 1;
+	icon_state = "cargo_arrow";
+	tag = "icon-cargo_arrow (NORTH)"
+	},
+/area/almayer/squads/alpha)
+"Qg" = (
+/obj/structure/machinery/cm_vending/clothing/smartgun/alpha,
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"Qi" = (
+/obj/item/device/radio/intercom{
+	freerange = 1;
+	name = "General Listening Channel";
+	pixel_y = 28
+	},
+/turf/open/floor/almayer{
+	dir = 1;
+	icon_state = "silver";
+	tag = "icon-silver (NORTH)"
+	},
+/area/almayer/squads/alpha)
+"QH" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "S";
+	tag = "icon-S"
+	},
+/obj/structure/machinery/landinglight/ds1/delayone{
+	dir = 4;
+	icon_state = "landingstripe";
+	tag = "icon-landingstripe (EAST)"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"QO" = (
+/obj/structure/pipes/vents/pump/on,
+/turf/open/floor/almayer,
+/area/almayer/squads/alpha)
+"Rc" = (
+/obj/structure/flora/pottedplant{
+	desc = "It is made of Fiberbush(tm). It contains asbestos.";
+	icon_state = "pottedplant_22";
+	name = "synthetic potted plant";
+	pixel_y = 8
+	},
+/turf/open/floor/almayer{
+	dir = 10;
+	icon_state = "silver";
+	tag = "icon-silver (NORTHWEST)"
+	},
+/area/almayer/squads/alpha)
+"Rj" = (
+/obj/structure/surface/table/reinforced/prison,
+/obj/item/ammo_box/magazine/misc/mre{
+	pixel_x = 4;
+	pixel_y = 15
+	},
+/obj/item/storage/box/wy_mre{
+	pixel_x = 5;
+	pixel_y = 2
+	},
+/obj/item/tool/kitchen/utensil/pfork{
+	pixel_x = -8;
+	pixel_y = 7
+	},
+/obj/item/tool/kitchen/utensil/pfork{
+	pixel_x = -7;
+	pixel_y = 8
+	},
+/turf/open/floor/almayer,
+/area/almayer/squads/alpha)
+"Rm" = (
+/turf/closed/wall/almayer/outer,
+/area/almayer/squads/alpha)
+"Rs" = (
+/obj/structure/window/framed/almayer/hull,
+/turf/open/space/basic,
+/area/almayer/squads/alpha)
+"Rx" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "N";
+	tag = "icon-N"
+	},
+/obj/structure/machinery/landinglight/ds1{
+	dir = 8;
+	icon_state = "landingstripe";
+	tag = "icon-landingstripe (WEST)"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"RO" = (
+/turf/open/floor/almayer_hull{
+	dir = 9;
+	icon_state = "outerhull_dir"
+	},
+/area/space)
+"RY" = (
+/obj/structure/machinery/light{
+	dir = 1;
+	tag = "icon-tube1 (NORTH)"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"RZ" = (
+/obj/structure/flora/pottedplant{
+	desc = "It is made of Fiberbush(tm). It contains asbestos.";
+	icon_state = "pottedplant_22";
+	name = "synthetic potted plant";
+	pixel_y = 8
+	},
+/turf/open/floor/almayer{
+	dir = 5;
+	icon_state = "silver";
+	tag = "icon-silver (NORTHWEST)"
+	},
+/area/almayer/squads/alpha)
+"Sd" = (
+/turf/closed/wall/almayer/outer,
+/area/almayer/hallways/hangar)
+"Sq" = (
+/obj/structure/machinery/status_display{
+	pixel_y = 30
+	},
+/obj/structure/machinery/cm_vending/clothing/marine/alpha,
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"St" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "N";
+	tag = "icon-N"
+	},
+/obj/structure/machinery/landinglight/ds1/delayone{
+	dir = 4;
+	icon_state = "landingstripe";
+	tag = "icon-landingstripe (EAST)"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"SE" = (
+/obj/structure/sign/poster{
+	pixel_y = 32
+	},
+/turf/open/floor/almayer{
+	dir = 8;
+	icon_state = "silver";
+	tag = "icon-silver (NORTHWEST)"
+	},
+/area/almayer/squads/alpha)
+"SL" = (
+/obj/structure/machinery/door/airlock/almayer/marine/alpha/spec,
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"SO" = (
+/turf/open/floor/almayer{
+	icon_state = "silver";
+	tag = "icon-silver"
+	},
+/area/almayer/squads/alpha)
+"Td" = (
+/obj/effect/landmark/late_join,
+/obj/effect/landmark/start/marine/medic,
+/obj/effect/landmark/start/marine/engineer,
+/turf/open/floor/plating/plating_catwalk,
+/area/almayer/squads/alpha)
+"Tf" = (
+/turf/open/floor/almayer_hull{
+	icon_state = "outerhull_dir"
+	},
+/area/space)
+"Tp" = (
+/obj/structure/machinery/door/airlock/almayer/marine,
+/turf/open/floor/almayer{
+	icon_state = "silver";
+	tag = "icon-silver"
+	},
+/area/almayer/squads/alpha)
+"Tz" = (
+/obj/structure/machinery/door/airlock/almayer/marine/alpha/engineer,
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"TB" = (
+/obj/effect/landmark/start/marine,
+/obj/effect/landmark/late_join,
+/obj/structure/machinery/light{
+	dir = 1;
+	tag = "icon-tube1 (NORTH)"
+	},
+/turf/open/floor/plating/plating_catwalk,
+/area/almayer/squads/alpha)
+"TH" = (
+/turf/open/floor/almayer{
+	dir = 1;
+	icon_state = "silver";
+	tag = "icon-silver (NORTH)"
+	},
+/area/almayer/squads/alpha)
+"TO" = (
+/obj/structure/machinery/landinglight/ds1{
+	dir = 1;
+	icon_state = "landingstripe";
+	tag = "icon-landingstripe (NORTH)"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"Ua" = (
+/obj/structure/machinery/cryopod,
+/turf/open/floor/almayer{
+	icon_state = "cargo";
+	tag = "icon-bluecorner (NORTH)"
+	},
+/area/almayer/squads/alpha)
+"Uh" = (
+/obj/structure/machinery/cm_vending/clothing/specialist/alpha,
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/squads/alpha)
+"Uj" = (
+/turf/open/floor/almayer{
+	dir = 1;
+	icon_state = "silver";
+	tag = "icon-silver"
+	},
+/area/almayer/squads/alpha)
+"Up" = (
+/obj/structure/machinery/cm_vending/gear/rto{
+	density = 0;
+	pixel_x = -32;
+	vend_x_offset = 1
+	},
+/obj/structure/machinery/light,
+/turf/open/floor/almayer{
+	dir = 8;
+	icon_state = "silver";
+	tag = "icon-silver (NORTHWEST)"
+	},
+/area/almayer/squads/alpha)
+"UW" = (
+/obj/structure/extinguisher_cabinet{
+	pixel_x = 26
+	},
+/turf/open/floor/almayer{
+	dir = 1;
+	icon_state = "cargo_arrow";
+	tag = "icon-cargo_arrow (NORTH)"
+	},
+/area/almayer/squads/alpha)
+"UZ" = (
+/obj/structure/machinery/alarm/almayer{
+	dir = 1
+	},
+/turf/open/floor/almayer{
+	dir = 1;
+	icon_state = "silver";
+	tag = "icon-silver (NORTH)"
+	},
+/area/almayer/squads/alpha)
+"Vf" = (
+/obj/effect/landmark/start/marine/leader,
+/turf/open/floor/plating/plating_catwalk,
+/area/almayer/squads/alpha)
+"Vn" = (
+/obj/item/stack/catwalk,
+/turf/open/floor/plating/almayer,
+/area/almayer/squads/alpha)
+"Vp" = (
+/turf/open/space/basic,
+/area/space)
+"Vt" = (
+/obj/structure/machinery/light{
+	dir = 4;
+	tag = "icon-tube1 (EAST)"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"Vv" = (
+/obj/structure/machinery/camera/autoname/almayer{
+	dir = 1;
+	name = "ship-grade camera";
+	tag = "icon-camera (NORTH)"
+	},
+/turf/open/floor/almayer{
+	icon_state = "silver";
+	tag = "icon-silver"
+	},
+/area/almayer/squads/alpha)
+"Vz" = (
+/obj/structure/machinery/door/airlock/almayer/marine,
+/turf/open/floor/almayer{
+	dir = 1;
+	icon_state = "silver";
+	tag = "icon-silver (NORTH)"
+	},
+/area/almayer/squads/alpha)
+"VB" = (
+/turf/open/floor/plating/plating_catwalk,
+/area/almayer/squads/alpha)
+"VJ" = (
+/obj/effect/decal/cleanable/blood/oil,
+/turf/open/floor/almayer,
+/area/almayer/squads/alpha)
+"VQ" = (
+/obj/structure/surface/table/reinforced/prison,
+/obj/item/storage/toolbox/mechanical{
+	pixel_x = 1;
+	pixel_y = 7
+	},
+/obj/item/storage/toolbox/emergency{
+	pixel_x = -3
+	},
+/turf/open/floor/almayer,
+/area/almayer/squads/alpha)
+"VT" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "E";
+	tag = "icon-E"
+	},
+/obj/structure/bed/chair{
+	dir = 8;
+	tag = "icon-chair (NORTH)"
+	},
+/obj/structure/machinery/light{
+	dir = 4;
+	tag = "icon-tube1 (EAST)"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"Wz" = (
+/obj/structure/machinery/light{
+	dir = 8
+	},
+/turf/open/floor/almayer{
+	dir = 8;
+	icon_state = "silver";
+	tag = "icon-silver (WEST)"
+	},
+/area/almayer/squads/alpha)
+"WZ" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "E";
+	tag = "icon-E"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"Xa" = (
+/turf/open/floor/almayer{
+	dir = 8;
+	icon_state = "silver";
+	tag = "icon-silver (WEST)"
+	},
+/area/almayer/squads/alpha)
+"Xe" = (
+/turf/open/floor/almayer{
+	dir = 10;
+	icon_state = "silverfull";
+	tag = null
+	},
+/area/almayer/squads/alpha)
+"Yh" = (
+/obj/structure/machinery/cm_vending/sorted/uniform_supply/squad_prep/delta{
+	req_access = null;
+	req_one_access = null;
+	req_one_access_txt = "15;16;21"
+	},
+/obj/structure/machinery/light{
+	dir = 8
+	},
+/turf/open/floor/almayer,
+/area/almayer/squads/alpha)
+"Yl" = (
+/turf/open/floor/almayer{
+	icon_state = "silvercorner";
+	tag = "icon-silver (NORTHWEST)"
+	},
+/area/almayer/squads/alpha)
+"YD" = (
+/turf/open/floor/almayer_hull{
+	dir = 6;
+	icon_state = "outerhull_dir"
+	},
+/area/space)
+"YK" = (
+/obj/effect/landmark/late_join,
+/obj/effect/landmark/start/marine,
+/turf/open/floor/almayer{
+	icon_state = "silver";
+	tag = "icon-silver"
+	},
+/area/almayer/squads/alpha)
+"YN" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "N";
+	tag = "icon-N"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+"Zk" = (
+/turf/open/floor/almayer_hull{
+	dir = 10;
+	icon_state = "outerhull_dir"
+	},
+/area/space)
+"ZH" = (
+/obj/structure/machinery/status_display{
+	pixel_y = 30
+	},
+/turf/open/floor/almayer{
+	dir = 1;
+	icon_state = "silver";
+	tag = "icon-silver (NORTH)"
+	},
+/area/almayer/squads/alpha)
+"ZS" = (
+/obj/effect/decal/warning_stripes{
+	icon_state = "S";
+	tag = "icon-S"
+	},
+/turf/open/floor/almayer{
+	icon_state = "plate";
+	tag = "icon-sterile"
+	},
+/area/almayer/hallways/hangar)
+
+(1,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(2,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(3,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(4,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(5,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(6,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(7,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(8,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(9,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(10,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(11,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(12,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(13,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(14,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(15,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(16,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(17,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(18,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(19,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(20,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(21,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+RO
+Hd
+Hd
+Hd
+Hd
+Hd
+Hd
+Hd
+Hd
+Hd
+Hd
+Hd
+Hd
+Hd
+Hd
+Hd
+Hd
+Hd
+Hd
+Hd
+Hd
+Hd
+Hd
+Hd
+Hd
+Hd
+Hd
+Hd
+Hd
+Hd
+Hd
+Hd
+Hd
+Hd
+Hd
+Hd
+Zk
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(22,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(23,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(24,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+Sd
+Sd
+Sd
+cF
+cF
+cF
+cF
+Sd
+Sd
+Sd
+Sd
+Sd
+Sd
+Sd
+Sd
+Sd
+Sd
+Sd
+Sd
+Sd
+Sd
+Sd
+Sd
+Sd
+cF
+cF
+cF
+cF
+Sd
+Sd
+Sd
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(25,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+Sd
+gb
+tN
+gb
+mQ
+dd
+ml
+tN
+gb
+gb
+gb
+gb
+gb
+gb
+tN
+gb
+gb
+gb
+gb
+gb
+tN
+gb
+gb
+tN
+mQ
+dd
+ml
+gb
+tN
+gb
+Sd
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(26,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+Sd
+gb
+tF
+tF
+YN
+gb
+ZS
+tF
+tF
+tF
+tF
+tF
+tF
+tF
+tF
+tF
+tF
+tF
+tF
+tF
+tF
+tF
+tF
+tF
+YN
+gb
+ZS
+tF
+tF
+gb
+Sd
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(27,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+Sd
+gb
+tF
+gb
+Ow
+et
+QH
+et
+lH
+zO
+pX
+et
+lH
+MQ
+gW
+et
+lH
+zO
+pX
+et
+lH
+zO
+pX
+et
+St
+et
+mN
+gb
+tF
+gb
+Sd
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(28,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+Sd
+RY
+tF
+gb
+BC
+Dn
+Dn
+Dn
+Dn
+Dn
+lG
+lG
+lG
+Dn
+Dn
+Dn
+Dn
+Dn
+Dn
+lG
+lG
+lG
+lG
+Dn
+Dn
+Dn
+TO
+gb
+tF
+LR
+Sd
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(29,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+MY
+gb
+tF
+gb
+xo
+Dn
+Dn
+Dn
+Dn
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+Dn
+lG
+lG
+lG
+lG
+Dn
+Dn
+lG
+sp
+gb
+tF
+gb
+MY
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(30,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+MY
+gb
+tF
+gb
+vr
+Dn
+Dn
+Dn
+Dn
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+Dn
+lG
+Nl
+gb
+tF
+gb
+MY
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(31,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+Sd
+gb
+tF
+gb
+kj
+Dn
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+IU
+gb
+tF
+gb
+Sd
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(32,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+MY
+gb
+tF
+gb
+BC
+Dn
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+Dn
+Dn
+NS
+tF
+tF
+gb
+MY
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(33,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+MY
+gb
+tF
+gb
+xo
+Dn
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+xz
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+Dn
+Dn
+uB
+tF
+tF
+gb
+MY
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(34,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+MY
+gb
+tF
+gb
+vr
+Dn
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+Dn
+Dn
+qq
+tF
+tF
+gb
+MY
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(35,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+Sd
+gb
+tF
+gb
+kj
+Dn
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+IU
+gb
+tF
+gb
+Sd
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(36,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+MY
+gb
+tF
+gb
+BC
+Dn
+Dn
+Dn
+Dn
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+Dn
+lG
+TO
+gb
+tF
+gb
+MY
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(37,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+MY
+gb
+tF
+gb
+xo
+Dn
+Dn
+Dn
+Dn
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+lG
+Dn
+lG
+lG
+lG
+lG
+Dn
+Dn
+lG
+sp
+gb
+tF
+gb
+MY
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(38,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+Sd
+RY
+tF
+gb
+vr
+Dn
+Dn
+Dn
+Dn
+Dn
+lG
+lG
+lG
+Dn
+Dn
+Dn
+Dn
+Dn
+Dn
+lG
+lG
+lG
+lG
+Dn
+Dn
+Dn
+Nl
+gb
+tF
+LR
+Sd
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(39,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+Sd
+gb
+tF
+gb
+mQ
+Bk
+MB
+dY
+yh
+Bk
+pl
+dY
+yh
+uY
+cc
+dY
+yh
+Bk
+pl
+dY
+yh
+Bk
+pl
+dY
+Rx
+Bk
+PT
+gb
+tF
+gb
+Sd
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(40,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+Sd
+gb
+tF
+tF
+YN
+gb
+ZS
+tF
+tF
+tF
+tF
+tF
+tF
+tF
+tF
+tF
+tF
+tF
+tF
+tF
+tF
+tF
+tF
+tF
+YN
+gb
+ZS
+tF
+tF
+gb
+Sd
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(41,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+Sd
+gb
+Vt
+gb
+Ow
+WZ
+mN
+VT
+KI
+VT
+gb
+gb
+KI
+KI
+VT
+KI
+KI
+gb
+gb
+VT
+KI
+KI
+WZ
+rz
+Ow
+WZ
+mN
+gb
+Vt
+gb
+Sd
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(42,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+Sd
+Sd
+Sd
+cF
+cF
+cF
+cF
+Rm
+Rm
+Rm
+OW
+OW
+Rm
+Rm
+Rm
+Rm
+Rm
+OW
+OW
+Rm
+Rm
+Rm
+Sd
+Sd
+cF
+cF
+cF
+cF
+Sd
+Sd
+Sd
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(43,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+df
+df
+df
+df
+Rm
+gl
+vP
+TH
+EN
+Rm
+Yh
+yu
+Yh
+Rm
+JM
+SO
+Ce
+gl
+Rm
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(44,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Ds
+mF
+mF
+df
+df
+df
+df
+df
+df
+df
+Rm
+ds
+PY
+TH
+AW
+AW
+CD
+CD
+CD
+AW
+AW
+SO
+sw
+HI
+Rm
+df
+df
+df
+df
+df
+df
+df
+mF
+mF
+mF
+mF
+YD
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(45,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+df
+Rs
+gl
+ou
+VB
+VB
+HJ
+my
+tP
+my
+HJ
+VB
+VB
+Cf
+gl
+Rs
+df
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(46,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+df
+Rs
+gl
+PY
+TH
+AW
+AW
+Fw
+CV
+VQ
+AW
+AW
+SO
+sw
+gl
+Rs
+df
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(47,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+df
+Rm
+ds
+ou
+TH
+AW
+AW
+AW
+pJ
+pJ
+AW
+AW
+SO
+rQ
+HI
+Rm
+df
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(48,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+df
+Rm
+gl
+PY
+TH
+AW
+AW
+iA
+iA
+IT
+AW
+AW
+SO
+sw
+gl
+Rm
+df
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(49,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+df
+Rm
+Rm
+rW
+TH
+BS
+pC
+yR
+zH
+hx
+EF
+AW
+SO
+LF
+Rm
+Rm
+df
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(50,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+df
+Rm
+MN
+HD
+VB
+Vn
+HJ
+Xe
+mk
+gh
+HJ
+VB
+VB
+gp
+MN
+Rm
+df
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(51,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+df
+Rm
+JY
+HD
+TH
+AW
+VJ
+AW
+AW
+AW
+AW
+AW
+SO
+gp
+BB
+Rm
+df
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(52,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+df
+Rm
+MN
+UW
+TH
+AW
+AW
+Rj
+jI
+wb
+AW
+AW
+SO
+FN
+MN
+Rm
+df
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(53,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+df
+Rm
+Rm
+Rm
+Rm
+At
+At
+rR
+Rm
+rR
+At
+At
+Rm
+Rm
+Rm
+Rm
+df
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(54,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+df
+Rs
+Kk
+Up
+Rm
+Ma
+MP
+Rc
+Rm
+jY
+FX
+pL
+Rm
+mJ
+oE
+Rm
+df
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(55,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+df
+Rs
+Ie
+cs
+ud
+VB
+AW
+nG
+Rm
+yP
+AW
+VB
+ud
+cs
+dx
+Rm
+df
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(56,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rm
+Rm
+Rm
+Rm
+Rm
+uZ
+Yl
+BR
+Rm
+RZ
+Nt
+EN
+Rm
+Rm
+Rm
+Rm
+Rm
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(57,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rm
+Qg
+VB
+Oz
+VB
+VB
+SO
+ed
+Rm
+ed
+Uj
+VB
+VB
+Oz
+AW
+Qg
+Rm
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(58,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rm
+NY
+aJ
+Rm
+EV
+Nt
+qo
+bA
+Rm
+bA
+Iv
+Yl
+EV
+Rm
+aJ
+NY
+Rm
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(59,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rm
+Rm
+Rm
+Rm
+Rm
+Qi
+qo
+bA
+Rm
+Ld
+Iv
+SO
+Rm
+Rm
+Rm
+Rm
+Rm
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(60,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rm
+iO
+cO
+Nk
+Rm
+sa
+AW
+bA
+Rm
+bA
+QO
+Vv
+Rm
+Nk
+bM
+iO
+Rm
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(61,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rm
+iO
+VB
+Nk
+Rm
+TH
+qo
+bA
+Rm
+bA
+Iv
+SO
+Rm
+Nk
+AW
+iO
+Rm
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(62,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rs
+EM
+VB
+HJ
+mj
+VB
+qo
+bA
+Rm
+Eb
+Iv
+VB
+mj
+HJ
+AW
+Ck
+Rs
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(63,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rm
+iO
+VB
+Nk
+Rm
+TH
+GY
+qi
+Rm
+Ja
+AW
+SO
+Rm
+Nk
+AW
+iO
+Rm
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(64,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rm
+iO
+LB
+Nk
+Rm
+TH
+qo
+bA
+Rm
+bA
+Iv
+SO
+Rm
+Nk
+LB
+iO
+Rm
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(65,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rm
+Rm
+Rm
+Rm
+Rm
+TH
+qo
+bA
+Rm
+bA
+Iv
+SO
+Rm
+Rm
+Rm
+Rm
+Rm
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(66,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rm
+ii
+cO
+DR
+Rm
+TH
+AW
+bA
+Rm
+mT
+AW
+SO
+Rm
+DR
+Wz
+ii
+Rm
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(67,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rm
+ii
+VB
+DR
+Rm
+TH
+qo
+bA
+Rm
+bA
+Iv
+SO
+Rm
+DR
+VB
+ii
+Rm
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(68,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rs
+CD
+VB
+HJ
+Tz
+VB
+qo
+bA
+Rm
+bA
+Iv
+VB
+Tz
+HJ
+VB
+CD
+Rs
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(69,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rm
+ii
+aJ
+DR
+Rm
+UZ
+AW
+bA
+Rm
+vn
+nW
+SO
+Rm
+DR
+aJ
+ii
+Rm
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(70,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rm
+Rm
+Rm
+Rm
+Rm
+ZH
+qo
+bA
+Rm
+Sq
+Iv
+SO
+Rm
+Rm
+Rm
+Rm
+Rm
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(71,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rm
+wD
+Uh
+Rm
+SE
+rC
+qo
+qi
+Rm
+Ja
+Iv
+MP
+Xa
+Rm
+Uh
+cv
+Rm
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(72,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rs
+Uj
+VB
+SL
+AW
+VB
+AW
+bA
+Rm
+bA
+AW
+VB
+AW
+SL
+VB
+SO
+Rs
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(73,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rm
+Rm
+Rm
+Rm
+rl
+AW
+qo
+bA
+Rm
+bA
+Iv
+AW
+iD
+Rm
+Rm
+Rm
+Rm
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(74,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rs
+Uj
+VB
+tr
+AW
+VB
+qo
+bA
+Rm
+bA
+Iv
+VB
+AW
+tr
+VB
+SO
+Rs
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(75,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rm
+Fh
+dC
+Rm
+KC
+AW
+Yl
+bA
+Rm
+bA
+Nt
+AW
+Yl
+Rm
+dC
+wE
+Rm
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(76,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rm
+Rm
+Rm
+Rm
+wm
+At
+Tp
+Rm
+Rm
+Rm
+Vz
+At
+Tp
+Rm
+Rm
+Rm
+Rm
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(77,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Ds
+mF
+mF
+df
+df
+df
+df
+df
+df
+Rm
+TH
+VB
+SO
+Vf
+BM
+Vf
+TH
+VB
+SO
+Rm
+df
+df
+df
+df
+df
+df
+mF
+mF
+YD
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(78,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rm
+Ms
+VB
+SO
+HE
+Ua
+HE
+TH
+VB
+uj
+Rm
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(79,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rm
+Ua
+Td
+SO
+HE
+OO
+HE
+TH
+Td
+sq
+Rm
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(80,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rm
+Rm
+ry
+SO
+VB
+Cu
+VB
+TH
+xR
+Rm
+Rm
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(81,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rm
+OO
+Td
+SO
+HE
+Ua
+HE
+TH
+Td
+tY
+Rm
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(82,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rm
+FQ
+VB
+SO
+HE
+OO
+HE
+TH
+VB
+YK
+Rm
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(83,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rm
+TH
+VB
+SO
+VB
+Cu
+VB
+TH
+VB
+SO
+Rm
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(84,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rm
+sd
+By
+Aq
+kn
+jg
+Ke
+sd
+By
+Aq
+Rm
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(85,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rm
+TB
+Ua
+EJ
+EJ
+Ua
+EJ
+EJ
+Ua
+DJ
+Rm
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(86,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rm
+EJ
+OO
+EJ
+EJ
+OO
+EJ
+EJ
+OO
+EJ
+Rm
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(87,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rm
+EJ
+CD
+EJ
+EJ
+CD
+EJ
+EJ
+CD
+EJ
+Rm
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(88,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rm
+EJ
+Ua
+EJ
+EJ
+Ua
+EJ
+EJ
+Ua
+EJ
+Rm
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(89,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rm
+EJ
+yC
+EJ
+EJ
+yC
+EJ
+EJ
+yC
+EJ
+Rm
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(90,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+Rm
+Rm
+Rm
+Rm
+Rm
+Rm
+Rm
+Rm
+Rm
+Rm
+Rm
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(91,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(92,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(93,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(94,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(95,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+xy
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+df
+Tf
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(96,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Ds
+mF
+mF
+mF
+mF
+mF
+mF
+mF
+mF
+mF
+mF
+mF
+mF
+mF
+mF
+mF
+mF
+mF
+mF
+mF
+mF
+mF
+YD
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(97,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(98,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(99,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(100,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(101,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(102,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}
+(103,1,1) = {"
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+Vp
+"}

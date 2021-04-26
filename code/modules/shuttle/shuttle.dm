@@ -944,6 +944,8 @@
 
 
 /obj/docking_port/mobile/proc/can_move_topic(mob/user)
+	if(SEND_SIGNAL(src, COMSIG_SHUTTLE_CAN_MOVE_TOPIC, user) & COMPONENT_SHUTTLE_PREVENT_MOVE)
+		return FALSE
 	if(mode == SHUTTLE_RECHARGING)
 		to_chat(user, "<span class='warning'>The engines are not ready to use yet!</span>")
 		return FALSE

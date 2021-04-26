@@ -58,6 +58,7 @@
 #define SS_INIT_PLANT              21.5
 #define SS_INIT_HUMANS             21
 #define SS_INIT_MAP                20
+#define SS_INIT_TICKER             19.9
 #define SS_INIT_COMPONENT          19.5
 #define SS_INIT_POWER              19
 #define SS_INIT_OBJECT             18
@@ -82,7 +83,6 @@
 #define SS_INIT_UNSPECIFIED        0
 #define SS_INIT_EMERGENCY_SHUTTLE -19
 #define SS_INIT_ASSETS            -20
-#define SS_INIT_TICKER            -21
 #define SS_INIT_VOTE			  -23
 #define SS_INIT_FINISH            -24
 #define SS_INIT_MINIMAP           -25

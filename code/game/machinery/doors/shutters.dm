@@ -31,6 +31,7 @@
 	return
 
 /obj/structure/machinery/door/poddoor/shutters/open()
+	set waitfor = FALSE
 	if(operating == 1) //doors can still open when emag-disabled
 		return
 	if(!operating) //in case of emag
@@ -50,6 +51,7 @@
 	return 1
 
 /obj/structure/machinery/door/poddoor/shutters/close()
+	set waitfor = FALSE
 	if(operating)
 		return
 	operating = 1

@@ -103,6 +103,8 @@
 	new_dock.last_dock_time = world.time
 	setDir(new_dock.dir)
 
+	SEND_SIGNAL(src, COMSIG_SHUTTLE_ON_DOCK, new_dock)
+
 	// remove any stragglers just in case, and clear the list
 	remove_ripples()
 	return DOCKING_SUCCESS

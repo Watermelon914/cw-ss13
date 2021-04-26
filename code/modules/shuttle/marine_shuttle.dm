@@ -32,6 +32,10 @@
 	id = "normandy"
 	roundstart_template = /datum/map_template/shuttle/dropship_two
 
+/obj/docking_port/stationary/marine_dropship/hive
+	name = "Hive"
+	id = "hive"
+
 /obj/docking_port/mobile/marine_dropship
 	name = "marine dropship"
 	dir = SOUTH
@@ -220,6 +224,15 @@
 	icon = 'icons/obj/structures/machinery/shuttle-parts.dmi'
 	req_one_access = list(ACCESS_MARINE_DROPSHIP, ACCESS_MARINE_LEADER) // TLs can only operate the remote console
 	possible_destinations = "lz1;lz2;alamo;normandy"
+
+/obj/structure/machinery/computer/shuttle/marine_dropship/Initialize()
+	. = ..()
+	GLOB.shuttle_controls_list += src
+
+/obj/structure/machinery/computer/shuttle/marine_dropship/Destroy()
+	GLOB.shuttle_controls_list -= src
+	return ..()
+
 
 /obj/structure/machinery/computer/shuttle/marine_dropship/tgui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
@@ -655,17 +668,6 @@
 	name = "shuttle control console"
 	icon = 'icons/obj/structures/machinery/computer.dmi'
 	icon_state = "shuttle"
-
-
-/obj/structure/machinery/computer/shuttle/shuttle_control/Initialize()
-	. = ..()
-	GLOB.shuttle_controls_list += src
-
-
-/obj/structure/machinery/computer/shuttle/shuttle_control/Destroy()
-	GLOB.shuttle_controls_list -= src
-	return ..()
-
 
 /obj/structure/machinery/computer/shuttle/shuttle_control/ui_interact(mob/user)
 	if(!allowed(user))

@@ -319,6 +319,9 @@ GLOBAL_DATUM_INIT(rain_effect, /obj/effect/weather_vfx_holder/rain, new)
 	soundscape_interval = 30
 	soundscape_playlist = SCAPE_PL_THUNDER
 
+/area/bigredv2/outside/unknown
+	name = "\improper Unknown Area"
+
 /area/bigredv2/outside/ne
 	name = "\improper Northeast Colony Grounds"
 	icon_state = "northeast"
@@ -623,3 +626,14 @@ GLOBAL_DATUM_INIT(rain_effect, /obj/effect/weather_vfx_holder/rain, new)
 	name = "\improper LZ2 'Cargo'"
 	icon_state = "tcomsatcham"
 	requires_power = 0
+
+/area/bigredv2/hive
+	name = "\improper Xenomorph Hive"
+	requires_power = FALSE
+	lighting_use_dynamic = FALSE
+	luminosity = TRUE
+	icon_state = "caves_north"
+	ceiling = CEILING_MAX
+	ceiling_muffle = FALSE
+	ambience_exterior = AMBIENCE_YAUTJA
+	soundscape_playlist = SCAPE_PL_ELEVATOR_MUSIC
