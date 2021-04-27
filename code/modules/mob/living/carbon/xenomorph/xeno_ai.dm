@@ -1,5 +1,6 @@
 /mob/living/carbon/Xenomorph
 	// AI stuff
+	var/flags_ai = NO_FLAGS
 	var/mob/current_target
 
 	var/next_path_generation = 0
@@ -35,7 +36,7 @@
 /mob/living/carbon/Xenomorph/proc/process_ai(delta_time, game_evaluation)
 	SHOULD_NOT_SLEEP(TRUE)
 	SHOULD_CALL_PARENT(TRUE)
-	if(!hive)
+	if(!hive || !get_turf(src))
 		return TRUE
 
 	if(is_mob_incapacitated(TRUE))
@@ -267,7 +268,7 @@
 			smallest_distance = distance
 			closest_human = H
 
-	if(smallest_distance > RANGE_TO_DESPAWN_XENO)
+	if(smallest_distance > RANGE_TO_DESPAWN_XENO && (XENO_AI_NO_DESPAWN & flags_ai))
 		remove_ai()
 		qdel(src)
 		return

@@ -1,5 +1,5 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
-#define MAIN_SHIP_NAME "USS Almayer"
+#define MAIN_SHIP_NAME "Outpost Alpha"
 //=================================================
 //Please don't edit these values without speaking to Errorage first	~Carn
 //Admin Permissions

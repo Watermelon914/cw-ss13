@@ -280,7 +280,8 @@ SUBSYSTEM_DEF(vote)
 					maps += i
 
 				choices.Add(maps)
-				if(length(choices) < 1)
+				if(length(choices) < 2)
+					on_end.Invoke()
 					return FALSE
 				SSentity_manager.filter_then(/datum/entity/map_vote, null, CALLBACK(src, .proc/carry_over_callback))
 
@@ -302,10 +303,12 @@ SUBSYSTEM_DEF(vote)
 					maps += i
 				choices.Add(maps)
 				if(length(choices) < 2)
+					on_end.Invoke()
 					return FALSE
 			if("custom")
 				question = input(usr, "What is the vote for?")
 				if(!question)
+					on_end.Invoke()
 					return FALSE
 				for(var/i = 1 to 10)
 					var/option = capitalize(input(usr, "Please enter an option or hit cancel to finish"))
@@ -313,6 +316,7 @@ SUBSYSTEM_DEF(vote)
 						break
 					choices.Add(option)
 			else
+				on_end.Invoke()
 				return FALSE
 
 		for(var/i in choices)

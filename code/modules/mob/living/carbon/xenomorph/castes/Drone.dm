@@ -69,15 +69,16 @@
 	var/search_delay = 3 SECONDS
 	var/pursuing_target = FALSE
 
-// Drone has unique behaviour, it is not a fighting caste
+/mob/living/carbon/Xenomorph/Drone/make_ai()
+	. = ..()
+	current_aura = pick(caste.aura_allowed)
+
 /mob/living/carbon/Xenomorph/Drone/process_ai(delta_time, game_evaluation)
-	SHOULD_CALL_PARENT(FALSE)
-
-	a_intent = INTENT_HARM
-
 	. = ..()
 	if(.)
 		return
+
+	a_intent = INTENT_HARM
 
 	if((!target_turf || pursuing_target) && next_search_time < world.time)
 		var/list/valid_turfs = RANGE_TURFS(range_to_check_for_weeds, current_target)

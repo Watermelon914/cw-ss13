@@ -32,9 +32,16 @@
 	var/endgame_remaining_spawns = 8
 	var/game_shuttle_id = "alamo"
 
+	var/endgame_enabled = FALSE
+	var/boss_battle_enabled = FALSE
+
 	var/endgame_map_path = "map_files/Hive"
 	var/endgame_map_file = "Hive.dmm"
+
+	var/endgame_entrance_area = /area/hive_entrance
 	var/list/endgame_map_traits = list()
+
+	var/boss_to_spawn = /mob/living/carbon/Xenomorph/Queen
 
 	var/game_started = FALSE
 
@@ -52,9 +59,6 @@
 		var/datum/squad/S = i
 		if(!(S.name in squad_limit))
 			RoleAuthority.squads -= i
-
-	var/datum/techtree/marine/M = GET_TREE(TREE_MARINE)
-	M.zlevel_check = FALSE
 
 	for(var/i in GLOB.objective_landmarks)
 		var/turf/T = get_turf(i)
@@ -116,7 +120,7 @@
 		INVOKE_ASYNC(src, .proc/enter_endgame)
 
 /datum/game_mode/colonialmarines/ai/proc/enter_endgame()
-	marine_announcement("Massive biosignatures detected. Xenomorph hive located. Please board the dropship and launch as soon as possible. Autopilot co-ordinates set for Xenomorph Hive", "Outpost Alpha AI", 'sound/misc/queen_alarm.ogg')
+	marine_announcement("Massive biosignatures detected. Xenomorph hive located. Please board the dropship and launch as soon as possible. Autopilot co-ordinates set for Xenomorph Hive", "[MAIN_SHIP_NAME] AI", 'sound/misc/distressbeacon_sunshine.ogg')
 	for(var/i in GLOB.xeno_ai_spawns)
 		var/obj/effect/landmark/xeno_ai/XA = i
 		XA.remaining_spawns = endgame_remaining_spawns
@@ -127,9 +131,11 @@
 		var/obj/structure/machinery/computer/shuttle/S = i
 		S.possible_destinations = "hive"
 
+	endgame_enabled = TRUE
+
 /datum/game_mode/colonialmarines/ai/proc/shuttle_launch_handler(var/obj/docking_port/mobile/marine_dropship/DS, var/mob/user)
 	SIGNAL_HANDLER
-	if(is_mainship_level(DS.z))
+	if(is_mainship_level(DS.z) || endgame_enabled)
 		for(var/i in GLOB.alive_client_human_list)
 			var/mob/M = i
 			if(is_ground_level(M.z))
@@ -154,6 +160,20 @@
 		flags_round_type |= MODE_NO_LATEJOIN
 		game_started = TRUE
 
+	if(endgame_enabled)
+		for(var/i in GLOB.alive_client_human_list)
+			var/mob/M = i
+			if(M.z == DS.z)
+				continue
+			M.forceMove(get_turf(DS))
+
+/datum/game_mode/colonialmarines/ai/declare_completion()
+	. = ..()
+	for(var/i in GLOB.clients)
+		var/client/C = i
+		C.set_queued_music(null)
+		sound_to(C, sound(null, channel=SOUND_CHANNEL_MUSIC))
+		C.current_music = null
 
 /datum/game_mode/colonialmarines/ai/end_round_message()
 	switch(round_finished)
@@ -182,8 +202,44 @@ GLOBAL_LIST_INIT(t3_ais, list(
 	/mob/living/carbon/Xenomorph/Praetorian
 ))
 
+/datum/game_mode/colonialmarines/ai/proc/start_boss_battle()
+	boss_battle_enabled = TRUE
+	for(var/i in GLOB.boss_entrance_landmarks)
+		var/obj/effect/landmark/boss_entrance/BE = i
+		if(BE.close_on_begin)
+			BE.attached_object.density = FALSE
+			INVOKE_ASYNC(BE.attached_object, /obj/structure/machinery/door.proc/close, TRUE)
+		else
+			INVOKE_ASYNC(BE.attached_object, /obj/structure/machinery/door.proc/open, TRUE)
+
+	for(var/i in GLOB.alive_client_human_list)
+		to_chat(i, SPAN_HIGHDANGER("This is it. This is the Queen's chamber. Kill the Queen to succeed in your objectives!"))
+
+	var/turf/spawn_loc = get_turf(GLOB.boss_spawn)
+	var/mob/living/carbon/Xenomorph/X = new boss_to_spawn(spawn_loc)
+	RegisterSignal(X, COMSIG_MOB_DEATH, .proc/marine_win)
+
+/datum/game_mode/colonialmarines/ai/proc/marine_win()
+	for(var/i in GLOB.xeno_mob_list)
+		var/mob/M = i
+		M.gib("marine win")
+
+	round_finished = MODE_PVE_WIN
+
 /datum/game_mode/colonialmarines/ai/process(delta_time)
 	. = ..()
+
+	if(endgame_enabled && !boss_battle_enabled)
+		var/ready_for_boss_battle = TRUE
+		for(var/i in GLOB.alive_client_human_list)
+			var/mob/living/carbon/human/H = i
+			var/area/A = get_area(H)
+			if(A.type != endgame_entrance_area)
+				ready_for_boss_battle = FALSE
+				break
+
+		if(ready_for_boss_battle)
+			start_boss_battle()
 
 	var/t2_amount = 0
 	var/t3_amount = 0
@@ -209,6 +265,14 @@ GLOBAL_LIST_INIT(t3_ais, list(
 
 	for(var/i in targetted_players)
 		var/client/C = i
+
+		if(SSticker.current_state == GAME_STATE_FINISHED)
+			C.set_queued_music(null)
+			continue
+
+		if(boss_battle_enabled)
+			SET_THREAT(C, length(GLOB.danger_music))
+			continue
 
 		if(!total_amount)
 			C.set_queued_music(null) // Remove queued music
@@ -282,9 +346,12 @@ GLOBAL_LIST_INIT(t3_ais, list(
 	SIGNAL_HANDLER
 	X.make_ai()
 
-// Temporary fix for now, proper win conditions can be set later.
 /datum/game_mode/colonialmarines/ai/check_win()
-	return FALSE
+	if(round_finished || SSticker.current_state != GAME_STATE_PLAYING)
+		return
+
+	if(!length(GLOB.alive_client_human_list))
+		round_finished = MODE_PVE_LOSE
 
 GLOBAL_LIST_EMPTY_TYPED(objective_landmarks, /obj/effect/landmark/objective_landmark)
 
@@ -299,3 +366,70 @@ GLOBAL_LIST_EMPTY_TYPED(objective_landmarks, /obj/effect/landmark/objective_land
 /obj/effect/landmark/objective_landmark/Destroy()
 	GLOB.objective_landmarks -= src
 	return ..()
+
+GLOBAL_LIST_EMPTY_TYPED(boss_entrance_landmarks, /obj/effect/landmark/boss_entrance)
+
+/obj/effect/landmark/boss_entrance
+	var/close_on_begin = FALSE
+	var/obj/structure/machinery/door/attached_object
+
+/obj/effect/landmark/boss_entrance/Initialize(mapload)
+	. = ..()
+	if(!attached_object)
+		return INITIALIZE_HINT_QDEL
+
+	GLOB.boss_entrance_landmarks += src
+	attached_object = new attached_object(loc)
+
+/obj/effect/landmark/boss_entrance/Destroy()
+	QDEL_NULL(attached_object)
+	GLOB.boss_entrance_landmarks -= src
+	return ..()
+
+/obj/effect/landmark/boss_entrance/secure_closed
+	close_on_begin = FALSE
+	attached_object = /obj/structure/machinery/door/poddoor/two_tile/four_tile/secure
+
+/obj/effect/landmark/boss_entrance/secure_open
+	close_on_begin = TRUE
+	attached_object = /obj/structure/machinery/door/poddoor/two_tile/four_tile/secure/opened
+
+
+
+GLOBAL_DATUM(boss_spawn, /obj/effect/landmark/boss_spawn)
+
+/obj/effect/landmark/boss_spawn
+	name = "Boss Spawn"
+
+/obj/effect/landmark/boss_spawn/Initialize(mapload, ...)
+	. = ..()
+	if(GLOB.boss_spawn)
+		qdel(GLOB.boss_spawn)
+	GLOB.boss_spawn = src
+
+/obj/effect/landmark/boss_spawn/Destroy()
+	GLOB.boss_spawn = null
+	return ..()
+
+
+/area/hive_entrance
+	name = "\improper Xenomorph Hive Entrance"
+	requires_power = FALSE
+	lighting_use_dynamic = FALSE
+	luminosity = TRUE
+	icon_state = "caves_lambda"
+	ceiling = CEILING_MAX
+	ceiling_muffle = FALSE
+	ambience_exterior = AMBIENCE_YAUTJA
+	soundscape_playlist = SCAPE_PL_ELEVATOR_MUSIC
+
+/area/hive
+	name = "\improper Xenomorph Hive"
+	requires_power = FALSE
+	lighting_use_dynamic = FALSE
+	luminosity = TRUE
+	icon_state = "caves_north"
+	ceiling = CEILING_MAX
+	ceiling_muffle = FALSE
+	ambience_exterior = AMBIENCE_YAUTJA
+	soundscape_playlist = SCAPE_PL_ELEVATOR_MUSIC

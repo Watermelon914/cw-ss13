@@ -1,4 +1,11 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"ap" = (
+/obj/effect/landmark/boss_spawn,
+/turf/open/floor{
+	icon_state = "whitepurplefull";
+	tag = "icon-whitepurplefull"
+	},
+/area/hive)
 "ea" = (
 /turf/open/mars_cave{
 	icon_state = "mars_cave_19";
@@ -11,7 +18,7 @@
 	icon_state = "dark";
 	tag = "icon-dark"
 	},
-/area/bigredv2/hive)
+/area/hive)
 "fR" = (
 /turf/open/mars_cave{
 	icon_state = "mars_dirt_4";
@@ -24,7 +31,14 @@
 	icon_state = "dark";
 	tag = "icon-dark"
 	},
-/area/bigredv2/hive)
+/area/hive)
+"gF" = (
+/obj/effect/landmark/boss_entrance/secure_closed,
+/turf/open/floor{
+	icon_state = "dark";
+	tag = "icon-dark"
+	},
+/area/hive)
 "hw" = (
 /turf/open/mars_cave{
 	icon_state = "mars_cave_16";
@@ -51,13 +65,6 @@
 	icon_state = "pwall"
 	},
 /area/space)
-"jD" = (
-/turf/open/floor{
-	dir = 1;
-	icon_state = "whitepurplecorner";
-	tag = "icon-whitepurplecorner (NORTH)"
-	},
-/area/bigredv2/hive)
 "lD" = (
 /obj/structure/machinery/light/built{
 	dir = 4;
@@ -67,13 +74,13 @@
 	icon_state = "dark";
 	tag = "icon-dark"
 	},
-/area/bigredv2/hive)
+/area/hive)
 "mT" = (
 /turf/open/floor{
 	icon_state = "whitepurple";
 	tag = "icon-whitepurple"
 	},
-/area/bigredv2/hive)
+/area/hive)
 "nj" = (
 /obj/effect/alien/weeds/node,
 /turf/open/mars_cave{
@@ -103,7 +110,7 @@
 	icon_state = "dark";
 	tag = "icon-dark"
 	},
-/area/bigredv2/hive)
+/area/hive)
 "sg" = (
 /obj/effect/alien/resin/spike,
 /turf/open/mars_cave{
@@ -136,7 +143,7 @@
 	icon_state = "dark";
 	tag = "icon-dark"
 	},
-/area/bigredv2/hive)
+/area/hive)
 "vW" = (
 /obj/effect/alien/weeds/node,
 /obj/structure/mineral_door/resin/thick,
@@ -154,10 +161,10 @@
 	icon_state = "dark";
 	tag = "icon-dark"
 	},
-/area/bigredv2/hive)
+/area/hive)
 "yF" = (
 /turf/closed/wall/solaris/reinforced/hull,
-/area/bigredv2/hive)
+/area/hive)
 "yW" = (
 /obj/docking_port/stationary/marine_dropship/hive,
 /turf/open/mars,
@@ -168,7 +175,7 @@
 	icon_state = "whitepurplefull";
 	tag = "icon-whitepurplefull"
 	},
-/area/bigredv2/hive)
+/area/hive)
 "AL" = (
 /turf/open/mars,
 /area/bigredv2/outside/unknown)
@@ -180,27 +187,26 @@
 	},
 /area/bigredv2/outside/unknown)
 "BE" = (
-/obj/effect/alien/resin/acid_pillar/strong,
 /obj/effect/alien/resin/spike,
+/obj/effect/alien/resin/acid_pillar,
 /turf/open/mars_cave{
 	icon_state = "mars_cave_2";
 	tag = "icon-mars_cave_2"
 	},
 /area/bigredv2/caves)
 "Cy" = (
-/obj/structure/machinery/door/poddoor/two_tile/four_tile/secure,
 /turf/open/floor{
 	icon_state = "dark";
 	tag = "icon-dark"
 	},
-/area/bigredv2/hive)
+/area/hive_entrance)
 "CJ" = (
 /obj/structure/closet/crate/loot/weapons,
 /turf/open/floor{
 	icon_state = "dark";
 	tag = "icon-dark"
 	},
-/area/bigredv2/hive)
+/area/hive)
 "Em" = (
 /obj/effect/alien/resin/spike,
 /turf/open/mars_cave{
@@ -208,19 +214,6 @@
 	tag = "icon-mars_dirt_4"
 	},
 /area/bigredv2/caves)
-"EC" = (
-/turf/open/floor{
-	icon_state = "whitepurplecorner";
-	tag = "icon-whitepurplecorner (NORTH)"
-	},
-/area/bigredv2/hive)
-"EJ" = (
-/turf/open/floor{
-	dir = 4;
-	icon_state = "whitepurplecorner";
-	tag = "icon-whitepurplecorner (NORTH)"
-	},
-/area/bigredv2/hive)
 "FA" = (
 /obj/effect/alien/resin/acid_pillar,
 /turf/open/mars_cave{
@@ -239,6 +232,13 @@
 	tag = "icon-mars_cave_2"
 	},
 /area/bigredv2/caves)
+"KB" = (
+/obj/effect/landmark/boss_entrance/secure_open,
+/turf/open/floor{
+	icon_state = "dark";
+	tag = "icon-dark"
+	},
+/area/hive)
 "KK" = (
 /obj/structure/machinery/light/built{
 	dir = 8;
@@ -248,14 +248,14 @@
 	icon_state = "dark";
 	tag = "icon-dark"
 	},
-/area/bigredv2/hive)
+/area/hive)
 "Lf" = (
 /obj/structure/machinery/door/poddoor/two_tile/four_tile/secure/opened,
 /turf/open/floor{
 	icon_state = "dark";
 	tag = "icon-dark"
 	},
-/area/bigredv2/hive)
+/area/hive)
 "LJ" = (
 /obj/effect/landmark/xeno_ai,
 /turf/open/mars_cave{
@@ -263,6 +263,13 @@
 	tag = "icon-mars_dirt_4"
 	},
 /area/bigredv2/outside/unknown)
+"Ng" = (
+/obj/structure/machinery/light/built,
+/turf/open/floor{
+	icon_state = "dark";
+	tag = "icon-dark"
+	},
+/area/hive_entrance)
 "No" = (
 /turf/closed/wall/mineral/bone_resin,
 /area/bigredv2/caves)
@@ -274,24 +281,17 @@
 	tag = "icon-mars_cave_2"
 	},
 /area/bigredv2/caves)
-"Oj" = (
+"Oi" = (
+/obj/effect/alien/weeds/node,
 /turf/open/floor{
-	dir = 1;
-	icon_state = "whitepurple";
-	tag = "icon-whitepurple"
+	icon_state = "dark";
+	tag = "icon-dark"
 	},
-/area/bigredv2/hive)
-"OB" = (
-/turf/open/floor{
-	dir = 8;
-	icon_state = "whitepurple";
-	tag = "icon-whitepurple (WEST)"
-	},
-/area/bigredv2/hive)
+/area/hive_entrance)
 "Qq" = (
 /obj/structure/sign/safety/blast_door,
 /turf/closed/wall/solaris/reinforced/hull,
-/area/bigredv2/hive)
+/area/hive)
 "QF" = (
 /obj/structure/machinery/light/built{
 	dir = 8;
@@ -302,7 +302,7 @@
 	icon_state = "dark";
 	tag = "icon-dark"
 	},
-/area/bigredv2/hive)
+/area/hive)
 "QX" = (
 /obj/effect/alien/resin/acid_pillar,
 /turf/open/mars_cave{
@@ -325,25 +325,18 @@
 	},
 /area/bigredv2/caves)
 "SB" = (
-/obj/effect/alien/resin/acid_pillar/strong,
-/turf/open/mars_cave{
-	icon_state = "mars_cave_2";
-	tag = "icon-mars_cave_2"
-	},
-/area/bigredv2/caves)
-"Tt" = (
+/obj/effect/landmark/xeno_ai,
 /turf/open/floor{
-	dir = 4;
-	icon_state = "whitepurple";
-	tag = "icon-whitepurple (EAST)"
+	icon_state = "dark";
+	tag = "icon-dark"
 	},
-/area/bigredv2/hive)
+/area/hive_entrance)
 "TC" = (
 /turf/open/floor{
 	icon_state = "whitepurplefull";
 	tag = "icon-whitepurplefull"
 	},
-/area/bigredv2/hive)
+/area/hive)
 "TM" = (
 /turf/open/space/basic,
 /area/space)
@@ -355,7 +348,7 @@
 /area/bigredv2/caves)
 "UW" = (
 /turf/closed/wall/solaris/reinforced,
-/area/bigredv2/hive)
+/area/hive)
 "Vj" = (
 /turf/open/mars_cave{
 	icon_state = "mars_cave_2";
@@ -363,12 +356,8 @@
 	},
 /area/bigredv2/caves)
 "VC" = (
-/turf/open/floor{
-	dir = 8;
-	icon_state = "whitepurplecorner";
-	tag = "icon-whitepurplecorner (NORTH)"
-	},
-/area/bigredv2/hive)
+/turf/closed/wall/mineral/bone_resin,
+/area/hive)
 "XZ" = (
 /obj/structure/machinery/light/built{
 	dir = 1;
@@ -378,28 +367,24 @@
 	icon_state = "dark";
 	tag = "icon-dark"
 	},
-/area/bigredv2/hive)
+/area/hive)
 "Zs" = (
 /obj/effect/alien/weeds/node,
-/turf/open/floor{
-	dir = 1;
-	icon_state = "whitepurple";
-	tag = "icon-whitepurple"
-	},
-/area/bigredv2/hive)
+/turf/closed/wall/mineral/bone_resin,
+/area/hive)
 "ZC" = (
 /obj/effect/landmark/xeno_ai,
 /turf/open/floor{
 	icon_state = "dark";
 	tag = "icon-dark"
 	},
-/area/bigredv2/hive)
+/area/hive)
 "ZE" = (
 /turf/open/floor{
 	icon_state = "dark";
 	tag = "icon-dark"
 	},
-/area/bigredv2/hive)
+/area/hive)
 
 (1,1,1) = {"
 TM
@@ -1375,16 +1360,16 @@ Gt
 Gt
 UW
 UW
-EC
-Tt
-Tt
-Tt
-Tt
-Tt
-Tt
-Tt
-Tt
-EJ
+VC
+VC
+VC
+VC
+VC
+VC
+VC
+VC
+VC
+VC
 UW
 UW
 Gt
@@ -1440,7 +1425,8 @@ Gt
 Gt
 Gt
 UW
-EC
+VC
+VC
 TC
 TC
 TC
@@ -1449,9 +1435,8 @@ TC
 TC
 TC
 TC
-TC
-TC
-EJ
+VC
+VC
 UW
 UW
 jA
@@ -1506,7 +1491,7 @@ Gt
 Gt
 UW
 UW
-mT
+VC
 TC
 zZ
 TC
@@ -1517,8 +1502,8 @@ TC
 TC
 TC
 TC
-TC
-EJ
+VC
+VC
 UW
 jA
 TM
@@ -1571,8 +1556,8 @@ Gt
 Gt
 Gt
 UW
-EC
-TC
+VC
+VC
 TC
 TC
 TC
@@ -1584,7 +1569,7 @@ TC
 zZ
 TC
 TC
-Oj
+VC
 UW
 jA
 TM
@@ -1637,7 +1622,7 @@ Gt
 Gt
 Gt
 UW
-mT
+VC
 TC
 TC
 TC
@@ -1650,7 +1635,7 @@ TC
 TC
 TC
 TC
-Oj
+VC
 UW
 jA
 TM
@@ -1703,7 +1688,7 @@ Gt
 Gt
 Gt
 UW
-mT
+VC
 TC
 TC
 TC
@@ -1716,7 +1701,7 @@ TC
 TC
 TC
 TC
-Oj
+VC
 UW
 jA
 TM
@@ -1769,7 +1754,7 @@ Gt
 Gt
 Gt
 UW
-mT
+VC
 TC
 TC
 TC
@@ -1782,7 +1767,7 @@ TC
 TC
 zZ
 TC
-Oj
+VC
 UW
 jA
 TM
@@ -1835,7 +1820,7 @@ Gt
 Gt
 UW
 UW
-mT
+VC
 TC
 TC
 TC
@@ -1848,7 +1833,7 @@ TC
 TC
 TC
 TC
-Oj
+VC
 UW
 jA
 TM
@@ -1900,7 +1885,8 @@ yF
 yF
 yF
 UW
-EC
+VC
+VC
 TC
 TC
 TC
@@ -1913,8 +1899,7 @@ TC
 TC
 TC
 TC
-TC
-Oj
+VC
 UW
 jA
 TM
@@ -1966,8 +1951,8 @@ ZE
 ZE
 yF
 UW
-mT
-TC
+VC
+VC
 TC
 zZ
 TC
@@ -1980,7 +1965,7 @@ TC
 TC
 TC
 TC
-Oj
+VC
 UW
 jA
 TM
@@ -2032,7 +2017,7 @@ ZE
 rQ
 yF
 UW
-mT
+VC
 TC
 TC
 TC
@@ -2046,7 +2031,7 @@ zZ
 TC
 TC
 TC
-Oj
+VC
 UW
 jA
 TM
@@ -2098,7 +2083,7 @@ ZE
 ZE
 yF
 UW
-mT
+VC
 TC
 TC
 TC
@@ -2112,7 +2097,7 @@ TC
 TC
 TC
 TC
-Oj
+VC
 UW
 jA
 TM
@@ -2164,7 +2149,7 @@ ZE
 ZE
 yF
 UW
-mT
+VC
 TC
 TC
 TC
@@ -2230,21 +2215,21 @@ ZE
 ZE
 yF
 UW
-mT
+VC
 zZ
 TC
 TC
 TC
 TC
+VC
+VC
+VC
 TC
 TC
 TC
 TC
 TC
-TC
-TC
-TC
-Oj
+VC
 UW
 jA
 TM
@@ -2295,22 +2280,22 @@ ZE
 ZE
 rQ
 yF
-EC
+VC
+VC
 TC
 TC
 TC
 TC
 TC
+VC
+VC
+VC
 TC
 TC
 TC
 TC
 TC
-TC
-TC
-TC
-TC
-Oj
+VC
 UW
 jA
 TM
@@ -2361,22 +2346,22 @@ eh
 ZE
 ZE
 yF
-mT
-TC
+VC
+VC
 TC
 TC
 TC
 TC
 zZ
+VC
+VC
+VC
 TC
 TC
 TC
 TC
 TC
-TC
-TC
-TC
-Oj
+VC
 UW
 jA
 TM
@@ -2427,22 +2412,22 @@ yF
 yF
 yF
 yF
-mT
+VC
+VC
 TC
 TC
 TC
 TC
 TC
+VC
+VC
+VC
 TC
 TC
 TC
 TC
 TC
-TC
-TC
-TC
-TC
-Oj
+VC
 UW
 jA
 TM
@@ -2484,16 +2469,16 @@ ZE
 ZE
 ZE
 yF
-ZE
-ZE
-ZE
-ZE
-ZE
-ZE
-ZE
-rQ
+Cy
+Cy
+Cy
+Cy
+Cy
+Cy
+Cy
+Ng
 yF
-mT
+VC
 TC
 TC
 zZ
@@ -2508,7 +2493,7 @@ zZ
 TC
 TC
 TC
-Oj
+VC
 UW
 jA
 TM
@@ -2549,16 +2534,16 @@ ZE
 ZE
 ZE
 ZE
-Lf
-ZE
-ZE
-ZE
-ZE
-ZE
-ZE
-ZE
-ZE
+KB
 Cy
+Cy
+Cy
+Cy
+Cy
+Cy
+Cy
+Cy
+gF
 mT
 TC
 TC
@@ -2566,7 +2551,6 @@ TC
 TC
 TC
 TC
-zZ
 TC
 TC
 TC
@@ -2574,7 +2558,8 @@ TC
 TC
 TC
 TC
-Oj
+TC
+VC
 UW
 jA
 TM
@@ -2616,14 +2601,14 @@ ZE
 eh
 ZE
 ZE
-ZE
-ZE
-ZC
-eh
-ZE
-ZE
-ZE
-ZE
+Cy
+Cy
+SB
+Oi
+Cy
+Cy
+Cy
+Cy
 ZE
 mT
 TC
@@ -2632,15 +2617,15 @@ TC
 TC
 TC
 TC
+zZ
+ap
 TC
 TC
 TC
 TC
 TC
 TC
-TC
-TC
-Oj
+VC
 UW
 jA
 TM
@@ -2682,14 +2667,14 @@ ZE
 ZE
 ZE
 ZE
-ZE
-ZE
-ZE
-ZE
-ZE
-ZE
-ZE
-ZE
+Cy
+Cy
+Cy
+Cy
+Cy
+Cy
+Cy
+Cy
 ZE
 mT
 zZ
@@ -2706,7 +2691,7 @@ TC
 TC
 TC
 TC
-Oj
+VC
 UW
 jA
 TM
@@ -2748,14 +2733,14 @@ ZE
 ZE
 ZE
 ZE
-ZE
-ZE
-ZE
-ZE
-ZE
-ZE
-ZE
-ZE
+Cy
+Cy
+Cy
+Cy
+Cy
+Cy
+Cy
+Cy
 ZE
 mT
 TC
@@ -2764,15 +2749,15 @@ TC
 TC
 TC
 TC
+TC
+TC
+TC
+TC
+TC
+TC
 zZ
 TC
-TC
-TC
-TC
-TC
-zZ
-TC
-Oj
+VC
 UW
 jA
 TM
@@ -2814,16 +2799,16 @@ ZE
 ZE
 ZE
 yF
-ZE
-ZE
-ZE
-ZE
-ZE
-ZE
-ZE
-rQ
+Cy
+Cy
+Cy
+Cy
+Cy
+Cy
+Cy
+Ng
 yF
-mT
+VC
 TC
 TC
 TC
@@ -2838,7 +2823,7 @@ TC
 TC
 TC
 TC
-Oj
+VC
 UW
 jA
 TM
@@ -2872,7 +2857,7 @@ No
 sg
 sg
 sg
-BE
+sg
 Jn
 yF
 XZ
@@ -2889,22 +2874,22 @@ yF
 yF
 yF
 yF
-mT
+VC
+VC
 TC
+zZ
 TC
+zZ
+TC
+VC
+VC
+VC
 zZ
 TC
 TC
 TC
 TC
-TC
-TC
-zZ
-TC
-TC
-TC
-TC
-Oj
+VC
 UW
 jA
 TM
@@ -2955,22 +2940,22 @@ ZE
 ZE
 ZE
 yF
-mT
+VC
+VC
 TC
 TC
 TC
 TC
 TC
+VC
+VC
+VC
 TC
 TC
 TC
 TC
 TC
-TC
-TC
-TC
-TC
-Oj
+VC
 UW
 jA
 TM
@@ -3002,7 +2987,7 @@ No
 No
 sg
 sg
-sg
+BE
 sg
 RQ
 sg
@@ -3021,22 +3006,22 @@ ZE
 eh
 rQ
 yF
-mT
+VC
+VC
 TC
 TC
 TC
 TC
 TC
-TC
-TC
-zZ
-TC
-TC
-TC
+VC
+VC
+VC
 TC
 TC
 TC
-Oj
+TC
+TC
+VC
 UW
 jA
 TM
@@ -3088,21 +3073,21 @@ ZE
 ZE
 yF
 VC
+VC
 TC
 TC
 TC
 TC
 TC
+VC
+VC
+VC
 TC
 TC
 TC
 TC
 TC
-TC
-TC
-TC
-TC
-Oj
+VC
 UW
 jA
 TM
@@ -3154,7 +3139,7 @@ ZE
 ZE
 yF
 UW
-mT
+VC
 TC
 zZ
 TC
@@ -3220,7 +3205,7 @@ ZE
 ZE
 yF
 UW
-mT
+VC
 TC
 TC
 TC
@@ -3234,7 +3219,7 @@ zZ
 TC
 TC
 TC
-Oj
+VC
 UW
 jA
 TM
@@ -3286,7 +3271,7 @@ ZE
 rQ
 yF
 UW
-mT
+VC
 TC
 TC
 TC
@@ -3300,7 +3285,7 @@ TC
 TC
 TC
 TC
-Oj
+VC
 UW
 jA
 TM
@@ -3352,7 +3337,7 @@ ZE
 ZE
 yF
 UW
-mT
+VC
 zZ
 TC
 TC
@@ -3366,7 +3351,7 @@ TC
 TC
 TC
 TC
-Oj
+VC
 UW
 jA
 TM
@@ -3419,6 +3404,7 @@ yF
 yF
 UW
 VC
+VC
 TC
 TC
 TC
@@ -3431,8 +3417,7 @@ TC
 TC
 TC
 TC
-TC
-Oj
+VC
 UW
 jA
 TM
@@ -3461,7 +3446,7 @@ No
 sg
 sg
 sg
-BE
+sg
 sg
 sg
 sg
@@ -3485,7 +3470,7 @@ Gt
 Gt
 UW
 UW
-mT
+VC
 TC
 TC
 TC
@@ -3498,7 +3483,7 @@ TC
 TC
 TC
 TC
-Oj
+VC
 UW
 jA
 TM
@@ -3551,7 +3536,7 @@ Gt
 Gt
 Gt
 UW
-mT
+VC
 TC
 TC
 zZ
@@ -3564,7 +3549,7 @@ TC
 TC
 TC
 zZ
-Oj
+VC
 UW
 jA
 TM
@@ -3592,7 +3577,7 @@ No
 No
 sg
 sg
-sg
+BE
 sg
 sg
 sg
@@ -3617,7 +3602,7 @@ Gt
 Gt
 Gt
 UW
-mT
+VC
 TC
 zZ
 TC
@@ -3630,7 +3615,7 @@ TC
 TC
 TC
 TC
-Oj
+VC
 UW
 jA
 TM
@@ -3683,7 +3668,7 @@ Gt
 Gt
 Gt
 UW
-mT
+VC
 TC
 TC
 TC
@@ -3696,7 +3681,7 @@ TC
 TC
 TC
 TC
-Oj
+VC
 UW
 jA
 TM
@@ -3750,7 +3735,7 @@ Gt
 Gt
 UW
 VC
-TC
+VC
 TC
 TC
 TC
@@ -3762,7 +3747,7 @@ TC
 TC
 TC
 TC
-Oj
+VC
 UW
 jA
 TM
@@ -3816,7 +3801,7 @@ Gt
 Gt
 UW
 UW
-mT
+VC
 TC
 TC
 TC
@@ -3827,8 +3812,8 @@ TC
 TC
 TC
 TC
-TC
-jD
+VC
+VC
 UW
 jA
 TM
@@ -3883,7 +3868,7 @@ Gt
 Gt
 UW
 VC
-TC
+VC
 TC
 TC
 TC
@@ -3892,8 +3877,8 @@ zZ
 TC
 TC
 TC
-TC
-jD
+VC
+VC
 UW
 UW
 jA
@@ -3950,15 +3935,15 @@ Gt
 UW
 UW
 VC
-OB
-OB
-OB
-OB
-OB
-OB
-OB
-OB
-jD
+VC
+VC
+VC
+VC
+VC
+VC
+VC
+VC
+VC
 UW
 UW
 Gt
@@ -4376,8 +4361,8 @@ oe
 Vj
 Vj
 Vj
-SB
 Vj
+FA
 sg
 Vj
 Vj

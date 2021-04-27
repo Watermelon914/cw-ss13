@@ -102,6 +102,8 @@ SUBSYSTEM_DEF(xeno_ai)
 		E.calculate_eval()
 
 /datum/controller/subsystem/xeno_ai/proc/add_ai(var/mob/living/carbon/Xenomorph/X)
+	if(X.mob_flags & AI_CONTROLLED)
+		return
 	ai_mobs |= X
 	X.mob_flags |= AI_CONTROLLED
 

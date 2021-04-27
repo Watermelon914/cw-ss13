@@ -18,7 +18,7 @@ SUBSYSTEM_DEF(music)
 
 		if(!C.queued_music || C.prefs?.music_volume == 0)
 			if(C.current_music)
-				var/sound/stop_music = sound(C.queued_music, FALSE, channel = SOUND_CHANNEL_MUSIC)
+				var/sound/stop_music = sound(C.queued_music, FALSE, channel = SOUND_CHANNEL_MUSIC, volume = C.prefs.music_volume)
 				stop_music.status = SOUND_UPDATE
 				stop_music.repeat = FALSE
 				sound_to(C, stop_music)

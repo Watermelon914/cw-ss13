@@ -84,9 +84,15 @@
 	ability_name = "screech"
 	macro_path = /datum/action/xeno_action/verb/verb_screech
 	action_type = XENO_ACTION_ACTIVATE
-	xeno_cooldown = 50 SECONDS
+	xeno_cooldown = 80 SECONDS
 	plasma_cost = 250
 	cooldown_message = "You feel your throat muscles vibrate. You are ready to screech again."
+	var/xenos_to_spawn = 4
+	var/range_to_spawn = 3
+
+	var/heal_amt_per_second = 10
+	var/ovipositor_time = 60 SECONDS
+	var/ovi_health = 200
 
 /datum/action/xeno_action/activable/screech/use_ability(atom/A)
 	var/mob/living/carbon/Xenomorph/Queen/X = owner
@@ -118,14 +124,16 @@
 	X.visible_message(SPAN_XENOHIGHDANGER("[X] emits an ear-splitting guttural roar!"))
 	X.create_shriekwave() //Adds the visual effect. Wom wom wom
 
-	for(var/mob/M in view())
+	var/list/objects = view(7, X)
+
+	for(var/mob/M in objects)
 		if(M && M.client)
 			if(isXeno(M))
 				shake_camera(M, 10, 1)
 			else
 				shake_camera(M, 30, 1) //50 deciseconds, SORRY 5 seconds was way too long. 3 seconds now
 
-	for(var/mob/living/carbon/M in oview(7, X))
+	for(var/mob/living/carbon/M in objects)
 		if(SEND_SIGNAL(M, COMSIG_MOB_SCREECH_ACT, X) & COMPONENT_SCREECH_ACT_CANCEL)
 			continue
 
@@ -133,19 +141,64 @@
 		var/dist = get_dist(X, M)
 		if(dist <= 4)
 			to_chat(M, SPAN_DANGER("An ear-splitting guttural roar shakes the ground beneath your feet!"))
-			M.AdjustStunned(4)
-			M.KnockDown(4)
-			if(!M.ear_deaf)
-				M.ear_deaf += 5 //Deafens them temporarily
 		else if(dist >= 5 && dist < 7)
-			M.AdjustStunned(3)
-			if(!M.ear_deaf)
-				M.ear_deaf += 2
 			to_chat(M, SPAN_DANGER("The roar shakes your body to the core, freezing you in place!"))
+
+	var/list/turfs = RANGE_TURFS(range_to_spawn, X) & objects
+	var/list/possible_spawns = GLOB.t3_ais + GLOB.t2_ais + GLOB.t1_ais
+
+	for(var/i in 1 to xenos_to_spawn)
+		var/turf/T = pick(turfs)
+		if(length(turfs) > 1)
+			turfs -= T
+
+
+		var/xeno_to_spawn = pick(possible_spawns)
+		var/mob/living/carbon/Xenomorph/to_spawn = new xeno_to_spawn(T)
+		to_spawn.make_ai()
+
+	ovi_health = initial(ovi_health)
+	X.mount_ovipositor()
+	RegisterSignal(X, COMSIG_MOB_DEATH, .proc/disable_effect)
+	RegisterSignal(X, COMSIG_XENO_TAKE_DAMAGE, .proc/handle_damage_taken)
+	START_PROCESSING(SSobj, src)
+	addtimer(CALLBACK(src, .proc/disable_effect), ovipositor_time)
 
 	apply_cooldown()
 
 	..()
+
+/datum/action/xeno_action/activable/screech/process(delta_time)
+	var/mob/living/carbon/Xenomorph/Queen/X = owner
+
+	if(!istype(X))
+		return PROCESS_KILL
+
+	if(X.ovipositor)
+		X.flick_heal_overlay(delta_time, "#00ff00")
+		X.apply_damage(-heal_amt_per_second * delta_time)
+
+/datum/action/xeno_action/activable/screech/proc/disable_effect()
+	SIGNAL_HANDLER
+	var/mob/living/carbon/Xenomorph/Queen/X = owner
+	if(!X)
+		return
+	if(X.ovipositor)
+		INVOKE_ASYNC(X, /mob/living/carbon/Xenomorph/Queen.proc/dismount_ovipositor, TRUE)
+	UnregisterSignal(X, list(
+		COMSIG_MOB_DEATH,
+		COMSIG_XENO_TAKE_DAMAGE
+	))
+	STOP_PROCESSING(SSobj, src)
+
+/datum/action/xeno_action/activable/screech/proc/handle_damage_taken(var/mob/living/carbon/Xenomorph/Queen/X, var/list/damage)
+	SIGNAL_HANDLER
+	if(!X.ovipositor)
+		disable_effect()
+
+	ovi_health -= damage["damage"]
+	if(ovi_health <= 0)
+		disable_effect()
 
 /datum/action/xeno_action/activable/gut
 	name = "Gut (200)"

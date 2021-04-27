@@ -25,7 +25,7 @@
 	evolution_allowed = FALSE
 	fire_immunity = FIRE_IMMUNITY_NO_DAMAGE|FIRE_IMMUNITY_NO_IGNITE
 	caste_desc = "The biggest and baddest xeno. The Queen controls the hive and plants eggs"
-	spit_types = list(/datum/ammo/xeno/toxin/queen, /datum/ammo/xeno/acid/medium)
+	spit_types = list(/datum/ammo/xeno/acid/medium)
 	can_hold_facehuggers = 0
 	can_hold_eggs = CAN_HOLD_ONE_HAND
 	acid_level = 2
@@ -256,6 +256,8 @@
 	small_explosives_stun = FALSE
 	pull_speed = 3.0 //screech/neurodragging is cancer, at the very absolute least get some runner to do it for teamwork
 
+	flags_ai = XENO_AI_NO_DESPAWN
+
 	var/map_view = 0
 	var/breathing_counter = 0
 	var/ovipositor = FALSE //whether the Queen is attached to an ovipositor
@@ -329,6 +331,11 @@
 	var/queen_aged = FALSE
 	var/queen_age_timer_id = TIMER_ID_NULL
 
+/mob/living/carbon/Xenomorph/Queen/make_ai()
+	. = ..()
+	make_combat_effective()
+	current_aura = pick(caste.aura_allowed)
+
 /mob/living/carbon/Xenomorph/Queen/can_destroy_special()
 	return TRUE
 
@@ -346,6 +353,48 @@
 
 /mob/living/carbon/Xenomorph/Queen/Delta
 	hivenumber = XENO_HIVE_DELTA
+
+/mob/living/carbon/Xenomorph/Queen/process_ai(delta_time, game_evaluation)
+	. = ..()
+
+	if(.)
+		return
+
+	a_intent = INTENT_HARM
+
+	if(!ovipositor && !anchored)
+		var/turf/T = get_turf(current_target)
+		if(get_dist(src, current_target) <= 1)
+			var/list/turfs = RANGE_TURFS(1, T)
+			while(length(turfs))
+				T = pick(turfs)
+				turfs -= T
+				if(!T.density)
+					break
+
+				if(T == get_turf(current_target))
+					break
+
+
+		if(!move_to_next_turf(T))
+			current_target = null
+			return
+
+		if(DT_PROB(QUEEN_SCREECH, delta_time))
+			var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/screech)
+			A.use_ability_async(current_target)
+
+	if(DT_PROB(QUEEN_SPIT, delta_time) && (loc in view(current_target)))
+		var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/xeno_spit)
+		A.use_ability_async(current_target)
+
+	if(DT_PROB(QUEEN_PLANT_WEEDS, delta_time))
+		var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/onclick/plant_weeds)
+		A.use_ability_async(current_target)
+
+	if(get_dist(src, current_target) <= 1 && DT_PROB(XENO_SLASH, delta_time))
+		INVOKE_ASYNC(src, /mob.proc/do_click, current_target, "", list())
+
 
 /mob/living/carbon/Xenomorph/Queen/Initialize()
 	. = ..()
@@ -711,7 +760,6 @@
 	var/list/immobile_abilities = list(
 		/datum/action/xeno_action/onclick/regurgitate,
 		/datum/action/xeno_action/onclick/remove_eggsac,
-		/datum/action/xeno_action/activable/screech,
 		/datum/action/xeno_action/onclick/emit_pheromones,
 		/datum/action/xeno_action/onclick/psychic_whisper,
 		/datum/action/xeno_action/watch_xeno,
@@ -800,6 +848,7 @@
 	if(ovipositor)
 		icon = queen_ovipositor_icon
 		icon_state = "[mutation_type] Queen Ovipositor"
+		return
 	else
 		icon = queen_standing_icon
 
