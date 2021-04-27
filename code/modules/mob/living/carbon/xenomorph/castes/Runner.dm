@@ -64,21 +64,23 @@
 	if (PF)
 		PF.flags_pass = PASS_FLAGS_CRAWLER
 
+/mob/living/carbon/Xenomorph/Runner/launch_towards(datum/launch_metadata/LM)
+	pull_direction = turn(get_dir(src, current_target), 180)
 
-/mob/living/carbon/Xenomorph/Runner/process_ai(delta_time, game_evaluation)
-	. = ..()
+	if(!(pull_direction in GLOB.cardinals))
+		if(abs(x - current_target.x) < abs(y - current_target.y))
+			pull_direction &= (NORTH|SOUTH)
+		else
+			pull_direction &= (EAST|WEST)
+	return ..()
 
-	if(.)
-		return
-
-	a_intent = INTENT_HARM
-	create_hud()
-
+/mob/living/carbon/Xenomorph/Runner/ai_move_target(delta_time, game_evaluation)
 	if(throwing)
 		return
 
-	if(pulling && can_move_and_apply_move_delay())
-		Move(get_step(loc, pull_direction), pull_direction)
+	if(pulling)
+		if(can_move_and_apply_move_delay())
+			Move(get_step(loc, pull_direction), pull_direction)
 		current_path = null
 	else
 		if(!(src in view(world.view, current_target)))
@@ -92,29 +94,11 @@
 			travelling_turf = null
 			return
 
-		if(get_dist(src, current_target) <= RUNNER_POUNCE_RANGE && DT_PROB(RUNNER_POUNCE, delta_time))
-			var/turf/last_turf = loc
-			var/clear = TRUE
-			add_temp_pass_flags(PASS_OVER_THROW_MOB)
-			for(var/i in getline2(src, current_target, FALSE))
-				var/turf/new_turf = i
-				if(LinkBlocked(src, last_turf, new_turf, list(current_target, src)))
-					clear = FALSE
-					break
-			remove_temp_pass_flags(PASS_OVER_THROW_MOB)
+	if(get_dist(current_target, src) <= 1 && current_target.is_mob_incapacitated() && !isXeno(current_target.pulledby) && !pulling && DT_PROB(RUNNER_GRAB, delta_time))
+		CallAsync(src, /mob.proc/start_pulling, list(current_target))
+		swap_hand()
 
-			if(clear)
-				var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/pounce)
-				A.use_ability_async(current_target)
-				SSxeno_pathfinding.stop_calculating_path(src)
-				//stop_calculating_path()
-				current_path = null
-				pull_direction = turn(dir, 180)
-
-	zone_selected = pick(GLOB.warrior_target_limbs)
-	if(get_dist(src, current_target) <= 1)
-		if(DT_PROB(XENO_SLASH, delta_time))
-			INVOKE_ASYNC(src, /mob.proc/do_click, current_target, "", list())
-		if(current_target.is_mob_incapacitated() && !isXeno(current_target.pulledby) && !pulling && DT_PROB(RUNNER_GRAB, delta_time))
-			CallAsync(src, /mob.proc/start_pulling, list(current_target))
-			swap_hand()
+/mob/living/carbon/Xenomorph/Runner/process_ai(delta_time, game_evaluation)
+	zone_selected = pick(GLOB.ai_target_limbs)
+	create_hud()
+	return ..()

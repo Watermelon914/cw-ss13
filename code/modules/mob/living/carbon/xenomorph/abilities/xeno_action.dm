@@ -6,6 +6,8 @@
 	var/action_type = XENO_ACTION_CLICK // Determines how macros interact with this action. Defines are in xeno.dm in the defines folder.
 	var/ability_primacy = XENO_NOT_PRIMARY_ACTION // Determines how the default ability macros handle this.
 
+	var/default_ai_action = FALSE
+
 	// Cooldown
 	var/xeno_cooldown = null   // Cooldown of the ability
 	var/cooldown_message = null
@@ -67,10 +69,23 @@
 	if(X && !X.is_mob_incapacitated() && !X.dazed && !X.lying && !X.buckled && X.plasma_stored >= plasma_cost)
 		return TRUE
 
-/datum/action/xeno_action/give_to(mob/living/L)
+/datum/action/xeno_action/give_to(mob/living/carbon/Xenomorph/X)
 	..()
+	if(!istype(X))
+		CRASH("Xeno action given to non-xenomorph type! Expected /mob/living/carbon/Xenomorph, got [X.type]")
+
+	if(default_ai_action)
+		X.register_ai_action(src)
+
 	if(macro_path)
-		add_verb(L, macro_path)
+		add_verb(X, macro_path)
+
+/datum/action/xeno_action/remove_from(mob/living/carbon/Xenomorph/X)
+	if(src in X.registered_ai_abilities)
+		X.unregister_ai_action(src)
+
+	return ..()
+
 
 /datum/action/xeno_action/update_button_icon()
 	if(!button)
@@ -90,6 +105,16 @@
 
 	use_plasma_owner(plasma_to_use)
 	return TRUE
+
+/datum/action/xeno_action/proc/process_ai(var/mob/living/carbon/Xenomorph/X, delta_time, game_evaluation)
+	SHOULD_NOT_SLEEP(TRUE)
+	return PROCESS_KILL
+
+/datum/action/xeno_action/proc/ai_registered(var/mob/living/carbon/Xenomorph/X)
+	return
+
+/datum/action/xeno_action/proc/ai_unregistered(var/mob/living/carbon/Xenomorph/X)
+	return
 
 // Checks the host Xeno's plasma. Returns TRUE if the amount of plasma
 // is sufficient to use the ability and FALSE otherwise.

@@ -73,7 +73,7 @@
 		current_target = null
 		return
 
-	zone_selected = pick(GLOB.warrior_target_limbs)
+	zone_selected = pick(GLOB.ai_target_limbs)
 	if(get_dist(src, current_target) <= 1)
 		if(DT_PROB(XENO_SLASH, delta_time))
 			INVOKE_ASYNC(src, /mob.proc/do_click, current_target, "", list())

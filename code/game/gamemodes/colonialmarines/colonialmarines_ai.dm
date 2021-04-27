@@ -1,5 +1,5 @@
 /datum/game_mode/colonialmarines/ai
-	name = "Distress Signal: Lowpop"
+	name = "Outpost Alpha"
 	config_tag = "Distress Signal: Lowpop"
 	required_players = 1 //Need at least one player, but really we need 2.
 

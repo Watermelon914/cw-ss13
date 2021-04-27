@@ -64,22 +64,6 @@
 #define DEFENDER_TAILWHIP 40
 #define DEFENDER_HEADBUTT 75
 
-// Ravager
-
-#define RAVAGER_SCISSOR_CUT 75
-#define RAVAGER_SCISSOR_CUT_RANGE 3
-/// The chance that rav shield procs
-#define RAVAGER_SHIELD 100
-/// The percentage of health that ravager shield procs at
-#define RAVAGER_SHIELD_PROC_HEALTH 0.25
-/// The number of people that need to be at a minimum for rav to proc his shield
-#define RAVAGER_SHIELD_PROC_PEOPLE 3
-#define RAVAGER_LUNGE 50
-/// The chance that ravager will lunge at someone with enough shield to knock them down.
-#define RAVAGER_LUNGE_SHIELD 95
-/// The range needed for ravager to try lunging
-#define RAVAGER_LUNGE_RANGE 5
-
 // Crusher
 
 /// How often is the crusher going to stomp whilst they're standing over you
@@ -97,12 +81,6 @@
 #define PRAETORIAN_DASH 100
 #define PRAETORIAN_SPIT 80
 #define PRAETORIAN_SPRAY 80
-
-// Queen
-
-#define QUEEN_SCREECH 100
-#define QUEEN_SPIT 80
-#define QUEEN_PLANT_WEEDS 20
 
 /*
 	GAME DIRECTOR AI

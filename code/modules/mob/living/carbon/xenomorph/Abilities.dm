@@ -94,6 +94,13 @@
 	var/ovipositor_time = 60 SECONDS
 	var/ovi_health = 200
 
+	var/prob_chance = 100
+	default_ai_action = TRUE
+
+/datum/action/xeno_action/activable/screech/process_ai(mob/living/carbon/Xenomorph/Queen/X, delta_time, game_evaluation)
+	if(X.ovipositor && DT_PROB(prob_chance, delta_time))
+		use_ability_async(X.current_target)
+
 /datum/action/xeno_action/activable/screech/use_ability(atom/A)
 	var/mob/living/carbon/Xenomorph/Queen/X = owner
 

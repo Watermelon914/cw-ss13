@@ -8,7 +8,7 @@
 	var/turf/current_target_turf
 
 	var/ai_move_delay = 0
-	var/path_update_per_second = 0.5 SECONDS
+	var/path_update_period = 0.5 SECONDS
 	var/no_path_found = FALSE
 	var/ai_range = 8
 	var/max_travel_distance = 24
@@ -23,6 +23,17 @@
 	var/home_locate_range = 15
 	var/turf/home_turf
 
+	var/list/datum/action/xeno_action/registered_ai_abilities = list()
+
+GLOBAL_LIST_INIT(ai_target_limbs, list(
+	"head",
+	"chest",
+	"l_leg",
+	"r_leg",
+	"l_arm",
+	"r_arm"
+))
+
 /mob/living/carbon/Xenomorph/proc/handle_ai_shot(obj/item/projectile/P)
 	if(!current_target && P.firer)
 		var/distance = get_dist(src, P.firer)
@@ -30,8 +41,16 @@
 			return
 
 		SSxeno_pathfinding.calculate_path(src, P.firer, distance, src, CALLBACK(src, .proc/set_path), list(src, P.firer))
-		//calculate_path(get_turf(P.firer), distance, CALLBACK(src, .proc/set_path))
 
+/mob/living/carbon/Xenomorph/proc/register_ai_action(var/datum/action/xeno_action/XA)
+	if(XA.owner != src)
+		XA.give_to(src)
+	registered_ai_abilities |= XA
+	XA.ai_registered(src)
+
+/mob/living/carbon/Xenomorph/proc/unregister_ai_action(var/datum/action/xeno_action/XA)
+	registered_ai_abilities -= XA
+	XA.ai_unregistered(src)
 
 /mob/living/carbon/Xenomorph/proc/process_ai(delta_time, game_evaluation)
 	SHOULD_NOT_SLEEP(TRUE)
@@ -42,6 +61,41 @@
 	if(is_mob_incapacitated(TRUE))
 		current_path = null
 		return TRUE
+
+	if(QDELETED(current_target) || current_target.stat == DEAD || get_dist(current_target, src) > ai_range)
+		current_target = get_target(ai_range)
+		if(QDELETED(src))
+			return TRUE
+
+		if(current_target)
+			resting = FALSE
+			return TRUE
+
+	if(!current_target)
+		ai_move_idle(delta_time, game_evaluation)
+		return TRUE
+
+	a_intent = INTENT_HARM
+
+	if(ai_move_target(delta_time, game_evaluation))
+		return TRUE
+
+	for(var/x in registered_ai_abilities)
+		var/datum/action/xeno_action/XA = x
+		if(QDELETED(XA) || XA.owner != src)
+			unregister_ai_action(XA)
+			continue
+
+		if(XA.process_ai(src, delta_time, game_evaluation) == PROCESS_KILL)
+			unregister_ai_action(XA)
+
+	if(get_dist(src, current_target) <= 1 && DT_PROB(XENO_SLASH, delta_time))
+		INVOKE_ASYNC(src, /mob.proc/do_click, current_target, "", list())
+
+/** Controls movement when idle. Called by process_ai */
+/mob/living/carbon/Xenomorph/proc/ai_move_idle(delta_time, game_evaluation)
+	if(throwing)
+		return
 
 	if(next_home_search < world.time && (!home_turf || !home_turf.weeds || get_dist(home_turf, src) > max_distance_from_home))
 		var/turf/T = get_turf(loc)
@@ -55,25 +109,35 @@
 				if(potential_home.weeds && !potential_home.density && get_dist(src, potential_home) < shortest_distance)
 					home_turf = potential_home
 
-	if(QDELETED(current_target) || current_target.stat == DEAD || get_dist(current_target, src) > ai_range)
-		current_target = get_target(ai_range)
-		if(QDELETED(src))
-			return TRUE
+	if(!home_turf)
+		return
 
-		if(current_target)
-			resting = FALSE
-			return TRUE
+	if(move_to_next_turf(home_turf, home_locate_range))
+		if(get_dist(home_turf, src) <= 0 && !resting)
+			lay_down()
+	else
+		home_turf = null
 
-	if(!current_target)
-		if(!current_path)
-			return TRUE
+/** Controls movement towards target. Called by process_ai */
+/mob/living/carbon/Xenomorph/proc/ai_move_target(delta_time, game_evaluation)
+	if(throwing)
+		return
 
-		if(move_to_next_turf(home_turf, home_locate_range))
-			if(get_dist(home_turf, src) <= 0 && !resting)
-				lay_down()
-		else
-			home_turf = null
+	var/turf/T = get_turf(current_target)
+	if(get_dist(src, current_target) <= 1)
+		var/list/turfs = RANGE_TURFS(1, T)
+		while(length(turfs))
+			T = pick(turfs)
+			turfs -= T
+			if(!T.density)
+				break
 
+			if(T == get_turf(current_target))
+				break
+
+
+	if(!move_to_next_turf(T))
+		current_target = null
 		return TRUE
 
 /atom/proc/xeno_ai_obstacle(var/mob/living/carbon/Xenomorph/X, direction)
@@ -84,108 +148,9 @@
 /atom/proc/xeno_ai_act(var/mob/living/carbon/Xenomorph/X)
 	return
 
-/*
-/mob/living/carbon/Xenomorph/proc/calculate_path(var/turf/target, range, var/datum/callback/CB)
-	// This proc can sleep if a callback is passed. Not recommended in process procs.
-	set waitfor = FALSE
-
-	if(!target)
-		return
-
-	calculating_path = TRUE
-
-	newest_path_time = world.time
-	var/current_path_time = newest_path_time
-
-	// A* Pathfinding. Uses priority queue
-	var/turf/current_node = get_turf(src)
-	var/list/visited_nodes = list()
-	var/list/distances = list()
-	var/list/f_distances = list()
-	var/list/prev = list()
-
-	distances[current_node] = 0
-	f_distances[current_node] = ASTAR_COST_FUNCTION(current_node)
-
-	for(var/i in RANGE_TURFS(range, src))
-		if(i != current_node)
-			distances[i] = INFINITY
-			f_distances[i] = INFINITY
-			prev[i] = null
-
-	visited_nodes += current_node
-
-	while(length(visited_nodes))
-		current_node = visited_nodes[visited_nodes.len]
-		visited_nodes.len--
-		if(current_node == target)
-			break
-
-		for(var/direction in cardinal)
-			var/turf/neighbor = get_step(current_node, direction)
-			var/distance_between = distances[current_node] * DISTANCE_PENALTY
-
-			if(direction != get_dir(prev[neighbor], neighbor))
-				distance_between += DIRECTION_CHANGE_PENALTY
-
-			if(!neighbor.weeds)
-				distance_between += NO_WEED_PENALTY
-
-			for(var/i in neighbor)
-				var/atom/A = i
-				distance_between += A.object_weight
-
-			var/list/L = LinkBlocked(src, current_node, neighbor, list(current_target, src), TRUE)
-			if(length(L))
-				for(var/i in L)
-					var/atom/A = i
-					distance_between += A.xeno_ai_obstacle(src, direction)
-
-			if(distance_between < distances[neighbor])
-				distances[neighbor] = distance_between
-				var/f_distance = distance_between + ASTAR_COST_FUNCTION(neighbor)
-				f_distances[neighbor] = f_distance
-				prev[neighbor] = current_node
-				if(neighbor in visited_nodes)
-					visited_nodes -= neighbor
-
-				for(var/i in 0 to length(visited_nodes))
-					var/index_to_check = length(visited_nodes) - i
-					if(index_to_check == 0)
-						visited_nodes.Insert(1, neighbor)
-						break
-
-					if(f_distance < f_distances[visited_nodes[index_to_check]])
-						visited_nodes.Insert(index_to_check, neighbor)
-						break
-
-		if(newest_path_time != current_path_time)
-			return
-
-		CHECK_TICK
-
-	if(!prev[target])
-		calculating_path = FALSE
-		return
-
-	var/list/path = list()
-	current_node = target
-	while(current_node)
-		if(current_node == loc)
-			break
-		path += current_node
-		current_node = prev[current_node]
-
-	calculating_path = FALSE
-	CB.Invoke(path)
-
-/mob/living/carbon/Xenomorph/proc/stop_calculating_path()
-	newest_path_time = 0
-*/
-
 /mob/living/carbon/Xenomorph/proc/can_move_and_apply_move_delay()
 	// Unable to move, try next time.
-	if(ai_move_delay > world.time || !canmove || is_mob_incapacitated(TRUE) || !on_movement())
+	if(ai_move_delay > world.time || !canmove || is_mob_incapacitated(TRUE) || !on_movement() || anchored)
 		return FALSE
 
 	ai_move_delay = world.time + move_delay
@@ -211,16 +176,10 @@
 		return FALSE
 
 	if(!current_path || (next_path_generation < world.time && current_target_turf != T))
-		/*
-		if(!calculating_path || current_target_turf != T)
-			calculate_path(T, max_range, CALLBACK(src, .proc/set_path))
-			current_target_turf = T
-		*/
-
 		if(!XENO_CALCULATING_PATH(src) || current_target_turf != T)
 			SSxeno_pathfinding.calculate_path(src, T, max_range, src, CALLBACK(src, .proc/set_path), list(src, current_target))
 			current_target_turf = T
-		next_path_generation = world.time + path_update_per_second
+		next_path_generation = world.time + path_update_period
 
 	if(XENO_CALCULATING_PATH(src))
 		return TRUE
@@ -231,6 +190,11 @@
 
 	// We've reached our destination
 	if(!length(current_path) || get_dist(T, src) <= 0)
+		current_path = null
+		return TRUE
+
+	// We've somehow deviated from our current path. Generate next path whenever possible.
+	if(get_dist(current_path[current_path.len], src) > 1)
 		current_path = null
 		return TRUE
 

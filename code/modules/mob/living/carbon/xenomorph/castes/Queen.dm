@@ -282,7 +282,7 @@
 		/datum/action/xeno_action/onclick/emit_pheromones,
 		/datum/action/xeno_action/onclick/psychic_whisper,
 		/datum/action/xeno_action/activable/gut,
-		/datum/action/xeno_action/onclick/plant_weeds, //here so its overridden by xeno_spit, and fits near the resin structure macros.
+		/datum/action/xeno_action/onclick/plant_weeds/random, //here so its overridden by xeno_spit, and fits near the resin structure macros.
 		/datum/action/xeno_action/onclick/choose_resin/queen_macro, //third macro
 		/datum/action/xeno_action/activable/secrete_resin/queen_macro, //fourth macro
 		/datum/action/xeno_action/onclick/banish,
@@ -299,6 +299,26 @@
 		/mob/living/carbon/Xenomorph/proc/rename_tunnel,
 	)
 
+	var/list/immobile_abilities = list(
+		/datum/action/xeno_action/onclick/regurgitate,
+		/datum/action/xeno_action/onclick/remove_eggsac,
+		/datum/action/xeno_action/onclick/emit_pheromones,
+		/datum/action/xeno_action/onclick/psychic_whisper,
+		/datum/action/xeno_action/watch_xeno,
+		/datum/action/xeno_action/onclick/set_xeno_lead,
+		/datum/action/xeno_action/activable/queen_heal,
+		/datum/action/xeno_action/activable/queen_give_plasma,
+		/datum/action/xeno_action/onclick/queen_order,
+		/datum/action/xeno_action/onclick/choose_resin,
+		/datum/action/xeno_action/activable/expand_weeds,
+		/datum/action/xeno_action/activable/secrete_resin/remote/queen,
+		/datum/action/xeno_action/activable/place_construction,
+		/datum/action/xeno_action/onclick/deevolve,
+		/datum/action/xeno_action/onclick/banish,
+		/datum/action/xeno_action/onclick/readmit,
+		/datum/action/xeno_action/onclick/eye
+	)
+
 	var/list/mobile_abilities = list(
 		/datum/action/xeno_action/onclick/xeno_resting,
 		/datum/action/xeno_action/onclick/regurgitate,
@@ -312,7 +332,7 @@
 		/datum/action/xeno_action/activable/screech, //custom macro, Screech
 		/datum/action/xeno_action/activable/xeno_spit, //first macro
 		/datum/action/xeno_action/onclick/shift_spits, //second macro
-		/datum/action/xeno_action/onclick/plant_weeds, //here so its overridden by xeno_spit, and fits near the resin structure macros.
+		/datum/action/xeno_action/onclick/plant_weeds/random, //here so its overridden by xeno_spit, and fits near the resin structure macros.
 		/datum/action/xeno_action/onclick/choose_resin/queen_macro, //third macro
 		/datum/action/xeno_action/activable/secrete_resin/queen_macro, //fourth macro
 		/datum/action/xeno_action/onclick/banish,
@@ -354,47 +374,10 @@
 /mob/living/carbon/Xenomorph/Queen/Delta
 	hivenumber = XENO_HIVE_DELTA
 
-/mob/living/carbon/Xenomorph/Queen/process_ai(delta_time, game_evaluation)
-	. = ..()
-
-	if(.)
+/mob/living/carbon/Xenomorph/Queen/ai_move_target(delta_time, game_evaluation)
+	if(ovipositor)
 		return
-
-	a_intent = INTENT_HARM
-
-	if(!ovipositor && !anchored)
-		var/turf/T = get_turf(current_target)
-		if(get_dist(src, current_target) <= 1)
-			var/list/turfs = RANGE_TURFS(1, T)
-			while(length(turfs))
-				T = pick(turfs)
-				turfs -= T
-				if(!T.density)
-					break
-
-				if(T == get_turf(current_target))
-					break
-
-
-		if(!move_to_next_turf(T))
-			current_target = null
-			return
-
-		if(DT_PROB(QUEEN_SCREECH, delta_time))
-			var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/screech)
-			A.use_ability_async(current_target)
-
-	if(DT_PROB(QUEEN_SPIT, delta_time) && (loc in view(current_target)))
-		var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/xeno_spit)
-		A.use_ability_async(current_target)
-
-	if(DT_PROB(QUEEN_PLANT_WEEDS, delta_time))
-		var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/onclick/plant_weeds)
-		A.use_ability_async(current_target)
-
-	if(get_dist(src, current_target) <= 1 && DT_PROB(XENO_SLASH, delta_time))
-		INVOKE_ASYNC(src, /mob.proc/do_click, current_target, "", list())
-
+	return ..()
 
 /mob/living/carbon/Xenomorph/Queen/Initialize()
 	. = ..()
@@ -756,26 +739,6 @@
 
 	for(var/datum/action/xeno_action/A in actions)
 		A.hide_from(src)
-
-	var/list/immobile_abilities = list(
-		/datum/action/xeno_action/onclick/regurgitate,
-		/datum/action/xeno_action/onclick/remove_eggsac,
-		/datum/action/xeno_action/onclick/emit_pheromones,
-		/datum/action/xeno_action/onclick/psychic_whisper,
-		/datum/action/xeno_action/watch_xeno,
-		/datum/action/xeno_action/onclick/set_xeno_lead,
-		/datum/action/xeno_action/activable/queen_heal,
-		/datum/action/xeno_action/activable/queen_give_plasma,
-		/datum/action/xeno_action/onclick/queen_order,
-		/datum/action/xeno_action/onclick/choose_resin,
-		/datum/action/xeno_action/activable/expand_weeds,
-		/datum/action/xeno_action/activable/secrete_resin/remote/queen,
-		/datum/action/xeno_action/activable/place_construction,
-		/datum/action/xeno_action/onclick/deevolve,
-		/datum/action/xeno_action/onclick/banish,
-		/datum/action/xeno_action/onclick/readmit,
-		/datum/action/xeno_action/onclick/eye
-	)
 
 	for(var/path in immobile_abilities)
 		give_action(src, path)

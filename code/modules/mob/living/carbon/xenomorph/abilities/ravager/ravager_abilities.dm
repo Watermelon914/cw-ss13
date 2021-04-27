@@ -20,6 +20,32 @@
 	// State
 	var/activated_once = FALSE
 
+	var/prob_chance = 100
+	var/ai_activate_percentage_health = 0.25
+	var/ai_activate_people = 3
+
+/datum/action/xeno_action/activable/empower/process_ai(mob/living/carbon/Xenomorph/X, delta_time, game_evaluation)
+	if(!DT_PROB(prob_chance, delta_time))
+		return
+
+	var/should_apply = FALSE
+	if(X.health/X.maxHealth < ai_activate_percentage_health)
+		should_apply = TRUE
+
+	var/humans_around = 0
+	for(var/i in GLOB.alive_client_human_list)
+		var/mob/living/carbon/human/H = i
+		if(get_dist(H, src) <= empower_range)
+			humans_around++
+
+		if(humans_around >= ai_activate_people)
+			should_apply = TRUE
+			break
+
+	if(should_apply)
+		use_ability_async(null)
+
+
 // Rav charge
 /datum/action/xeno_action/activable/pounce/charge
 	name = "Charge"
@@ -40,6 +66,44 @@
 	freeze_self = FALSE				// Should we freeze ourselves after the lunge?
 	should_destroy_objects = TRUE   // Only used for ravager charge
 
+	var/shielded_prob_chance = 100
+	prob_chance = 30
+
+/datum/action/xeno_action/activable/pounce/charge/process_ai(mob/living/carbon/Xenomorph/X, delta_time, game_evaluation)
+	if(get_dist(X, X.current_target) > distance)
+		return
+
+	var/shield_total = 0
+	for (var/l in X.xeno_shields)
+		var/datum/xeno_shield/XS = l
+		if (XS.shield_source == XENO_SHIELD_SOURCE_RAVAGER)
+			shield_total += XS.amount
+			break
+	var/datum/behavior_delegate/ravager_base/BD = X.behavior_delegate
+
+	var/clear = FALSE
+	if (shield_total > BD.min_shield_buffed_abilities)
+		clear = DT_PROB(shielded_prob_chance, delta_time)
+	else
+		clear = DT_PROB(prob_chance, delta_time)
+
+	if(!clear)
+		return
+
+	var/turf/last_turf = X.loc
+	X.add_temp_pass_flags(PASS_OVER_THROW_MOB)
+	for(var/i in getline2(X, X.current_target, FALSE))
+		var/turf/new_turf = i
+		if(LinkBlocked(X, last_turf, new_turf, list(X.current_target, X)))
+			clear = FALSE
+			break
+	X.remove_temp_pass_flags(PASS_OVER_THROW_MOB)
+
+	if(!clear)
+		return
+
+	use_ability_async(X.current_target)
+
 // Rav "Scissor Cut"
 /datum/action/xeno_action/activable/scissor_cut
 	name = "Scissor Cut"
@@ -55,6 +119,12 @@
 	var/damage = 45
 
 	var/daze_duration = 2 // If we daze, daze for this duration
+	var/prob_chance = 75
+	var/ai_range = 3
+
+/datum/action/xeno_action/activable/scissor_cut/process_ai(mob/living/carbon/Xenomorph/X, delta_time, game_evaluation)
+	if(DT_PROB(prob_chance, delta_time) && get_dist(X, X.current_target) <= ai_range)
+		use_ability_async(X.current_target)
 
 //// BERSERKER ACTIONS
 

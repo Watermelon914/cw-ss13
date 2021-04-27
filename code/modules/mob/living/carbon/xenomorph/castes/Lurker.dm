@@ -193,7 +193,7 @@
 			//stop_calculating_path()
 			current_path = null
 
-	zone_selected = pick(GLOB.warrior_target_limbs)
+	zone_selected = pick(GLOB.ai_target_limbs)
 	if(get_dist(src, current_target) <= 1)
 		if(DT_PROB(XENO_SLASH, delta_time))
 			if(DT_PROB(LURKER_POWER_SLASH, delta_time))

@@ -17,6 +17,14 @@
 	xeno_cooldown = 10
 	ability_primacy = XENO_PRIMARY_ACTION_1
 
+/datum/action/xeno_action/onclick/plant_weeds/random
+	var/chance_per_second = 20
+	default_ai_action = TRUE
+
+/datum/action/xeno_action/onclick/plant_weeds/random/process_ai(mob/living/carbon/Xenomorph/X, delta_time, game_evaluation)
+	if(DT_PROB(chance_per_second, delta_time))
+		use_ability_async(X.current_target)
+
 // Resting
 /datum/action/xeno_action/onclick/xeno_resting
 	name = "Rest"
@@ -178,6 +186,28 @@
 	var/successful_parry = FALSE
 	var/atom/current_pounce_target
 
+	default_ai_action = TRUE
+	var/prob_chance = 80
+
+/datum/action/xeno_action/activable/pounce/process_ai(mob/living/carbon/Xenomorph/X, delta_time, game_evaluation)
+	if(get_dist(X, X.current_target) > distance || !DT_PROB(prob_chance, delta_time))
+		return
+
+	var/turf/last_turf = X.loc
+	var/clear = TRUE
+	X.add_temp_pass_flags(PASS_OVER_THROW_MOB)
+	for(var/i in getline2(X, X.current_target, FALSE))
+		var/turf/new_turf = i
+		if(LinkBlocked(X, last_turf, new_turf, list(X.current_target, X)))
+			clear = FALSE
+			break
+	X.remove_temp_pass_flags(PASS_OVER_THROW_MOB)
+
+	if(!clear)
+		return
+
+	use_ability_async(X.current_target)
+
 /datum/action/xeno_action/activable/pounce/New()
 	. = ..()
 	initialize_pounce_pass_flags()
@@ -310,6 +340,13 @@
 	ability_primacy = XENO_PRIMARY_ACTION_1
 	cooldown_message = "You feel your neurotoxin glands swell with ichor. You can spit again."
 	xeno_cooldown = 60 SECONDS
+	default_ai_action = TRUE
+
+	var/spit_chance_per_second = 80
+
+/datum/action/xeno_action/activable/xeno_spit/process_ai(mob/living/carbon/Xenomorph/X, delta_time, game_evaluation)
+	if(DT_PROB(spit_chance_per_second, delta_time) && (X.loc in view(X.current_target)))
+		use_ability_async(X.current_target)
 
 /datum/action/xeno_action/activable/bombard
 	name = "Bombard"
