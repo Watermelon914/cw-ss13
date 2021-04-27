@@ -227,6 +227,11 @@
 	freeze_self = FALSE
 
 	windup = FALSE
+	var/prob_chance = 100
+
+/datum/action/xeno_action/activable/pounce/base_prae_dash/process_ai(mob/living/carbon/Xenomorph/X, delta_time, game_evaluation)
+	if(DT_PROB(prob_chance, delta_time))
+		use_ability_async(X.current_target)
 
 /datum/action/xeno_action/activable/prae_acid_ball
 	name = "Acid Ball"
@@ -259,6 +264,13 @@
 	activation_delay = TRUE
 	activation_delay_length = 0.5 SECONDS
 	activation_interrupt = INTERRUPT_INCAPACITATED
+
+	default_ai_action = TRUE
+	var/prob_chance = 80
+
+/datum/action/xeno_action/activable/spray_acid/base_prae_spray_acid/process_ai(mob/living/carbon/Xenomorph/X, delta_time, game_evaluation)
+	if(DT_PROB(prob_chance, delta_time))
+		use_ability_async(X.current_target)
 
 
 ///////////////////////// WARDEN PRAE

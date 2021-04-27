@@ -53,69 +53,18 @@
 	claw_type = CLAW_TYPE_SHARP
 
 /mob/living/carbon/Xenomorph/Warrior/process_ai(delta_time, game_evaluation)
-	. = ..()
-
-	if(.)
-		return
-
-	a_intent = INTENT_HARM
 	create_hud()
-
 	if(get_active_hand())
 		swap_hand()
+	zone_selected = pick(GLOB.ai_target_limbs)
+	return ..()
 
-	if(throwing)
-		return
-
+/mob/living/carbon/Xenomorph/Warrior/ai_move_target(delta_time, game_evaluation)
 	if(pulling && can_move_and_apply_move_delay())
 		Move(get_step(loc, turn(dir, 180)), turn(dir, 180))
 		current_path = null
-	else
-		var/turf/T = get_turf(current_target)
-		if(get_dist(src, current_target) <= 1)
-			var/list/turfs = RANGE_TURFS(1, T)
-			while(length(turfs))
-				T = pick(turfs)
-				turfs -= T
-				if(!T.density)
-					break
-
-				if(T == get_turf(current_target))
-					break
-
-		if(!move_to_next_turf(T))
-			current_target = null
-			return
-
-		if(get_dist(src, current_target) <= WARRIOR_LUNGE_RANGE && DT_PROB(WARRIOR_LUNGE, delta_time))
-			var/turf/last_turf = loc
-			var/clear = TRUE
-			add_temp_pass_flags(PASS_OVER_THROW_MOB)
-			for(var/i in getline2(src, current_target, FALSE))
-				var/turf/new_turf = i
-				if(LinkBlocked(src, last_turf, new_turf, list(current_target, src)))
-					clear = FALSE
-					break
-			remove_temp_pass_flags(PASS_OVER_THROW_MOB)
-
-			if(clear)
-				var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/pounce/lunge)
-				A.use_ability_async(current_target)
-				SSxeno_pathfinding.stop_calculating_path(src)
-				//stop_calculating_path()
-				current_path = null
-				swap_hand()
-
-	zone_selected = pick(GLOB.ai_target_limbs)
-	if(get_dist(src, current_target) <= 1)
-		if(DT_PROB(XENO_SLASH, delta_time))
-			INVOKE_ASYNC(src, /mob.proc/do_click, current_target, "", list())
-		if(DT_PROB(WARRIOR_PUNCH, delta_time))
-			var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/warrior_punch)
-			A.use_ability_async(current_target)
-		else if(DT_PROB(WARRIOR_FLING, delta_time))
-			var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/fling)
-			A.use_ability_async(current_target)
+		return
+	return ..()
 
 /mob/living/carbon/Xenomorph/Warrior/throw_item(atom/target)
 	toggle_throw_mode(THROW_MODE_OFF)

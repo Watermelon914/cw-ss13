@@ -24,6 +24,8 @@
 	var/ai_activate_percentage_health = 0.25
 	var/ai_activate_people = 3
 
+	default_ai_action = TRUE
+
 /datum/action/xeno_action/activable/empower/process_ai(mob/living/carbon/Xenomorph/X, delta_time, game_evaluation)
 	if(!DT_PROB(prob_chance, delta_time))
 		return
@@ -121,6 +123,8 @@
 	var/daze_duration = 2 // If we daze, daze for this duration
 	var/prob_chance = 75
 	var/ai_range = 3
+
+	default_ai_action = TRUE
 
 /datum/action/xeno_action/activable/scissor_cut/process_ai(mob/living/carbon/Xenomorph/X, delta_time, game_evaluation)
 	if(DT_PROB(prob_chance, delta_time) && get_dist(X, X.current_target) <= ai_range)

@@ -111,9 +111,11 @@
 	return PROCESS_KILL
 
 /datum/action/xeno_action/proc/ai_registered(var/mob/living/carbon/Xenomorph/X)
+	SHOULD_CALL_PARENT(TRUE)
 	return
 
 /datum/action/xeno_action/proc/ai_unregistered(var/mob/living/carbon/Xenomorph/X)
+	SHOULD_CALL_PARENT(TRUE)
 	return
 
 // Checks the host Xeno's plasma. Returns TRUE if the amount of plasma

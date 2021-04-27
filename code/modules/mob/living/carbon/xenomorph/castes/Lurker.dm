@@ -135,29 +135,9 @@
 	var/invis_message = (invis_start_time == -1) ? "N/A" : "[(invis_duration-(world.time - invis_start_time))/10] seconds."
 	. += "Invisibility Time Left: [invis_message]"
 
-/mob/living/carbon/Xenomorph/Lurker/process_ai(delta_time, game_evaluation)
-	. = ..()
-
-	if(.)
-		return
-
-	a_intent = INTENT_HARM
-	create_hud()
-
-	if(throwing)
-		return
-
+/mob/living/carbon/Xenomorph/Lurker/ai_move_target(delta_time, game_evaluation)
 	if(current_target.is_mob_incapacitated())
-		travelling_turf = get_turf(current_target)
-		var/list/turfs = RANGE_TURFS(1, travelling_turf)
-		while(length(turfs))
-			travelling_turf = pick(turfs)
-			turfs -= travelling_turf
-			if(!travelling_turf.density)
-				break
-
-			if(travelling_turf == get_turf(current_target))
-				break
+		return ..()
 
 	else if(!(src in view(world.view, current_target)))
 		travelling_turf = get_turf(current_target)
@@ -168,12 +148,16 @@
 
 	if(!move_to_next_turf(travelling_turf))
 		travelling_turf = null
-		return
+		return TRUE
+
+/mob/living/carbon/Xenomorph/Lurker/process_ai(delta_time, game_evaluation)
+	a_intent = INTENT_HARM
+	create_hud()
+	zone_selected = pick(GLOB.ai_target_limbs)
+	return ..()
+
 
 	var/datum/action/xeno_action/onclick/lurker_invisibility/invis = get_xeno_action_by_type(src, /datum/action/xeno_action/onclick/lurker_invisibility)
-
-	if(DT_PROB(LURKER_INVISIBLE, delta_time))
-		invis.use_ability_async()
 
 	if(invis.invis_timer_id != TIMER_ID_NULL && get_dist(src, current_target) <= LURKER_POUNCE_RANGE && DT_PROB(LURKER_POUNCE, delta_time))
 		var/turf/last_turf = loc
@@ -193,7 +177,6 @@
 			//stop_calculating_path()
 			current_path = null
 
-	zone_selected = pick(GLOB.ai_target_limbs)
 	if(get_dist(src, current_target) <= 1)
 		if(DT_PROB(XENO_SLASH, delta_time))
 			if(DT_PROB(LURKER_POWER_SLASH, delta_time))

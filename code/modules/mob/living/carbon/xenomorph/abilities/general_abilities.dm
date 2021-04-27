@@ -287,6 +287,7 @@
 	var/activation_delay_length = 0		// Only used if activation_delay is TRUE.
 	var/activation_interrupt = INTERRUPT_NO_NEEDHAND
 
+	var/prob_chance = 100
 
 /datum/action/xeno_action/activable/transfer_plasma
 	name = "Transfer Plasma"

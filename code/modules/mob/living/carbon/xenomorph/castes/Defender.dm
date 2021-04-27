@@ -58,28 +58,5 @@
 		icon_state = "[mutation_type] [caste.display_icon] Crest"
 
 /mob/living/carbon/Xenomorph/Defender/process_ai(delta_time, game_evaluation)
-	. = ..()
-
-	if(.)
-		return
-
-	a_intent = INTENT_HARM
-
-	var/turf/T = get_turf(current_target)
-	if(get_dist(src, current_target) <= 1)
-		T = pick(RANGE_TURFS(1, T))
-
-	if(!move_to_next_turf(T))
-		current_target = null
-		return
-
 	zone_selected = pick(GLOB.ai_target_limbs)
-	if(get_dist(src, current_target) <= 1)
-		if(DT_PROB(XENO_SLASH, delta_time))
-			INVOKE_ASYNC(src, /mob.proc/do_click, current_target, "", list())
-		if(DT_PROB(DEFENDER_TAILWHIP, delta_time))
-			var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/onclick/tail_sweep)
-			A.use_ability_async(current_target)
-		if(DT_PROB(DEFENDER_HEADBUTT, delta_time))
-			var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/headbutt)
-			A.use_ability_async(current_target)
+	return ..()

@@ -19,6 +19,12 @@
 	action_type = XENO_ACTION_CLICK
 	ability_primacy = XENO_PRIMARY_ACTION_2
 	xeno_cooldown = 40
+	var/prob_chance = 75
+	default_ai_action = TRUE
+
+/datum/action/xeno_action/onclick/headbutt/process_ai(mob/living/carbon/Xenomorph/X, delta_time, game_evaluation)
+		if(DT_PROB(prob_chance, delta_time) && get_dist(X, X.current_target) <= 1)
+			use_ability_async(X.current_target)
 
 /datum/action/xeno_action/onclick/tail_sweep
 	name = "Tail Sweep"
@@ -29,6 +35,12 @@
 	ability_primacy = XENO_PRIMARY_ACTION_3
 	plasma_cost = 10
 	xeno_cooldown = 110
+	var/prob_chance = 40
+	default_ai_action = TRUE
+
+/datum/action/xeno_action/onclick/tail_sweep/process_ai(mob/living/carbon/Xenomorph/X, delta_time, game_evaluation)
+		if(DT_PROB(prob_chance, delta_time) && get_dist(X, X.current_target) <= 1)
+			use_ability_async(X.current_target)
 
 /datum/action/xeno_action/activable/fortify
 	name = "Fortify"

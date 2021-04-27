@@ -28,6 +28,11 @@
 	var/stun_power = 1
 	var/weaken_power = 1
 
+	var/prob_chance = 25
+
+/datum/action/xeno_action/activable/fling/process_ai(mob/living/carbon/Xenomorph/X, delta_time, game_evaluation)
+	if(DT_PROB(prob_chance, delta_time) && get_dist(X, X.current_target) <= 1)
+		use_ability_async(X.current_target)
 
 // Warrior Lunge
 /datum/action/xeno_action/activable/pounce/lunge
@@ -47,6 +52,25 @@
 
 	var/click_miss_cooldown = 15
 	var/twitch_message_cooldown = 0 //apparently this is necessary for a tiny code that makes the lunge message on cooldown not be spammable, doesn't need to be big so 5 will do.
+	var/prob_chance = 40
+
+/datum/action/xeno_action/activable/pounce/lunge/process_ai(mob/living/carbon/Xenomorph/X, delta_time, game_evaluation)
+	if(X.pulling || get_dist(X, X.current_target) > distance || !DT_PROB(prob_chance, delta_time))
+		return
+
+	var/turf/last_turf = loc
+	var/clear = TRUE
+	X.add_temp_pass_flags(PASS_OVER_THROW_MOB)
+	for(var/i in getline2(X, X.current_target, FALSE))
+		var/turf/new_turf = i
+		if(LinkBlocked(X, last_turf, new_turf, list(X.current_target, X)))
+			clear = FALSE
+			break
+	X.remove_temp_pass_flags(PASS_OVER_THROW_MOB)
+
+	if(clear)
+		use_ability_async(X.current_target)
+		X.swap_hand()
 
 // Warrior Agility
 
@@ -67,6 +91,13 @@
 	var/base_punch_damage_pred = 25
 	var/boxer_punch_damage_pred = 25
 	var/damage_variance = 5
+
+	default_ai_action = TRUE
+	var/prob_chance = 15
+
+/datum/action/xeno_action/activable/warrior_punch/process_ai(mob/living/carbon/Xenomorph/X, delta_time, game_evaluation)
+	if(DT_PROB(prob_chance, delta_time) && get_dist(X, X.current_target) <= 1)
+		use_ability_async(X.current_target)
 
 /datum/action/xeno_action/activable/uppercut
 	name = "Uppercut"

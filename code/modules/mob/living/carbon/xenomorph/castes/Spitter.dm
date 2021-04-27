@@ -58,52 +58,29 @@
 	var/turf/travelling_turf
 	var/potential_turf_range = 6
 	var/min_range = 3
-	var/last_spit = 0
 
-/mob/living/carbon/Xenomorph/Spitter/process_ai(delta_time, game_evaluation)
-	. = ..()
+/mob/living/carbon/Xenomorph/Spitter/ai_move_target(delta_time, game_evaluation)
+	if(current_target.is_mob_incapacitated())
+		return ..()
 
-	if(.)
-		return
+	if(!travelling_turf || !(get_turf(src) in view(world.view, current_target)))
+		travelling_turf = get_turf(current_target)
+	else if(get_dist(src, travelling_turf) <= min_range)
+		travelling_turf = loc
 
-	a_intent = INTENT_HARM
+	if(!move_to_next_turf(travelling_turf) || get_dist(travelling_turf, src) <= 0)
+		var/list/potential_turfs = RANGE_TURFS(potential_turf_range, travelling_turf)
+		potential_turfs -= loc
+		while(length(potential_turfs))
+			var/turf/target_turf = pick(potential_turfs)
+			potential_turfs -= target_turf
 
-	if(!current_target.is_mob_incapacitated() || !move_to_next_turf(get_turf(current_target)))
-		if(!travelling_turf || !(get_turf(src) in view(world.view, current_target)))
-			travelling_turf = get_turf(current_target)
-		else if(get_dist(src, travelling_turf) <= min_range)
-			travelling_turf = loc
+			if(get_dist(target_turf, current_target) <= min_range)
+				continue
 
-		if(!move_to_next_turf(travelling_turf) || get_dist(travelling_turf, src) <= 0)
-			var/list/potential_turfs = RANGE_TURFS(potential_turf_range, travelling_turf)
-			potential_turfs -= loc
-			while(length(potential_turfs))
-				var/turf/target_turf = pick(potential_turfs)
-				potential_turfs -= target_turf
-
-				if(get_dist(target_turf, current_target) <= min_range)
-					continue
-
-				if(target_turf in view(current_target))
-					travelling_turf = target_turf
-					break
-
-	if(DT_PROB(SPITTER_FRENZY, delta_time))
-		var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/onclick/spitter_frenzy)
-		A.use_ability_async(current_target)
-
-	if(DT_PROB(SPITTER_SPIT, delta_time) && (loc in view(current_target)))
-		var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/xeno_spit)
-		if(A.can_use_action())
-			last_spit = world.time
-		A.use_ability_async(current_target)
-
-	if(DT_PROB(SPITTER_SPRAY, delta_time) && (last_spit + SPITTER_SPRAY_SPIT_PERIOD) > world.time)
-		var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/spray_acid/spitter)
-		A.use_ability_async(current_target)
-
-	if(get_dist(src, current_target) <= 1 && DT_PROB(XENO_SLASH, delta_time))
-		INVOKE_ASYNC(src, /mob.proc/do_click, current_target, "", list())
+			if(target_turf in view(current_target))
+				travelling_turf = target_turf
+				break
 
 
 /datum/behavior_delegate/spitter_base
