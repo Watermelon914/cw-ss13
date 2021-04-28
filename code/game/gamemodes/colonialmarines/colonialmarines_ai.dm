@@ -25,7 +25,8 @@
 
 	var/list/lootbox_amounts = list(
 		/obj/structure/closet/crate/loot/objects = 200,
-		/obj/structure/closet/crate/loot/weapons = 200
+		/obj/structure/closet/crate/loot/weapons = 200,
+		/obj/structure/closet/crate/loot/ammo = 200
 	)
 
 	var/endgame_spawn_amount = 3

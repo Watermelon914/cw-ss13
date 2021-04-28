@@ -316,7 +316,9 @@
 		/datum/action/xeno_action/onclick/deevolve,
 		/datum/action/xeno_action/onclick/banish,
 		/datum/action/xeno_action/onclick/readmit,
-		/datum/action/xeno_action/onclick/eye
+		/datum/action/xeno_action/onclick/eye,
+		/datum/action/xeno_action/activable/xeno_spit,
+		/datum/action/xeno_action/onclick/shift_spits
 	)
 
 	var/list/mobile_abilities = list(

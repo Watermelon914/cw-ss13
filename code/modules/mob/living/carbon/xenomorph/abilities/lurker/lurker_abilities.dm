@@ -97,7 +97,7 @@
 
 	var/duration = 30 SECONDS 			// 30 seconds base
 	var/invis_timer_id = TIMER_ID_NULL
-	var/alpha_amount = 35
+	var/alpha_amount = 80
 	var/speed_buff = 0
 
 	var/speed_buff_mod_max = 0.25

@@ -1256,6 +1256,7 @@
 #include "code\modules\cm_aliens\structures\special\spawn_pool.dm"
 #include "code\modules\cm_loot\loot_crate.dm"
 #include "code\modules\cm_loot\loot_datum.dm"
+#include "code\modules\cm_loot\loot\ammo.dm"
 #include "code\modules\cm_loot\loot\utility.dm"
 #include "code\modules\cm_loot\loot\weapons.dm"
 #include "code\modules\cm_marines\anti_air.dm"

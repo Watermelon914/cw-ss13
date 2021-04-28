@@ -7,11 +7,16 @@
 	var/max_alpha = 35
 	var/glow_color = "#00ff00"
 
+	var/damage_mult = 3
+
 /datum/component/toxic_buildup/Initialize(var/toxic_buildup, var/toxic_buildup_dissipation = AMOUNT_PER_TIME(1, 3 SECONDS), var/max_buildup = 75)
 	. = ..()
 	src.toxic_buildup = toxic_buildup
 	src.toxic_buildup_dissipation = toxic_buildup_dissipation
 	src.max_buildup = max_buildup
+
+	if(!isliving(parent))
+		return COMPONENT_INCOMPATIBLE
 
 /datum/component/toxic_buildup/InheritComponent(datum/component/toxic_buildup/C, i_am_original, var/toxic_buildup)
 	. = ..()
@@ -25,25 +30,23 @@
 /datum/component/toxic_buildup/process(delta_time)
 	toxic_buildup = max(toxic_buildup - toxic_buildup_dissipation * delta_time, 0)
 
-	if(ishuman(parent))
-		var/mob/living/carbon/human/H = parent
-		H.apply_damage(toxic_buildup_dissipation * delta_time, TOX)
-
 	if(toxic_buildup <= 0)
 		qdel(src)
+		return
 
 	var/color = glow_color
 	var/intensity = toxic_buildup/max_buildup
 	color += num2text(max_alpha*intensity, 2, 16)
 
 	if(parent)
-		var/atom/A = parent
-		A.add_filter("toxic_buildup", 2, list("type" = "outline", "color" = color, "size" = 1))
+		var/mob/living/M = parent
+		M.apply_damage(toxic_buildup_dissipation * delta_time * damage_mult, BURN)
+
+		M.add_filter("toxic_buildup", 2, list("type" = "outline", "color" = color, "size" = 1))
 
 /datum/component/toxic_buildup/RegisterWithParent()
 	START_PROCESSING(SSdcs, src)
 	RegisterSignal(parent, list(
-		COMSIG_XENO_PRE_CALCULATE_ARMOURED_DAMAGE,
 		COMSIG_XENO_PRE_APPLY_ARMOURED_DAMAGE
 	), .proc/apply_toxic_buildup)
 	RegisterSignal(parent, COMSIG_XENO_APPEND_TO_STAT, .proc/stat_append)
@@ -51,7 +54,6 @@
 /datum/component/toxic_buildup/UnregisterFromParent()
 	STOP_PROCESSING(SSdcs, src)
 	UnregisterSignal(parent, list(
-		COMSIG_XENO_PRE_CALCULATE_ARMOURED_DAMAGE,
 		COMSIG_XENO_PRE_APPLY_ARMOURED_DAMAGE,
 		COMSIG_XENO_APPEND_TO_STAT
 	))

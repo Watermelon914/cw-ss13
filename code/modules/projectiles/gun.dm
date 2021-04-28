@@ -128,6 +128,9 @@
 	/// that will be given to a projectile with the current ammo datum
 	var/list/list/traits_to_give
 
+	var/mags_to_spawn = 1
+	var/list/base_magazines = list()
+
 
 //----------------------------------------------------------
 				//				    \\
@@ -141,6 +144,9 @@
 	base_gun_icon = icon_state
 	attachable_overlays = list("muzzle" = null, "rail" = null, "under" = null, "stock" = null, "mag" = null, "special" = null)
 	item_state_slots = list("back" = item_state, "j_store" = item_state)
+
+	if(!(flags_gun_features & GUN_INTERNAL_MAG))
+		base_magazines |= current_mag
 
 	if(current_mag)
 		if(spawn_empty && !(flags_gun_features & GUN_INTERNAL_MAG)) //Internal mags will still spawn, but they won't be filled.

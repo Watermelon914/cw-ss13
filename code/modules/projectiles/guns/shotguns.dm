@@ -20,6 +20,13 @@ can cause issues with ammo types getting mixed up during the burst.
 	has_empty_icon = FALSE
 	has_open_icon = FALSE
 
+	mags_to_spawn = 3
+	base_magazines = list(
+		/obj/item/ammo_magazine/handful/shotgun/buckshot,
+		/obj/item/ammo_magazine/handful/shotgun/slug,
+		/obj/item/ammo_magazine/handful/shotgun/flechette
+	)
+
 /obj/item/weapon/gun/shotgun/Initialize(mapload, spawn_empty)
 	. = ..()
 	if(current_mag)

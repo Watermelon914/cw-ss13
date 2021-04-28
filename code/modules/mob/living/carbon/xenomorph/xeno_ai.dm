@@ -86,6 +86,9 @@ GLOBAL_LIST_INIT(ai_target_limbs, list(
 			unregister_ai_action(XA)
 			continue
 
+		if(XA.hidden)
+			continue
+
 		if(XA.process_ai(src, delta_time, game_evaluation) == PROCESS_KILL)
 			unregister_ai_action(XA)
 

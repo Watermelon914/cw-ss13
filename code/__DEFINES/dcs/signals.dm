@@ -211,7 +211,6 @@
 	#define COMPONENT_CANCEL_XENO_HEAL (1<<0)
 
 /// from /mob/living/carbon/Xenomorph/apply_armoured_damage(): (list/damagedata)
-#define COMSIG_XENO_PRE_CALCULATE_ARMOURED_DAMAGE "xeno_pre_calculate_armoured_damage"
 #define COMSIG_XENO_PRE_APPLY_ARMOURED_DAMAGE "xeno_pre_apply_armoured_damage"
 
 /// from /mob/living/carbon/Xenomorph/get_status_tab_items(): (list/statdata)

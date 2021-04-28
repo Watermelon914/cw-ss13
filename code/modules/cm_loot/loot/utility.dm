@@ -59,25 +59,6 @@ GLOBAL_DATUM_INIT(loot_objects, /datum/loot_table/objects, new())
 	rarity = LOOT_RARE
 
 /*
-  AMMO KITS
-*/
-
-/datum/loot_entry/object/ammo_wp
-	name = "Wall-piercing Ammo Kit"
-	item_to_spawn = /obj/item/ammo_kit/penetrating
-	rarity = LOOT_COMMON
-
-/datum/loot_entry/object/ammo_incend
-	name = "Incendiary Ammo Kit"
-	item_to_spawn = /obj/item/ammo_kit/incendiary
-	rarity = LOOT_COMMON
-
-/datum/loot_entry/object/ammo_toxin
-	name = "Toxin Ammo Kit"
-	item_to_spawn = /obj/item/ammo_kit/toxin
-	rarity = LOOT_COMMON
-
-/*
   Armour Plates
 */
 

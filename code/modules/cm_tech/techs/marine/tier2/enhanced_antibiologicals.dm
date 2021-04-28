@@ -22,7 +22,7 @@
 /obj/item/ammo_kit
 	name = "ammo kit"
 	icon = 'icons/obj/items/devices.dmi'
-	desc = "An ammo kit used to convert regular ammo magazines of various weapons into a different variation."
+	desc = "An ammo kit used to produce ammunition for a weapon."
 	icon_state = "kit_generic"
 
 	var/list/convert_map
@@ -37,27 +37,55 @@
 	to_chat(user, SPAN_NOTICE("It has [uses] uses remaining."))
 
 /obj/item/ammo_kit/afterattack(atom/target, mob/living/user, proximity_flag, click_parameters)
-	if(!(target.type in convert_map))
-		return ..()
-
 	if(uses <= 0)
 		return ..()
 
-	var/obj/item/ammo_magazine/M = target
-	if(M.current_rounds < M.max_rounds)
-		to_chat(user, SPAN_WARNING("The magazine needs to be full for you to apply this kit onto it."))
-		return
+	var/amount_to_spawn = 1
+	var/type_to_convert_to
+	if(isgun(target))
+		var/obj/item/weapon/gun/G = target
+		var/list/L = G.base_magazines
+		if(!length(L))
+			return ..()
 
-	if(user.l_hand != M && user.r_hand != M)
-		to_chat(user, SPAN_WARNING("The magazine needs to be in your hands for you to apply this kit onto it."))
-		return
+		if(length(L) == 1)
+			type_to_convert_to = L[1]
+		else
+			var/list/mapping = list()
+			for(var/i in L)
+				var/atom/A = i
+				mapping[initial(A.name)] = i
 
-	var/type_to_convert_to = convert_map[target.type]
+			type_to_convert_to = tgui_input_list(user, "Select ammo type to retrieve", name, mapping)
+			if(uses <= 0 || QDELETED(src) || !type_to_convert_to)
+				return ..()
 
-	user.drop_held_item(M)
-	QDEL_NULL(M)
-	M = new type_to_convert_to(get_turf(user))
-	user.put_in_any_hand_if_possible(M)
+			type_to_convert_to = mapping[type_to_convert_to]
+
+		if(type_to_convert_to in convert_map)
+			type_to_convert_to = convert_map[type_to_convert_to]
+
+		amount_to_spawn = G.mags_to_spawn
+	else
+		if(!(target.type in convert_map))
+			return ..()
+
+		var/obj/item/ammo_magazine/M = target
+		if(M.current_rounds < M.max_rounds)
+			to_chat(user, SPAN_WARNING("The magazine needs to be full for you to apply this kit onto it."))
+			return
+
+		if(user.l_hand != M && user.r_hand != M)
+			to_chat(user, SPAN_WARNING("The magazine needs to be in your hands for you to apply this kit onto it."))
+			return
+
+		type_to_convert_to = convert_map[target.type]
+		user.drop_held_item(M)
+		QDEL_NULL(M)
+
+	for(var/i in 1 to amount_to_spawn)
+		var/obj/M = new type_to_convert_to(get_turf(user))
+		user.put_in_any_hand_if_possible(M)
 	uses -= 1
 	playsound(get_turf(user), "sound/machines/fax.ogg", 5)
 
@@ -68,10 +96,13 @@
 /obj/item/ammo_kit/proc/get_convert_map()
 	return list()
 
+/obj/item/ammo_kit/normal
+	name = "regular ammo kit"
+	icon_state = "kit_generic"
+
 /obj/item/ammo_kit/incendiary
 	name = "incendiary ammo kit"
 	icon_state = "kit_incendiary"
-	desc = "Converts magazines into incendiary ammo."
 
 /obj/item/ammo_kit/incendiary/get_convert_map()
 	. = ..()
@@ -83,6 +114,9 @@
 	.[/obj/item/ammo_magazine/pistol/vp78] =  /obj/item/ammo_magazine/pistol/vp78/incendiary
 	.[/obj/item/ammo_magazine/pistol/mod88] =  /obj/item/ammo_magazine/pistol/mod88/incendiary
 	.[/obj/item/ammo_magazine/revolver] =  /obj/item/ammo_magazine/revolver/incendiary
+	.[/obj/item/ammo_magazine/handful/shotgun/buckshot] =  /obj/item/ammo_magazine/handful/shotgun/custom_color/incendiary
+	.[/obj/item/ammo_magazine/handful/shotgun/slug] =  /obj/item/ammo_magazine/handful/shotgun/incendiary
+
 
 /obj/item/storage/box/shotgun
 	name = "incendiary shotgun kit"

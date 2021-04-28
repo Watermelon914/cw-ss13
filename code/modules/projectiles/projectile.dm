@@ -906,8 +906,6 @@
 	var/damage = P.calculate_damage()
 	var/damage_result = damage
 
-	var/ammo_flags = P.ammo.flags_ammo_behavior | P.projectile_override_flags
-
 	if(isXeno(P.firer))
 		var/mob/living/carbon/Xenomorph/X = P.firer
 		if(X.can_not_harm(src))
@@ -922,32 +920,6 @@
 		M.track_shot_hit(P.weapon_source, src)
 
 	flash_weak_pain()
-
-	if(damage > 0 && !(ammo_flags & AMMO_IGNORE_ARMOR))
-		var/armor = armor_deflection + armor_deflection_buff
-
-		var/list/damagedata = list(
-			"damage" = damage,
-			"armor" = armor,
-			"penetration" = P.ammo.penetration,
-			"armour_break_pr_pen" = P.ammo.pen_armor_punch,
-			"armour_break_flat" = P.ammo.damage_armor_punch,
-			"armor_integrity" = armor_integrity
-		)
-		SEND_SIGNAL(src, COMSIG_XENO_PRE_CALCULATE_ARMOURED_DAMAGE, damagedata)
-		damage_result = armor_damage_reduction(GLOB.xeno_ranged, damage,
-			damagedata["armor"], damagedata["penetration"], damagedata["armour_break_pr_pen"],
-			damagedata["armour_break_flat"], damagedata["armor_integrity"])
-
-		var/armor_punch = armor_break_calculation(GLOB.xeno_ranged, damage,
-			damagedata["armor"], damagedata["penetration"], damagedata["armour_break_pr_pen"],
-			damagedata["armour_break_flat"], damagedata["armor_integrity"])
-
-		apply_armorbreak(armor_punch)
-
-		if(damage <= 3)
-			damage = 0
-			bullet_ping(P)
 
 	bullet_message(P) //Message us about the bullet, since damage was inflicted.
 

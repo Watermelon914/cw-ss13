@@ -306,6 +306,9 @@
 						/obj/item/attachable/scope/mini,
 						/obj/item/attachable/scope/mini_iff)
 	var/folded = FALSE // Used for the stock attachment, to check if we can shoot or not
+	base_magazines = list(
+		/obj/item/ammo_magazine/revolver
+	)
 
 /obj/item/weapon/gun/revolver/m44/set_gun_attachment_offsets()
 	attachable_offset = list("muzzle_x" = 29, "muzzle_y" = 21,"rail_x" = 12, "rail_y" = 23, "under_x" = 21, "under_y" = 18, "stock_x" = 16, "stock_y" = 20)

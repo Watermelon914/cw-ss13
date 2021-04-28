@@ -130,7 +130,7 @@
 	if (ishuman(AM))
 		var/mob/living/carbon/human/H = AM
 		if (!isYautja(H) && !H.ally_of_hivenumber(linked_hive.hivenumber)) // predators are immune to weed slowdown effect
-			H.next_move_slowdown = H.next_move_slowdown + weed_strength
+			H.next_move_slowdown += HUMAN_WEED_SLOWDOWN
 	else if (isXeno(AM))
 		var/mob/living/carbon/Xenomorph/X = AM
 		if (!linked_hive.is_ally(X))

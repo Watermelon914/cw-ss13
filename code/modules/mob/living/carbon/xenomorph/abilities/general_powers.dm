@@ -250,7 +250,7 @@
 /datum/action/xeno_action/activable/pounce/use_ability(atom/A)
 	var/mob/living/carbon/Xenomorph/X = owner
 
-	if(!action_cooldown_check())
+	if(!action_cooldown_check() || !can_use_action())
 		return
 
 	if(!A) return
