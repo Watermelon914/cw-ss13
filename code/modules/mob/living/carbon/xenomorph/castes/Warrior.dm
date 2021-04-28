@@ -53,7 +53,6 @@
 	claw_type = CLAW_TYPE_SHARP
 
 /mob/living/carbon/Xenomorph/Warrior/process_ai(delta_time, game_evaluation)
-	create_hud()
 	if(get_active_hand())
 		swap_hand()
 	zone_selected = pick(GLOB.ai_target_limbs)

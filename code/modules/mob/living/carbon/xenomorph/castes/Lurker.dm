@@ -151,35 +151,5 @@
 		return TRUE
 
 /mob/living/carbon/Xenomorph/Lurker/process_ai(delta_time, game_evaluation)
-	a_intent = INTENT_HARM
-	create_hud()
 	zone_selected = pick(GLOB.ai_target_limbs)
 	return ..()
-
-
-	var/datum/action/xeno_action/onclick/lurker_invisibility/invis = get_xeno_action_by_type(src, /datum/action/xeno_action/onclick/lurker_invisibility)
-
-	if(invis.invis_timer_id != TIMER_ID_NULL && get_dist(src, current_target) <= LURKER_POUNCE_RANGE && DT_PROB(LURKER_POUNCE, delta_time))
-		var/turf/last_turf = loc
-		var/clear = TRUE
-		add_temp_pass_flags(PASS_OVER_THROW_MOB)
-		for(var/i in getline2(src, current_target, FALSE))
-			var/turf/new_turf = i
-			if(LinkBlocked(src, last_turf, new_turf, list(current_target, src)))
-				clear = FALSE
-				break
-		remove_temp_pass_flags(PASS_OVER_THROW_MOB)
-
-		if(clear)
-			var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/pounce/lurker)
-			A.use_ability_async(current_target)
-			SSxeno_pathfinding.stop_calculating_path(src)
-			//stop_calculating_path()
-			current_path = null
-
-	if(get_dist(src, current_target) <= 1)
-		if(DT_PROB(XENO_SLASH, delta_time))
-			if(DT_PROB(LURKER_POWER_SLASH, delta_time))
-				var/datum/action/xeno_action/power_slash = get_xeno_action_by_type(src, /datum/action/xeno_action/onclick/lurker_assassinate)
-				power_slash.use_ability_async()
-			INVOKE_ASYNC(src, /mob.proc/do_click, current_target, "", list())

@@ -22,9 +22,9 @@
 	var/prob_chance = 75
 	default_ai_action = TRUE
 
-/datum/action/xeno_action/onclick/headbutt/process_ai(mob/living/carbon/Xenomorph/X, delta_time, game_evaluation)
-		if(DT_PROB(prob_chance, delta_time) && get_dist(X, X.current_target) <= 1)
-			use_ability_async(X.current_target)
+/datum/action/xeno_action/activable/headbutt/process_ai(mob/living/carbon/Xenomorph/X, delta_time, game_evaluation)
+	if(DT_PROB(prob_chance, delta_time) && get_dist(X, X.current_target) <= 1)
+		use_ability_async(X.current_target)
 
 /datum/action/xeno_action/onclick/tail_sweep
 	name = "Tail Sweep"
@@ -39,8 +39,8 @@
 	default_ai_action = TRUE
 
 /datum/action/xeno_action/onclick/tail_sweep/process_ai(mob/living/carbon/Xenomorph/X, delta_time, game_evaluation)
-		if(DT_PROB(prob_chance, delta_time) && get_dist(X, X.current_target) <= 1)
-			use_ability_async(X.current_target)
+	if(DT_PROB(prob_chance, delta_time) && get_dist(X, X.current_target) <= 1)
+		use_ability_async(X.current_target)
 
 /datum/action/xeno_action/activable/fortify
 	name = "Fortify"

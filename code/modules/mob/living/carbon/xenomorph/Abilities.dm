@@ -98,7 +98,7 @@
 	default_ai_action = TRUE
 
 /datum/action/xeno_action/activable/screech/process_ai(mob/living/carbon/Xenomorph/Queen/X, delta_time, game_evaluation)
-	if(X.ovipositor && DT_PROB(prob_chance, delta_time))
+	if(!X.ovipositor && DT_PROB(prob_chance, delta_time))
 		use_ability_async(X.current_target)
 
 /datum/action/xeno_action/activable/screech/use_ability(atom/A)

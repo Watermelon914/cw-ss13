@@ -35,6 +35,8 @@
 	var/when_to_get_turf = 0.5 SECONDS
 	var/charging = FALSE
 
+	prob_chance = 75
+
 /datum/action/xeno_action/activable/pounce/crusher_charge/ai/use_ability(atom/A)
 	if(charging || !action_cooldown_check() || !can_use_action())
 		return
@@ -62,6 +64,22 @@
 
 	return ..(A)
 
+
+/datum/action/xeno_action/activable/pounce/crusher_charge/ai/process_ai(mob/living/carbon/Xenomorph/X, delta_time, game_evaluation)
+	if(get_dist(X, X.current_target) > distance || DT_PROB(prob_chance, delta_time))
+		var/turf/last_turf = X.loc
+		var/clear = TRUE
+		X.add_temp_pass_flags(PASS_OVER_THROW_MOB)
+		for(var/i in getline2(X, X.current_target, FALSE))
+			var/turf/new_turf = i
+			if(LinkBlocked(X, last_turf, new_turf, list(X.current_target, X)))
+				clear = FALSE
+				break
+		X.remove_temp_pass_flags(PASS_OVER_THROW_MOB)
+
+		if(clear)
+			use_ability_async(X.current_target)
+
 /datum/action/xeno_action/activable/pounce/crusher_charge/New()
 	. = ..()
 	not_reducing_objects = typesof(/obj/structure/barricade) + typesof(/obj/structure/machinery/defenses)
@@ -85,6 +103,14 @@
 	var/effect_type_base = /datum/effects/xeno_slow/superslow
 	var/effect_duration = 10
 
+	var/prob_chance_on_person = 100
+	var/prob_chance = 10
+
+/datum/action/xeno_action/onclick/crusher_stomp/process_ai(mob/living/carbon/Xenomorph/X, delta_time, game_evaluation)
+	if((get_dist(X, X.current_target) <= 0 && DT_PROB(prob_chance_on_person, delta_time)) \
+		|| (get_dist(X, X.current_target) <= 1 && DT_PROB(prob_chance, delta_time)))
+		use_ability_async()
+
 /datum/action/xeno_action/onclick/crusher_shield
 	name = "Defensive Shield"
 	action_icon_state = "empower"
@@ -96,3 +122,11 @@
 	plasma_cost = 20
 
 	var/shield_amount = 200
+	default_ai_action = TRUE
+
+	var/ai_percentage_activate = 0.25
+	var/prob_chance = 100
+
+/datum/action/xeno_action/onclick/crusher_shield/process_ai(mob/living/carbon/Xenomorph/X, delta_time, game_evaluation)
+	if(DT_PROB(prob_chance, delta_time) && X.health/X.maxHealth < ai_percentage_activate)
+		use_ability_async()

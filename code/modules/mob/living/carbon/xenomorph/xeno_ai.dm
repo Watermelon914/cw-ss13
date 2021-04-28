@@ -232,7 +232,7 @@ GLOBAL_LIST_INIT(ai_target_limbs, list(
 			smallest_distance = distance
 			closest_human = H
 
-	if(smallest_distance > RANGE_TO_DESPAWN_XENO && (XENO_AI_NO_DESPAWN & flags_ai))
+	if(smallest_distance > RANGE_TO_DESPAWN_XENO && !(XENO_AI_NO_DESPAWN & flags_ai))
 		remove_ai()
 		qdel(src)
 		return
@@ -242,10 +242,13 @@ GLOBAL_LIST_INIT(ai_target_limbs, list(
 	return closest_human
 
 /mob/living/carbon/Xenomorph/proc/make_ai()
+	SHOULD_CALL_PARENT(TRUE)
+	create_hud()
 	if(!client)
 		SSxeno_ai.add_ai(src)
 
 /mob/living/carbon/Xenomorph/proc/remove_ai()
+	SHOULD_CALL_PARENT(TRUE)
 	SSxeno_ai.remove_ai(src)
 
 GLOBAL_LIST_EMPTY_TYPED(xeno_ai_spawns, /obj/effect/landmark/xeno_ai)

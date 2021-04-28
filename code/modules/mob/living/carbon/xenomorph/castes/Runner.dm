@@ -99,6 +99,7 @@
 		swap_hand()
 
 /mob/living/carbon/Xenomorph/Runner/process_ai(delta_time, game_evaluation)
+	if(get_active_hand())
+		swap_hand()
 	zone_selected = pick(GLOB.ai_target_limbs)
-	create_hud()
 	return ..()

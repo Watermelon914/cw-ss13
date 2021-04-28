@@ -19,7 +19,7 @@
         0.0
     ],
     "map_item_type": "/obj/item/map/big_red_map",
-    "announce_text": "A xenomorphic outbreak has occured within Weston-Yamada's research facility, Solaris Ridge. ####OUTPOSTNAME#### is the only remaining location on the planet not overrun by Xenomorphs.",
+    "announce_text": "A xenomorphic outbreak has occured within Weston-Yamada's research facility, Solaris Ridge. ####SHIPNAME#### is the only remaining location on the planet not overrun by Xenomorphs.",
     "monkey_types": [
         "neaera"
 	],

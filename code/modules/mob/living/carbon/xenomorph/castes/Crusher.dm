@@ -290,38 +290,14 @@
 
 	. += "Shield: [shield_total]"
 
-/mob/living/carbon/Xenomorph/Crusher/process_ai(delta_time, game_evaluation)
-	. = ..()
-
-	if(.)
+/mob/living/carbon/Xenomorph/Crusher/ai_move_target(delta_time, game_evaluation)
+	if(frozen)
 		return
 
-	a_intent = INTENT_HARM
-	create_hud()
+	if(current_target.is_mob_incapacitated())
+		return ..()
 
-	if(DT_PROB(CRUSHER_SHIELD, delta_time))
-		var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/onclick/crusher_shield)
-		if(health/maxHealth < CRUSHER_SHIELD_HEALTH_PROC)
-			A.use_ability_async(null)
-
-	if(throwing || frozen)
-		return
-
-	var/datum/action/xeno_action/charge_ability = get_xeno_action_by_type(src, /datum/action/xeno_action/activable/pounce/crusher_charge/ai)
-
-	if(current_target.is_mob_incapacitated() || charge_ability.can_use_action())
-		travelling_turf = get_turf(current_target)
-		var/list/turfs = RANGE_TURFS(1, travelling_turf)
-		while(length(turfs))
-			travelling_turf = pick(turfs)
-			turfs -= travelling_turf
-			if(!travelling_turf.density)
-				break
-
-			if(travelling_turf == get_turf(current_target))
-				break
-
-	else if(!(src in view(world.view, current_target)))
+	if(!(src in view(world.view, current_target)))
 		travelling_turf = get_turf(current_target)
 	else if(!travelling_turf || get_dist(travelling_turf, src) <= 0)
 		travelling_turf = get_random_turf_in_range(current_target, linger_range, linger_range)
@@ -330,28 +306,4 @@
 
 	if(!move_to_next_turf(travelling_turf))
 		current_target = null
-		return
-
-	if(get_dist(src, current_target) <= CRUSHER_POUNCE_RANGE && DT_PROB(CRUSHER_POUNCE, delta_time))
-		var/turf/last_turf = loc
-		var/clear = TRUE
-		add_temp_pass_flags(PASS_OVER_THROW_MOB)
-		for(var/i in getline2(src, current_target, FALSE))
-			var/turf/new_turf = i
-			if(LinkBlocked(src, last_turf, new_turf, list(current_target, src)))
-				clear = FALSE
-				break
-		remove_temp_pass_flags(PASS_OVER_THROW_MOB)
-
-		if(clear)
-			charge_ability.use_ability_async(current_target)
-			SSxeno_pathfinding.stop_calculating_path(src)
-			//stop_calculating_path()
-			current_path = null
-
-	if(get_dist(src, current_target) <= 1 && DT_PROB(XENO_SLASH, delta_time))
-		INVOKE_ASYNC(src, /mob.proc/do_click, current_target, "", list())
-
-	if(get_dist(src, current_target) <= 0 && DT_PROB(CRUSHER_STOMP, delta_time))
-		var/datum/action/xeno_action/A = get_xeno_action_by_type(src, /datum/action/xeno_action/onclick/crusher_stomp)
-		A.use_ability_async(null)
+		return TRUE

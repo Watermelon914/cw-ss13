@@ -102,5 +102,4 @@
 
 /mob/living/carbon/Xenomorph/Ravager/process_ai(delta_time, game_evaluation)
 	zone_selected = pick(GLOB.ai_target_limbs)
-	create_hud()
 	return ..()
