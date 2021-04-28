@@ -59,7 +59,7 @@ Giving objectives to an agent:
 	source_human.contents += tools
 
 /datum/agent/proc/generate_message()
-	var/faction_name = "Weston-Yamada"
+	var/faction_name = "Weyland-Yutani"
 	switch(faction)
 		if(FACTION_RESS)
 			faction_name = "Royal Empire of the Shining Sun"
