@@ -73,13 +73,7 @@
 	. = ..()
 	current_aura = pick(caste.aura_allowed)
 
-/mob/living/carbon/Xenomorph/Drone/process_ai(delta_time, game_evaluation)
-	. = ..()
-	if(.)
-		return
-
-	a_intent = INTENT_HARM
-
+/mob/living/carbon/Xenomorph/Drone/ai_move_target(delta_time, game_evaluation)
 	if((!target_turf || pursuing_target) && next_search_time < world.time)
 		var/list/valid_turfs = RANGE_TURFS(range_to_check_for_weeds, current_target)
 		var/list/total_turfs = valid_turfs.Copy()
@@ -115,9 +109,6 @@
 		target_turf = null
 		current_target = null
 		return
-
-	if(get_dist(current_target, src) <= 1 && DT_PROB(XENO_SLASH, delta_time))
-		INVOKE_ASYNC(src, /mob.proc/do_click, current_target, "", list())
 
 	if(get_dist(target_turf, src) <= 0)
 		var/datum/action/xeno_action/onclick/plant_weeds/PW = get_xeno_action_by_type(src, /datum/action/xeno_action/onclick/plant_weeds)

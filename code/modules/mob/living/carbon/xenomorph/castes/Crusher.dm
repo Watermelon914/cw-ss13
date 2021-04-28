@@ -72,7 +72,7 @@
 /mob/living/carbon/Xenomorph/Crusher/remove_ai()
 	qdel(get_xeno_action_by_type(src, /datum/action/xeno_action/activable/pounce/crusher_charge/ai))
 	give_action(src, /datum/action/xeno_action/activable/pounce/crusher_charge)
-	return
+	return ..()
 
 // Refactored to handle all of crusher's interactions with object during charge.
 /mob/living/carbon/Xenomorph/proc/handle_collision(atom/target)
