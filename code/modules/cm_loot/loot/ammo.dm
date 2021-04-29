@@ -62,3 +62,8 @@ GLOBAL_DATUM_INIT(loot_ammo, /datum/loot_table/ammo, new())
 	name = "Toxin Ammo Kit"
 	item_to_spawn = /obj/item/ammo_kit/toxin
 	rarity = LOOT_RARE
+
+/datum/loot_entry/ammo/ammo_ap
+	name = "Armor-piercing Ammo Kit"
+	item_to_spawn = /obj/item/ammo_kit/ap
+	rarity = LOOT_RARE

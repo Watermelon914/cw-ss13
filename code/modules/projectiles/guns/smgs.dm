@@ -94,7 +94,7 @@
 	desc = "A modified version M-39 submachinegun, re-engineered for better weight, handling and accuracy. Given only to elite units."
 	icon_state = "m39b2"
 	item_state = "m39b2"
-	current_mag = /obj/item/ammo_magazine/smg/m39/ap
+	current_mag = /obj/item/ammo_magazine/smg/m39
 	flags_gun_features = GUN_AUTO_EJECTOR|GUN_CAN_POINTBLANK|GUN_AMMO_COUNTER
 	map_specific_decoration = FALSE
 

@@ -116,6 +116,8 @@
 	.[/obj/item/ammo_magazine/revolver] =  /obj/item/ammo_magazine/revolver/incendiary
 	.[/obj/item/ammo_magazine/handful/shotgun/buckshot] =  /obj/item/ammo_magazine/handful/shotgun/custom_color/incendiary
 	.[/obj/item/ammo_magazine/handful/shotgun/slug] =  /obj/item/ammo_magazine/handful/shotgun/incendiary
+	.[/obj/item/ammo_magazine/rocket] = /obj/item/ammo_magazine/rocket/wp
+	.[/obj/item/ammo_magazine/rifle/m4ra] = /obj/item/ammo_magazine/rifle/m4ra/incendiary
 
 
 /obj/item/storage/box/shotgun
@@ -163,6 +165,7 @@
 	.[/obj/item/ammo_magazine/pistol/vp78] =  /obj/item/ammo_magazine/pistol/vp78/penetrating
 	.[/obj/item/ammo_magazine/pistol/mod88] =  /obj/item/ammo_magazine/pistol/mod88/penetrating
 	.[/obj/item/ammo_magazine/revolver] =  /obj/item/ammo_magazine/revolver/penetrating
+	.[/obj/item/ammo_magazine/rocket] = /obj/item/ammo_magazine/rocket/ap
 
 /obj/item/ammo_kit/toxin
 	name = "toxin ammo kit"
@@ -178,4 +181,20 @@
 	.[/obj/item/ammo_magazine/pistol] =  /obj/item/ammo_magazine/pistol/toxin
 	.[/obj/item/ammo_magazine/pistol/vp78] =  /obj/item/ammo_magazine/pistol/vp78/toxin
 	.[/obj/item/ammo_magazine/pistol/mod88] =  /obj/item/ammo_magazine/pistol/mod88/toxin
-	.[/obj/item/ammo_magazine/revolver] =  /obj/item/ammo_magazine/revolver/marksman/toxin
+	.[/obj/item/ammo_magazine/revolver] =  /obj/item/ammo_magazine/revolver/toxin
+	.[/obj/item/ammo_magazine/rocket] = /obj/item/ammo_magazine/rocket/ap
+
+/obj/item/ammo_kit/ap
+	name = "armor-piercing ammo kit"
+	icon_state = "kit_ap"
+	desc = "Converts magazines into armor-piercing ammo."
+
+/obj/item/ammo_kit/ap/get_convert_map()
+	. = ..()
+	.[/obj/item/ammo_magazine/smg/m39] = /obj/item/ammo_magazine/smg/m39/ap
+	.[/obj/item/ammo_magazine/rifle] = /obj/item/ammo_magazine/rifle/ap
+	.[/obj/item/ammo_magazine/rifle/l42a] = /obj/item/ammo_magazine/rifle/l42a/ap
+	.[/obj/item/ammo_magazine/pistol] =  /obj/item/ammo_magazine/pistol/ap
+	.[/obj/item/ammo_magazine/revolver] =  /obj/item/ammo_magazine/revolver/marksman
+	.[/obj/item/ammo_magazine/rocket] = /obj/item/ammo_magazine/rocket/ap
+	.[/obj/item/ammo_magazine/rifle/m40_sd] = /obj/item/ammo_magazine/rifle/m40_sd/ap

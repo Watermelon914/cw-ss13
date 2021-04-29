@@ -10,12 +10,6 @@ GLOBAL_LIST_INIT(cm_vending_gear_smartgun, list(
 		list("SMARTGUN EXTRA UTILITIES (CHOOSE 1)", 0, null, null, null),
 		list("Burst Fire Assembly", 0, /obj/item/attachable/burstfire_assembly, MARINE_CAN_BUY_ARMOR, VENDOR_ITEM_REGULAR),
 		list("High-Capacity Power Cell", 0, /obj/item/cell/high, MARINE_CAN_BUY_ARMOR, VENDOR_ITEM_MANDATORY),
-
-		list("GUN ATTACHMENTS (CHOOSE 1)", 0, null, null, null),
-		list("Laser Sight", 0, /obj/item/attachable/lasersight, MARINE_CAN_BUY_ATTACHMENT, VENDOR_ITEM_REGULAR),
-		list("Quickfire Adapter", 0, /obj/item/attachable/quickfire, MARINE_CAN_BUY_ATTACHMENT, VENDOR_ITEM_REGULAR),
-		list("Red-Dot Sight", 0, /obj/item/attachable/reddot, MARINE_CAN_BUY_ATTACHMENT, VENDOR_ITEM_REGULAR),
-		list("Reflex Sight", 0, /obj/item/attachable/reflex, MARINE_CAN_BUY_ATTACHMENT, VENDOR_ITEM_REGULAR),
 	))
 
 /obj/structure/machinery/cm_vending/gear/smartgun

@@ -235,13 +235,6 @@
 		list("M44 Speed Loader (.44)", round(scale * 5.3), /obj/item/ammo_magazine/revolver, VENDOR_ITEM_REGULAR),
 		list("M4A3 Magazine (9mm)", round(scale * 6.1), /obj/item/ammo_magazine/pistol, VENDOR_ITEM_REGULAR),
 
-		list("ARMOR-PIERCING AMMUNITION", -1, null, null),
-		list("88 Mod 4 AP Magazine (9mm)", round(scale * 5.5), /obj/item/ammo_magazine/pistol/mod88, VENDOR_ITEM_REGULAR),
-		list("L42A AP Magazine (10x24mm)", round(scale * 4.5), /obj/item/ammo_magazine/rifle/l42a/ap, VENDOR_ITEM_REGULAR),
-		list("M39 AP Magazine (10x20mm)", round(scale * 3.5), /obj/item/ammo_magazine/smg/m39/ap, VENDOR_ITEM_REGULAR),
-		list("M41A AP Magazine (10x24mm)", round(scale * 3.5), /obj/item/ammo_magazine/rifle/ap, VENDOR_ITEM_REGULAR),
-		list("M4A3 AP Magazine (9mm)", round(scale * 2), /obj/item/ammo_magazine/pistol/ap, VENDOR_ITEM_REGULAR),
-
 		list("EXTENDED AMMUNITION", -1, null, null),
 		list("M39 Extended Magazine (10x20mm)", round(scale * 2.5) + 3, /obj/item/ammo_magazine/smg/m39/extended, VENDOR_ITEM_REGULAR),
 		list("M41A Extended Magazine (10x24mm)", round(scale * 2.5), /obj/item/ammo_magazine/rifle/extended, VENDOR_ITEM_REGULAR),

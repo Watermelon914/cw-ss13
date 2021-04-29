@@ -30,9 +30,9 @@
 	default_ammo = /datum/ammo/bullet/revolver/incendiary
 	icon_state = "m44_incendiary"
 
-/obj/item/ammo_magazine/revolver/marksman/toxin
+/obj/item/ammo_magazine/revolver/toxin
 	name = "\improper M44 toxic speed loader (.44)"
-	default_ammo = /datum/ammo/bullet/revolver/marksman/toxin
+	default_ammo = /datum/ammo/bullet/revolver/toxin
 	icon_state = "m44_toxin"
 
 /obj/item/ammo_magazine/revolver/penetrating

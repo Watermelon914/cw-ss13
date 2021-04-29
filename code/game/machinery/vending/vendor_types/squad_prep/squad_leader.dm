@@ -42,28 +42,8 @@ GLOBAL_LIST_INIT(cm_vending_gear_leader, list(
 		list("Sensor Medical HUD", 4, /obj/item/clothing/glasses/hud/sensor, null, VENDOR_ITEM_MANDATORY),
 
 		list("SPECIAL AMMUNITION", 0, null, null, null),
-		list("L42A AP Magazine (10x24mm)", 6, /obj/item/ammo_magazine/rifle/l42a/ap, null, VENDOR_ITEM_REGULAR),
-		list("M39 AP Magazine (10x20mm)", 6, /obj/item/ammo_magazine/smg/m39/ap , null, VENDOR_ITEM_REGULAR),
 		list("M39 Extended Magazine (10x20mm)", 6, /obj/item/ammo_magazine/smg/m39/extended , null, VENDOR_ITEM_REGULAR),
-		list("M41A AP Magazine (10x24mm)", 6, /obj/item/ammo_magazine/rifle/ap , null, VENDOR_ITEM_REGULAR),
 		list("M41A Extended Magazine (10x24mm)", 6, /obj/item/ammo_magazine/rifle/extended , null, VENDOR_ITEM_REGULAR),
-
-		list("ATTACHMENTS", 0, null, null, null),
-		list("Angled Grip", 6, /obj/item/attachable/angledgrip, null, VENDOR_ITEM_REGULAR),
-		list("Extended Barrel", 6, /obj/item/attachable/extended_barrel, null, VENDOR_ITEM_REGULAR),
-		list("Gyroscopic Stabilizer", 6, /obj/item/attachable/gyro, null, VENDOR_ITEM_REGULAR),
-		list("Laser Sight", 6, /obj/item/attachable/lasersight, null, VENDOR_ITEM_REGULAR),
-		list("Masterkey Shotgun", 6, /obj/item/attachable/attached_gun/shotgun, null, VENDOR_ITEM_REGULAR),
-		list("M37 Wooden Stock", 6, /obj/item/attachable/stock/shotgun, null, VENDOR_ITEM_REGULAR),
-		list("M39 Stock", 6, /obj/item/attachable/stock/smg, null, VENDOR_ITEM_REGULAR),
-		list("M41A Solid Stock", 6, /obj/item/attachable/stock/rifle, null, VENDOR_ITEM_REGULAR),
-		list("Quickfire Adapter", 6, /obj/item/attachable/quickfire, null, VENDOR_ITEM_REGULAR),
-		list("Recoil Compensator", 6, /obj/item/attachable/compensator, null, VENDOR_ITEM_REGULAR),
-		list("Red-Dot Sight", 6, /obj/item/attachable/reddot, null, VENDOR_ITEM_REGULAR),
-		list("Reflex Sight", 6, /obj/item/attachable/reflex, null, VENDOR_ITEM_REGULAR),
-		list("Suppressor", 6, /obj/item/attachable/suppressor, null, VENDOR_ITEM_REGULAR),
-		list("Underbarrel Extinguisher", 6, /obj/item/attachable/attached_gun/extinguisher, null, VENDOR_ITEM_REGULAR),
-		list("Vertical Grip", 6, /obj/item/attachable/verticalgrip, null, VENDOR_ITEM_REGULAR)
 	))
 
 /obj/structure/machinery/cm_vending/gear/leader

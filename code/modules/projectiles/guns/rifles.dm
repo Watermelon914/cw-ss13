@@ -81,7 +81,7 @@
 
 /obj/item/weapon/gun/rifle/m41a/set_gun_config_values()
 	..()
-	fire_delay = FIRE_DELAY_TIER_9
+	fire_delay = FIRE_DELAY_TIER_8
 	burst_amount = BURST_AMOUNT_TIER_3
 	burst_delay = FIRE_DELAY_TIER_9
 	accuracy_mult = BASE_ACCURACY_MULT + HIT_ACCURACY_MULT_TIER_6
@@ -110,7 +110,7 @@
 	icon_state = "m41a2"
 	item_state = "m41a2"
 
-	current_mag = /obj/item/ammo_magazine/rifle/ap
+	current_mag = /obj/item/ammo_magazine/rifle
 	flags_gun_features = GUN_AUTO_EJECTOR|GUN_CAN_POINTBLANK|GUN_AMMO_COUNTER
 	aim_slowdown = SLOWDOWN_ADS_SMG
 	wield_delay = WIELD_DELAY_FAST
@@ -421,10 +421,7 @@
 /obj/item/weapon/gun/rifle/m46c/recalculate_attachment_bonuses()
 	. = ..()
 	if(iff_enabled)
-		damage_mult -= BULLET_DAMAGE_MULT_TIER_1 //Loses a tier of damage
-		fire_delay += FIRE_DELAY_TIER_10
 		burst_amount -=  BURST_AMOUNT_TIER_6
-
 		flags_gun_features &= ~GUN_BURST_ON //Gun loses some combat ability in return for IFF, as well as burst fire mode
 
 
@@ -688,7 +685,7 @@
 	fire_sound = 'sound/weapons/gun_m16.ogg'
 	reload_sound = 'sound/weapons/handling/gun_m16_reload.ogg'
 	unload_sound = 'sound/weapons/handling/gun_m16_unload.ogg'
-	current_mag = /obj/item/ammo_magazine/rifle/m16/ap
+	current_mag = /obj/item/ammo_magazine/rifle/m16
 	attachable_allowed = list(
 						/obj/item/attachable/suppressor,
 						/obj/item/attachable/bayonet,
@@ -873,7 +870,7 @@
 	icon_state = "type73"
 	item_state = "type73"
 	wield_delay = 0 //Ends up being .5 seconds due to scope
-	current_mag = /obj/item/ammo_magazine/rifle/type71/ap
+	current_mag = /obj/item/ammo_magazine/rifle/type71
 	attachable_allowed = list(
 						/obj/item/attachable/lasersight,
 						/obj/item/attachable/verticalgrip,

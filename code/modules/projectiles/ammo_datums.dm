@@ -251,46 +251,43 @@
 
 	damage = BULLET_DAMAGE_TIER_11 //hollowpoint is strong
 	damage_falloff = DAMAGE_FALLOFF_TIER_9 //should be useful in close-range mostly
-	penetration = 0 //hollowpoint can't pierce armor!
+
 	shrapnel_chance = SHRAPNEL_CHANCE_TIER_3 //hollowpoint causes shrapnel
 
 // Used by M4A3 AP, Highpower and mod88
 /datum/ammo/bullet/pistol/ap
 	name = "armor-piercing pistol bullet"
 
-	damage = BULLET_DAMAGE_TIER_5
+	damage = BULLET_DAMAGE_TIER_10
 	accuracy = HIT_ACCURACY_TIER_2
 	penetration= ARMOR_PENETRATION_TIER_8
 	shrapnel_chance = SHRAPNEL_CHANCE_TIER_2
 
-/datum/ammo/bullet/pistol/ap/penetrating
+/datum/ammo/bullet/pistol/penetrating
 	name = "wall-piercing pistol bullet"
 	shrapnel_chance = 0
 
-	damage = BULLET_DAMAGE_TIER_6
-	penetration = ARMOR_PENETRATION_TIER_10
-
-/datum/ammo/bullet/pistol/ap/penetrating/set_bullet_traits()
+/datum/ammo/bullet/pistol/penetrating/set_bullet_traits()
 	. = ..()
 	LAZYADD(traits_to_give, list(
 		BULLET_TRAIT_ENTRY(/datum/element/bullet_trait_penetrating)
 	))
 
-/datum/ammo/bullet/pistol/ap/toxin
+/datum/ammo/bullet/pistol/toxin
 	name = "toxic pistol bullet"
 	var/acid_per_hit = 10
 	var/organic_damage_mult = 3
 
-/datum/ammo/bullet/pistol/ap/toxin/on_hit_mob(mob/M, obj/item/projectile/P)
+/datum/ammo/bullet/pistol/toxin/on_hit_mob(mob/M, obj/item/projectile/P)
 	. = ..()
 	M.AddComponent(/datum/component/toxic_buildup, acid_per_hit)
 
-/datum/ammo/bullet/pistol/ap/toxin/on_hit_turf(turf/T, obj/item/projectile/P)
+/datum/ammo/bullet/pistol/toxin/on_hit_turf(turf/T, obj/item/projectile/P)
 	. = ..()
 	if(T.flags_turf & TURF_ORGANIC)
 		P.damage *= organic_damage_mult
 
-/datum/ammo/bullet/pistol/ap/toxin/on_hit_obj(obj/O, obj/item/projectile/P)
+/datum/ammo/bullet/pistol/toxin/on_hit_obj(obj/O, obj/item/projectile/P)
 	. = ..()
 	if(O.flags_obj & OBJ_ORGANIC)
 		P.damage *= organic_damage_mult
@@ -299,7 +296,7 @@
 	name = "armor-shredding pistol bullet"
 
 	damage = BULLET_DAMAGE_TIER_3
-	penetration = ARMOR_PENETRATION_TIER_4
+
 	pen_armor_punch = 3
 
 /datum/ammo/bullet/pistol/rubber
@@ -354,7 +351,7 @@
 	flags_ammo_behavior = AMMO_BALLISTIC
 
 	accuracy = HIT_ACCURACY_TIER_3
-	damage = BULLET_DAMAGE_TIER_4
+	damage = BULLET_DAMAGE_TIER_5
 
 /datum/ammo/bullet/pistol/incendiary/set_bullet_traits()
 	..()
@@ -394,7 +391,7 @@
 /datum/ammo/bullet/pistol/squash/penetrating
 	name = "wall-piercing squash-head pistol bullet"
 	shrapnel_chance = 0
-	penetration = ARMOR_PENETRATION_TIER_10
+
 
 /datum/ammo/bullet/pistol/squash/penetrating/set_bullet_traits()
 	. = ..()
@@ -408,7 +405,7 @@
 	shrapnel_chance = 0
 	flags_ammo_behavior = AMMO_BALLISTIC
 	accuracy = HIT_ACCURACY_TIER_3
-	damage = BULLET_DAMAGE_TIER_7
+	damage = BULLET_DAMAGE_TIER_8
 
 /datum/ammo/bullet/pistol/squash/incendiary/set_bullet_traits()
 	..()
@@ -460,7 +457,7 @@
 	debilitate = list(1,0,0,0,0,0,0,0)
 
 	damage = BULLET_DAMAGE_TIER_11
-	penetration = ARMOR_PENETRATION_TIER_1
+
 	accuracy = HIT_ACCURACY_TIER_1
 
 /datum/ammo/bullet/revolver/marksman
@@ -469,13 +466,13 @@
 	shrapnel_chance = 0
 	damage_falloff = 0
 	accurate_range = 12
-	penetration = ARMOR_PENETRATION_TIER_7
+
 
 /datum/ammo/bullet/revolver/heavy
 	name = "heavy revolver bullet"
 
 	damage = BULLET_DAMAGE_TIER_7
-	penetration = ARMOR_PENETRATION_TIER_4
+
 	accuracy = HIT_ACCURACY_TIER_3
 
 /datum/ammo/bullet/revolver/heavy/on_hit_mob(mob/M, obj/item/projectile/P)
@@ -483,7 +480,7 @@
 
 /datum/ammo/bullet/revolver/incendiary
 	name = "incendiary revolver bullet"
-	damage = BULLET_DAMAGE_TIER_8
+	damage = BULLET_DAMAGE_TIER_9
 
 /datum/ammo/bullet/revolver/incendiary/set_bullet_traits()
 	..()
@@ -491,21 +488,21 @@
 		BULLET_TRAIT_ENTRY(/datum/element/bullet_trait_incendiary)
 	))
 
-/datum/ammo/bullet/revolver/marksman/toxin
+/datum/ammo/bullet/revolver/toxin
 	name = "toxic revolver bullet"
 	var/acid_per_hit = 10
 	var/organic_damage_mult = 3
 
-/datum/ammo/bullet/revolver/marksman/toxin/on_hit_mob(mob/M, obj/item/projectile/P)
+/datum/ammo/bullet/revolver/toxin/on_hit_mob(mob/M, obj/item/projectile/P)
 	. = ..()
 	M.AddComponent(/datum/component/toxic_buildup, acid_per_hit)
 
-/datum/ammo/bullet/revolver/marksman/toxin/on_hit_turf(turf/T, obj/item/projectile/P)
+/datum/ammo/bullet/revolver/toxin/on_hit_turf(turf/T, obj/item/projectile/P)
 	. = ..()
 	if(T.flags_turf & TURF_ORGANIC)
 		P.damage *= organic_damage_mult
 
-/datum/ammo/bullet/revolver/marksman/toxin/on_hit_obj(obj/O, obj/item/projectile/P)
+/datum/ammo/bullet/revolver/toxin/on_hit_obj(obj/O, obj/item/projectile/P)
 	. = ..()
 	if(O.flags_obj & OBJ_ORGANIC)
 		P.damage *= organic_damage_mult
@@ -514,7 +511,7 @@
 	name = "wall-piercing revolver bullet"
 	shrapnel_chance = 0
 
-	penetration = ARMOR_PENETRATION_TIER_10
+
 
 /datum/ammo/bullet/revolver/penetrating/set_bullet_traits()
 	. = ..()
@@ -536,7 +533,7 @@
 	damage = BULLET_DAMAGE_TIER_11
 	damage_var_low = PROJECTILE_VARIANCE_TIER_8
 	damage_var_high = PROJECTILE_VARIANCE_TIER_6
-	penetration = ARMOR_PENETRATION_TIER_2
+
 	var/explosive = FALSE
 
 /datum/ammo/bullet/revolver/mateba/highimpact
@@ -548,7 +545,7 @@
 	damage = BULLET_DAMAGE_TIER_11
 	damage_var_low = PROJECTILE_VARIANCE_TIER_8
 	damage_var_high = PROJECTILE_VARIANCE_TIER_6
-	penetration = ARMOR_PENETRATION_TIER_2
+
 
 /datum/ammo/bullet/revolver/mateba/highimpact/on_hit_mob(mob/M, obj/item/projectile/P)
 	knockback(M, P, 4)
@@ -582,7 +579,7 @@
 	damage = BULLET_DAMAGE_TIER_20
 	damage_var_low = PROJECTILE_VARIANCE_TIER_10
 	damage_var_high = PROJECTILE_VARIANCE_TIER_1
-	penetration = ARMOR_PENETRATION_TIER_10
+
 	explosive = TRUE
 
 /datum/ammo/bullet/revolver/mateba/highimpact/explosive/on_hit_mob(mob/M, obj/item/projectile/P)
@@ -615,7 +612,7 @@
 	name = "submachinegun bullet"
 	damage = BULLET_DAMAGE_TIER_8
 	accurate_range = 6
-	penetration = ARMOR_PENETRATION_TIER_1
+
 	shell_speed = AMMO_SPEED_TIER_6
 	damage_falloff = DAMAGE_FALLOFF_TIER_9
 	scatter = SCATTER_AMOUNT_TIER_6
@@ -627,26 +624,25 @@
 /datum/ammo/bullet/smg/ap
 	name = "armor-piercing submachinegun bullet"
 
-	damage = BULLET_DAMAGE_TIER_7
-	penetration = ARMOR_PENETRATION_TIER_6
+	damage = BULLET_DAMAGE_TIER_10
 	damage_falloff = DAMAGE_FALLOFF_TIER_8
 	shell_speed = AMMO_SPEED_TIER_4
 
-/datum/ammo/bullet/smg/ap/toxin
+/datum/ammo/bullet/smg/toxin
 	name = "toxic submachinegun bullet"
 	var/acid_per_hit = 5
 	var/organic_damage_mult = 3
 
-/datum/ammo/bullet/smg/ap/toxin/on_hit_mob(mob/M, obj/item/projectile/P)
+/datum/ammo/bullet/smg/toxin/on_hit_mob(mob/M, obj/item/projectile/P)
 	. = ..()
 	M.AddComponent(/datum/component/toxic_buildup, acid_per_hit)
 
-/datum/ammo/bullet/smg/ap/toxin/on_hit_turf(turf/T, obj/item/projectile/P)
+/datum/ammo/bullet/smg/toxin/on_hit_turf(turf/T, obj/item/projectile/P)
 	. = ..()
 	if(T.flags_turf & TURF_ORGANIC)
 		P.damage *= organic_damage_mult
 
-/datum/ammo/bullet/smg/ap/toxin/on_hit_obj(obj/O, obj/item/projectile/P)
+/datum/ammo/bullet/smg/toxin/on_hit_obj(obj/O, obj/item/projectile/P)
 	. = ..()
 	if(O.flags_obj & OBJ_ORGANIC)
 		P.damage *= organic_damage_mult
@@ -656,7 +652,6 @@
 	icon_state = "nail-projectile"
 
 	damage = BULLET_DAMAGE_TIER_5
-	penetration = ARMOR_PENETRATION_TIER_8
 	damage_falloff = DAMAGE_FALLOFF_TIER_6
 	accurate_range = 5
 	shell_speed = AMMO_SPEED_TIER_4
@@ -736,8 +731,7 @@
 	shrapnel_chance = 0
 	flags_ammo_behavior = AMMO_BALLISTIC
 
-	damage = BULLET_DAMAGE_TIER_5
-	accuracy = -HIT_ACCURACY_TIER_2
+	damage = BULLET_DAMAGE_TIER_8
 
 /datum/ammo/bullet/smg/incendiary/set_bullet_traits()
 	. = ..()
@@ -745,14 +739,11 @@
 		BULLET_TRAIT_ENTRY(/datum/element/bullet_trait_incendiary)
 	))
 
-/datum/ammo/bullet/smg/ap/penetrating
+/datum/ammo/bullet/smg/penetrating
 	name = "wall-piercing submachinegun bullet"
 	shrapnel_chance = 0
 
-	damage = BULLET_DAMAGE_TIER_6
-	penetration = ARMOR_PENETRATION_TIER_10
-
-/datum/ammo/bullet/smg/ap/penetrating/set_bullet_traits()
+/datum/ammo/bullet/smg/penetrating/set_bullet_traits()
 	. = ..()
 	LAZYADD(traits_to_give, list(
 		BULLET_TRAIT_ENTRY(/datum/element/bullet_trait_penetrating)
@@ -763,7 +754,6 @@
 
 	scatter = SCATTER_AMOUNT_TIER_10
 	damage = BULLET_DAMAGE_TIER_4
-	penetration = ARMOR_PENETRATION_TIER_4
 	shell_speed = AMMO_SPEED_TIER_3
 	damage_falloff = DAMAGE_FALLOFF_TIER_10
 	pen_armor_punch = 4
@@ -814,38 +804,37 @@
 /datum/ammo/bullet/rifle/ap
 	name = "armor-piercing rifle bullet"
 
-	damage = BULLET_DAMAGE_TIER_6
-	penetration = ARMOR_PENETRATION_TIER_8
+	damage = BULLET_DAMAGE_TIER_10
 
 // Basically AP but better. Focused at taking out armour temporarily
-/datum/ammo/bullet/rifle/ap/toxin
+/datum/ammo/bullet/rifle/toxin
 	name = "toxic rifle bullet"
 	var/acid_per_hit = 7
 	var/organic_damage_mult = 3
 
-/datum/ammo/bullet/rifle/ap/toxin/on_hit_mob(mob/M, obj/item/projectile/P)
+/datum/ammo/bullet/rifle/toxin/on_hit_mob(mob/M, obj/item/projectile/P)
 	. = ..()
 	M.AddComponent(/datum/component/toxic_buildup, acid_per_hit)
 
-/datum/ammo/bullet/rifle/ap/toxin/on_hit_turf(turf/T, obj/item/projectile/P)
+/datum/ammo/bullet/rifle/toxin/on_hit_turf(turf/T, obj/item/projectile/P)
 	. = ..()
 	if(T.flags_turf & TURF_ORGANIC)
 		P.damage *= organic_damage_mult
 
-/datum/ammo/bullet/rifle/ap/toxin/on_hit_obj(obj/O, obj/item/projectile/P)
+/datum/ammo/bullet/rifle/toxin/on_hit_obj(obj/O, obj/item/projectile/P)
 	. = ..()
 	if(O.flags_obj & OBJ_ORGANIC)
 		P.damage *= organic_damage_mult
 
 
-/datum/ammo/bullet/rifle/ap/penetrating
+/datum/ammo/bullet/rifle/penetrating
 	name = "wall-piercing rifle bullet"
 	shrapnel_chance = 0
 
-	damage = BULLET_DAMAGE_TIER_7
-	penetration = ARMOR_PENETRATION_TIER_10
+	damage = BULLET_DAMAGE_TIER_10
 
-/datum/ammo/bullet/rifle/ap/penetrating/set_bullet_traits()
+
+/datum/ammo/bullet/rifle/penetrating/set_bullet_traits()
 	. = ..()
 	LAZYADD(traits_to_give, list(
 		BULLET_TRAIT_ENTRY(/datum/element/bullet_trait_penetrating)
@@ -855,7 +844,7 @@
 	name = "armor-shredding rifle bullet"
 
 	damage = BULLET_DAMAGE_TIER_4
-	penetration = ARMOR_PENETRATION_TIER_4
+
 	pen_armor_punch = 5
 
 /datum/ammo/bullet/rifle/rubber
@@ -899,7 +888,7 @@
 	name = "A19 high velocity incendiary bullet"
 	flags_ammo_behavior = AMMO_BALLISTIC
 
-	damage = BULLET_DAMAGE_TIER_8
+	damage = BULLET_DAMAGE_TIER_9
 	accuracy = HIT_ACCURACY_TIER_4
 	scatter = -SCATTER_AMOUNT_TIER_8
 	penetration= ARMOR_PENETRATION_TIER_5
@@ -918,7 +907,7 @@
 	damage = BULLET_DAMAGE_TIER_8
 	accuracy = -HIT_ACCURACY_TIER_2
 	scatter = -SCATTER_AMOUNT_TIER_8
-	penetration = ARMOR_PENETRATION_TIER_10
+
 	shell_speed = AMMO_SPEED_TIER_6
 
 /datum/ammo/bullet/rifle/m4ra/impact/on_hit_mob(mob/M, obj/item/projectile/P)
@@ -946,7 +935,7 @@
 	accurate_range = 6
 	max_range = 8
 	damage = BULLET_DAMAGE_TIER_14
-	penetration = ARMOR_PENETRATION_TIER_4
+
 	damage_armor_punch = 2
 
 /datum/ammo/bullet/shotgun/slug/on_hit_mob(mob/M,obj/item/projectile/P)
@@ -981,7 +970,7 @@
 
 	accuracy = -HIT_ACCURACY_TIER_2
 	max_range = 12
-	damage = BULLET_DAMAGE_TIER_11
+	damage = BULLET_DAMAGE_TIER_12
 	penetration= ARMOR_PENETRATION_TIER_1
 
 /datum/ammo/bullet/shotgun/incendiary/set_bullet_traits()
@@ -1083,7 +1072,7 @@
 	damage_var_low = PROJECTILE_VARIANCE_TIER_8
 	damage_var_high = PROJECTILE_VARIANCE_TIER_8
 	damage_falloff = DAMAGE_FALLOFF_TIER_8
-	penetration = ARMOR_PENETRATION_TIER_1
+
 	shell_speed = AMMO_SPEED_TIER_2
 	scatter = SCATTER_AMOUNT_TIER_1
 	damage_armor_punch = 0
@@ -1129,7 +1118,7 @@
 	accuracy_var_high = PROJECTILE_VARIANCE_TIER_6
 	scatter = 0
 	damage = BULLET_DAMAGE_TIER_12
-	penetration = ARMOR_PENETRATION_TIER_4
+
 
 /datum/ammo/bullet/sniper/incendiary/set_bullet_traits()
 	. = ..()
@@ -1158,7 +1147,7 @@
 	scatter = SCATTER_AMOUNT_TIER_8
 	damage = BULLET_DAMAGE_TIER_11
 	damage_var_high = PROJECTILE_VARIANCE_TIER_8
-	penetration = 0
+
 
 /datum/ammo/bullet/sniper/flak/on_hit_mob(mob/M,obj/item/projectile/P)
 	if(P.homing_target && M == P.homing_target)
@@ -1251,7 +1240,7 @@
 	accuracy = HIT_ACCURACY_TIER_3
 	damage_falloff = DAMAGE_FALLOFF_TIER_10
 	damage = BULLET_DAMAGE_TIER_6
-	penetration = 0
+
 
 /datum/ammo/bullet/smartgun/armor_piercing
 	name = "armor-piercing smartgun bullet"
@@ -1261,7 +1250,7 @@
 	accuracy = HIT_ACCURACY_TIER_1
 	damage_falloff = DAMAGE_FALLOFF_TIER_10
 	damage = BULLET_DAMAGE_TIER_4
-	penetration = ARMOR_PENETRATION_TIER_8
+
 	damage_armor_punch = 1
 
 /datum/ammo/bullet/smartgun/dirty
@@ -1273,7 +1262,7 @@
 	accuracy = HIT_ACCURACY_TIER_3
 	damage_falloff = DAMAGE_FALLOFF_TIER_10
 	damage = BULLET_DAMAGE_TIER_8
-	penetration = 0
+
 
 /datum/ammo/bullet/smartgun/dirty/armor_piercing
 	debilitate = list(0,0,0,3,0,0,0,1)
@@ -1282,7 +1271,7 @@
 	accuracy = HIT_ACCURACY_TIER_3
 	damage_falloff = DAMAGE_FALLOFF_TIER_10
 	damage = BULLET_DAMAGE_TIER_6
-	penetration = ARMOR_PENETRATION_TIER_7
+
 	damage_armor_punch = 3
 
 
@@ -1296,7 +1285,7 @@
 	accuracy_var_high = PROJECTILE_VARIANCE_TIER_8
 	max_range = 22
 	damage = BULLET_DAMAGE_TIER_6
-	penetration = ARMOR_PENETRATION_TIER_7
+
 	damage_armor_punch = 0
 	pen_armor_punch = 0
 	shell_speed = 2*AMMO_SPEED_TIER_6
@@ -1320,7 +1309,7 @@
 
 	accurate_range = 8
 	damage =  BULLET_DAMAGE_TIER_10
-	penetration = ARMOR_PENETRATION_TIER_6
+
 	accuracy = HIT_ACCURACY_TIER_8
 	shell_speed = AMMO_SPEED_TIER_2
 	max_range = 14
@@ -1334,7 +1323,7 @@
 	accuracy_var_high = PROJECTILE_VARIANCE_TIER_6
 	accurate_range = 12
 	damage = BULLET_DAMAGE_TIER_7
-	penetration = ARMOR_PENETRATION_TIER_7
+
 
 /datum/ammo/bullet/minigun/tank
 	accuracy = -HIT_ACCURACY_TIER_1
@@ -1365,7 +1354,7 @@
 	ping = null //no bounce off.
 	sound_bounce	= "rocket_bounce"
 	damage_falloff = 0
-	flags_ammo_behavior = AMMO_EXPLOSIVE|AMMO_ROCKET|AMMO_STRIKES_SURFACE
+	flags_ammo_behavior = AMMO_EXPLOSIVE|AMMO_ROCKET|AMMO_STRIKES_SURFACE|AMMO_SKIPS_ALIENS
 	var/datum/effect_system/smoke_spread/smoke
 
 	accuracy = HIT_ACCURACY_TIER_2
@@ -1449,7 +1438,7 @@
 
 /datum/ammo/rocket/wp
 	name = "white phosphorous rocket"
-	flags_ammo_behavior = AMMO_ROCKET|AMMO_EXPLOSIVE|AMMO_STRIKES_SURFACE
+	flags_ammo_behavior = AMMO_ROCKET|AMMO_EXPLOSIVE|AMMO_STRIKES_SURFACE|AMMO_SKIPS_ALIENS
 	damage_type = BURN
 
 	accuracy_var_low = PROJECTILE_VARIANCE_TIER_6
@@ -1906,7 +1895,7 @@
 
 	accuracy = HIT_ACCURACY_TIER_3
 	damage = BULLET_DAMAGE_TIER_5
-	penetration = ARMOR_PENETRATION_TIER_2
+
 	shell_speed = AMMO_SPEED_TIER_2
 
 /datum/ammo/xeno/acid/on_shield_block(mob/M, obj/item/projectile/P)
@@ -2137,7 +2126,7 @@
 	damage_var_low = -PROJECTILE_VARIANCE_TIER_6
 	damage_var_high = PROJECTILE_VARIANCE_TIER_6
 	damage_falloff = DAMAGE_FALLOFF_TIER_10
-	penetration = ARMOR_PENETRATION_TIER_4
+
 	shell_speed = AMMO_SPEED_TIER_2
 	shrapnel_chance = 5
 
@@ -2163,7 +2152,7 @@
 
 	shell_speed = AMMO_SPEED_TIER_1
 	damage = BULLET_DAMAGE_TIER_4
-	penetration = ARMOR_PENETRATION_TIER_4
+
 
 /datum/ammo/bullet/shrapnel/incendiary/set_bullet_traits()
 	. = ..()
@@ -2176,7 +2165,7 @@
 	icon_state = "shrapnel_light"
 
 	damage = BULLET_DAMAGE_TIER_2
-	penetration = ARMOR_PENETRATION_TIER_1
+
 	shell_speed = AMMO_SPEED_TIER_1
 	shrapnel_chance = 0
 
@@ -2205,7 +2194,7 @@
 	icon_state = "shrapnel_light"
 
 	damage = BULLET_DAMAGE_TIER_2
-	penetration = ARMOR_PENETRATION_TIER_1
+
 	shell_speed = AMMO_SPEED_TIER_1
 	shrapnel_chance = 0
 
