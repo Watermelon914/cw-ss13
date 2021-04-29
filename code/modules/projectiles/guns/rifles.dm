@@ -81,7 +81,7 @@
 
 /obj/item/weapon/gun/rifle/m41a/set_gun_config_values()
 	..()
-	fire_delay = FIRE_DELAY_TIER_8
+	fire_delay = FIRE_DELAY_TIER_9
 	burst_amount = BURST_AMOUNT_TIER_3
 	burst_delay = FIRE_DELAY_TIER_9
 	accuracy_mult = BASE_ACCURACY_MULT + HIT_ACCURACY_MULT_TIER_6
@@ -134,11 +134,13 @@
 	fire_delay = FIRE_DELAY_TIER_9
 	burst_amount = BURST_AMOUNT_TIER_2
 	burst_delay = FIRE_DELAY_TIER_10
-	accuracy_mult = BASE_ACCURACY_MULT + HIT_ACCURACY_MULT_TIER_10
-	accuracy_mult_unwielded = BASE_ACCURACY_MULT - HIT_ACCURACY_MULT_TIER_4
-	scatter = SCATTER_AMOUNT_TIER_10
+	accuracy_mult = BASE_ACCURACY_MULT + HIT_ACCURACY_MULT_TIER_4 + 2*HIT_ACCURACY_MULT_TIER_1
+	accuracy_mult_unwielded = BASE_ACCURACY_MULT - HIT_ACCURACY_MULT_TIER_7
+	scatter = SCATTER_AMOUNT_TIER_8
 	burst_scatter_mult = SCATTER_AMOUNT_TIER_10
-	scatter_unwielded = SCATTER_AMOUNT_TIER_4
+	scatter_unwielded = SCATTER_AMOUNT_TIER_2
+	damage_mult = BASE_BULLET_DAMAGE_MULT + BULLET_DAMAGE_MULT_TIER_5
+	recoil_unwielded = RECOIL_AMOUNT_TIER_2
 
 //-------------------------------------------------------
 //M40-SD AKA MARSOC RIFLE FROM HELL (It's actually an M41A, don't tell!)
@@ -231,9 +233,6 @@
 		/obj/item/ammo_magazine/rifle/ap,
 		/obj/item/ammo_magazine/rifle
 	)
-
-
-
 	attachable_allowed = list(
 						/obj/item/attachable/suppressor,
 						/obj/item/attachable/bayonet,
@@ -253,32 +252,26 @@
 
 /obj/item/weapon/gun/rifle/m41aMK1/set_gun_config_values()
 	..()
-	fire_delay = FIRE_DELAY_TIER_8
+	fire_delay = FIRE_DELAY_TIER_9
 	burst_amount = BURST_AMOUNT_TIER_4
-	burst_delay = FIRE_DELAY_TIER_8
-	accuracy_mult = BASE_ACCURACY_MULT + HIT_ACCURACY_MULT_TIER_3
+	burst_delay = FIRE_DELAY_TIER_9
+	accuracy_mult = BASE_ACCURACY_MULT + HIT_ACCURACY_MULT_TIER_4 + 2*HIT_ACCURACY_MULT_TIER_1
 	accuracy_mult_unwielded = BASE_ACCURACY_MULT - HIT_ACCURACY_MULT_TIER_7
-	scatter = SCATTER_AMOUNT_TIER_9
-	burst_scatter_mult = SCATTER_AMOUNT_TIER_9
+	scatter = SCATTER_AMOUNT_TIER_8
+	burst_scatter_mult = SCATTER_AMOUNT_TIER_10
 	scatter_unwielded = SCATTER_AMOUNT_TIER_2
-	damage_mult = BASE_BULLET_DAMAGE_MULT + BULLET_DAMAGE_MULT_TIER_5
+	damage_mult = BASE_BULLET_DAMAGE_MULT + BULLET_DAMAGE_MULT_TIER_2
 	recoil_unwielded = RECOIL_AMOUNT_TIER_2
-
-
-
-//----------------------------------------------
-//Special gun for the CO to replace the smartgun
 
 /obj/item/weapon/gun/rifle/m46c
 	name = "\improper M46C pulse rifle"
-	desc = "A prototype M46C, an experimental rifle platform built to outperform the standard M41A. Back issue only. Uses standard MK1 & MK2 rifle magazines."
+	desc = "A cancelled 'M41A killer', the M46C proved to be far too expensive to replace the M41A in active combat despite having inbuilt IFF. Also comes with a magnetic harness for free."
 	icon_state = "m46c"
 	item_state = "m46c"
 	fire_sound = "gun_pulse"
 	reload_sound = 'sound/weapons/handling/m41_reload.ogg'
 	unload_sound = 'sound/weapons/handling/m41_unload.ogg'
 	current_mag = /obj/item/ammo_magazine/rifle/incendiary
-	var/iff_enabled = TRUE
 	accepted_ammo = list(
 		/obj/item/ammo_magazine/rifle,
 		/obj/item/ammo_magazine/rifle/extended,
@@ -313,7 +306,7 @@
 	random_spawn_chance = 100
 	random_spawn_rail = list(
 							/obj/item/attachable/reddot,
-							/obj/item/attachable/reflex/,
+							/obj/item/attachable/reflex,
 							)
 	random_spawn_underbarrel = list(
 							/obj/item/attachable/angledgrip,
@@ -330,16 +323,12 @@
 	unacidable = TRUE
 	indestructible = TRUE
 
-	var/mob/living/carbon/human/linked_human
-	var/is_locked = TRUE
-
 /obj/item/weapon/gun/rifle/m46c/Initialize(mapload, ...)
 	. = ..()
 	AddElement(/datum/element/magharness)
-	if(iff_enabled)
-		LAZYADD(traits_to_give, list(
-			BULLET_TRAIT_ENTRY_ID("iff", /datum/element/bullet_trait_iff)
-		))
+	LAZYADD(traits_to_give, list(
+		BULLET_TRAIT_ENTRY_ID("iff", /datum/element/bullet_trait_iff)
+	))
 
 /obj/item/weapon/gun/rifle/m46c/handle_starting_attachment()
 	..()
@@ -356,94 +345,16 @@
 
 /obj/item/weapon/gun/rifle/m46c/set_gun_config_values()
 	..()
-	fire_delay = FIRE_DELAY_TIER_8
+	fire_delay = FIRE_DELAY_TIER_9
 	burst_amount = BURST_AMOUNT_TIER_5
-	burst_delay = FIRE_DELAY_TIER_10
-	accuracy_mult = BASE_ACCURACY_MULT + HIT_ACCURACY_MULT_TIER_5
+	burst_delay = FIRE_DELAY_TIER_7
+	accuracy_mult = BASE_ACCURACY_MULT + HIT_ACCURACY_MULT_TIER_4 + 2*HIT_ACCURACY_MULT_TIER_1
 	accuracy_mult_unwielded = BASE_ACCURACY_MULT - HIT_ACCURACY_MULT_TIER_7
 	scatter = SCATTER_AMOUNT_TIER_8
-	burst_scatter_mult = SCATTER_AMOUNT_TIER_8
+	burst_scatter_mult = SCATTER_AMOUNT_TIER_10
 	scatter_unwielded = SCATTER_AMOUNT_TIER_2
-	damage_mult = BASE_BULLET_DAMAGE_MULT + BULLET_DAMAGE_MULT_TIER_4
+	damage_mult = BASE_BULLET_DAMAGE_MULT + BULLET_DAMAGE_MULT_TIER_2
 	recoil_unwielded = RECOIL_AMOUNT_TIER_2
-
-/obj/item/weapon/gun/rifle/m46c/able_to_fire(mob/user)
-	. = ..()
-	if(is_locked && linked_human && linked_human != user)
-		if(linked_human.is_revivable() || linked_human.stat != DEAD)
-			to_chat(user, SPAN_WARNING("[icon2html(src)] Trigger locked by [src]. Unauthorized user."))
-			playsound(loc,'sound/weapons/gun_empty.ogg', 25, 1)
-			return FALSE
-
-		linked_human = null
-		is_locked = FALSE
-		UnregisterSignal(linked_human, COMSIG_PARENT_QDELETING)
-
-/obj/item/weapon/gun/rifle/m46c/pickup(user)
-	if(!linked_human)
-		src.name_after_co(user, src)
-		to_chat(usr, SPAN_NOTICE("[icon2html(src)] You pick up [src], registering you as its owner."))
-	..()
-
-/obj/item/weapon/gun/rifle/m46c/verb/toggle_lock()
-	set category = "Weapons"
-	set name = "Toggle Lock"
-	set src in usr
-
-	if(usr != linked_human)
-		to_chat(usr, SPAN_WARNING("[icon2html(src)] Action denied by [src]. Unauthorized user."))
-		return
-
-	is_locked = !is_locked
-	to_chat(usr, SPAN_NOTICE("[icon2html(src)] You [is_locked? "lock": "unlock"] [src]."))
-	playsound(loc,'sound/machines/click.ogg', 25, 1)
-
-
-/obj/item/weapon/gun/rifle/m46c/verb/toggle_iff()
-	set category = "Weapons"
-	set name = "Toggle Lethal Mode"
-	set src in usr
-
-	if(is_locked && linked_human && usr != linked_human)
-		to_chat(usr, SPAN_WARNING("[icon2html(src)] Action denied by [src]. Unauthorized user."))
-		return
-
-	iff_enabled = !iff_enabled
-	to_chat(usr, SPAN_NOTICE("[icon2html(src)] You [iff_enabled? "enable": "disable"] the IFF on [src]."))
-	playsound(loc,'sound/machines/click.ogg', 25, 1)
-
-	recalculate_attachment_bonuses()
-	if(iff_enabled)
-		add_bullet_trait(BULLET_TRAIT_ENTRY_ID("iff", /datum/element/bullet_trait_iff))
-	else
-		remove_bullet_trait("iff")
-
-/obj/item/weapon/gun/rifle/m46c/recalculate_attachment_bonuses()
-	. = ..()
-	if(iff_enabled)
-		burst_amount -=  BURST_AMOUNT_TIER_6
-		flags_gun_features &= ~GUN_BURST_ON //Gun loses some combat ability in return for IFF, as well as burst fire mode
-
-
-/obj/item/weapon/gun/rifle/m46c/proc/name_after_co(var/mob/living/carbon/human/H, var/obj/item/weapon/gun/rifle/m46c/I)
-	linked_human = H
-	RegisterSignal(linked_human, COMSIG_PARENT_QDELETING, .proc/remove_idlock)
-
-/obj/item/weapon/gun/rifle/m46c/examine()
-	..()
-	if(linked_human)
-		if(is_locked)
-			to_chat(usr, SPAN_NOTICE("It is registered to [linked_human]."))
-		else
-			to_chat(usr, SPAN_NOTICE("It is registered to [linked_human] but has its fire restrictions unlocked."))
-	else
-		to_chat(usr, SPAN_NOTICE("It's unregistered. Pick it up to register you as its owner."))
-	if(!iff_enabled)
-		to_chat(usr, SPAN_WARNING("Its IFF restrictions are disabled."))
-
-/obj/item/weapon/gun/rifle/m46c/proc/remove_idlock()
-	SIGNAL_HANDLER
-	linked_human = null
 
 /obj/item/weapon/gun/rifle/m46c/stripped
 	random_spawn_chance = 0//no extra attachies on spawn, still gets its stock though.
@@ -849,7 +760,7 @@
 	icon_state = "type71c"
 	item_state = "type71c"
 	aim_slowdown = SLOWDOWN_ADS_SMG //Carbine is more lightweight
-	wield_delay = WIELD_DELAY_VERY_FAST
+	wield_delay = WIELD_DELAY_MIN
 
 	random_spawn_muzzle = list() //no default bayonet
 
@@ -1063,7 +974,7 @@
 						)
 
 	flags_gun_features = GUN_AUTO_EJECTOR|GUN_CAN_POINTBLANK|GUN_AMMO_COUNTER
-	wield_delay = WIELD_DELAY_VERY_FAST
+	wield_delay = WIELD_DELAY_MIN
 	aim_slowdown = SLOWDOWN_ADS_SMG
 	starting_attachment_types = list(/obj/item/attachable/stock/carbine)
 	map_specific_decoration = TRUE
@@ -1074,7 +985,7 @@
 
 /obj/item/weapon/gun/rifle/l42a/set_gun_config_values()
 	..()
-	fire_delay = FIRE_DELAY_TIER_6
+	fire_delay = FIRE_DELAY_TIER_8
 	burst_amount = 0
 	accuracy_mult = BASE_ACCURACY_MULT + HIT_ACCURACY_MULT_TIER_5
 	accuracy_mult_unwielded = BASE_ACCURACY_MULT - HIT_ACCURACY_MULT_TIER_4
@@ -1117,7 +1028,7 @@
 						/obj/item/attachable/stock/hunting,
 						)
 	flags_gun_features = GUN_AUTO_EJECTOR|GUN_CAN_POINTBLANK|GUN_AMMO_COUNTER
-	wield_delay = WIELD_DELAY_VERY_FAST
+	wield_delay = WIELD_DELAY_MIN
 	aim_slowdown = SLOWDOWN_ADS_SMG
 	starting_attachment_types = list(/obj/item/attachable/scope/mini/hunting,/obj/item/attachable/stock/hunting)
 

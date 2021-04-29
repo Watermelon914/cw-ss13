@@ -9,7 +9,7 @@
 	w_class = SIZE_LARGE
 	movement_acc_penalty_mult = 4
 	aim_slowdown = SLOWDOWN_ADS_SMG
-	wield_delay = WIELD_DELAY_VERY_FAST
+	wield_delay = WIELD_DELAY_MIN
 	attachable_allowed = list(
 						/obj/item/attachable/suppressor,
 						/obj/item/attachable/reddot,
@@ -455,7 +455,7 @@
 	w_class = SIZE_MEDIUM
 	movement_acc_penalty_mult = 4
 	aim_slowdown = SLOWDOWN_ADS_SMG
-	wield_delay = WIELD_DELAY_VERY_FAST
+	wield_delay = WIELD_DELAY_MIN
 	attachable_allowed = list()
 
 	flags_gun_features = GUN_AUTO_EJECTOR|GUN_CAN_POINTBLANK

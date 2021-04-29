@@ -762,7 +762,7 @@ Defined in conflicts.dm of the #defines folder.
 	desc = "If you can read this, someone screwed up. Go Gitlab this and bug a coder."
 	icon_state = "stock"
 	slot = "stock"
-	wield_delay_mod = WIELD_DELAY_VERY_FAST
+	wield_delay_mod = WIELD_DELAY_MIN
 	melee_mod = 5
 	size_mod = 2
 	pixel_shift_x = 30
