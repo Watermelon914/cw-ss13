@@ -84,12 +84,11 @@
 //Wield delays, in milliseconds. 10 is 1 second
 #define WIELD_DELAY_NONE			0
 #define WIELD_DELAY_MIN				1
-#define WIELD_DELAY_VERY_FAST		2
-#define WIELD_DELAY_FAST			4
-#define WIELD_DELAY_NORMAL			6
-#define WIELD_DELAY_SLOW			8
-#define WIELD_DELAY_VERY_SLOW		10
-#define WIELD_DELAY_HORRIBLE		12
+#define WIELD_DELAY_FAST			2
+#define WIELD_DELAY_NORMAL			3
+#define WIELD_DELAY_SLOW			4
+#define WIELD_DELAY_VERY_SLOW		5
+#define WIELD_DELAY_HORRIBLE		6
 
 //Explosion level thresholds. Upper bounds
 #define EXPLOSION_THRESHOLD_VLOW	50
