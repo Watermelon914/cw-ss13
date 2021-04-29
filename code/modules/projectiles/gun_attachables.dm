@@ -272,6 +272,18 @@ Defined in conflicts.dm of the #defines folder.
 	pixel_shift_x = 14 //Below the muzzle.
 	pixel_shift_y = 18
 
+/obj/item/attachable/bayonet/sharp
+	name = "\improper M5 'Silent Killer' bayonet"
+	desc = "The standard-issue bayonet of the Colonial Marines. You can slide this knife into your boots, or attach it to the end of a rifle. Very sharp."
+	force = 150
+	throwforce = 150
+
+/obj/item/attachable/bayonet/fast
+	name = "\improper M5 'Rapid Slicer' bayonet"
+	force = MELEE_FORCE_STRONG
+	throwforce = MELEE_FORCE_STRONG
+	attack_speed = 1
+
 /obj/item/attachable/bayonet/New()
 	..()
 	accuracy_unwielded_mod = -HIT_ACCURACY_MULT_TIER_1

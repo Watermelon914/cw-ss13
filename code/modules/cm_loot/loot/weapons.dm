@@ -119,6 +119,11 @@ GLOBAL_DATUM_INIT(loot_weapons, /datum/loot_table/weapons, new())
 	item_to_spawn = /obj/item/weapon/gun/launcher/grenade/m92
 	rarity = LOOT_RARE
 
+/datum/loot_entry/weapon/flamer
+	name = "Flamer"
+	item_to_spawn = /obj/item/weapon/gun/flamer
+	rarity = LOOT_COMMON
+
 #ifdef TESTING
 /client/verb/do_loot_table_test(var/amount as num)
 	set name = "Do Weapon Loot Table Test"

@@ -1063,7 +1063,9 @@ obj/item/weapon/gun/launcher/grenade/update_icon()
 	delay_style	= WEAPON_DELAY_NO_FIRE
 	aim_slowdown = SLOWDOWN_ADS_SHOTGUN
 	attachable_allowed = list(
-						/obj/item/attachable/magnetic_harness
+						/obj/item/attachable/magnetic_harness,
+						/obj/item/attachable/flashlight,
+						/obj/item/attachable/flashlight/grip
 						)
 
 	flags_gun_features = GUN_SPECIALIST|GUN_WIELDED_FIRING_ONLY

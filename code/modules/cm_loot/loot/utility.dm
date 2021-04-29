@@ -118,3 +118,43 @@ GLOBAL_DATUM_INIT(loot_objects, /datum/loot_table/objects, new())
 		/obj/item/clothing/head/helmet/marine/marsoc/nvg
 	)
 	rarity = LOOT_LEGENDARY
+
+/datum/loot_entry/object/multiple/b18_armor
+	name = "B18 Armor"
+	item_to_spawn = list(
+		/obj/item/clothing/gloves/marine/specialist,
+		/obj/item/clothing/head/helmet/marine/specialist,
+		/obj/item/clothing/suit/storage/marine/specialist
+	)
+	rarity = LOOT_VERY_RARE
+
+
+/datum/loot_entry/object/fire_armor
+	name = "Fire Armor"
+	item_to_spawn = /obj/item/clothing/suit/storage/marine/M35
+	rarity = LOOT_COMMON
+
+/datum/loot_entry/object/rpg_armor
+	name = "RPG Armor"
+	item_to_spawn = /obj/item/clothing/suit/storage/marine/M3T
+	rarity = LOOT_COMMON
+
+/datum/loot_entry/object/scout_armor
+	name = "Scout Armor"
+	item_to_spawn = /obj/item/clothing/suit/storage/marine/M3S
+	rarity = LOOT_COMMON
+
+
+/*
+  Special items
+*/
+
+/datum/loot_entry/object/holy_hand_grenade
+	name = "Holy Hand Grenade"
+	item_to_spawn = /obj/item/explosive/grenade/HE/holy_hand_grenade
+	rarity = LOOT_LEGENDARY
+
+/datum/loot_entry/object/m2c_kit
+	name = "M2C Machinegun Kit"
+	item_to_spawn = /obj/item/storage/box/kit/machinegunner
+	rarity = LOOT_RARE

@@ -649,10 +649,6 @@ var/list/squad_colors_chat = list(rgb(230,125,125), rgb(255,230,80), rgb(255,150
 		to_chat(H, SPAN_WARNING("You must be wearing the M35 pyro armor to activate FIREWALK protocol!"))
 		return
 
-	if(!skillcheck(H, SKILL_SPEC_WEAPONS, SKILL_SPEC_ALL) && H.skills.get_skill_level(SKILL_SPEC_WEAPONS) != SKILL_SPEC_PYRO)
-		to_chat(H, SPAN_WARNING("You don't seem to know how to use [src]..."))
-		return
-
 	if(fire_shield_on)
 		to_chat(H, SPAN_WARNING("You already have FIREWALK protocol activated!"))
 		return
@@ -808,9 +804,6 @@ var/list/squad_colors_chat = list(rgb(230,125,125), rgb(255,230,80), rgb(255,150
 	if(!ishuman(usr) || hide_in_progress)
 		return
 	var/mob/living/carbon/human/H = usr
-	if(!skillcheck(H, SKILL_SPEC_WEAPONS, SKILL_SPEC_ALL) && H.skills.get_skill_level(SKILL_SPEC_WEAPONS) != SKILL_SPEC_SNIPER)
-		to_chat(H, SPAN_WARNING("You don't seem to know how to use [src]..."))
-		return
 
 	if(H.wear_suit != src)
 		to_chat(H, SPAN_WARNING("You must be wearing the ghillie suit to activate it!"))
