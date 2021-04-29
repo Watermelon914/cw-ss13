@@ -1,6 +1,5 @@
 //Xenomorph Life - Colonial Marines - Apophis775 - Last Edit: 03JAN2015
 
-#define XENO_ARMOR_REGEN_DELAY 30 SECONDS
 /mob/living/carbon/Xenomorph/Life(delta_time)
 	set invisibility = 0
 	set background = 1
@@ -148,10 +147,7 @@
 	if(regular_update && health <= 0 && (!caste || (caste.fire_immunity & FIRE_IMMUNITY_NO_IGNITE) || !on_fire)) //Sleeping Xenos are also unconscious, but all crit Xenos are under 0 HP. Go figure
 		var/turf/T = loc
 		if(istype(T))
-			if(!check_weeds_for_healing()) //In crit, damage is maximal if you're caught off weeds
-				apply_damage(2.5 - warding_aura*0.5, BRUTE) //Warding can heavily lower the impact of bleedout. Halved at 2.5 phero, stopped at 5 phero
-			else
-				apply_damage(-warding_aura, BRUTE)
+			apply_damage(-heal_amt_crit*max(1, warding_aura), BRUTE)
 
 	updatehealth()
 
@@ -293,10 +289,6 @@
 			else if(plasma_stacks <= 0)
 				hud_used.alien_plasma_display.icon_state = "power_display_empty"
 
-	if(hud_used.alien_armor_display)
-		var/armor_stacks = min((get_armor_integrity_percentage() * 0.01) * HUD_ARMOR_STATES_XENO, HUD_ARMOR_STATES_XENO)
-		hud_used.alien_armor_display.icon_state = "armor_[Floor(armor_stacks)]0"
-
 	return TRUE
 
 /*Heal 1/70th of your max health in brute per tick. 1 as a bonus, to help smaller pools.
@@ -349,20 +341,6 @@ updatehealth()
 				else
 					XENO_HEAL_WOUNDS(caste.heal_standing * regeneration_multiplier, recoveryActual)
 				updatehealth()
-
-			if(armor_integrity < armor_integrity_max && armor_deflection > 0 && world.time > armor_integrity_last_damage_time + XENO_ARMOR_REGEN_DELAY)
-				var/curve_factor = armor_integrity/armor_integrity_max
-				curve_factor *= curve_factor
-				if(curve_factor < 0.5)
-					curve_factor = 0.5
-				if(armor_integrity/armor_integrity_max < 0.3)
-					curve_factor /= 2
-
-				var/factor = ((armor_deflection / 60) * 3 MINUTES) // 60 armor is restored in 10 minutes in 2 seconds intervals
-				armor_integrity += 100*curve_factor/factor
-
-			if(armor_integrity > armor_integrity_max)
-				armor_integrity = armor_integrity_max
 
 		else //Xenos restore plasma VERY slowly off weeds, regardless of health, as long as they are not using special abilities
 			if(prob(50) && !is_runner_hiding && !current_aura)

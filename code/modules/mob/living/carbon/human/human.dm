@@ -34,7 +34,6 @@
 	..()
 	//updating all the mob's hud images
 	med_hud_set_health()
-	med_hud_set_armor()
 	med_hud_set_status()
 	sec_hud_set_ID()
 	sec_hud_set_security_status()

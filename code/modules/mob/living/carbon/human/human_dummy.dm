@@ -20,9 +20,6 @@
 /mob/living/carbon/human/dummy/med_hud_set_health()
 	return
 
-/mob/living/carbon/human/dummy/med_hud_set_armor()
-	return
-
 /mob/living/carbon/human/dummy/med_hud_set_status()
 	return
 

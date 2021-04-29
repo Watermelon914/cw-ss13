@@ -37,6 +37,7 @@
 	var/regeneration_per_second = AMOUNT_PER_TIME(10, 10 SECONDS)
 
 	var/take_slash_damage = TRUE
+	var/generic_damage_mult = 0.25
 	var/slash_durability_mult = 0.25
 	var/projectile_durability_mult = 0.1
 
@@ -98,6 +99,7 @@
 		if(take_slash_damage)
 			RegisterSignal(user, COMSIG_HUMAN_XENO_ATTACK, .proc/take_slash_damage)
 		RegisterSignal(user, COMSIG_HUMAN_BULLET_ACT, .proc/take_bullet_damage)
+		RegisterSignal(user, COMSIG_HUMAN_TAKE_DAMAGE, .proc/take_damage_signal)
 		RegisterSignal(user, COMSIG_HUMAN_MED_HUD_SET_HEALTH, .proc/update_med_hud)
 	else
 		unassign_signals(S, user)
@@ -136,22 +138,25 @@
 	if(damage <= 0 || (ammo_flags & AMMO_IGNORE_ARMOR))
 		return
 
-	var/damage_to_nullify = armor_health
-	armor_health = max(armor_health - damage*projectile_durability_mult, 0)
-
-	update_icon()
-
-	next_regeneration = world.time + no_damage_period
-	START_PROCESSING(SSobj, src)
-
-	if(damage_to_nullify)
-		playsound(user, armor_hitsound, 25, 1)
+	if(take_damage(user, damage, projectile_durability_mult))
 		return COMPONENT_CANCEL_BULLET_ACT
 
 /obj/item/clothing/accessory/health/proc/take_slash_damage(mob/living/user, damage)
 	SIGNAL_HANDLER
+	if(take_damage(user, damage, slash_durability_mult))
+		return COMPONENT_CANCEL_XENO_ATTACK
+
+/obj/item/clothing/accessory/health/proc/take_damage_signal(mob/living/user, var/list/damage)
+	SIGNAL_HANDLER
+	if(damage["damage"] <= 0)
+		return
+
+	if(take_damage(user, damage["damage"]))
+		return COMPONENT_BLOCK_DAMAGE
+
+/obj/item/clothing/accessory/health/proc/take_damage(mob/living/user, damage, damage_mult = src.generic_damage_mult)
 	var/damage_to_nullify = armor_health
-	armor_health = max(armor_health - damage*slash_durability_mult, 0)
+	armor_health = max(armor_health - damage*damage_mult, 0)
 
 	update_icon()
 	if(!armor_health && damage_to_nullify)
@@ -163,7 +168,7 @@
 
 	if(damage_to_nullify)
 		playsound(user, armor_hitsound, 25, 1)
-		return COMPONENT_CANCEL_XENO_ATTACK
+		return TRUE
 
 /obj/item/clothing/accessory/health/on_removed(mob/living/user, obj/item/clothing/C)
 	if(!has_suit)

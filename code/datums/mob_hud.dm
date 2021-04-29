@@ -248,8 +248,6 @@ var/list/datum/mob_hud/huds = list(
 //called when a human changes health
 /mob/proc/med_hud_set_health()
 	return
-/mob/proc/med_hud_set_armor()
-	return
 
 /mob/living/carbon/Xenomorph/med_hud_set_health()
 	var/image/holder = hud_list[HEALTH_HUD_XENO]
@@ -276,18 +274,6 @@ var/list/datum/mob_hud/huds = list(
 		holder.overlays += image('icons/mob/hud/hud.dmi', "xenoshield[percentage_shield]")
 	else
 		holder.overlays += image('icons/mob/hud/hud.dmi', "xenoshield0")
-
-/mob/living/carbon/Xenomorph/med_hud_set_armor()
-	if(GLOB.xeno_general.armor_ignore_integrity)
-		return FALSE
-
-	var/image/holder = hud_list[ARMOR_HUD_XENO]
-	if(stat == DEAD || armor_deflection <=0)
-		holder.icon_state = "xenoarmor0"
-	else
-		var/amount = round(armor_integrity*100/armor_integrity_max, 10)
-		if(!amount) amount = 1 //don't want the 'zero health' icon when we still have 4% of our health
-		holder.icon_state = "xenoarmor[amount]"
 
 /mob/living/carbon/human/med_hud_set_health()
 	var/image/holder = hud_list[HEALTH_HUD]

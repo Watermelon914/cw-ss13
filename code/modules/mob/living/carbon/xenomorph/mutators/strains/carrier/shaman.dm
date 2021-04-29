@@ -174,7 +174,6 @@
 		return
 
 	var/heal_percent =  min(((effect_power - 1) * action_def.heal_strength_gain) + action_def.heal_strength_base, action_def.heal_strength_max)
-	var/armor_percent =  min(((effect_power - 1) * action_def.armor_strength_gain) + action_def.armor_strength_base, action_def.armor_strength_max)
 
 	for(var/mob/living/carbon/Xenomorph/X in range(src, action_def.get_gather_range()))
 		if(X.hive != hive)
@@ -189,10 +188,6 @@
 		// give overheal
 		var/to_heal = min(X.maxHealth * heal_percent / 100, action_def.heal_strength_max)
 		X.add_xeno_shield(to_heal, XENO_SHIELD_SOURCE_SHAMAN)
-
-		if(X.armor_deflection && X.armor_integrity < 100)
-			var/to_armor = armor_percent
-			X.gain_armor_percent(to_armor)
 
 		if(X.stunned || X.dazed || X.knocked_down)
 			// lift them up from any state

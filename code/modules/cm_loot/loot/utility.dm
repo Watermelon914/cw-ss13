@@ -86,7 +86,6 @@ GLOBAL_DATUM_INIT(loot_objects, /datum/loot_table/objects, new())
 	rarity = LOOT_RARE
 	var/amount_to_spawn = 2
 	var/list/possible_implants = list(
-		/obj/item/device/implanter/nvg,
 		/obj/item/device/implanter/rejuv,
 		/obj/item/device/implanter/agility,
 		/obj/item/device/implanter/subdermal_armor

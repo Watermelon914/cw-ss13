@@ -40,6 +40,9 @@
 	if(uses <= 0)
 		return ..()
 
+	if(!isitem(target))
+		return ..()
+
 	var/amount_to_spawn = 1
 	var/type_to_convert_to
 	if(isgun(target))
@@ -70,18 +73,19 @@
 		if(!(target.type in convert_map))
 			return ..()
 
-		var/obj/item/ammo_magazine/M = target
-		if(M.current_rounds < M.max_rounds)
-			to_chat(user, SPAN_WARNING("The magazine needs to be full for you to apply this kit onto it."))
-			return
+		if(istype(target, /obj/item/ammo_magazine))
+			var/obj/item/ammo_magazine/M = target
+			if(M.current_rounds < M.max_rounds)
+				to_chat(user, SPAN_WARNING("The magazine needs to be full for you to apply this kit onto it."))
+				return
 
-		if(user.l_hand != M && user.r_hand != M)
-			to_chat(user, SPAN_WARNING("The magazine needs to be in your hands for you to apply this kit onto it."))
+		if(user.l_hand != target && user.r_hand != target)
+			to_chat(user, SPAN_WARNING("The object needs to be in your hands for you to apply this kit onto it."))
 			return
 
 		type_to_convert_to = convert_map[target.type]
-		user.drop_held_item(M)
-		QDEL_NULL(M)
+		user.drop_held_item(target)
+		QDEL_NULL(target)
 
 	for(var/i in 1 to amount_to_spawn)
 		var/obj/M = new type_to_convert_to(get_turf(user))
@@ -198,3 +202,5 @@
 	.[/obj/item/ammo_magazine/revolver] =  /obj/item/ammo_magazine/revolver/marksman
 	.[/obj/item/ammo_magazine/rocket] = /obj/item/ammo_magazine/rocket/ap
 	.[/obj/item/ammo_magazine/rifle/m40_sd] = /obj/item/ammo_magazine/rifle/m40_sd/ap
+	.[/obj/item/explosive/grenade/HE] = /obj/item/explosive/grenade/HE/m15
+	.[/obj/item/explosive/grenade/HE/m15] = /obj/item/explosive/grenade/HE/PMC

@@ -17,13 +17,11 @@
 
 	if(X.crest_defense)
 		to_chat(X, SPAN_XENOWARNING("You lower your crest."))
-		X.armor_deflection_buff += armor_buff
 		X.ability_speed_modifier += speed_debuff
 		X.mob_size = MOB_SIZE_BIG //knockback immune
 		X.update_icons()
 	else
 		to_chat(X, SPAN_XENOWARNING("You raise your crest."))
-		X.armor_deflection_buff -= armor_buff
 		X.ability_speed_modifier -= speed_debuff
 		X.mob_size = MOB_SIZE_XENO //no longer knockback immune
 		X.update_icons()
@@ -108,6 +106,9 @@
 	if(!X.check_state())
 		return
 
+	if(X.action_busy)
+		return
+
 	if (!action_cooldown_check())
 		return
 
@@ -119,11 +120,23 @@
 		to_chat(src, SPAN_XENOWARNING("You cannot use tail swipe with your crest lowered."))
 		return
 
+	var/failed = FALSE
+	X.add_filter("unavoidable_act", 1, list("type" = "outline", "color" = "#ffa800", "size" = 1))
+	var/filter = X.get_filter("unavoidable_act")
+	animate(filter, alpha=0, time = 0.1 SECONDS, loop = -1, flags = ANIMATION_PARALLEL)
+	animate(alpha = 255, time = 0.1 SECONDS)
+
+	if(!do_after(X, sweep_time, INTERRUPT_INCAPACITATED))
+		failed = TRUE
+
+	animate(filter)
+	X.remove_filter("unavoidable_act")
+
+	if(failed)
+		return
+
 	X.visible_message(SPAN_XENOWARNING("[X] sweeps its tail in a wide circle!"), \
 	SPAN_XENOWARNING("You sweep your tail in a wide circle!"))
-
-	if(!check_and_use_plasma_owner())
-		return
 
 	X.spin_circle()
 	X.emote("tail")
@@ -174,12 +187,10 @@
 	if(!X.fortify)
 		to_chat(X, SPAN_XENOWARNING("You tuck yourself into a defensive stance."))
 		if(X.steelcrest)
-			X.armor_deflection_buff += 10
 			X.armor_explosive_buff += 60
 			X.ability_speed_modifier += 3
 			X.damage_modifier -= XENO_DAMAGE_MOD_SMALL
 		else
-			X.armor_deflection_buff += 30
 			X.armor_explosive_buff += 60
 			X.frozen = TRUE
 			X.anchored = TRUE
@@ -194,12 +205,10 @@
 		X.frozen = FALSE
 		X.anchored = FALSE
 		if(X.steelcrest)
-			X.armor_deflection_buff -= 10
 			X.armor_explosive_buff -= 60
 			X.ability_speed_modifier -= 3
 			X.damage_modifier += XENO_DAMAGE_MOD_SMALL
 		else
-			X.armor_deflection_buff -= 30
 			X.armor_explosive_buff -= 60
 			X.small_explosives_stun = TRUE
 		X.mob_size = MOB_SIZE_XENO //no longer knockback immune

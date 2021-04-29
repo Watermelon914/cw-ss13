@@ -18,15 +18,15 @@
 
 /datum/action/xeno_action/activable/pounce/lurker/ai_registered(mob/living/carbon/Xenomorph/X)
 	. = ..()
-	ai_combo_ability = get_xeno_action_by_type(src, /datum/action/xeno_action/onclick/lurker_invisibility)
+	ai_combo_ability = get_xeno_action_by_type(X, /datum/action/xeno_action/onclick/lurker_invisibility)
 	if(ai_combo_ability)
 		RegisterSignal(ai_combo_ability, COMSIG_PARENT_QDELETING, .proc/cleanup_combo)
 
 /datum/action/xeno_action/activable/pounce/lurker/ai_unregistered(mob/living/carbon/Xenomorph/X)
-	. = ..()
 	if(ai_combo_ability)
 		UnregisterSignal(ai_combo_ability, COMSIG_PARENT_QDELETING)
 		ai_combo_ability = null
+	return ..()
 
 /datum/action/xeno_action/activable/pounce/lurker/proc/cleanup_combo(var/datum/D)
 	SIGNAL_HANDLER

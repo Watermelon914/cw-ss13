@@ -15,11 +15,9 @@
 
 	var/damage = severity
 
-	var/cfg = armor_deflection==0 ? GLOB.xeno_explosive_small : GLOB.xeno_explosive
+	var/cfg = mob_size < MOB_SIZE_BIG? GLOB.xeno_explosive_small : GLOB.xeno_explosive
 	var/total_explosive_resistance = caste != null ? caste.xeno_explosion_resistance + armor_explosive_buff : armor_explosive_buff
-	damage = armor_damage_reduction(cfg, damage, total_explosive_resistance, pierce, 1, 0.5, armor_integrity)
-	var/armor_punch = armor_break_calculation(cfg, damage, total_explosive_resistance, pierce, 1, 0.5, armor_integrity)
-	apply_armorbreak(armor_punch)
+	damage = armor_damage_reduction(cfg, damage, total_explosive_resistance, pierce, 1, 0.5)
 
 	if(source)
 		last_damage_source = source
@@ -58,37 +56,6 @@
 				Superslow(powerfactor_value/2)
 			else
 				Slow(powerfactor_value/3)
-
-/mob/living/carbon/Xenomorph/apply_armoured_damage(var/damage = 0, var/armour_type = ARMOR_MELEE, var/damage_type = BRUTE, var/def_zone = null, var/penetration = 0, var/armour_break_pr_pen = 0, var/armour_break_flat = 0, var/effectiveness_mult = 1)
-	if(damage <= 0)
-		return ..(damage, armour_type, damage_type, def_zone)
-
-	var/armour_config = GLOB.xeno_ranged
-	if(armour_type == ARMOR_MELEE)
-		armour_config = GLOB.xeno_melee
-
-	var/list/damagedata = list(
-		"damage" = damage,
-		"armor" = (armor_deflection + armor_deflection_buff) * effectiveness_mult,
-		"penetration" = penetration,
-		"armour_break_pr_pen" = armour_break_pr_pen,
-		"armour_break_flat" = armour_break_flat,
-		"armor_integrity" = armor_integrity
-	)
-	SEND_SIGNAL(src, COMSIG_XENO_PRE_APPLY_ARMOURED_DAMAGE, damagedata)
-	var/modified_damage = armor_damage_reduction(armour_config, damage,
-		damagedata["armor"], damagedata["penetration"], damagedata["armour_break_pr_pen"],
-		damagedata["armour_break_flat"], damagedata["armor_integrity"])
-
-	var/armor_punch = armor_break_calculation(armour_config, damage,
-		damagedata["armor"], damagedata["penetration"], damagedata["armour_break_pr_pen"],
-		damagedata["armour_break_flat"], damagedata["armor_integrity"])
-
-	apply_armorbreak(armor_punch)
-
-	apply_damage(modified_damage, damage_type)
-
-	return modified_damage
 
 /mob/living/carbon/Xenomorph/apply_damage(damage = 0, damagetype = BRUTE, def_zone = null, used_weapon = null, sharp = 0, edge = 0, force = FALSE)
 	if(!damage)
@@ -143,51 +110,6 @@
 	last_hit_time = world.time
 
 	return 1
-
-#define XENO_ARMOR_BREAK_PASS_TIME 0.5 SECONDS
-#define XENO_ARMOR_BREAK_25PERCENT_IMMUNITY_TIME 2 SECONDS
-
-/mob/living/carbon/Xenomorph/var/armor_break_to_apply = 0
-/mob/living/carbon/Xenomorph/proc/apply_armorbreak(armorbreak = 0)
-	if(GLOB.xeno_general.armor_ignore_integrity)
-		return FALSE
-
-	if(stat == DEAD) return
-
-	if(armor_deflection<=0)
-		return
-
-	//Immunity check
-	if(world.time < armor_integrity_immunity_time && world.time>armor_integrity_last_damage_time + XENO_ARMOR_BREAK_PASS_TIME)
-		return 1
-
-	if(world.time>armor_integrity_immunity_time)
-		armor_integrity_immunity_time = world.time
-		armor_integrity_last_damage_time = world.time
-		armor_break_to_apply = 0
-		post_apply_armorbreak()
-
-	var/delay = ((armor_integrity - armorbreak / 10)/25)*XENO_ARMOR_BREAK_25PERCENT_IMMUNITY_TIME
-	armor_break_to_apply += armorbreak
-	armor_integrity_immunity_time += delay
-
-	if(armor_integrity_immunity_time - world.time > XENO_ARMOR_BREAK_25PERCENT_IMMUNITY_TIME * 4)
-		armor_integrity_immunity_time = world.time + XENO_ARMOR_BREAK_25PERCENT_IMMUNITY_TIME * 4
-
-	return 1
-
-/mob/living/carbon/Xenomorph/proc/post_apply_armorbreak()
-	set waitfor = 0
-	if(!caste) return
-	sleep(XENO_ARMOR_BREAK_PASS_TIME)
-	if(warding_aura && armor_break_to_apply > 0) //Damage to armor reduction
-		armor_break_to_apply = round(armor_break_to_apply * ((100 - (warding_aura * 15)) / 100))
-	if(caste)
-		armor_integrity -= armor_break_to_apply
-	if(armor_integrity < 0)
-		armor_integrity = 0
-	armor_break_to_apply = 0
-	updatehealth()
 
 /mob/living/carbon/Xenomorph/proc/check_blood_splash(damage = 0, damtype = BRUTE, chancemod = 0, radius = 1)
 	if(!damage || world.time < acid_splash_last + acid_splash_cooldown || (SSticker?.mode?.flags_round_type & MODE_DISABLE_ACID_BLOOD))

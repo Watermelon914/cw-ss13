@@ -28,7 +28,8 @@
 	QDEL_NULL(mob_panel)
 
 	if(implants)
-		QDEL_NULL_LIST(implants)
+		for(var/i in implants)
+			qdel(implants[i])
 
 	ghostize()
 	clear_fullscreens()

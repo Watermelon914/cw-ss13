@@ -90,7 +90,7 @@
 	var/xenos_to_spawn = 4
 	var/range_to_spawn = 3
 
-	var/heal_amt_per_second = 10
+	var/heal_amt_per_second = AMOUNT_PER_TIME(200, 60 SECONDS)
 	var/ovipositor_time = 60 SECONDS
 	var/ovi_health = 200
 

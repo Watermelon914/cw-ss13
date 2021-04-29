@@ -50,5 +50,6 @@ GLOBAL_LIST_EMPTY(simulator_cameras)
 
 GLOBAL_LIST_EMPTY(teleporter_landmarks)
 
+GLOBAL_LIST_INIT(diagonals, list(NORTHEAST, SOUTHEAST, NORTHWEST, SOUTHWEST))
 GLOBAL_LIST_INIT(cardinals, list(NORTH, SOUTH, EAST, WEST))
 GLOBAL_LIST_EMPTY(nightmare_landmarks)

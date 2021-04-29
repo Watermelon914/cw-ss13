@@ -37,6 +37,7 @@
 	xeno_cooldown = 110
 	var/prob_chance = 40
 	default_ai_action = TRUE
+	var/sweep_time = 0.5 SECONDS
 
 /datum/action/xeno_action/onclick/tail_sweep/process_ai(mob/living/carbon/Xenomorph/X, delta_time, game_evaluation)
 	if(DT_PROB(prob_chance, delta_time) && get_dist(X, X.current_target) <= 1)

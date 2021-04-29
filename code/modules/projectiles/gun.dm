@@ -145,7 +145,7 @@
 	attachable_overlays = list("muzzle" = null, "rail" = null, "under" = null, "stock" = null, "mag" = null, "special" = null)
 	item_state_slots = list("back" = item_state, "j_store" = item_state)
 
-	if(!(flags_gun_features & GUN_INTERNAL_MAG))
+	if(!(flags_gun_features & (GUN_INTERNAL_MAG|GUN_UNUSUAL_DESIGN)))
 		base_magazines |= current_mag
 
 	if(current_mag)
@@ -671,7 +671,7 @@ User can be passed as null, (a gun reloading itself for instance), so we need to
 	if(user)
 		if(magazine.reload_delay > 1)
 			to_chat(user, SPAN_NOTICE("You begin reloading [src]. Hold still..."))
-			if(do_after(user, magazine.reload_delay, INTERRUPT_ALL, BUSY_ICON_FRIENDLY)) replace_magazine(user, magazine)
+			if(do_after(user, magazine.reload_delay, INTERRUPT_INCAPACITATED|INTERRUPT_NEEDHAND, BUSY_ICON_FRIENDLY)) replace_magazine(user, magazine)
 			else
 				to_chat(user, SPAN_WARNING("Your reload was interrupted!"))
 				return

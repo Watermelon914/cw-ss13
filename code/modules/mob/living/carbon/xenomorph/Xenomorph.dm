@@ -96,13 +96,8 @@
 	var/evasion = 0   // RNG "Armor"
 
 	// Armor
-	var/armor_deflection = 10 // Most important: "max armor"
-	var/armor_deflection_buff = 0 // temp buffs to armor
 	var/armor_explosive_buff = 0  // temp buffs to explosive armor
-	var/armor_integrity = 100     // Current health % of our armor
-	var/armor_integrity_max = 100
-	var/armor_integrity_last_damage_time = 0
-	var/armor_integrity_immunity_time = 0
+
 	var/pull_multiplier = 1.0
 	var/aura_strength = 0 // Pheromone strength
 	var/weed_level = WEED_LEVEL_STANDARD
@@ -175,7 +170,6 @@
 	var/weed_modifier = 0
 	var/evasion_modifier = 0
 	var/attack_speed_modifier = 0
-	var/armor_integrity_modifier = 0
 
 	//////////////////////////////////////////////////////////////////
 	//
@@ -212,6 +206,7 @@
 	var/evolving = FALSE // Whether the xeno is in the process of evolving
 	/// The damage dealt by a xeno whenever they take damage near someone
 	var/acid_blood_damage = 12
+	var/heal_amt_crit = 2.5
 
 
 	//////////////////////////////////////////////////////////////////
@@ -643,7 +638,6 @@
 	..()
 	//updating all the mob's hud images
 	med_hud_set_health()
-	med_hud_set_armor()
 	hud_set_plasma()
 	hud_set_pheromone()
 
@@ -772,7 +766,7 @@
 
 /mob/living/carbon/Xenomorph/proc/recalculate_armor()
 	//We are calculating it in a roundabout way not to give anyone 100% armor deflection, so we're dividing the differences
-	armor_deflection = armor_modifier + round(100 - (100 - caste.armor_deflection))
+
 	armor_explosive_buff = explosivearmor_modifier
 
 /mob/living/carbon/Xenomorph/proc/recalculate_damage()
@@ -846,7 +840,6 @@
 			hive.add_xeno(src)
 			hive.hive_ui.update_all_xeno_data()
 
-	armor_integrity = 100
 	UnregisterSignal(src, COMSIG_XENO_PRE_HEAL)
 	..()
 	hud_update()

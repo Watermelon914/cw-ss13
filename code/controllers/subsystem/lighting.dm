@@ -2,7 +2,7 @@ SUBSYSTEM_DEF(lighting)
 	name          = "Lighting"
 	init_order    = SS_INIT_LIGHTING
 	priority      = SS_PRIORITY_LIGHTING
-	wait          = 0.4 SECONDS
+	wait          = 0.1 SECONDS
 	runlevels = RUNLEVELS_DEFAULT|RUNLEVEL_LOBBY
 
 	var/list/datum/light_source/lights_current = list()

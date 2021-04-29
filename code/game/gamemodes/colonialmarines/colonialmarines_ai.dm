@@ -139,8 +139,6 @@
 	if(is_mainship_level(DS.z) || endgame_enabled)
 		for(var/i in GLOB.alive_client_human_list)
 			var/mob/M = i
-			if(is_ground_level(M.z))
-				continue
 
 			if(!istype(get_area(M), /area/shuttle))
 				to_chat(user, SPAN_WARNING("You must wait for everyone else to be on the dropship!"))

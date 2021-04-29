@@ -795,6 +795,12 @@
 	var/disallowed_grenade_types = list(/obj/item/explosive/grenade/spawnergrenade, /obj/item/explosive/grenade/alien)
 	///What is this weapon permitted to fire? This is a whitelist. Anything in this list can be fired. Anything.
 	var/valid_munitions = list(/obj/item/explosive/grenade)
+	mags_to_spawn = 2
+	base_magazines = list(
+		/obj/item/explosive/grenade/HE,
+		/obj/item/explosive/grenade/HE/airburst,
+		/obj/item/explosive/grenade/incendiary/airburst
+	)
 
 
 /obj/item/weapon/gun/launcher/grenade/set_gun_config_values()
@@ -980,6 +986,8 @@ obj/item/weapon/gun/launcher/grenade/update_icon()
 	internal_slots = 6
 	direct_draw = FALSE
 
+
+
 /obj/item/weapon/gun/launcher/grenade/m92/set_gun_attachment_offsets()
 	attachable_offset = list("muzzle_x" = 33, "muzzle_y" = 18,"rail_x" = 14, "rail_y" = 22, "under_x" = 19, "under_y" = 14, "stock_x" = 19, "stock_y" = 14)
 
@@ -1048,7 +1056,7 @@ obj/item/weapon/gun/launcher/grenade/update_icon()
 	force = 15
 	wield_delay = WIELD_DELAY_HORRIBLE
 	delay_style	= WEAPON_DELAY_NO_FIRE
-	aim_slowdown = SLOWDOWN_ADS_SPECIALIST
+	aim_slowdown = SLOWDOWN_ADS_SHOTGUN
 	attachable_allowed = list(
 						/obj/item/attachable/magnetic_harness
 						)
@@ -1057,6 +1065,9 @@ obj/item/weapon/gun/launcher/grenade/update_icon()
 	var/datum/effect_system/smoke_spread/smoke
 
 	flags_item = TWOHANDED|NO_CRYO_STORE
+	base_magazines = list(
+		/obj/item/ammo_magazine/rocket
+	)
 
 /obj/item/weapon/gun/launcher/rocket/Initialize(mapload, spawn_empty)
 	. = ..()
@@ -1154,7 +1165,7 @@ obj/item/weapon/gun/launcher/grenade/update_icon()
 
 	if(user)
 		to_chat(user, SPAN_NOTICE("You begin reloading [src]. Hold still..."))
-		if(do_after(user,current_mag.reload_delay, INTERRUPT_ALL, BUSY_ICON_FRIENDLY))
+		if(do_after(user,current_mag.reload_delay, INTERRUPT_INCAPACITATED|INTERRUPT_NEEDHAND, BUSY_ICON_FRIENDLY))
 			qdel(current_mag)
 			user.drop_inv_item_on_ground(rocket)
 			current_mag = rocket

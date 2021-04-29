@@ -33,6 +33,7 @@
 	windup_duration = 3 SECONDS
 	// When to acquire target before launching
 	var/when_to_get_turf = 0.5 SECONDS
+	var/additional_turfs_to_charge = 3
 	var/charging = FALSE
 
 	prob_chance = 75
@@ -41,19 +42,39 @@
 	if(charging || !action_cooldown_check() || !can_use_action())
 		return
 
-	var/mob/M = owner
+	var/mob/living/carbon/Xenomorph/M = owner
 
 	M.anchored = TRUE
 	M.frozen = TRUE
+
+	charging = TRUE
 
 	var/failed = FALSE
 	if(!do_after(M, windup_duration - when_to_get_turf, INTERRUPT_INCAPACITATED, BUSY_ICON_HOSTILE))
 		failed = TRUE
 
-	A = get_turf(A)
+	if(!failed)
+		var/direction = get_dir(M, A)
 
-	if(!failed && !do_after(M, when_to_get_turf, INTERRUPT_INCAPACITATED, BUSY_ICON_HOSTILE))
-		failed = TRUE
+		if(direction in GLOB.diagonals)
+			if(abs(M.x - A.x) < abs(M.y - A.y))
+				direction &= (NORTH|SOUTH)
+			else
+				direction &= (EAST|WEST)
+
+		for(var/i in 1 to additional_turfs_to_charge)
+			A = get_step(A, direction)
+
+		M.add_filter("unavoidable_act", 1, list("type" = "outline", "color" = "#ffa800", "size" = 1))
+		var/filter = M.get_filter("unavoidable_act")
+		animate(filter, alpha=0, time = 0.1 SECONDS, loop = -1, flags = ANIMATION_PARALLEL)
+		animate(alpha = 255, time = 0.1 SECONDS)
+
+		if(!do_after(M, when_to_get_turf, INTERRUPT_INCAPACITATED, BUSY_ICON_HOSTILE))
+			failed = TRUE
+
+		animate(filter)
+		M.remove_filter("unavoidable_act")
 
 	M.anchored = FALSE
 	M.frozen = FALSE

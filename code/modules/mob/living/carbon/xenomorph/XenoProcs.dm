@@ -31,7 +31,6 @@
 	. += ""
 
 	. += "Health: [round(health)]/[round(maxHealth)]"
-	. += "Armor: [round(0.01*armor_integrity*armor_deflection)]/[round(armor_deflection)]"
 	. += "Plasma: [round(plasma_stored)]/[round(plasma_max)]"
 	. += "Slash Damage: [round((melee_damage_lower+melee_damage_upper)/2)]"
 
@@ -202,10 +201,6 @@
 	for(var/X in actions)
 		var/datum/action/A = X
 		A.update_button_icon()
-
-
-/mob/living/carbon/Xenomorph/proc/gain_armor_percent(value)
-	armor_integrity = min(armor_integrity + value, 100)
 
 
 //Strip all inherent xeno verbs from your caste. Used in evolution.

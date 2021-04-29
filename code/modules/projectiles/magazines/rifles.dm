@@ -106,7 +106,7 @@
 /obj/item/ammo_magazine/rifle/m40_sd/ap
 	name = "\improper M40-SD AP magazine (10x24mm)"
 	desc = "A stubby and wide, high capacity double stack magazine used in the M40-SD pulse rifle. Fires 10x24mm Armor Piercing rounds, holding up to 60 + 1 in the chamber."
-	icon_state = "m40_sd"
+	icon_state = "m40_sd_ap"
 	max_rounds = 60
 	gun_type = /obj/item/weapon/gun/rifle/m41a/elite/m40_sd
 	default_ammo = /datum/ammo/bullet/rifle/ap

@@ -131,15 +131,6 @@
 //
 /////////////////////////////////////////////////////////////////////////////////////
 
-// Armor levels
-#define XENO_NO_ARMOR 0
-#define XENO_ARMOR_TIER_1 20
-#define XENO_ARMOR_TIER_2 25
-#define XENO_ARMOR_TIER_3 30
-#define XENO_ARMOR_TIER_4 35
-#define XENO_ARMOR_TIER_5 40
-#define XENO_ARMOR_TIER_7 50
-
 // Explosive armor (think explosion resistance)
 #define XENO_NO_EXPLOSIVE_ARMOR 		0
 #define XENO_EXPLOSIVE_ARMOR_TIER_1 	10
@@ -206,19 +197,6 @@
 #define XENO_REGEN_MULTIPLIER_TIER_8 1.40
 #define XENO_REGEN_MULTIPLIER_TIER_9 1.45
 #define XENO_REGEN_MULTIPLIER_TIER_10 1.50
-
-// Armor factor
-#define XENO_ARMOR_FACTOR_TIER_1 25
-#define XENO_ARMOR_FACTOR_TIER_2 30
-#define XENO_ARMOR_FACTOR_TIER_3 35
-#define XENO_ARMOR_FACTOR_TIER_4 40
-#define XENO_ARMOR_FACTOR_TIER_5 45
-#define XENO_ARMOR_FACTOR_TIER_6 50
-#define XENO_ARMOR_FACTOR_TIER_7 55
-#define XENO_ARMOR_FACTOR_TIER_8 60
-#define XENO_ARMOR_FACTOR_TIER_9 65
-#define XENO_ARMOR_FACTOR_TIER_10 70
-#define XENO_ARMOR_FACTOR_CRUSHER 200
 
 // Evasion
 #define XENO_EVASION_NONE 0
@@ -293,15 +271,6 @@
 #define XENO_HEALTH_MOD_LARGE      80
 #define XENO_HEALTH_MOD_VERYLARGE  100
 
-// Armor mods. Use the above defines for some guidance
-// In general, +20 armor should be a little more than +20% effective HP, however,
-// the higher the Xeno's base armor, the greater the effect.
-#define XENO_ARMOR_MOD_VERYSMALL  5
-#define XENO_ARMOR_MOD_SMALL      10
-#define XENO_ARMOR_MOD_MED        15
-#define XENO_ARMOR_MOD_LARGE      20
-#define XENO_ARMOR_MOD_VERYLARGE  25
-
 #define XENO_EXPOSIVEARMOR_MOD_VERYSMALL  10
 #define XENO_EXPOSIVEARMOR_MOD_SMALL      20
 #define XENO_EXPOSIVEARMOR_MOD_MED        30
@@ -365,13 +334,6 @@
 #define XENO_EVASION_MOD_LARGE   	12
 #define XENO_EVASION_MOD_VERYLARGE	15
 #define XENO_EVASION_MOD_ULTRA		25
-
-// Armor factor modifiers
-#define XENO_ARMORFACTOR_MOD_VERYSMALL	5
-#define XENO_ARMORFACTOR_MOD_SMALL		10
-#define XENO_ARMORFACTOR_MOD_MED		15
-#define XENO_ARMORFACTOR_MOD_LARGE		20
-#define XENO_ARMORFACTOR_MOD_VERYLARGE 	25
 
 // Acid boost (I guess, this is used literally nowhere)
 // Feel free to add more defines here if it ever becomes relevant

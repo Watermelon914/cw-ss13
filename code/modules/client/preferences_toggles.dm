@@ -339,14 +339,6 @@
 	to_chat(src, "As a player, you will now [(prefs.chat_display_preferences & CHAT_TYPE_XENO_COMBAT) ? "see all xeno attack messages" : "never see xeno attack messages"].")
 	prefs.save_preferences()
 
-/client/proc/toggle_chat_xeno_armor()
-	set name = "Toggle Xeno Armor Messages"
-	set category = "Preferences.Combat"
-	set desc = ".Enable or Disable messages informing about xeno armor"
-	prefs.chat_display_preferences ^= CHAT_TYPE_ARMOR_DAMAGE
-	to_chat(src, "As a player, you will now [(prefs.chat_display_preferences & CHAT_TYPE_ARMOR_DAMAGE) ? "see all xeno armor messages" : "never see xeno armor messages"].")
-	prefs.save_preferences()
-
 /client/proc/toggle_chat_someone_hit()
 	set name = "Toggle Someone Hit Messages"
 	set category = "Preferences.Combat"
@@ -374,7 +366,6 @@
 var/list/combat_chat_prefs_verbs = list(
 	/client/proc/toggle_chat_shooting,
 	/client/proc/toggle_chat_xeno_attack,
-	/client/proc/toggle_chat_xeno_armor,
 	/client/proc/toggle_chat_someone_hit,
 	/client/proc/toggle_chat_you_hit,
 	/client/proc/toggle_chat_you_pain,

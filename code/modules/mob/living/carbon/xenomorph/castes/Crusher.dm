@@ -6,11 +6,11 @@
 
 	melee_damage_lower = XENO_DAMAGE_TIER_5
 	melee_damage_upper = XENO_DAMAGE_TIER_5
-	max_health = XENO_HEALTH_TIER_7
+	max_health = XENO_HEALTH_TIER_10
 	plasma_gain = XENO_PLASMA_GAIN_TIER_7
 	plasma_max = XENO_PLASMA_TIER_4
 	xeno_explosion_resistance = XENO_EXPLOSIVE_ARMOR_TIER_10
-	armor_deflection = XENO_ARMOR_TIER_3
+
 	evasion = XENO_EVASION_NONE
 	speed = XENO_SPEED_TIER_3
 	heal_standing = 0.66
@@ -60,6 +60,7 @@
 
 	var/turf/travelling_turf
 	var/linger_range = 6
+	var/linger_deviation = 1
 
 /mob/living/carbon/Xenomorph/Crusher/make_ai()
 	. = ..()
@@ -300,10 +301,10 @@
 	if(!(src in view(world.view, current_target)))
 		travelling_turf = get_turf(current_target)
 	else if(!travelling_turf || get_dist(travelling_turf, src) <= 0)
-		travelling_turf = get_random_turf_in_range(current_target, linger_range, linger_range)
+		travelling_turf = get_random_turf_in_range_unblocked(current_target, linger_range-linger_deviation, linger_range+linger_deviation)
 		if(!travelling_turf)
 			travelling_turf = get_turf(current_target)
 
 	if(!move_to_next_turf(travelling_turf))
-		current_target = null
+		travelling_turf = get_turf(current_target)
 		return TRUE

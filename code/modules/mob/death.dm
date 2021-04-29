@@ -88,7 +88,6 @@
 		X.behavior_delegate.on_kill_mob(src)
 
 	med_hud_set_health()
-	med_hud_set_armor()
 	med_hud_set_status()
 
 	update_icons()

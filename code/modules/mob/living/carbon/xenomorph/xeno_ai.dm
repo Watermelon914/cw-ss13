@@ -224,25 +224,26 @@ GLOBAL_LIST_INIT(ai_target_limbs, list(
 	return TRUE
 
 /mob/living/carbon/Xenomorph/proc/get_target(var/range)
-	var/mob/living/carbon/human/closest_human
+	var/list/viable_humans = list()
 	var/smallest_distance = INFINITY
 	for(var/l in GLOB.alive_client_human_list)
 		var/mob/living/carbon/human/H = l
 		if(z != H.z)
 			continue
 		var/distance = get_dist(src, H)
-		if(distance < smallest_distance)
-			smallest_distance = distance
-			closest_human = H
+
+		if(distance < ai_range)
+			viable_humans += H
+		smallest_distance = min(distance, smallest_distance)
+
 
 	if(smallest_distance > RANGE_TO_DESPAWN_XENO && !(XENO_AI_NO_DESPAWN & flags_ai))
 		remove_ai()
 		qdel(src)
 		return
 
-	if(smallest_distance > ai_range)
-		return
-	return closest_human
+	if(length(viable_humans))
+		return pick(viable_humans)
 
 /mob/living/carbon/Xenomorph/proc/make_ai()
 	SHOULD_CALL_PARENT(TRUE)

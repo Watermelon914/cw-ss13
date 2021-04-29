@@ -141,18 +141,10 @@
 			M.visible_message(SPAN_DANGER("[M] is hit by backlash from \a [P.name]!"),isXeno(M) ? SPAN_XENODANGER("[msg]"):SPAN_HIGHDANGER("[msg]"))
 		var/damage = P.damage/damage_div
 
-		var/mob/living/carbon/Xenomorph/XNO = null
-
-		if(isXeno(M))
-			XNO = M
-			var/total_explosive_resistance = XNO.caste.xeno_explosion_resistance + XNO.armor_explosive_buff
-			damage = armor_damage_reduction(GLOB.xeno_explosive, damage, total_explosive_resistance , 60, 0, 0.5, XNO.armor_integrity)
-			var/armor_punch = armor_break_calculation(GLOB.xeno_explosive, damage, total_explosive_resistance, 60, 0, 0.5, XNO.armor_integrity)
-			XNO.apply_armorbreak(armor_punch)
-
 		M.apply_damage(damage,damage_type)
 
-		if(XNO && XNO.xeno_shields.len)
+		var/mob/living/carbon/Xenomorph/XNO = M
+		if(istype(XNO) && XNO.xeno_shields.len)
 			P.play_shielded_damage_effect(M)
 		else
 			P.play_damage_effect(M)
@@ -1030,7 +1022,7 @@
 	accuracy_var_high = PROJECTILE_VARIANCE_TIER_5
 	accurate_range = 4
 	max_range = 4
-	damage = BULLET_DAMAGE_TIER_12
+	damage = BULLET_DAMAGE_TIER_10
 	damage_var_low = PROJECTILE_VARIANCE_TIER_8
 	damage_var_high = PROJECTILE_VARIANCE_TIER_8
 	damage_falloff = DAMAGE_FALLOFF_TIER_8
@@ -1363,8 +1355,8 @@
 	damage = BULLET_DAMAGE_TIER_20
 	shell_speed = AMMO_SPEED_TIER_1
 
-	var/power = 300
-	var/falloff = 100
+	var/power = 600
+	var/falloff = 200
 
 /datum/ammo/rocket/New()
 	..()
@@ -1406,8 +1398,8 @@
 	damage = BULLET_DAMAGE_TIER_20
 	penetration= ARMOR_PENETRATION_TIER_10
 
-	power = 1000
-	falloff = 550
+	power = 1500
+	falloff = 750
 
 /datum/ammo/rocket/ltb
 	name = "cannon round"

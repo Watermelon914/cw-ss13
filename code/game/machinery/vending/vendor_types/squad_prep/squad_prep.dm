@@ -38,6 +38,7 @@
 		list("M39 Folding Stock", round(scale * 10), /obj/item/attachable/stock/smg/collapsible, VENDOR_ITEM_REGULAR),
 		list("L42 Synthetic Stock", round(scale * 10), /obj/item/attachable/stock/carbine, VENDOR_ITEM_REGULAR),
 		list("Rail Flashlight", round(scale * 25), /obj/item/attachable/flashlight, VENDOR_ITEM_RECOMMENDED),
+		list("Magnetic Harness", round(scale * 25), /obj/item/attachable/magnetic_harness, VENDOR_ITEM_RECOMMENDED),
 		list("Underbarrel Flashlight Grip", round(scale * 10), /obj/item/attachable/flashlight/grip, VENDOR_ITEM_RECOMMENDED),
 		list("Underslung Grenade Launcher", round(scale * 25), /obj/item/attachable/attached_gun/grenade, VENDOR_ITEM_REGULAR), //They already get these as on-spawns, might as well formalize some spares.
 

@@ -10,7 +10,7 @@
 	plasma_gain = XENO_PLASMA_GAIN_TIER_8
 	plasma_max = XENO_PLASMA_TIER_4
 	xeno_explosion_resistance = XENO_EXPLOSIVE_ARMOR_TIER_2
-	armor_deflection = XENO_NO_ARMOR
+
 	evasion = XENO_EVASION_NONE
 	speed = XENO_SPEED_TIER_8
 
@@ -142,7 +142,7 @@
 	else if(!(src in view(world.view, current_target)))
 		travelling_turf = get_turf(current_target)
 	else if(!travelling_turf || get_dist(travelling_turf, src) <= 0)
-		travelling_turf = get_random_turf_in_range(current_target, linger_range, linger_range)
+		travelling_turf = get_random_turf_in_range_unblocked(current_target, linger_range, linger_range)
 		if(!travelling_turf)
 			travelling_turf = get_turf(current_target)
 

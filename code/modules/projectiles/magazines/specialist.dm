@@ -119,7 +119,7 @@
 	caliber = "rocket"
 	icon_state = "rocket"
 
-	reload_delay = 60
+	reload_delay = 3 SECONDS
 	matter = list("metal" = 10000)
 	w_class = SIZE_MEDIUM
 	max_rounds = 1
