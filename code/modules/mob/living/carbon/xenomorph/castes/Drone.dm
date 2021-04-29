@@ -73,6 +73,7 @@
 	. = ..()
 	current_aura = pick(caste.aura_allowed)
 
+// Drone has unique movement. Not going to modularize it yet.
 /mob/living/carbon/Xenomorph/Drone/ai_move_target(delta_time, game_evaluation)
 	if((!target_turf || pursuing_target) && next_search_time < world.time)
 		var/list/valid_turfs = RANGE_TURFS(range_to_check_for_weeds, current_target)

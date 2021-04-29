@@ -51,8 +51,8 @@
 	tackle_min = 2
 	tackle_max = 6
 
-	var/turf/travelling_turf
 	var/linger_range = 5
+	var/linger_deviation = 0
 
 /datum/behavior_delegate/lurker_base
 	name = "Base Lurker Behavior Delegate"
@@ -135,20 +135,11 @@
 	var/invis_message = (invis_start_time == -1) ? "N/A" : "[(invis_duration-(world.time - invis_start_time))/10] seconds."
 	. += "Invisibility Time Left: [invis_message]"
 
-/mob/living/carbon/Xenomorph/Lurker/ai_move_target(delta_time, game_evaluation)
-	if(current_target.is_mob_incapacitated())
-		return ..()
-
-	else if(!(src in view(world.view, current_target)))
-		travelling_turf = get_turf(current_target)
-	else if(!travelling_turf || get_dist(travelling_turf, src) <= 0)
-		travelling_turf = get_random_turf_in_range_unblocked(current_target, linger_range, linger_range)
-		if(!travelling_turf)
-			travelling_turf = get_turf(current_target)
-
-	if(!move_to_next_turf(travelling_turf))
-		travelling_turf = null
-		return TRUE
+/mob/living/carbon/Xenomorph/Lurker/init_movement_handler()
+	var/datum/xeno_ai_movement/linger/L = new(src)
+	L.linger_range = linger_range
+	L.linger_deviation = linger_deviation
+	return L
 
 /mob/living/carbon/Xenomorph/Lurker/process_ai(delta_time, game_evaluation)
 	zone_selected = pick(GLOB.ai_target_limbs)

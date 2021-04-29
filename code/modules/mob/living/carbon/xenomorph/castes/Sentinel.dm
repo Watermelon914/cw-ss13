@@ -50,32 +50,12 @@
 		/mob/living/carbon/Xenomorph/proc/vent_crawl,
 	)
 	mutation_type = SENTINEL_NORMAL
-	var/turf/travelling_turf
+
 	var/potential_turf_range = 6
 	var/min_range = 2
-	var/last_spit = 0
 
-/mob/living/carbon/Xenomorph/Sentinel/ai_move_target(delta_time, game_evaluation)
-	if(current_target.is_mob_incapacitated())
-		return ..()
-
-	if(!travelling_turf || !(get_turf(src) in view(world.view, current_target)))
-		travelling_turf = get_turf(current_target)
-	else if(get_dist(src, travelling_turf) <= min_range)
-		travelling_turf = loc
-
-	if(move_to_next_turf(travelling_turf) && get_dist(travelling_turf, src) > 0)
-		return
-
-	var/list/potential_turfs = RANGE_TURFS(potential_turf_range, travelling_turf)
-	potential_turfs -= loc
-	while(length(potential_turfs))
-		var/turf/target_turf = pick(potential_turfs)
-		potential_turfs -= target_turf
-
-		if(get_dist(target_turf, current_target) <= min_range)
-			continue
-
-		if(target_turf in view(4, current_target))
-			travelling_turf = target_turf
-			break
+/mob/living/carbon/Xenomorph/Sentinel/init_movement_handler()
+	var/datum/xeno_ai_movement/ranged/R = new(src)
+	R.potential_turf_range = potential_turf_range
+	R.min_range = min_range
+	return R

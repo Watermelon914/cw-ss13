@@ -16,14 +16,9 @@
 	var/ai_timeout_time = 0
 	var/ai_timeout_period = 2 SECONDS
 
-	// Home turf
-	var/next_home_search = 0
-	var/home_search_delay = 5 SECONDS
-	var/max_distance_from_home = 15
-	var/home_locate_range = 15
-	var/turf/home_turf
-
 	var/list/datum/action/xeno_action/registered_ai_abilities = list()
+
+	var/datum/xeno_ai_movement/ai_movement_handler
 
 GLOBAL_LIST_INIT(ai_target_limbs, list(
 	"head",
@@ -33,6 +28,9 @@ GLOBAL_LIST_INIT(ai_target_limbs, list(
 	"l_arm",
 	"r_arm"
 ))
+
+/mob/living/carbon/Xenomorph/proc/init_movement_handler()
+	return new /datum/xeno_ai_movement(src)
 
 /mob/living/carbon/Xenomorph/proc/handle_ai_shot(obj/item/projectile/P)
 	if(!current_target && P.firer)
@@ -97,51 +95,15 @@ GLOBAL_LIST_INIT(ai_target_limbs, list(
 
 /** Controls movement when idle. Called by process_ai */
 /mob/living/carbon/Xenomorph/proc/ai_move_idle(delta_time, game_evaluation)
-	if(throwing)
-		return
-
-	if(next_home_search < world.time && (!home_turf || !home_turf.weeds || get_dist(home_turf, src) > max_distance_from_home))
-		var/turf/T = get_turf(loc)
-		next_home_search = world.time + home_search_delay
-		if(T.weeds)
-			home_turf = T
-		else
-			var/shortest_distance = INFINITY
-			for(var/i in RANGE_TURFS(home_locate_range, T))
-				var/turf/potential_home = i
-				if(potential_home.weeds && !potential_home.density && get_dist(src, potential_home) < shortest_distance)
-					home_turf = potential_home
-
-	if(!home_turf)
-		return
-
-	if(move_to_next_turf(home_turf, home_locate_range))
-		if(get_dist(home_turf, src) <= 0 && !resting)
-			lay_down()
-	else
-		home_turf = null
+	if(!ai_movement_handler)
+		CRASH("No valid movement handler for [src]!")
+	ai_movement_handler.ai_move_idle(delta_time, game_evaluation)
 
 /** Controls movement towards target. Called by process_ai */
 /mob/living/carbon/Xenomorph/proc/ai_move_target(delta_time, game_evaluation)
-	if(throwing)
-		return
-
-	var/turf/T = get_turf(current_target)
-	if(get_dist(src, current_target) <= 1)
-		var/list/turfs = RANGE_TURFS(1, T)
-		while(length(turfs))
-			T = pick(turfs)
-			turfs -= T
-			if(!T.density)
-				break
-
-			if(T == get_turf(current_target))
-				break
-
-
-	if(!move_to_next_turf(T))
-		current_target = null
-		return TRUE
+	if(!ai_movement_handler)
+		CRASH("No valid movement handler for [src]!")
+	return ai_movement_handler.ai_move_target(delta_time, game_evaluation)
 
 /atom/proc/xeno_ai_obstacle(var/mob/living/carbon/Xenomorph/X, direction)
 	return INFINITY
@@ -250,6 +212,17 @@ GLOBAL_LIST_INIT(ai_target_limbs, list(
 	create_hud()
 	if(!client)
 		SSxeno_ai.add_ai(src)
+
+	if(!ai_movement_handler)
+		set_movement_handler(init_movement_handler())
+
+/mob/living/carbon/Xenomorph/proc/set_movement_handler(var/datum/xeno_ai_movement/XAM)
+	if(!XAM)
+		CRASH("Passed null value to set_movement_handler on [type].")
+
+	if(ai_movement_handler)
+		qdel(ai_movement_handler)
+	ai_movement_handler = XAM
 
 /mob/living/carbon/Xenomorph/proc/remove_ai()
 	SHOULD_CALL_PARENT(TRUE)

@@ -24,8 +24,9 @@
 
 	var/mob/living/carbon/Xenomorph/Runner/R = MS.xeno
 	R.mutation_type = RUNNER_ACIDER
-	R.speed_modifier += XENO_SPEED_SLOWMOD_TIER_5
-	R.health_modifier += XENO_HEALTH_MOD_VERYLARGE
+	R.speed_modifier += XENO_SPEED_SLOWMOD_TIER_10
+	R.health_modifier -= XENO_HEALTH_MOD_VERYLARGE
+	R.set_movement_handler(new /datum/xeno_ai_movement(R))
 	apply_behavior_holder(R)
 	mutator_update_actions(R)
 	R.recalculate_everything()

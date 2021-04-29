@@ -55,9 +55,23 @@
 	)
 	mutation_type = RUNNER_NORMAL
 
-	var/turf/travelling_turf
 	var/linger_range = 5
+	var/linger_deviation = 0
 	var/pull_direction
+
+/mob/living/carbon/Xenomorph/Runner/make_ai()
+	. = ..()
+	var/datum/mutator_set/MS = mutators
+	var/list/options = MS.available_mutators()
+	if(!length(options))
+		return
+
+	options += "None"
+
+	var/chosen = pick(options)
+	if(!chosen || chosen == "None")
+		return
+	GLOB.xeno_mutator_list[chosen].apply_mutator(MS)
 
 /mob/living/carbon/Xenomorph/Runner/initialize_pass_flags(var/datum/pass_flags_container/PF)
 	..()
@@ -77,6 +91,12 @@
 			pull_direction &= (EAST|WEST)
 	return ..()
 
+/mob/living/carbon/Xenomorph/Runner/init_movement_handler()
+	var/datum/xeno_ai_movement/linger/L = new(src)
+	L.linger_range = linger_range
+	L.linger_deviation = linger_deviation
+	return L
+
 /mob/living/carbon/Xenomorph/Runner/ai_move_target(delta_time, game_evaluation)
 	if(throwing)
 		return
@@ -86,16 +106,7 @@
 			Move(get_step(loc, pull_direction), pull_direction)
 		current_path = null
 	else
-		if(!(src in view(world.view, current_target)))
-			travelling_turf = get_turf(current_target)
-		else if(!travelling_turf || get_dist(travelling_turf, src) <= 0)
-			travelling_turf = get_random_turf_in_range_unblocked(current_target, linger_range, linger_range)
-			if(!travelling_turf)
-				travelling_turf = get_turf(current_target)
-
-		if(!move_to_next_turf(travelling_turf))
-			travelling_turf = null
-			return
+		..()
 
 	if(get_dist(current_target, src) <= 1 && current_target.is_mob_incapacitated() && !isXeno(current_target.pulledby) && !pulling && DT_PROB(RUNNER_GRAB, delta_time))
 		CallAsync(src, /mob.proc/start_pulling, list(current_target))

@@ -51,3 +51,12 @@
 	action_type = XENO_ACTION_ACTIVATE
 	ability_primacy = XENO_PRIMARY_ACTION_3
 	var/minimal_acid = 200
+
+	var/wait_period = 0.5 SECONDS
+	var/range = 2
+
+	default_ai_action = TRUE
+
+/datum/action/xeno_action/activable/acider_for_the_hive/process_ai(mob/living/carbon/Xenomorph/X, delta_time, game_evaluation)
+	if(get_dist(X, X.current_target) <= 1)
+		use_ability_async()

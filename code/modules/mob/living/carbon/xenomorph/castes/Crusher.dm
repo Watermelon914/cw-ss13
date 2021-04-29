@@ -58,7 +58,6 @@
 	mutation_type = CRUSHER_NORMAL
 	claw_type = CLAW_TYPE_VERY_SHARP
 
-	var/turf/travelling_turf
 	var/linger_range = 6
 	var/linger_deviation = 1
 
@@ -294,17 +293,10 @@
 /mob/living/carbon/Xenomorph/Crusher/ai_move_target(delta_time, game_evaluation)
 	if(frozen)
 		return
+	return ..()
 
-	if(current_target.is_mob_incapacitated())
-		return ..()
-
-	if(!(src in view(world.view, current_target)))
-		travelling_turf = get_turf(current_target)
-	else if(!travelling_turf || get_dist(travelling_turf, src) <= 0)
-		travelling_turf = get_random_turf_in_range_unblocked(current_target, linger_range-linger_deviation, linger_range+linger_deviation)
-		if(!travelling_turf)
-			travelling_turf = get_turf(current_target)
-
-	if(!move_to_next_turf(travelling_turf))
-		travelling_turf = get_turf(current_target)
-		return TRUE
+/mob/living/carbon/Xenomorph/Crusher/init_movement_handler()
+	var/datum/xeno_ai_movement/linger/L = new(src)
+	L.linger_range = linger_range
+	L.linger_deviation = linger_deviation
+	return L

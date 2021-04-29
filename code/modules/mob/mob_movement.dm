@@ -131,7 +131,7 @@
 		next_movement = world.time + MINIMAL_MOVEMENT_INTERVAL
 		return
 
-	if(mob.stat == DEAD)
+	if(initial(mob.stat) != DEAD && mob.stat == DEAD)
 		mob.ghostize(TRUE)
 		return
 

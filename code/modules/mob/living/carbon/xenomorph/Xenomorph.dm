@@ -583,6 +583,8 @@
 		var/list/L = built_structures[i]
 		QDEL_NULL_LIST(L)
 
+	QDEL_NULL(ai_movement_handler)
+
 	built_structures = null
 
 	. = ..()

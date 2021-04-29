@@ -52,6 +52,12 @@
 /datum/game_mode/colonialmarines/ai/load_maps(var/list/FailedZs)
 	SSmapping.LoadGroup(FailedZs, "The Hive", endgame_map_path, endgame_map_file, endgame_map_traits, ZTRAITS_HIVE, TRUE)
 
+/datum/game_mode/colonialmarines/ai/can_start()
+	if(readied_players <= 0)
+		return FALSE
+	return ..()
+
+
 /datum/game_mode/colonialmarines/ai/pre_setup()
 	game_shuttle = SSshuttle.getShuttle(game_shuttle_id)
 

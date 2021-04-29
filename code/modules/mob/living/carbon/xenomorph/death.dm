@@ -129,8 +129,6 @@
 			B.smoke.set_up(2, 0, get_turf(src))
 			B.smoke.start()
 			remains.icon_state = "gibbed-a-corpse"
-		if(XENO_CASTE_RUNNER)
-			remains.icon_state = "gibbed-a-corpse-runner"
 		if(XENO_CASTE_LARVA, XENO_CASTE_PREDALIEN_LARVA)
 			remains.icon_state = "larva_gib_corpse"
 		else

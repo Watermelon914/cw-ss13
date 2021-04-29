@@ -164,43 +164,27 @@
 	if(!action_cooldown_check())
 		return
 
-	if(X.mutation_type != RUNNER_ACIDER)
+	var/failed = FALSE
+	X.add_filter("unavoidable_act", 1, list("type" = "outline", "color" = "#ffa800", "size" = 1))
+	var/filter = X.get_filter("unavoidable_act")
+	animate(filter, alpha=0, time = 0.1 SECONDS, loop = -1, flags = ANIMATION_PARALLEL)
+	animate(alpha = 255, time = 0.1 SECONDS)
+
+	if(!do_after(X, wait_period, INTERRUPT_INCAPACITATED))
+		failed = TRUE
+
+	animate(filter)
+	X.remove_filter("unavoidable_act")
+
+	if(failed)
 		return
 
-	var/datum/behavior_delegate/runner_acider/BD = X.behavior_delegate
-	if(!istype(BD))
+	var/datum/automata_cell/acid/E = new /datum/automata_cell/acid(get_turf(X))
+
+	// something went wrong :(
+	if(QDELETED(E))
 		return
 
-	if(BD.caboom_trigger)
-		cancel_ability()
-		return
-
-	if(BD.acid_amount < minimal_acid)
-		to_chat(X, SPAN_XENOWARNING("Not enough acid built up for an explosion."))
-		return
-
-	to_chat(X, SPAN_XENOWARNING("Your stomach starts turning and twisting, getting ready to compress the built up acid."))
-	X.color = "#22FF22"
-	X.SetLuminosity(3)
-
-	BD.caboom_trigger = TRUE
-	BD.caboom_left = BD.caboom_timer
-	BD.caboom_last_proc = 0
-	X.SetSuperslowed(BD.caboom_timer*2)
-
-	X.say(";FOR THE HIVE!!!")
-
-/datum/action/xeno_action/activable/acider_for_the_hive/proc/cancel_ability()
-	var/mob/living/carbon/Xenomorph/X = owner
-
-	if(!istype(X))
-		return
-	var/datum/behavior_delegate/runner_acider/BD = X.behavior_delegate
-	if(!istype(BD))
-		return
-
-	BD.caboom_trigger = FALSE
-	X.color = null
-	X.SetLuminosity(0)
-	BD.modify_acid(-BD.max_acid / 4)
-	to_chat(X, SPAN_XENOWARNING("You remove all your explosive acid before it combusted."))
+	E.range = range
+	E.hivenumber = X.hivenumber
+	X.gib()
