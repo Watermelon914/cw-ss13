@@ -192,7 +192,6 @@ SUBSYSTEM_DEF(ticker)
 
 	CHECK_TICK
 	if(!mode.pre_setup() && !bypass_checks)
-		QDEL_NULL(mode)
 		to_chat(world, "<b>Error in pre-setup for [mode.name].</b> Reverting to pre-game lobby.")
 		RoleAuthority.reset_roles()
 		return FALSE
