@@ -50,6 +50,10 @@
 	if(spit_combo_ai)
 		RegisterSignal(spit_combo_ai, COMSIG_PARENT_QDELETING, .proc/cleanup_combo)
 
+/datum/action/xeno_action/activable/spray_acid/spitter/Destroy()
+	cleanup_combo(spit_combo_ai)
+	return ..()
+
 /datum/action/xeno_action/activable/spray_acid/spitter/proc/cleanup_combo(var/datum/D)
 	SIGNAL_HANDLER
 	if(spit_combo_ai == D)

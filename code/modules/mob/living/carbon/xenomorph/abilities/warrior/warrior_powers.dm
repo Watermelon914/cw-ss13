@@ -225,7 +225,7 @@
 
 	var/distance = get_dist(X, A)
 
-	if (distance > 3)
+	if (distance > src.distance)
 		return
 
 	var/mob/living/carbon/H = A
@@ -234,9 +234,6 @@
 
 	if (!check_and_use_plasma_owner())
 		return
-
-	if (distance > 2)
-		step_towards(X, H, 1)
 
 	if (distance > 1)
 		step_towards(X, H, 1)

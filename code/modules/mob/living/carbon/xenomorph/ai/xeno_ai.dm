@@ -216,6 +216,19 @@ GLOBAL_LIST_INIT(ai_target_limbs, list(
 	if(!ai_movement_handler)
 		set_movement_handler(init_movement_handler())
 
+	if(flags_ai & XENO_AI_CHOOSE_RANDOM_STRAIN)
+		var/datum/mutator_set/MS = mutators
+		var/list/options = MS.available_mutators()
+		if(!length(options))
+			return
+
+		options += "None"
+
+		var/chosen = pick(options)
+		if(!chosen || chosen == "None")
+			return
+		GLOB.xeno_mutator_list[chosen].apply_mutator(MS)
+
 /mob/living/carbon/Xenomorph/proc/set_movement_handler(var/datum/xeno_ai_movement/XAM)
 	if(!XAM)
 		CRASH("Passed null value to set_movement_handler on [type].")

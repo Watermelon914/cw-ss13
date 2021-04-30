@@ -97,6 +97,9 @@
 	default_ai_action = TRUE
 	var/prob_chance = 15
 
+/datum/action/xeno_action/activable/warrior_punch/boxer
+	prob_chance = 100
+
 /datum/action/xeno_action/activable/warrior_punch/process_ai(mob/living/carbon/Xenomorph/X, delta_time, game_evaluation)
 	if(DT_PROB(prob_chance, delta_time) && get_dist(X, X.current_target) <= 1)
 		use_ability_async(X.current_target)
@@ -115,6 +118,33 @@
 	var/knockout_power = 11 // 11 seconds
 	var/base_healthgain = 5 // in percents of health per ko point
 
+	default_ai_action = TRUE
+	var/prob_chance_scale = 3
+	var/datum/behavior_delegate/boxer/registered_delegate
+
+/datum/action/xeno_action/activable/uppercut/ai_registered(mob/living/carbon/Xenomorph/X)
+	. = ..()
+	if(!istype(X.behavior_delegate, /datum/behavior_delegate/boxer/))
+		return
+	registered_delegate = X.behavior_delegate
+	RegisterSignal(registered_delegate, COMSIG_PARENT_QDELETING, .proc/cleanup_delegate)
+
+/datum/action/xeno_action/activable/uppercut/ai_unregistered(mob/living/carbon/Xenomorph/X)
+	UnregisterSignal(registered_delegate, COMSIG_PARENT_QDELETING)
+	registered_delegate = null
+	return ..()
+
+/datum/action/xeno_action/activable/uppercut/proc/cleanup_delegate(var/datum/D)
+	SIGNAL_HANDLER
+	if(D == registered_delegate)
+		registered_delegate = null
+
+/datum/action/xeno_action/activable/uppercut/process_ai(mob/living/carbon/Xenomorph/X, delta_time, game_evaluation)
+	if((registered_delegate && (DT_PROB(registered_delegate.ko_counter * prob_chance_scale, delta_time) || registered_delegate.ko_counter == registered_delegate.max_ko_counter))\
+		&& get_dist(X, X.current_target) <= 1)
+		use_ability_async(X.current_target)
+
+
 /datum/action/xeno_action/activable/jab
 	name = "Jab"
 	action_icon_state = "pounce"
@@ -124,3 +154,9 @@
 	ability_primacy = XENO_PRIMARY_ACTION_2
 	xeno_cooldown = 40
 
+	var/distance = 3
+	default_ai_action = TRUE
+
+/datum/action/xeno_action/activable/jab/process_ai(mob/living/carbon/Xenomorph/X, delta_time, game_evaluation)
+	if(get_dist(X, X.current_target) <= distance)
+		use_ability_async(X.current_target)

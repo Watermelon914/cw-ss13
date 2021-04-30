@@ -352,7 +352,7 @@ GLOBAL_LIST_INIT(t3_ais, list(
 	X.make_ai()
 
 /datum/game_mode/colonialmarines/ai/check_win()
-	if(round_finished || SSticker.current_state != GAME_STATE_PLAYING)
+	if(!game_started || round_finished || SSticker.current_state != GAME_STATE_PLAYING)
 		return
 
 	if(!length(GLOB.alive_client_human_list))

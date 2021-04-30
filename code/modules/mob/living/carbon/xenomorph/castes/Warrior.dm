@@ -31,6 +31,8 @@
 /mob/living/carbon/Xenomorph/Warrior
 	caste_type = XENO_CASTE_WARRIOR
 	name = XENO_CASTE_WARRIOR
+
+	//flags_ai = XENO_AI_CHOOSE_RANDOM_STRAIN
 	desc = "A beefy, alien with an armored carapace."
 	icon_size = 64
 	icon_state = "Warrior Walking"

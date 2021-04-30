@@ -28,6 +28,8 @@
 /mob/living/carbon/Xenomorph/Runner
 	caste_type = XENO_CASTE_RUNNER
 	name = XENO_CASTE_RUNNER
+
+	flags_ai = XENO_AI_CHOOSE_RANDOM_STRAIN
 	desc = "A small red alien that looks like it could run fairly quickly..."
 	icon_state = "Runner Walking"
 	icon_size = 64
@@ -58,20 +60,6 @@
 	var/linger_range = 5
 	var/linger_deviation = 0
 	var/pull_direction
-
-/mob/living/carbon/Xenomorph/Runner/make_ai()
-	. = ..()
-	var/datum/mutator_set/MS = mutators
-	var/list/options = MS.available_mutators()
-	if(!length(options))
-		return
-
-	options += "None"
-
-	var/chosen = pick(options)
-	if(!chosen || chosen == "None")
-		return
-	GLOB.xeno_mutator_list[chosen].apply_mutator(MS)
 
 /mob/living/carbon/Xenomorph/Runner/initialize_pass_flags(var/datum/pass_flags_container/PF)
 	..()

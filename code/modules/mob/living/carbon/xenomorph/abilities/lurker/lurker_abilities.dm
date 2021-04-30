@@ -28,6 +28,10 @@
 		ai_combo_ability = null
 	return ..()
 
+/datum/action/xeno_action/activable/pounce/lurker/Destroy()
+	cleanup_combo(ai_combo_ability)
+	return ..()
+
 /datum/action/xeno_action/activable/pounce/lurker/proc/cleanup_combo(var/datum/D)
 	SIGNAL_HANDLER
 	if(D == ai_combo_ability)

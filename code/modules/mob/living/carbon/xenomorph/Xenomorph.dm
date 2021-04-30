@@ -559,8 +559,12 @@
 	remove_from_all_mob_huds()
 
 	for(var/datum/action/xeno_action/XA in actions)
+		if(XA in registered_ai_abilities)
+			unregister_ai_action(XA)
 		qdel(XA)
 		XA = null
+
+	registered_ai_abilities.Cut()
 
 	reagents = null
 

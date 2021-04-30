@@ -7,10 +7,12 @@
 	mutator_actions_to_remove = list(
 		/datum/action/xeno_action/activable/fling,
 		/datum/action/xeno_action/activable/pounce/lunge,
+		/datum/action/xeno_action/activable/warrior_punch
 	)
 	mutator_actions_to_add = list(
 		/datum/action/xeno_action/activable/jab,
 		/datum/action/xeno_action/activable/uppercut,
+		/datum/action/xeno_action/activable/warrior_punch/boxer
 	)
 	behavior_delegate_type = /datum/behavior_delegate/boxer
 	keystone = TRUE
