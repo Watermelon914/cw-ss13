@@ -271,7 +271,7 @@
 	fire_sound = "gun_pulse"
 	reload_sound = 'sound/weapons/handling/m41_reload.ogg'
 	unload_sound = 'sound/weapons/handling/m41_unload.ogg'
-	current_mag = /obj/item/ammo_magazine/rifle/incendiary
+	current_mag = /obj/item/ammo_magazine/rifle
 	accepted_ammo = list(
 		/obj/item/ammo_magazine/rifle,
 		/obj/item/ammo_magazine/rifle/extended,

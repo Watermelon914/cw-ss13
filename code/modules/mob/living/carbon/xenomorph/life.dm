@@ -152,7 +152,7 @@
 	updatehealth()
 
 	if(health <= crit_health - warding_aura * 20) //dead
-		if(prob(gib_chance + 0.5*(crit_health - health)))
+		if(prob(gib_chance + 0.5*(crit_health - health)) || health < crit_health*3)
 			INVOKE_ASYNC(src, .proc/gib, last_damage_source)
 		else
 			death(last_damage_source)

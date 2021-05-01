@@ -279,6 +279,8 @@
 			muzzle_flash = null
 			fire_sound = "gun_silenced"
 
+	SEND_SIGNAL(src, COMSIG_GUN_RECALCULATE_ATTACHMENT_BONUSES)
+
 /obj/item/weapon/gun/proc/handle_random_attachments(var/randchance)
 	var/attachmentchoice
 

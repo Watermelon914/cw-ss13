@@ -106,6 +106,7 @@
 			adjustFireLoss(damage)
 
 	updatehealth()
+	handle_regular_status_updates(FALSE)
 
 	last_hit_time = world.time
 

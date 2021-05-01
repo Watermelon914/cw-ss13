@@ -203,6 +203,9 @@
 	if(!X.ovipositor)
 		disable_effect()
 
+	if(damage["damage"] <= 0)
+		return
+
 	ovi_health -= damage["damage"]
 	if(ovi_health <= 0)
 		disable_effect()

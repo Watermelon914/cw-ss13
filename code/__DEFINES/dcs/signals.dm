@@ -378,3 +378,5 @@
 	#define COMPONENT_SHUTTLE_PREVENT_MOVE (1<<0)
 
 #define COMSIG_SHUTTLE_ON_DOCK "shuttle_on_dock"
+
+#define COMSIG_GUN_RECALCULATE_ATTACHMENT_BONUSES "gun_recalculate_attachment_bonuses"
