@@ -538,3 +538,7 @@ GLOBAL_PROTECT(AdminProcCallSpamPrevention)
 
 
 	show_browser(usr, "<TT>[str]</TT>", "Ticker Count", "tickercount")
+
+/mob/living/carbon/human/pseudoclient/Initialize(mapload, new_species)
+	. = ..()
+	GLOB.alive_client_human_list += src

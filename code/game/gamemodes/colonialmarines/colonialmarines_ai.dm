@@ -49,6 +49,8 @@
 	var/obj/docking_port/mobile/marine_dropship/game_shuttle
 	var/music_range = 12
 
+	var/group_distance = 12
+
 /datum/game_mode/colonialmarines/ai/load_maps(var/list/FailedZs)
 	SSmapping.LoadGroup(FailedZs, "The Hive", endgame_map_path, endgame_map_file, endgame_map_traits, ZTRAITS_HIVE, TRUE)
 
@@ -231,6 +233,9 @@ GLOBAL_LIST_INIT(t3_ais, list(
 
 	round_finished = MODE_PVE_WIN
 
+#define XENO_SPAWN_INDEX 1
+#define AVERAGE_DISTANCE_INDEX 2
+
 /datum/game_mode/colonialmarines/ai/process(delta_time)
 	. = ..()
 
@@ -290,9 +295,23 @@ GLOBAL_LIST_INIT(t3_ais, list(
 
 		SET_THREAT(C, new_threat)
 
+	var/list/humans = GLOB.alive_client_human_list.Copy()
+	var/list/groups = list()
+	while(length(humans))
+		var/x = humans[length(humans)]
+		humans.len--
+		var/list/group = list(x)
+		for(var/y in humans)
+			if(get_dist(x, y) <= group_distance)
+				group += y
+				humans -= y
+
+		groups += list(group)
+
+
 	var/list/xenos_to_spawn = list()
 
-	while(total_amount < length(GLOB.alive_client_human_list)*CONFIG_GET(number/ai_director/max_xeno_per_player))
+	while(total_amount < length(GLOB.alive_client_human_list)*CONFIG_GET(number/ai_director/max_xeno_per_player)*length(groups))
 		var/current_amount = total_amount
 		total_amount++
 		if(current_amount)
@@ -311,41 +330,72 @@ GLOBAL_LIST_INIT(t3_ais, list(
 			continue
 		break
 
-	for(var/i in GLOB.xeno_ai_spawns)
-		var/obj/effect/landmark/xeno_ai/XA = i
-		var/within_range = 0
-		if(XA.remaining_spawns <= 0 || length(XA.spawned_xenos) > XA.remaining_spawns)
-			continue
+	for(var/group in groups)
+		var/list/spawners_nearby = list()
+		var/amount_to_spawn = Ceiling(length(xenos_to_spawn)/length(groups))
 
-		for(var/h in GLOB.alive_client_human_list)
-			var/mob/M = h
-			if(M.z != XA.z)
+		for(var/xa in GLOB.xeno_ai_spawns)
+			var/obj/effect/landmark/xeno_ai/XA = xa
+			if(XA.remaining_spawns <= 0 || length(XA.spawned_xenos) > XA.remaining_spawns)
 				continue
 
-			var/distance = get_dist(h, XA)
-			if(distance < MIN_RANGE_TO_SPAWN_XENO)
-				within_range = 0
-				break
+			var/nearby_group = FALSE
+			var/average_distance
+			for(var/h in group)
+				var/mob/M = h
+				if(M.z != XA.z)
+					continue
 
-			if(distance > MAX_RANGE_TO_SPAWN_XENO)
+				var/distance = get_dist(h, XA)
+				average_distance += distance
+				if(distance < MIN_RANGE_TO_SPAWN_XENO)
+					nearby_group = FALSE
+					break
+
+				if(distance > MAX_RANGE_TO_SPAWN_XENO)
+					continue
+
+				nearby_group = TRUE
+
+			average_distance /= length(group)
+
+			if(!nearby_group)
 				continue
 
-			within_range++
+			var/list/data = list(
+				XENO_SPAWN_INDEX = XA,
+				AVERAGE_DISTANCE_INDEX = average_distance
+			)
 
-		if(!within_range)
-			continue
+			if(!length(spawners_nearby))
+				spawners_nearby.Add(list(data))
+				continue
 
-		for(var/iteration in 1 to round(within_range/length(GLOB.alive_client_human_list), 1)*length(xenos_to_spawn))
-			if(length(XA.spawned_xenos) > XA.remaining_spawns)
-				break
+			for(var/curr_index in 1 to length(spawners_nearby))
+				if(spawners_nearby[curr_index][AVERAGE_DISTANCE_INDEX] < average_distance)
+					spawners_nearby.Insert(curr_index+1, list(data))
+					break
 
-			var/type_to_spawn = pick(xenos_to_spawn)
-			xenos_to_spawn -= type_to_spawn
-			var/datum/D = new type_to_spawn(pick(XA.spawnable_turfs))
-			XA.RegisterSignal(D, COMSIG_MOB_DEATH, /obj/effect/landmark/xeno_ai.proc/reduce_remaining_spawns)
-			XA.RegisterSignal(D, COMSIG_PARENT_QDELETING, /obj/effect/landmark/xeno_ai.proc/handle_xeno_delete)
-			XA.spawned_xenos += D
 
+		while(length(spawners_nearby))
+			var/list/data = spawners_nearby[length(spawners_nearby)]
+			spawners_nearby.len--
+			var/obj/effect/landmark/xeno_ai/XA = data[XENO_SPAWN_INDEX]
+
+			while(amount_to_spawn && length(xenos_to_spawn))
+				if(length(XA.spawned_xenos) > XA.remaining_spawns)
+					break
+
+				var/type_to_spawn = pick(xenos_to_spawn)
+				xenos_to_spawn -= type_to_spawn
+				amount_to_spawn--
+				var/datum/D = new type_to_spawn(pick(XA.spawnable_turfs))
+				XA.RegisterSignal(D, COMSIG_MOB_DEATH, /obj/effect/landmark/xeno_ai.proc/reduce_remaining_spawns)
+				XA.RegisterSignal(D, COMSIG_PARENT_QDELETING, /obj/effect/landmark/xeno_ai.proc/handle_xeno_delete)
+				XA.spawned_xenos += D
+
+#undef XENO_SPAWN_INDEX
+#undef AVERAGE_DISTANCE_INDEX
 
 /datum/game_mode/colonialmarines/ai/proc/handle_xeno_spawn(var/datum/source, var/mob/living/carbon/Xenomorph/X)
 	SIGNAL_HANDLER

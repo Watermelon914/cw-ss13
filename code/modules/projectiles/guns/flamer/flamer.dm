@@ -26,6 +26,10 @@
 	flags_gun_features = GUN_UNUSUAL_DESIGN|GUN_WIELDED_FIRING_ONLY|GUN_TRIGGER_SAFETY
 	gun_category = GUN_CATEGORY_HEAVY
 
+	base_magazines = list(
+		/obj/item/ammo_magazine/flamer_tank
+	)
+
 
 /obj/item/weapon/gun/flamer/Initialize(mapload, spawn_empty)
 	. = ..()
