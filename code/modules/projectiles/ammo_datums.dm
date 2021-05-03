@@ -896,7 +896,7 @@
 	name = "A19 high velocity impact bullet"
 	flags_ammo_behavior = AMMO_BALLISTIC
 
-	damage = BULLET_DAMAGE_TIER_8
+	damage = BULLET_DAMAGE_TIER_10
 	accuracy = -HIT_ACCURACY_TIER_2
 	scatter = -SCATTER_AMOUNT_TIER_8
 

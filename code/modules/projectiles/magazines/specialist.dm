@@ -63,7 +63,7 @@
 	name = "\improper A19 high velocity magazine (10x24mm)"
 	desc = "A magazine of A19 high velocity rounds for use in the M4RA battle rifle. The M4RA battle rifle is the only gun that can chamber these rounds."
 	icon_state = "m4ra"
-	default_ammo = /datum/ammo/bullet/rifle
+	default_ammo = /datum/ammo/bullet/rifle/m4ra
 	max_rounds = 24
 	gun_type = /obj/item/weapon/gun/rifle/m4ra
 
