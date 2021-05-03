@@ -696,6 +696,18 @@
 		if(!auto_fire)
 			STOP_PROCESSING(SSobj, src)
 
+/obj/item/weapon/gun/smartgun/get_ammo_type()
+	if(!ammo)
+		return list("unknown", "unknown")
+	else
+		return list(ammo.hud_state, ammo.hud_state_empty)
+
+/obj/item/weapon/gun/smartgun/get_ammo_count()
+	if(!current_mag)
+		return 0
+	else
+		return current_mag.current_rounds
+
 /obj/item/weapon/gun/smartgun/dirty
 	name = "\improper M56D 'Dirty' smartgun"
 	desc = "The actual firearm in the 4-piece M56D Smartgun System. If you have this, you're about to bring some serious pain to anyone in your way.\nYou may toggle firing restrictions by using a special action."
@@ -791,7 +803,7 @@
 
 	aim_slowdown = SLOWDOWN_ADS_SPECIALIST
 	wield_delay = WIELD_DELAY_SLOW
-	flags_gun_features = GUN_UNUSUAL_DESIGN|GUN_SPECIALIST|GUN_WIELDED_FIRING_ONLY
+	flags_gun_features = GUN_UNUSUAL_DESIGN|GUN_SPECIALIST|GUN_WIELDED_FIRING_ONLY|GUN_AMMO_COUNTER
 	///Can you access the storage by clicking it, put things into it, or take things out? Meant for break-actions mostly but useful for any state where you want access to be toggleable. Make sure to call cylinder.close(user) so they don't still have the screen open!
 	var/open_chamber = TRUE
 	///Does it launch its grenades in a low arc or a high? Do they strike people in their path, or fly beyond?
@@ -931,7 +943,8 @@ obj/item/weapon/gun/launcher/grenade/update_icon()
 			return
 		fire_grenade(target,user)
 		playsound(user.loc, cocked_sound, 25, 1)
-
+		var/obj/screen/ammo/A = user.hud_used.ammo
+		A.update_hud(user)
 
 /obj/item/weapon/gun/launcher/grenade/proc/fire_grenade(atom/target, mob/user)
 	set waitfor = 0
@@ -963,6 +976,15 @@ obj/item/weapon/gun/launcher/grenade/update_icon()
 	F.throw_atom(target, 20, SPEED_VERY_FAST, user, null, NORMAL_LAUNCH, pass_flags)
 	playsound(F.loc, fire_sound, 50, 1)
 
+/obj/item/weapon/gun/launcher/grenade/get_ammo_type()
+	if(length(cylinder.contents) == 0)
+		return list("empty", "empty")
+	else
+		var/obj/item/explosive/grenade/F = cylinder.contents[1]
+		return list(F.hud_state, F.hud_state_empty)
+
+/obj/item/weapon/gun/launcher/grenade/get_ammo_count()
+	return length(cylinder.contents)
 
 //Doesn't use these. Listed for reference.
 /obj/item/weapon/gun/launcher/grenade/load_into_chamber()
@@ -1068,7 +1090,7 @@ obj/item/weapon/gun/launcher/grenade/update_icon()
 						/obj/item/attachable/flashlight/grip
 						)
 
-	flags_gun_features = GUN_SPECIALIST|GUN_WIELDED_FIRING_ONLY
+	flags_gun_features = GUN_SPECIALIST|GUN_WIELDED_FIRING_ONLY|GUN_AMMO_COUNTER
 	var/datum/effect_system/smoke_spread/smoke
 
 	flags_item = TWOHANDED|NO_CRYO_STORE
@@ -1223,6 +1245,18 @@ obj/item/weapon/gun/launcher/grenade/update_icon()
 			C.emote("pain")
 
 		..()
+
+/obj/item/weapon/gun/launcher/rocket/get_ammo_type()
+	if(!ammo)
+		return list("unknown", "unknown")
+	else
+		return list(ammo.hud_state, ammo.hud_state_empty)
+
+/obj/item/weapon/gun/launcher/rocket/get_ammo_count()
+	if(!current_mag)
+		return 0
+	else
+		return current_mag.current_rounds
 
 //-------------------------------------------------------
 //M5 RPG'S MEAN FUCKING COUSIN

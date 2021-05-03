@@ -14,6 +14,7 @@
 	icon_state = "grenade"
 	det_time = 40
 	item_state = "grenade_hedp"
+	hud_state = "grenade_frag"
 	dangerous = 1
 	underslug_launchable = TRUE
 	var/explosion_power = 100
@@ -55,6 +56,7 @@
 	desc = "A high-explosive grenade produced for private security firms. It explodes around 3 seconds after the pin has been pulled."
 	icon_state = "grenade_pmc"
 	item_state = "grenade_ex"
+	hud_state = "grenade_frag"
 	underslug_launchable = FALSE
 	explosion_power = 200
 	falloff_mode = EXPLOSION_FALLOFF_SHAPE_EXPONENTIAL_HALF
@@ -89,6 +91,7 @@
 	explosion_power = 40
 	shrapnel_count = 48
 	falloff_mode = EXPLOSION_FALLOFF_SHAPE_LINEAR
+	hud_state = "grenade_frag"
 
 
 
@@ -103,6 +106,7 @@
 	explosion_power = 120
 	shrapnel_count = 48
 	falloff_mode = EXPLOSION_FALLOFF_SHAPE_LINEAR
+	hud_state = "grenade_frag"
 
 
 
@@ -117,6 +121,7 @@
 	explosion_power = 60
 	shrapnel_count = 56
 	falloff_mode = EXPLOSION_FALLOFF_SHAPE_LINEAR
+	hud_state = "grenade_frag"
 
 /*
 //================================================
@@ -138,6 +143,7 @@
 	shrapnel_type = /datum/ammo/bullet/shrapnel/jagged
 	var/direct_hit_shrapnel = 5
 	var/dispersion_angle = 60
+	hud_state = "grenade_frag"
 
 /obj/item/explosive/grenade/HE/airburst/prime()
 // We don't prime, we use launch_impact.
@@ -178,6 +184,7 @@
 	icon_state = "grenade_fire"
 	det_time = 40
 	item_state = "grenade_fire"
+	hud_state = "grenade_fire"
 	flags_equip_slot = SLOT_WAIST
 	dangerous = 1
 	underslug_launchable = TRUE
@@ -302,6 +309,7 @@
 	icon_state = "grenade_phos"
 	det_time = 20
 	item_state = "grenade_phos"
+	hud_state = "grenade_hide"
 	underslug_launchable = TRUE
 	var/datum/effect_system/smoke_spread/phosphorus/smoke
 	dangerous = 1

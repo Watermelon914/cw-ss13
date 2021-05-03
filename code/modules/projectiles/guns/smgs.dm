@@ -17,7 +17,7 @@
 						/obj/item/attachable/flashlight,
 						/obj/item/attachable/magnetic_harness)
 
-	flags_gun_features = GUN_AUTO_EJECTOR|GUN_CAN_POINTBLANK
+	flags_gun_features = GUN_AUTO_EJECTOR|GUN_CAN_POINTBLANK|GUN_AMMO_COUNTER
 	gun_category = GUN_CATEGORY_SMG
 
 /obj/item/weapon/gun/smg/Initialize(mapload, spawn_empty)
@@ -31,6 +31,19 @@
 /obj/item/weapon/gun/smg/set_gun_config_values()
 	..()
 	movement_acc_penalty_mult = 4
+
+/obj/item/weapon/gun/smg/get_ammo_type()
+	if(!ammo)
+		return list("unknown", "unknown")
+	else
+		return list(ammo.hud_state, ammo.hud_state_empty)
+
+/obj/item/weapon/gun/smg/get_ammo_count()
+	if(!current_mag)
+		return in_chamber ? 1 : 0
+	else
+		return in_chamber ? (current_mag.current_rounds + 1) : current_mag.current_rounds
+
 
 //-------------------------------------------------------
 //M39 SMG

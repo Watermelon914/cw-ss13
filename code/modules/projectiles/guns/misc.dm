@@ -33,6 +33,19 @@
 	recoil = RECOIL_AMOUNT_TIER_5
 	recoil_buildup_limit = RECOIL_AMOUNT_TIER_3 / RECOIL_BUILDUP_VIEWPUNCH_MULTIPLIER
 
+/obj/item/weapon/gun/minigun/get_ammo_type()
+	if(!ammo)
+		return list("unknown", "unknown")
+	else
+		return list(ammo.hud_state, ammo.hud_state_empty)
+
+/obj/item/weapon/gun/minigun/get_ammo_count()
+	if(!current_mag)
+		return in_chamber ? 1 : 0
+	else
+		return in_chamber ? (current_mag.current_rounds + 1) : current_mag.current_rounds
+
+
 //Minigun UPP
 /obj/item/weapon/gun/minigun/upp
 	name = "\improper GSh-7.62 rotary machine gun"

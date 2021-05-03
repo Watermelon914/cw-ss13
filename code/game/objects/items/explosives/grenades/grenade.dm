@@ -19,6 +19,8 @@
 	var/underslug_launchable = FALSE
 	var/hand_throwable = TRUE
 	var/has_iff = TRUE
+	var/hud_state = "grenade_he"
+	var/hud_state_empty = "grenade_empty"
 
 /obj/item/explosive/grenade/Initialize()
 	. = ..()

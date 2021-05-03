@@ -57,6 +57,18 @@
 		else
 			overlays += "+charge_0"
 
+/obj/item/weapon/gun/energy/taser/get_ammo_count()
+	if(!cell)
+		return 0
+	else
+		return FLOOR(cell.charge / max(charge_cost, 1),1)
+
+
+/obj/item/weapon/gun/energy/taser/get_ammo_type()
+	if(!ammo)
+		return list("unknown", "unknown")
+	else
+		return list(ammo.hud_state, ammo.hud_state_empty)
 
 /obj/item/weapon/gun/energy/taser/emp_act(severity)
 	cell.use(round(cell.maxcharge / severity))

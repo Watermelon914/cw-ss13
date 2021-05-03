@@ -43,7 +43,7 @@
 	var/UI_FRAME_LOC		= "EAST-3:0,14:15"
 
 	//Status effects starting loc
-	var/UI_STATUS_X			= 1	
+	var/UI_STATUS_X			= 1
 	var/UI_STATUS_X_OFFSET	= 4
 	var/UI_STATUS_Y			= 0
 	var/UI_STATUS_Y_OFFSET	= 26
@@ -54,6 +54,7 @@
 	var/UI_HEALTH_LOC 		= "EAST-1:28,7:15"
 	var/UI_TEMP_LOC 		= "EAST-1:28,6:13"
 	var/UI_NUTRITION_LOC 	= "EAST-1:28,5:11"
+	var/UI_AMMO = "EAST-1:28,4:8"
 
 	//Pop-up inventory
 	var/ui_shoes 		= "WEST+1:8,1:5"
@@ -94,6 +95,7 @@
 	UI_NUTRITION_LOC 	= "EAST-2:33,14:15"
 	UI_TEMP_LOC 		= "EAST-1:26,15:-7"
 	UI_HEALTH_LOC 		= "EAST-1:27,15:-8"
+	UI_AMMO = "EAST-1:27,15:-42"
 
 /datum/custom_hud/dark/get_status_loc(var/placement)
 	var/col = (placement-1)

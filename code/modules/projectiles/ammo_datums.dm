@@ -4,6 +4,8 @@
 	var/impact_limbs = BODY_FLAG_NO_BODY // The body parts that have an impact icon
 	var/icon 		= 'icons/obj/items/weapons/projectiles.dmi'
 	var/icon_state 	= "bullet"
+	var/hud_state   = "unknown"  //Bullet type on the Ammo HUD
+	var/hud_state_empty = "unknown"
 	var/ping 		= "ping_b" //The icon that is displayed when the bullet bounces off something.
 	var/sound_hit //When it deals damage.
 	var/sound_armor //When it's blocked by human armor.
@@ -208,15 +210,19 @@
 // Used by M4A3, M4A3 Custom and B92FS
 /datum/ammo/bullet/pistol
 	name = "pistol bullet"
+	hud_state = "pistol"
+	hud_state_empty = "pistol_empty"
 
 	damage = BULLET_DAMAGE_TIER_7
 	accuracy = HIT_ACCURACY_TIER_2
 
 /datum/ammo/bullet/pistol/tiny
 	name = "light pistol bullet"
+	hud_state = "pistol_light"
 
 /datum/ammo/bullet/pistol/tranq
 	name = "tranq bullet"
+	hud_state = "pistol_tranq"
 	flags_ammo_behavior = AMMO_BALLISTIC|AMMO_IGNORE_RESIST
 	stamina_damage = 300
 
@@ -240,6 +246,7 @@
 
 /datum/ammo/bullet/pistol/hollow
 	name = "hollowpoint pistol bullet"
+	hud_state = "pistol_hollow"
 
 	damage = BULLET_DAMAGE_TIER_11 //hollowpoint is strong
 	damage_falloff = DAMAGE_FALLOFF_TIER_9 //should be useful in close-range mostly
@@ -249,6 +256,7 @@
 // Used by M4A3 AP, Highpower and mod88
 /datum/ammo/bullet/pistol/ap
 	name = "armor-piercing pistol bullet"
+	hud_state = "pistol_ap"
 
 	damage = BULLET_DAMAGE_TIER_10
 	accuracy = HIT_ACCURACY_TIER_2
@@ -257,6 +265,7 @@
 
 /datum/ammo/bullet/pistol/penetrating
 	name = "wall-piercing pistol bullet"
+	hud_state = "pistol_wp"
 	shrapnel_chance = 0
 
 /datum/ammo/bullet/pistol/penetrating/set_bullet_traits()
@@ -267,6 +276,7 @@
 
 /datum/ammo/bullet/pistol/toxin
 	name = "toxic pistol bullet"
+	hud_state = "pistol_tox"
 	var/acid_per_hit = 10
 	var/organic_damage_mult = 3
 
@@ -302,6 +312,7 @@
 // Used by M1911, Deagle and KT-42
 /datum/ammo/bullet/pistol/heavy
 	name = "heavy pistol bullet"
+	hud_state = "pistol_heavy"
 
 	accuracy = -HIT_ACCURACY_TIER_3
 	accuracy_var_low = PROJECTILE_VARIANCE_TIER_6
@@ -338,6 +349,7 @@
 
 /datum/ammo/bullet/pistol/incendiary
 	name = "incendiary pistol bullet"
+	hud_state = "pistol_fire"
 	damage_type = BURN
 	shrapnel_chance = 0
 	flags_ammo_behavior = AMMO_BALLISTIC
@@ -354,6 +366,7 @@
 // Used by VP78 and Auto 9
 /datum/ammo/bullet/pistol/squash
 	name = "squash-head pistol bullet"
+	hud_state = "pistol_heavy"
 	debilitate = list(0,0,0,0,0,0,0,2)
 
 	accuracy = HIT_ACCURACY_TIER_4
@@ -363,6 +376,7 @@
 
 /datum/ammo/bullet/pistol/squash/toxin
 	name = "toxic squash-head pistol bullet"
+	hud_state = "pistol_tox"
 	var/acid_per_hit = 10
 	var/organic_damage_mult = 3
 
@@ -409,6 +423,7 @@
 /datum/ammo/bullet/pistol/mankey
 	name = "live monkey"
 	icon_state = "monkey1"
+	hud_state = "monkey"
 	ping = null //no bounce off.
 	damage_type = BURN
 	debilitate = list(4,4,0,0,0,0,0,0)
@@ -446,6 +461,8 @@
 
 /datum/ammo/bullet/revolver
 	name = "revolver bullet"
+	hud_state = "revolver"
+	hud_state_empty = "revolver_empty"
 	debilitate = list(1,0,0,0,0,0,0,0)
 
 	damage = BULLET_DAMAGE_TIER_11
@@ -454,6 +471,7 @@
 
 /datum/ammo/bullet/revolver/marksman
 	name = "marksman revolver bullet"
+	hud_state = "revolver_ap"
 
 	shrapnel_chance = 0
 	damage_falloff = 0
@@ -462,6 +480,7 @@
 
 /datum/ammo/bullet/revolver/heavy
 	name = "heavy revolver bullet"
+	hud_state = "revolver_heavy"
 
 	damage = BULLET_DAMAGE_TIER_7
 
@@ -472,6 +491,7 @@
 
 /datum/ammo/bullet/revolver/incendiary
 	name = "incendiary revolver bullet"
+	hud_state = "revolver_fire"
 	damage = BULLET_DAMAGE_TIER_9
 
 /datum/ammo/bullet/revolver/incendiary/set_bullet_traits()
@@ -482,6 +502,7 @@
 
 /datum/ammo/bullet/revolver/toxin
 	name = "toxic revolver bullet"
+	hud_state = "revolver_toxin"
 	var/acid_per_hit = 10
 	var/organic_damage_mult = 3
 
@@ -501,6 +522,7 @@
 
 /datum/ammo/bullet/revolver/penetrating
 	name = "wall-piercing revolver bullet"
+	hud_state = "revolver_wp"
 	shrapnel_chance = 0
 
 
@@ -602,6 +624,8 @@
 
 /datum/ammo/bullet/smg
 	name = "submachinegun bullet"
+	hud_state = "smg"
+	hud_state_empty = "smg_empty"
 	damage = BULLET_DAMAGE_TIER_8
 	accurate_range = 6
 
@@ -612,9 +636,11 @@
 
 /datum/ammo/bullet/smg/m39
 	name = "high-velocity submachinegun bullet" //i don't want all smgs to inherit 'high velocity'
+	hud_state = "smg_light"
 
 /datum/ammo/bullet/smg/ap
 	name = "armor-piercing submachinegun bullet"
+	hud_state = "smg_ap"
 
 	damage = BULLET_DAMAGE_TIER_10
 	damage_falloff = DAMAGE_FALLOFF_TIER_8
@@ -622,6 +648,7 @@
 
 /datum/ammo/bullet/smg/toxin
 	name = "toxic submachinegun bullet"
+	hud_state = "smg_tox"
 	var/acid_per_hit = 5
 	var/organic_damage_mult = 3
 
@@ -719,6 +746,7 @@
 
 /datum/ammo/bullet/smg/incendiary
 	name = "incendiary submachinegun bullet"
+	hud_state = "smg_fire"
 	damage_type = BURN
 	shrapnel_chance = 0
 	flags_ammo_behavior = AMMO_BALLISTIC
@@ -766,6 +794,8 @@
 
 /datum/ammo/bullet/rifle
 	name = "rifle bullet"
+	hud_state = "rifle"
+	hud_state_empty = "rifle_empty"
 
 	damage = BULLET_DAMAGE_TIER_8
 	accurate_range = 16
@@ -795,12 +825,14 @@
 
 /datum/ammo/bullet/rifle/ap
 	name = "armor-piercing rifle bullet"
+	hud_state = "rifle_ap"
 
 	damage = BULLET_DAMAGE_TIER_10
 
 // Basically AP but better. Focused at taking out armour temporarily
 /datum/ammo/bullet/rifle/toxin
 	name = "toxic rifle bullet"
+	hud_state = "rifle_tox"
 	var/acid_per_hit = 7
 	var/organic_damage_mult = 3
 
@@ -821,6 +853,7 @@
 
 /datum/ammo/bullet/rifle/penetrating
 	name = "wall-piercing rifle bullet"
+	hud_state = "rifle_wp"
 	shrapnel_chance = 0
 
 	damage = BULLET_DAMAGE_TIER_10
@@ -849,6 +882,7 @@
 
 /datum/ammo/bullet/rifle/incendiary
 	name = "incendiary rifle bullet"
+	hud_state = "rifle_fire"
 	damage_type = BURN
 	shrapnel_chance = 0
 	flags_ammo_behavior = AMMO_BALLISTIC
@@ -866,6 +900,8 @@
 
 /datum/ammo/bullet/rifle/m4ra
 	name = "A19 high velocity bullet"
+	hud_state = "hivelo"
+	hud_state_empty = "hivelo_empty"
 	shrapnel_chance = 0
 	damage_falloff = 0
 	flags_ammo_behavior = AMMO_BALLISTIC
@@ -878,6 +914,7 @@
 
 /datum/ammo/bullet/rifle/m4ra/incendiary
 	name = "A19 high velocity incendiary bullet"
+	hud_state = "hivelo_fire"
 	flags_ammo_behavior = AMMO_BALLISTIC
 
 	damage = BULLET_DAMAGE_TIER_9
@@ -894,6 +931,7 @@
 
 /datum/ammo/bullet/rifle/m4ra/impact
 	name = "A19 high velocity impact bullet"
+	hud_state = "hivelo_impact"
 	flags_ammo_behavior = AMMO_BALLISTIC
 
 	damage = BULLET_DAMAGE_TIER_10
@@ -917,9 +955,12 @@
 */
 
 /datum/ammo/bullet/shotgun
+	hud_state = "shotgun_buckshot"
+	hud_state_empty = "shotgun_empty"
 
 /datum/ammo/bullet/shotgun/slug
 	name = "shotgun slug"
+	hud_state = "shotgun_slug"
 	handful_state = "slug_shell"
 	impact_name = "slug"
 	impact_limbs = BODY_FLAG_HEAD
@@ -956,6 +997,7 @@
 
 /datum/ammo/bullet/shotgun/incendiary
 	name = "incendiary slug"
+	hud_state = "shotgun_fire_slug"
 	handful_state = "incendiary_slug"
 	damage_type = BURN
 	flags_ammo_behavior = AMMO_BALLISTIC
@@ -985,6 +1027,7 @@
 /datum/ammo/bullet/shotgun/flechette
 	name = "flechette shell"
 	icon_state = "flechette"
+	hud_state = "shotgun_fire_flechette"
 	handful_state = "flechette_shell"
 	bonus_projectiles_type = /datum/ammo/bullet/shotgun/flechette_spread
 
@@ -1013,6 +1056,7 @@
 
 /datum/ammo/bullet/shotgun/buckshot
 	name = "buckshot shell"
+	hud_state = "shotgun_buckshot"
 	icon_state = "buckshot"
 	handful_state = "buckshot_shell"
 	multiple_handful_name = TRUE
@@ -1034,6 +1078,7 @@
 
 /datum/ammo/bullet/shotgun/buckshot/incendiary
 	name = "incendiary buckshot shell"
+	hud_state = "shotgun_fire_buckshot"
 	handful_type = /obj/item/ammo_magazine/handful/shotgun/custom_color/incendiary
 	handful_color = "#ffa800"
 
@@ -1225,6 +1270,8 @@
 
 /datum/ammo/bullet/smartgun
 	name = "smartgun bullet"
+	hud_state = "smartgun"
+	hud_state_empty = "smartgun_empty"
 	icon_state = "redbullet"
 	flags_ammo_behavior = AMMO_BALLISTIC
 
@@ -1236,6 +1283,7 @@
 
 /datum/ammo/bullet/smartgun/armor_piercing
 	name = "armor-piercing smartgun bullet"
+	hud_state = "smartgun_ap"
 	icon_state = "bullet"
 
 	accurate_range = 12
@@ -1247,6 +1295,7 @@
 
 /datum/ammo/bullet/smartgun/dirty
 	name = "irradiated smartgun bullet"
+	hud_state = "smartgun_radioactive"
 	debilitate = list(0,0,0,3,0,0,0,1)
 
 	shrapnel_chance = SHRAPNEL_CHANCE_TIER_7
@@ -1290,6 +1339,8 @@
 /datum/ammo/bullet/machinegun //Adding this for the MG Nests (~Art)
 	name = "machinegun bullet"
 	icon_state 	= "bullet" // Keeping it bog standard with the turret but allows it to be changed. Had to remove IFF so you have to watch out.
+	hud_state = "minigun"
+	hud_state_empty = "minigun_empty"
 
 	accurate_range = 12
 	damage = BULLET_DAMAGE_TIER_7
@@ -1310,6 +1361,9 @@
 
 /datum/ammo/bullet/minigun
 	name = "minigun bullet"
+	hud_state = "minigun"
+	hud_state_empty = "minigun_empty"
+
 	accuracy = -HIT_ACCURACY_TIER_3
 	accuracy_var_low = PROJECTILE_VARIANCE_TIER_6
 	accuracy_var_high = PROJECTILE_VARIANCE_TIER_6
@@ -1342,6 +1396,9 @@
 
 /datum/ammo/rocket
 	name = "high explosive rocket"
+	hud_state = "rocket_he"
+	hud_state_empty = "rocket_empty"
+
 	icon_state = "missile"
 	ping = null //no bounce off.
 	sound_bounce	= "rocket_bounce"
@@ -1389,6 +1446,7 @@
 
 /datum/ammo/rocket/ap
 	name = "anti-armor rocket"
+	hud_state = "rocket_ap"
 	damage_falloff = 0
 	flags_ammo_behavior = AMMO_EXPLOSIVE|AMMO_ROCKET
 
@@ -1430,6 +1488,7 @@
 
 /datum/ammo/rocket/wp
 	name = "white phosphorous rocket"
+	hud_state = "rocket_fire"
 	flags_ammo_behavior = AMMO_ROCKET|AMMO_EXPLOSIVE|AMMO_STRIKES_SURFACE|AMMO_SKIPS_ALIENS
 	damage_type = BURN
 
@@ -1469,6 +1528,7 @@
 
 /datum/ammo/rocket/wp/quad
 	name = "thermobaric rocket"
+	hud_state = "rocket_thermobaric"
 	flags_ammo_behavior = AMMO_ROCKET|AMMO_STRIKES_SURFACE
 
 	damage = BULLET_DAMAGE_TIER_20
@@ -2234,6 +2294,7 @@
 
 /datum/ammo/flamethrower
 	name = "flame"
+	hud_state = "flame"
 	icon_state = "pulse0"
 	damage_type = BURN
 	flags_ammo_behavior = AMMO_IGNORE_ARMOR

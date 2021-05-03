@@ -25,7 +25,7 @@
 						/obj/item/attachable/quickfire,
 						/obj/item/attachable/burstfire_assembly)
 
-	flags_gun_features = GUN_AUTO_EJECTOR|GUN_CAN_POINTBLANK|GUN_ONE_HAND_WIELDED //For easy reference.
+	flags_gun_features = GUN_AUTO_EJECTOR|GUN_CAN_POINTBLANK|GUN_ONE_HAND_WIELDED|GUN_AMMO_COUNTER //For easy reference.
 	gun_category = GUN_CATEGORY_HANDGUN
 
 /obj/item/weapon/gun/pistol/Initialize(mapload, spawn_empty)
@@ -35,6 +35,18 @@
 
 /obj/item/weapon/gun/pistol/unique_action(mob/user)
 		cock(user)
+
+/obj/item/weapon/gun/pistol/get_ammo_type()
+	if(!ammo)
+		return list("unknown", "unknown")
+	else
+		return list(ammo.hud_state, ammo.hud_state_empty)
+
+/obj/item/weapon/gun/pistol/get_ammo_count()
+	if(!current_mag)
+		return in_chamber ? 1 : 0
+	else
+		return in_chamber ? (current_mag.current_rounds + 1) : current_mag.current_rounds
 
 
 /obj/item/weapon/gun/pistol/set_gun_config_values()
@@ -334,7 +346,7 @@
 	desc = "The M43 Hummingbird Pistol was produced in the mid-2170s as a cheap and concealable firearm for CLF Sleeper Cell agents for assassinations and ambushes, and is able to be concealed in shoes and workboots."
 	icon_state = "m43"
 	item_state = "m43"
-	flags_gun_features = GUN_CAN_POINTBLANK|GUN_ONE_HAND_WIELDED
+	flags_gun_features = GUN_CAN_POINTBLANK|GUN_ONE_HAND_WIELDED|GUN_AMMO_COUNTER
 	fire_sound = 'sound/weapons/gun_m43.ogg'
 	current_mag = /obj/item/ammo_magazine/pistol/m43pistol
 	w_class = SIZE_TINY
@@ -516,7 +528,7 @@ It is a modified Beretta 93R, and can fire three round burst or single fire. Whe
 	fire_sound = 'sound/weapons/gun_chimp70.ogg'
 	w_class = SIZE_MEDIUM
 	force = 8
-	flags_gun_features = GUN_AUTO_EJECTOR
+	flags_gun_features = GUN_AUTO_EJECTOR|GUN_AMMO_COUNTER
 
 /obj/item/weapon/gun/pistol/chimp/set_gun_config_values()
 	..()

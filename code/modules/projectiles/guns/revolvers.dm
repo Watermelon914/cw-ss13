@@ -17,7 +17,7 @@
 	var/trick_delay = 6
 	var/recent_trick //So they're not spamming tricks.
 	var/russian_roulette = 0 //God help you if you do this.
-	flags_gun_features = GUN_CAN_POINTBLANK|GUN_INTERNAL_MAG|GUN_ONE_HAND_WIELDED
+	flags_gun_features = GUN_CAN_POINTBLANK|GUN_INTERNAL_MAG|GUN_ONE_HAND_WIELDED|GUN_AMMO_COUNTER
 	gun_category = GUN_CATEGORY_HANDGUN
 	wield_delay = WIELD_DELAY_MIN //If you modify your revolver to be two-handed, it will still be fast to aim
 	movement_acc_penalty_mult = 3
@@ -278,6 +278,16 @@
 			user.visible_message(SPAN_INFO("<b>[user]</b> fumbles with [src] like a huge idiot!"), null, null, 3)
 
 	recent_trick = world.time //Turn on the delay for the next trick.
+
+/obj/item/weapon/gun/revolver/get_ammo_type()
+	if(!ammo)
+		return list("unknown", "unknown")
+	else
+		return list(ammo.hud_state, ammo.hud_state_empty)
+
+/obj/item/weapon/gun/revolver/get_ammo_count()
+	return current_mag ? current_mag.current_rounds : 0
+
 
 //-------------------------------------------------------
 //M44 Revolver

@@ -56,6 +56,8 @@
 	var/obj/screen/gun_move_icon
 	var/obj/screen/gun_run_icon
 
+	var/obj/screen/ammo
+
 	var/list/static_inventory = list() //the screen objects which are static
 	var/list/toggleable_inventory = list() //the screen objects which can be hidden
 	var/list/obj/screen/hotkeybuttons = list() //the buttons that can be used via hotkeys

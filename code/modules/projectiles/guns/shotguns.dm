@@ -13,7 +13,7 @@ can cause issues with ammo types getting mixed up during the burst.
 	var/break_sound = 'sound/weapons/handling/gun_mou_open.ogg'
 	var/seal_sound = 'sound/weapons/handling/gun_mou_close.ogg'
 	accuracy_mult = 1.15
-	flags_gun_features = GUN_CAN_POINTBLANK|GUN_INTERNAL_MAG
+	flags_gun_features = GUN_CAN_POINTBLANK|GUN_INTERNAL_MAG|GUN_AMMO_COUNTER
 	gun_category = GUN_CATEGORY_SHOTGUN
 	aim_slowdown = SLOWDOWN_ADS_SHOTGUN
 	wield_delay = WIELD_DELAY_NORMAL //Shotguns are as hard to pull up as a rifle. They're quite bulky afterall
@@ -158,6 +158,20 @@ can cause issues with ammo types getting mixed up during the burst.
 
 	return 1
 
+/obj/item/weapon/gun/shotgun/get_ammo_type()
+	if(in_chamber)
+		return list(in_chamber.ammo.hud_state, in_chamber.ammo.hud_state_empty)
+	if(!ammo)
+		return list("unknown", "unknown")
+	else
+		return list(ammo.hud_state, ammo.hud_state_empty)
+
+/obj/item/weapon/gun/shotgun/get_ammo_count()
+	if(!current_mag)
+		return in_chamber ? 1 : 0
+	else
+		return in_chamber ? (current_mag.current_rounds + 1) : current_mag.current_rounds
+
 
 //-------------------------------------------------------
 //GENERIC MERC SHOTGUN //Not really based on anything.
@@ -173,7 +187,7 @@ can cause issues with ammo types getting mixed up during the burst.
 	attachable_allowed = list(
 						/obj/item/attachable/compensator)
 
-	flags_gun_features = GUN_CAN_POINTBLANK|GUN_INTERNAL_MAG
+	flags_gun_features = GUN_CAN_POINTBLANK|GUN_INTERNAL_MAG|GUN_AMMO_COUNTER
 
 /obj/item/weapon/gun/shotgun/merc/Initialize(mapload, spawn_empty)
 	. = ..()
@@ -276,7 +290,7 @@ can cause issues with ammo types getting mixed up during the burst.
 	current_mag = /obj/item/ammo_magazine/internal/shotgun/buckshot
 
 	flags_equip_slot = SLOT_WAIST|SLOT_BACK
-	flags_gun_features = GUN_CAN_POINTBLANK|GUN_INTERNAL_MAG|GUN_HAS_FULL_AUTO|GUN_FULL_AUTO_ON
+	flags_gun_features = GUN_CAN_POINTBLANK|GUN_INTERNAL_MAG|GUN_HAS_FULL_AUTO|GUN_FULL_AUTO_ON|GUN_AMMO_COUNTER
 	fa_delay = FIRE_DELAY_TIER_6
 
 /obj/item/weapon/gun/shotgun/combat/marsoc/Initialize(mapload, spawn_empty)
@@ -325,7 +339,7 @@ can cause issues with ammo types getting mixed up during the burst.
 						/obj/item/attachable/flashlight,
 						/obj/item/attachable/magnetic_harness)
 
-	flags_gun_features = GUN_CAN_POINTBLANK|GUN_INTERNAL_MAG
+	flags_gun_features = GUN_CAN_POINTBLANK|GUN_INTERNAL_MAG|GUN_AMMO_COUNTER
 	burst_delay = 0 //So doubleshotty can doubleshot
 	has_open_icon = TRUE
 
@@ -446,7 +460,7 @@ can cause issues with ammo types getting mixed up during the burst.
 	icon_state = "sshotgun"
 	item_state = "sshotgun"
 	flags_equip_slot = SLOT_WAIST
-	flags_gun_features = GUN_CAN_POINTBLANK|GUN_INTERNAL_MAG
+	flags_gun_features = GUN_CAN_POINTBLANK|GUN_INTERNAL_MAG|GUN_AMMO_COUNTER
 
 /obj/item/weapon/gun/shotgun/double/sawn/set_gun_attachment_offsets()
 	attachable_offset = list("muzzle_x" = 30, "muzzle_y" = 20,"rail_x" = 11, "rail_y" = 22, "under_x" = 18, "under_y" = 16, "stock_x" = 18, "stock_y" = 16)
@@ -475,7 +489,7 @@ can cause issues with ammo types getting mixed up during the burst.
 	fire_sound = 'sound/weapons/gun_mou53.ogg'
 	reload_sound = 'sound/weapons/handling/gun_mou_reload.ogg'//unique shell insert
 	flags_equip_slot = SLOT_BACK
-	flags_gun_features = GUN_CAN_POINTBLANK|GUN_INTERNAL_MAG
+	flags_gun_features = GUN_CAN_POINTBLANK|GUN_INTERNAL_MAG|GUN_AMMO_COUNTER
 	current_mag = /obj/item/ammo_magazine/internal/shotgun/double/mou53 //Take care, she comes loaded!
 	attachable_allowed = list(
 						/obj/item/attachable/bayonet,
@@ -612,7 +626,8 @@ can cause issues with ammo types getting mixed up during the burst.
 	recent_pump = world.time
 	if (in_chamber)
 		pumped = TRUE
-
+		var/obj/screen/ammo/A = user.hud_used.ammo //The ammo HUD
+		A.update_hud(user)
 
 /obj/item/weapon/gun/shotgun/pump/reload_into_chamber(mob/user)
 	if(!current_mag)

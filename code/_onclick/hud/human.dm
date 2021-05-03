@@ -84,9 +84,9 @@
 	draw_oxygen(ui_datum)
 	draw_healths(ui_datum)
 	draw_bodytemp(ui_datum)
-	
+
 	draw_status_effects(ui_datum)
-	
+
 	if(!iszombie(owner))
 		draw_nutrition(ui_datum)
 	draw_locator_spot(ui_datum)
@@ -107,13 +107,13 @@
 		hud_used.hotkey_ui_hidden = 1
 
 /datum/hud/human/hidden_inventory_update()
-	if(!mymob || !ui_datum) 
+	if(!mymob || !ui_datum)
 		return
 	var/mob/living/carbon/human/H = mymob
 	if(!gear.len)
 		inventory_shown = FALSE
 		return //species without inv slots don't show items.
-		
+
 	if(inventory_shown && hud_shown)
 		if(H.shoes)
 			H.shoes.screen_loc = ui_datum.ui_shoes
@@ -158,7 +158,7 @@
 			H.head.screen_loc = null
 
 /datum/hud/human/persistant_inventory_update()
-	if(!mymob || !ui_datum) 
+	if(!mymob || !ui_datum)
 		return
 
 	var/mob/living/carbon/human/H = mymob
@@ -342,6 +342,10 @@
 	gun_run_icon.screen_loc = ui_datum.ui_gun3
 	gun_run_icon.update_icon(mymob)
 	static_inventory += gun_run_icon
+
+	ammo = new /obj/screen/ammo()
+	ammo.alpha = ui_alpha
+	ammo.screen_loc = ui_datum.UI_AMMO
 
 /datum/hud/human/proc/draw_status_effects(var/datum/custom_hud/ui_datum)
 	slowed_icon = new /obj/screen()
