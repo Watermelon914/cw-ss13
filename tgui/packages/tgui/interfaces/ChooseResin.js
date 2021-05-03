@@ -57,7 +57,7 @@ export const ChooseResin = (props, context) => {
                     />
                   </Stack.Item>
                   <Stack.Item grow>
-                    <Box fontSiz>
+                    <Box>
                       {val.name}
                       {val.max_per_xeno !== INFINITE_BUILD_AMOUNT
                         && ` (${val.max_per_xeno} Max)`}

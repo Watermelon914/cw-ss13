@@ -85,6 +85,9 @@ $fg-map: colors.$fg-map !default;
 
 .Tab__text {
   flex-grow: 1;
+}
+
+.Tab__text--vertical-center {
   margin: 0 0.5em;
 }
 

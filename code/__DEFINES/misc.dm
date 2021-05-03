@@ -34,6 +34,7 @@
 #define AREA_NOTUNNEL (1<<1) //makes it so the area can not be tunneled to
 #define AREA_ALLOW_XENO_JOIN (1<<2) //xenos can join whilst in this area (for admin zlevel)
 #define AREA_CONTAINMENT (1<<3) // Flags the area as a containment area
+#define AREA_INACCESSIBLE (1<<4)
 
 // Default number of ticks for do_after
 #define DA_DEFAULT_NUM_TICKS 5

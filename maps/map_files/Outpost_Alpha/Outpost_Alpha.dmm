@@ -672,10 +672,6 @@
 	},
 /area/almayer/squads/alpha)
 "oJ" = (
-/obj/structure/ladder{
-	height = 1;
-	id = null
-	},
 /obj/structure/blocker/invisible_wall,
 /turf/open/floor/plating/almayer,
 /area/almayer/squads/alpha)
@@ -789,7 +785,8 @@
 	dir = 4;
 	icon = 'icons/obj/structures/doors/secdoor.dmi';
 	icon_state = "door_closed";
-	name = "\improper Security Checkpoint"
+	name = "\improper Security Checkpoint";
+	opacity = 1
 	},
 /obj/structure/blocker/invisible_wall,
 /turf/open/floor/almayer{
@@ -2625,11 +2622,8 @@
 	pixel_x = -32;
 	pixel_y = 2
 	},
-/obj/structure/machinery/cm_vending/sorted/uniform_supply/squad_prep/delta{
-	req_access = null;
-	req_one_access = null;
-	req_one_access_txt = "15;16;21"
-	},
+/obj/item/device/pointshop/marine,
+/obj/structure/surface/table/reinforced/prison,
 /turf/open/floor/almayer,
 /area/almayer/squads/alpha)
 "Up" = (

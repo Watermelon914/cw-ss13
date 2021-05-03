@@ -24,7 +24,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	power_environ = FALSE
 	temperature = TCMB
 	pressure = 0
-	flags_area = AREA_NOTUNNEL
+	flags_area = AREA_NOTUNNEL|AREA_INACCESSIBLE
 	test_exemptions = MAP_TEST_EXEMPTION_SPACE
 
 /area/engine

@@ -112,6 +112,8 @@
 /datum/game_mode/colonialmarines/ai/proc/finish_objective(var/obj/structure/resource_node/RN)
 	SIGNAL_HANDLER
 
+	if(GLOB.marine_pointshop)
+		GLOB.marine_pointshop.points += RN.points_on_cap
 	objectives -= RN
 
 	for(var/i in GLOB.xeno_ai_spawns)

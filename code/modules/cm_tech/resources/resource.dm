@@ -38,6 +38,7 @@
 	var/play_ambient_noise = TRUE
 	var/is_area_controller = FALSE
 	var/area/controlled_area
+	var/points_on_cap = 30
 
 /obj/structure/resource_node/area_controller
 	is_area_controller = TRUE
