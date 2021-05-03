@@ -170,7 +170,6 @@
 	.[/obj/item/ammo_magazine/pistol/mod88] =  /obj/item/ammo_magazine/pistol/mod88/penetrating
 	.[/obj/item/ammo_magazine/revolver] =  /obj/item/ammo_magazine/revolver/penetrating
 	.[/obj/item/ammo_magazine/rocket] = /obj/item/ammo_magazine/rocket/ap
-	.[/obj/item/ammo_magazine/rifle/m4ra] = /obj/item/ammo_magazine/rifle/m4ra/impact
 
 /obj/item/ammo_kit/toxin
 	name = "toxin ammo kit"
@@ -188,7 +187,6 @@
 	.[/obj/item/ammo_magazine/pistol/mod88] =  /obj/item/ammo_magazine/pistol/mod88/toxin
 	.[/obj/item/ammo_magazine/revolver] =  /obj/item/ammo_magazine/revolver/toxin
 	.[/obj/item/ammo_magazine/rocket] = /obj/item/ammo_magazine/rocket/ap
-	.[/obj/item/ammo_magazine/rifle/m4ra] = /obj/item/ammo_magazine/rifle/m4ra/impact
 
 /obj/item/ammo_kit/ap
 	name = "armor-piercing ammo kit"
