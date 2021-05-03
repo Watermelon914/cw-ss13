@@ -71,6 +71,8 @@
 	/// Boolean field describing if the tgui_modal was closed by the user.
 	var/closed
 
+	var/close_on_choice = TRUE
+
 /datum/tgui_modal/New(mob/user, message, title, list/buttons, timeout)
 	src.title = title
 	src.message = message
@@ -125,7 +127,8 @@
 			if (!(params["choice"] in buttons))
 				return
 			choice = params["choice"]
-			SStgui.close_uis(src)
+			if(close_on_choice)
+				SStgui.close_uis(src)
 			return TRUE
 
 /**
@@ -137,8 +140,10 @@
 	/// The callback to be invoked by the tgui_modal upon having a choice made.
 	var/datum/callback/callback
 
+	close_on_choice = FALSE
+
 /datum/tgui_modal/async/New(mob/user, message, title, list/buttons, callback, timeout)
-	..(user, title, message, buttons, timeout)
+	..(user, message, title, buttons, timeout)
 	src.callback = callback
 
 /datum/tgui_modal/async/Destroy(force, ...)
@@ -154,7 +159,7 @@
 	if (!. || choice == null)
 		return
 	callback.InvokeAsync(choice)
-	qdel(src)
+	SStgui.close_uis(src)
 
 /datum/tgui_modal/async/wait()
 	return

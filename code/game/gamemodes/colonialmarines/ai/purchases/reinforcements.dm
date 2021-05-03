@@ -40,8 +40,7 @@
 		var/mob/M = i
 		if(M.client && !(M.client.prefs.be_special & DONT_BE_MARINE_AFTER_DEATH))
 			sound_to(M.client, 'sound/misc/notice3.ogg')
-			tgui_alert_async(M, "Would you like to re-enter the game as a marine reinforcement?", "Reinforcements",\
-				list("Yes", "No"), CALLBACK(src, .proc/add_player, M), timer)
+			tgui_alert_async(M, "Would you like to re-enter the game as a marine reinforcement?", "Reinforcements", list("Yes", "No"), CALLBACK(src, .proc/add_player, M), timer)
 
 	target = T
 	addtimer(CALLBACK(src, .proc/finish_launch), timer)
@@ -59,7 +58,9 @@
 
 	var/obj/structure/droppod/container/toLaunch = new()
 	var/mob/living/carbon/human/H = new(toLaunch)
-	M.client.prefs.copy_all_to(H)
+	H.create_hud()
+	M.mind.transfer_to(H)
+	H.client.prefs.copy_all_to(H)
 	arm_equipment(H, loadout)
 	toLaunch.launch(target)
 

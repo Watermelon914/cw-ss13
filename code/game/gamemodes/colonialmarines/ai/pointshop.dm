@@ -119,6 +119,15 @@
 
 	var/mob/targetter
 
+/datum/pointshop_product/supply_drop/New(datum/pointshop/P)
+	. = ..()
+	RegisterSignal(parent, COMSIG_ITEM_DROPPED, .proc/unregister_current_user)
+
+/datum/pointshop_product/supply_drop/proc/unregister_current_user()
+	SIGNAL_HANDLER
+	if(targetter)
+		unregister_user(targetter)
+
 /datum/pointshop_product/supply_drop/Destroy(force, ...)
 	targetter = null
 	return ..()
@@ -139,7 +148,6 @@
 	RegisterSignal(M, COMSIG_MOB_POST_RESET_VIEW, .proc/mouse_launch)
 	RegisterSignal(M, COMSIG_MOB_PRE_CLICK, .proc/select_launch_target)
 	RegisterSignal(M, COMSIG_PARENT_QDELETING, .proc/unregister_user)
-	RegisterSignal(parent, COMSIG_ITEM_DROPPED, .proc/unregister_user)
 	M.reset_view()
 	targetter = M
 

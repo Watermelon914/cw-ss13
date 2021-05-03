@@ -115,6 +115,10 @@
 	if(GLOB.marine_pointshop)
 		GLOB.marine_pointshop.points += RN.points_on_cap
 	objectives -= RN
+	UnregisterSignal(RN, list(
+		COMSIG_RESOURCE_NODE_SET_TREE,
+		COMSIG_PARENT_QDELETING
+	))
 
 	for(var/i in GLOB.xeno_ai_spawns)
 		var/obj/effect/landmark/xeno_ai/XA = i
