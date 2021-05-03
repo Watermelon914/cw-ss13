@@ -322,7 +322,7 @@
 	assignment = JOB_SQUAD_MARINE
 	rank = JOB_SQUAD_MARINE
 	paygrade = "E2"
-	role_comm_title = "Pfc"
+	role_comm_title = "Mar"
 	skills = /datum/skills/pfc/crafty
 
 /datum/equipment_preset/uscm/private_equipped/load_rank(mob/living/carbon/human/H)

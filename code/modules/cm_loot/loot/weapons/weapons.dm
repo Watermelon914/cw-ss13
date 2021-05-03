@@ -2,6 +2,9 @@ GLOBAL_DATUM_INIT(loot_weapons, /datum/loot_table/weapons, new())
 
 /obj/structure/closet/crate/loot/weapons
 	name = "weapons crate"
+	icon_state = "secure_locked_weapons"
+	icon_opened = "secure_open_weapons"
+	icon_closed = "secure_locked_weapons"
 
 /obj/structure/closet/crate/loot/weapons/Initialize()
 	. = ..()

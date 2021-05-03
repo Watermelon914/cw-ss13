@@ -21,7 +21,7 @@
 	return ..()
 
 /datum/pointshop/ui_state(mob/user)
-	return GLOB.default_state
+	return GLOB.inventory_state
 
 
 /datum/pointshop/ui_data(mob/user)
@@ -34,14 +34,9 @@
 	var/index = 1
 	for(var/i in products)
 		var/datum/pointshop_product/PSP = i
-		.["products"] += list(list(
-			"name" = PSP.name,
-			"desc" = PSP.desc,
-			"cost" = PSP.cost,
-			"category" = PSP.category,
-			"index" = index,
-			"image" = replacetext(PSP.name, " ", "-")
-		))
+		var/list/L = PSP.ui_data()
+		L["index"] = index
+		.["products"] += list(L)
 
 /datum/pointshop/ui_assets(mob/user)
 	return list(
@@ -81,6 +76,15 @@
 	var/cost = 0
 	var/abstract_type = /datum/pointshop_product
 	var/datum/pointshop/parent
+
+/datum/pointshop_product/ui_data(mob/user)
+	return list(
+		"name" = name,
+		"desc" = desc,
+		"cost" = cost,
+		"category" = category,
+		"image" = replacetext(name, " ", "-")
+	)
 
 /datum/pointshop_product/New(datum/pointshop/P)
 	. = ..()
@@ -134,6 +138,7 @@
 	RegisterSignal(M, COMSIG_MOB_POST_RESET_VIEW, .proc/mouse_launch)
 	RegisterSignal(M, COMSIG_MOB_PRE_CLICK, .proc/select_launch_target)
 	RegisterSignal(M, COMSIG_PARENT_QDELETING, .proc/unregister_user)
+	RegisterSignal(parent, COMSIG_ITEM_DROPPED, .proc/unregister_user)
 	M.reset_view()
 	targetter = M
 
@@ -188,7 +193,7 @@
 /datum/pointshop_product/supply_drop/proc/launch(var/turf/T)
 	if (isnull(T))
 		return
-	var/obj/structure/droppod/container/toLaunch = new() //Duplicate the temp_pod (which we have been varediting or configuring with the UI) and store the result
+	var/obj/structure/droppod/container/toLaunch = new()
 	load_droppod(toLaunch)
 	toLaunch.launch(T)
 
