@@ -37,6 +37,7 @@
 		var/list/L = PSP.ui_data()
 		L["index"] = index
 		.["products"] += list(L)
+		index++
 
 /datum/pointshop/ui_assets(mob/user)
 	return list(
@@ -71,7 +72,7 @@
 	var/name = ""
 	var/desc = ""
 	var/category = "Other"
-	var/icon = 'icons/obj/items/items.dmi'
+	var/icon = 'icons/effects/pointshop.dmi'
 	var/icon_state = "spacecash1"
 	var/cost = 0
 	var/abstract_type = /datum/pointshop_product
@@ -205,6 +206,7 @@
 	indestructible = TRUE
 	var/datum/pointshop/attached_shop
 	var/list/products = list()
+	w_class = SIZE_TINY
 
 /obj/item/device/pointshop/Initialize()
 	. = ..()

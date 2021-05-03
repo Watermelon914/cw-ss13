@@ -1,8 +1,7 @@
 /datum/pointshop_product/supply_drop/reinforcement
 	name = "Reinforcements"
 	desc = "Sends down a droppod containing a reinforcement marine. Refunds you if no reinforcements are available."
-	icon = 'icons/obj/structures/crates.dmi'
-	icon_state = "closed_ammo"
+	icon_state = "marine"
 	cost = 30
 	var/active = FALSE
 	var/list/players = list()

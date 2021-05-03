@@ -1180,22 +1180,25 @@
 /mob/living/carbon/human/proc/locate_squad_leader()
 	if(!assigned_squad) return
 
-	var/mob/living/carbon/human/H
+	var/atom/A
 	var/tl_prefix = ""
 	if(hud_used)
 		hud_used.locate_leader.icon_state = "trackoff"
 
-	if(assigned_fireteam && assigned_squad.fireteam_leaders[assigned_fireteam])
-		H = assigned_squad.fireteam_leaders[assigned_fireteam]
+	if(GLOB.marine_pointshop?.attached_object)
+		A = get_true_turf(GLOB.marine_pointshop.attached_object)
+	else if(assigned_fireteam && assigned_squad.fireteam_leaders[assigned_fireteam])
+		A = assigned_squad.fireteam_leaders[assigned_fireteam]
 		tl_prefix = "_tl"
 	else if(assigned_squad.squad_leader)
-		H = assigned_squad.squad_leader
-	else return
+		A = assigned_squad.squad_leader
+	else
+		return
 
-	if(H.z != src.z || get_dist(src,H) < 1 || src == H)
+	if(A.z != src.z || get_dist(src,A) < 1 || src == A)
 		hud_used.locate_leader.icon_state = "trackondirect[tl_prefix]"
 	else
-		hud_used.locate_leader.setDir(get_dir(src,H))
+		hud_used.locate_leader.setDir(get_dir(src, A))
 		hud_used.locate_leader.icon_state = "trackon[tl_prefix]"
 	return
 

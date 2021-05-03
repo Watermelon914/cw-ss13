@@ -1,7 +1,6 @@
 /datum/pointshop_product/supply_drop/weapon_crate
 	name = "Weapon crate"
 	desc = "Sends down a supply drop containing a random weapon item from the item crate. Contains 1 weapon."
-	icon = 'icons/obj/structures/crates.dmi'
 	icon_state = "secure_locked_weapons"
 	cost = 15
 

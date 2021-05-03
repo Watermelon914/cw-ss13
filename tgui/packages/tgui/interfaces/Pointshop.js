@@ -91,7 +91,7 @@ const GeneralPanel = (props, context) => {
                 return (
                   <Tabs.Tab
                     key={val.index}
-                    lineHeight="3em"
+                    lineHeight="4em"
                     selected={selectedProduct === val.index}
                     onClick={() => setSelectedProduct(val.index)}
                     color={points < val.cost? "red" : "white"}
@@ -102,6 +102,7 @@ const GeneralPanel = (props, context) => {
                           className={classes([
                             "pointshop32x32",
                             val.image,
+                            "Pointshop__ProductIcon",
                           ])}
                         />
                       </Stack.Item>

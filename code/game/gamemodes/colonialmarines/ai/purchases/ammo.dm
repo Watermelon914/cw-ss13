@@ -1,7 +1,6 @@
 /datum/pointshop_product/supply_drop/ammo_crate
 	name = "Ammo crate"
 	desc = "Sends down a supply drop containing a random ammo kit from the ammo crate. Contains 2 kits."
-	icon = 'icons/obj/structures/crates.dmi'
 	icon_state = "closed_ammo"
 	cost = 10
 	var/max_amount = 2
