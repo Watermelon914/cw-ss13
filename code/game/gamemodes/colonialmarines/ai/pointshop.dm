@@ -233,7 +233,10 @@ GLOBAL_DATUM(marine_pointshop, /datum/pointshop)
 	desc = "An uplink to purchase supplies"
 	icon_state = "tracker"
 	products = list(
-		/datum/pointshop_product/supply_drop/ammo_crate
+		/datum/pointshop_product/supply_drop/weapon_crate,
+		/datum/pointshop_product/supply_drop/ammo_crate,
+		/datum/pointshop_product/supply_drop/utility_crate,
+		/datum/pointshop_product/supply_drop/reinforcement
 	)
 
 /obj/item/device/pointshop/marine/Initialize()
