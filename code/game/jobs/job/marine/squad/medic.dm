@@ -1,7 +1,7 @@
 /datum/job/marine/medic
 	title = JOB_SQUAD_MEDIC
-	total_positions = 16
-	spawn_positions = 16
+	total_positions = 4
+	spawn_positions = 4
 	allow_additional = 1
 	flags_startup_parameters = ROLE_ADD_TO_DEFAULT|ROLE_ADD_TO_MODE|ROLE_ADD_TO_SQUAD
 	gear_preset = "USCM (Cryo) Squad Medic"

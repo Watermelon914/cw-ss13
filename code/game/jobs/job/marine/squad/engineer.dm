@@ -1,9 +1,9 @@
 /datum/job/marine/engineer
 	title = JOB_SQUAD_ENGI
-	total_positions = 12
-	spawn_positions = 12
+	total_positions = 3
+	spawn_positions = 3
 	allow_additional = 1
-	flags_startup_parameters = ROLE_ADD_TO_DEFAULT|ROLE_ADD_TO_MODE|ROLE_ADD_TO_SQUAD
+	flags_startup_parameters = ROLE_ADD_TO_SQUAD
 	gear_preset = "USCM (Cryo) Squad Engineer"
 	entry_message_body = "You have the equipment and skill to build fortifications, reroute power lines, and bunker down. Your squaddies will look to you when it comes to construction in the field of battle."
 
