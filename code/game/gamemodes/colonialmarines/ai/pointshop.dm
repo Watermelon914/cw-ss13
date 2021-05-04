@@ -246,6 +246,7 @@ GLOBAL_DATUM(marine_pointshop, /datum/pointshop)
 		/datum/pointshop_product/supply_drop/weapon_crate,
 		/datum/pointshop_product/supply_drop/ammo_crate,
 		/datum/pointshop_product/supply_drop/utility_crate,
+		/datum/pointshop_product/supply_drop/medical_crate,
 		/datum/pointshop_product/supply_drop/reinforcement
 	)
 

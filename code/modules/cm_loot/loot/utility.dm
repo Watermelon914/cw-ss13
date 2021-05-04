@@ -99,15 +99,6 @@ GLOBAL_DATUM_INIT(loot_objects, /datum/loot_table/objects, new())
 		new to_spawn(B)
 
 /*
-  Powerful medical kits
-*/
-
-/datum/loot_entry/object/medical_kits
-	name = "Medical Kit"
-	item_to_spawn = /obj/item/storage/box/medic_upgraded_kits
-	rarity = LOOT_VERY_RARE
-
-/*
   Special armours
 */
 

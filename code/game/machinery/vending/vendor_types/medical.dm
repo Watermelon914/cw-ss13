@@ -39,8 +39,6 @@
 		/obj/item/reagent_container/glass/bottle/tramadol,
 		)
 	var/list/stack_refill = list(
-		/obj/item/stack/medical/advanced/ointment,
-		/obj/item/stack/medical/advanced/bruise_pack,
 		/obj/item/stack/medical/ointment,
 		/obj/item/stack/medical/bruise_pack,
 		/obj/item/stack/medical/splint
@@ -145,8 +143,8 @@
 /obj/structure/machinery/cm_vending/sorted/medical/populate_product_list(var/scale)
 	listed_products = list(
 		list("FIELD SUPPLIES", -1, null, null),
-		list("Advanced Burn Kit", round(scale * 7), /obj/item/stack/medical/advanced/ointment, VENDOR_ITEM_REGULAR),
-		list("Advanced Trauma Kit", round(scale * 7), /obj/item/stack/medical/advanced/bruise_pack, VENDOR_ITEM_REGULAR),
+		list("Advanced Burn Kit", 1, /obj/item/stack/medical/advanced/ointment, VENDOR_ITEM_REGULAR),
+		list("Advanced Trauma Kit", 1, /obj/item/stack/medical/advanced/bruise_pack, VENDOR_ITEM_REGULAR),
 		list("Ointment", round(scale * 7), /obj/item/stack/medical/ointment, VENDOR_ITEM_REGULAR),
 		list("Roll of Gauze", round(scale * 7), /obj/item/stack/medical/bruise_pack, VENDOR_ITEM_REGULAR),
 		list("Splints", round(scale * 7), /obj/item/stack/medical/splint, VENDOR_ITEM_REGULAR),
@@ -376,6 +374,9 @@
 	unslashable = TRUE
 	wrenchable = FALSE
 	hackable = FALSE
+
+/obj/structure/machinery/cm_vending/sorted/medical/wall_med/lifeboat/dropship
+	name = "Dropship Medical Cabinet"
 
 /obj/structure/machinery/cm_vending/sorted/medical/wall_med/populate_product_list(var/scale)
 	return

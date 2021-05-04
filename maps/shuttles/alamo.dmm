@@ -391,8 +391,7 @@
 /obj/structure/bed/chair/dropship/passenger{
 	dir = 4
 	},
-/obj/structure/machinery/cm_vending/sorted/medical/wall_med{
-	dir = 4;
+/obj/structure/machinery/cm_vending/sorted/medical/wall_med/lifeboat/dropship{
 	pixel_x = -26
 	},
 /turf/open/shuttle/dropship/floor,
@@ -405,8 +404,7 @@
 /obj/structure/bed/chair/dropship/passenger{
 	dir = 8
 	},
-/obj/structure/machinery/cm_vending/sorted/medical/wall_med{
-	dir = 8;
+/obj/structure/machinery/cm_vending/sorted/medical/wall_med/lifeboat/dropship{
 	pixel_x = 26
 	},
 /turf/open/shuttle/dropship/floor,
