@@ -98,7 +98,7 @@
 	var/prob_chance = 15
 
 /datum/action/xeno_action/activable/warrior_punch/boxer
-	prob_chance = 100
+	prob_chance = 50
 
 /datum/action/xeno_action/activable/warrior_punch/process_ai(mob/living/carbon/Xenomorph/X, delta_time, game_evaluation)
 	if(DT_PROB(prob_chance, delta_time) && get_dist(X, X.current_target) <= 1)
@@ -119,7 +119,7 @@
 	var/base_healthgain = 5 // in percents of health per ko point
 
 	default_ai_action = TRUE
-	var/prob_chance_scale = 3
+	var/prob_chance_scale = 1
 	var/datum/behavior_delegate/boxer/registered_delegate
 
 /datum/action/xeno_action/activable/uppercut/ai_registered(mob/living/carbon/Xenomorph/X)
@@ -156,7 +156,8 @@
 
 	var/distance = 3
 	default_ai_action = TRUE
+	var/prob_chance = 20
 
 /datum/action/xeno_action/activable/jab/process_ai(mob/living/carbon/Xenomorph/X, delta_time, game_evaluation)
-	if(get_dist(X, X.current_target) <= distance)
+	if(get_dist(X, X.current_target) <= distance && DT_PROB(prob_chance, delta_time))
 		use_ability_async(X.current_target)

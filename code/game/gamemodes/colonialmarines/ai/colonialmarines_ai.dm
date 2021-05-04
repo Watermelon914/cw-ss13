@@ -42,7 +42,7 @@
 	var/endgame_entrance_area = /area/hive_entrance
 	var/list/endgame_map_traits = list()
 
-	var/boss_to_spawn = /mob/living/carbon/Xenomorph/Queen
+	var/boss_to_spawn = /datum/boss_battle/queen
 
 	var/game_started = FALSE
 
@@ -226,13 +226,12 @@ GLOBAL_LIST_INIT(t3_ais, list(
 		else
 			INVOKE_ASYNC(BE.attached_object, /obj/structure/machinery/door.proc/open, TRUE)
 
-	for(var/i in GLOB.alive_client_human_list)
-		to_chat(i, SPAN_HIGHDANGER("This is it. This is the Queen's chamber. Kill the Queen to succeed in your objectives!"))
+	var/datum/boss_battle/BB = new boss_to_spawn()
+	var/mob/X = BB.spawn_boss_in(length(GLOB.alive_client_human_list), get_turf(pick(GLOB.boss_spawn)))
+	if(!X)
+		marine_win()
+		CRASH("No boss spawned in for type [boss_to_spawn]!")
 
-	var/turf/spawn_loc = get_turf(GLOB.boss_spawn)
-	var/mob/living/carbon/Xenomorph/X = new boss_to_spawn(spawn_loc)
-	X.maxHealth *= (length(GLOB.alive_client_human_list) / boss_health_scale_per_player)
-	X.health = X.maxHealth
 	RegisterSignal(X, COMSIG_MOB_DEATH, .proc/marine_win)
 
 /datum/game_mode/colonialmarines/ai/proc/marine_win()
