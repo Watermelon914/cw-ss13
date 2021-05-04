@@ -50,6 +50,7 @@
 	var/music_range = 12
 
 	var/group_distance = 12
+	var/boss_health_scale_per_player = 4
 
 /datum/game_mode/colonialmarines/ai/load_maps(var/list/FailedZs)
 	SSmapping.LoadGroup(FailedZs, "The Hive", endgame_map_path, endgame_map_file, endgame_map_traits, ZTRAITS_HIVE, TRUE)
@@ -230,6 +231,8 @@ GLOBAL_LIST_INIT(t3_ais, list(
 
 	var/turf/spawn_loc = get_turf(GLOB.boss_spawn)
 	var/mob/living/carbon/Xenomorph/X = new boss_to_spawn(spawn_loc)
+	X.maxHealth *= (length(GLOB.alive_client_human_list) / boss_health_scale_per_player)
+	X.health = X.maxHealth
 	RegisterSignal(X, COMSIG_MOB_DEATH, .proc/marine_win)
 
 /datum/game_mode/colonialmarines/ai/proc/marine_win()
