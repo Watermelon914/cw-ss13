@@ -48,7 +48,7 @@ GLOBAL_DATUM_INIT(loot_medical, /datum/loot_table/medical, new())
 	item_to_spawn = /obj/item/storage/box/medic_upgraded_kits
 	rarity = LOOT_VERY_RARE
 
-/datum/loot_entry/object/normal_kits
+/datum/loot_entry/medical/normal_kits
 	name = "Medical Kit"
 	item_to_spawn = /obj/item/storage/firstaid/adv
 	rarity = LOOT_COMMON

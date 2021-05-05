@@ -37,7 +37,6 @@
 	targets = null
 	other_targets = null
 	target = null
-	QDEL_NULL(range_bounds)
 	QDEL_NULL(spark_system)
 	QDEL_NULL(ammo)
 	stop_processing()
