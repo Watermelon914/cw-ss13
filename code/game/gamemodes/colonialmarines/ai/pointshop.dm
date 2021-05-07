@@ -3,6 +3,8 @@
 /datum/pointshop
 	var/points = 0
 	var/atom/attached_object
+	var/currency = "points"
+	var/theme = "default"
 
 	var/list/products = list()
 
@@ -38,6 +40,8 @@
 		L["index"] = index
 		.["products"] += list(L)
 		index++
+	.["currency"] = currency
+	.["theme"] = theme
 
 /datum/pointshop/ui_assets(mob/user)
 	return list(
@@ -73,7 +77,7 @@
 	var/desc = ""
 	var/category = "Other"
 	var/icon = 'icons/effects/pointshop.dmi'
-	var/icon_state = "spacecash1"
+	var/icon_state = ""
 	var/cost = 0
 	var/abstract_type = /datum/pointshop_product
 	var/datum/pointshop/parent
@@ -209,21 +213,36 @@
 /datum/pointshop_product/supply_drop/proc/load_droppod(var/obj/structure/droppod/container/C)
 	return
 
+/datum/pointshop_product/marine
+	abstract_type = /datum/pointshop_product/marine
+
 /obj/item/device/pointshop
 	name = "abstract pointshop"
 	indestructible = TRUE
 	var/datum/pointshop/attached_shop
 	var/list/products = list()
+	var/list/subtype_products = list()
+	var/theme = "default"
+	var/currency = "points"
 	w_class = SIZE_TINY
 
 /obj/item/device/pointshop/Initialize()
 	. = ..()
 	attached_shop = new(src)
+	attached_shop.currency = currency
+	attached_shop.theme = theme
 	populate_products()
 
 /obj/item/device/pointshop/proc/populate_products()
 	for(var/i in products)
 		attached_shop.products += new i(attached_shop)
+
+	for(var/i in subtype_products)
+		for(var/l in subtypesof(i))
+			var/datum/pointshop_product/P = l
+			if(initial(P.abstract_type) == P)
+				continue
+			attached_shop.products += new P(attached_shop)
 
 /obj/item/device/pointshop/attack_self(mob/user)
 	. = ..()
@@ -245,9 +264,11 @@ GLOBAL_DATUM(marine_pointshop, /datum/pointshop)
 	products = list(
 		/datum/pointshop_product/supply_drop/weapon_crate,
 		/datum/pointshop_product/supply_drop/ammo_crate,
-		/datum/pointshop_product/supply_drop/utility_crate,
 		/datum/pointshop_product/supply_drop/medical_crate,
 		/datum/pointshop_product/supply_drop/reinforcement
+	)
+	subtype_products = list(
+		/datum/pointshop_product/marine
 	)
 
 /obj/item/device/pointshop/marine/Initialize()

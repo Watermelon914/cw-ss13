@@ -1263,6 +1263,7 @@
 #include "code\modules\cm_aliens\structures\special\pylon_core.dm"
 #include "code\modules\cm_aliens\structures\special\recovery_node.dm"
 #include "code\modules\cm_aliens\structures\special\spawn_pool.dm"
+#include "code\modules\cm_engi\engi_pda.dm"
 #include "code\modules\cm_loot\loot_crate.dm"
 #include "code\modules\cm_loot\loot_datum.dm"
 #include "code\modules\cm_loot\loot\ammo.dm"

@@ -4,10 +4,13 @@ import { Window } from '../layouts';
 import { classes } from "common/react";
 
 export const Pointshop = (props, context) => {
+  const { data } = useBackend(context);
+  const { theme } = data;
   return (
     <Window
       width={500}
       height={400}
+      theme={theme}
     >
       <Window.Content>
         <GeneralPanel />
@@ -18,7 +21,7 @@ export const Pointshop = (props, context) => {
 
 const GeneralPanel = (props, context) => {
   const { act, data } = useBackend(context);
-  const { products, points } = data;
+  const { products, points, currency } = data;
 
   const [currentSearch, setSearch]
     = useLocalState(context, "current_search", "");
@@ -62,7 +65,7 @@ const GeneralPanel = (props, context) => {
             </Stack.Item>
             <Stack.Item>
               <Box textAlign="center" py={1} mr={1}>
-                {points} points
+                {points} {currency}
               </Box>
             </Stack.Item>
           </Stack>
@@ -117,7 +120,7 @@ const GeneralPanel = (props, context) => {
                           textAlign="right"
                           color={points < val.cost? "red" : "white"}
                         >
-                          {val.cost} points
+                          {val.cost} {currency}
                         </Box>
                       </Stack.Item>
                     </Stack>

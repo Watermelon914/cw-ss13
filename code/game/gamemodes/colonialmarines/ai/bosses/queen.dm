@@ -7,5 +7,5 @@
 		to_chat(i, SPAN_HIGHDANGER("This is it. This is the Queen's chamber. Kill the Queen to succeed in your objectives!"))
 
 	var/mob/living/carbon/Xenomorph/Queen/X = new(spawn_loc)
-	X.maxHealth *= (length(GLOB.alive_client_human_list) / boss_health_scale_per_player)
+	X.maxHealth = max(X.maxHealth * (length(GLOB.alive_client_human_list) / boss_health_scale_per_player), X.maxHealth)
 	X.health = X.maxHealth
