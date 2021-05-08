@@ -186,22 +186,12 @@
 
 
 /obj/item/weapon/gun/launcher/spike/examine(mob/user)
-	if(isYautja(user))
-		..()
 		to_chat(user, "It currently has [spikes] / [max_spikes] spikes.")
-	else to_chat(user, "Looks like some kind of...mechanical donut.")
 
 /obj/item/weapon/gun/launcher/spike/update_icon()
 	..()
 	var/new_icon_state = spikes <=1 ? null : icon_state + "[round(spikes/4, 1)]"
 	update_special_overlay(new_icon_state)
-
-/obj/item/weapon/gun/launcher/spike/able_to_fire(mob/user)
-	if(!isYautja(user))
-		to_chat(user, SPAN_WARNING("You have no idea how this thing works!"))
-		return
-
-	return ..()
 
 /obj/item/weapon/gun/launcher/spike/load_into_chamber()
 	if(spikes > 0)

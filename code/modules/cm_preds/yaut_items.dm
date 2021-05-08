@@ -574,7 +574,7 @@
 	embeddable = FALSE
 	w_class = SIZE_MEDIUM
 	unacidable = TRUE
-	force = MELEE_FORCE_TIER_6
+	force = 60
 	throwforce = MELEE_FORCE_TIER_5
 	sharp = IS_SHARP_ITEM_SIMPLE
 	edge = TRUE
@@ -601,7 +601,7 @@
 	flags_atom = FPRINT|CONDUCT
 	flags_item = ITEM_PREDATOR
 	flags_equip_slot = SLOT_BACK
-	force = MELEE_FORCE_TIER_7
+	force = 80
 	throwforce = MELEE_FORCE_TIER_5
 	sharp = IS_SHARP_ITEM_SIMPLE
 	edge = TRUE
@@ -671,7 +671,7 @@
 	flags_atom = FPRINT|CONDUCT
 	flags_item = ITEM_PREDATOR
 	flags_equip_slot = SLOT_WAIST
-	force = MELEE_FORCE_TIER_6
+	force = 100
 	throwforce = MELEE_FORCE_TIER_5
 	sharp = IS_SHARP_ITEM_SIMPLE
 	edge = TRUE
@@ -720,9 +720,9 @@
 	w_class = SIZE_LARGE
 	embeddable = FALSE //It shouldn't embed so that the Yautja can actually use the yank combi verb, and so that it's not useless upon throwing it at someone.
 	throw_speed = SPEED_VERY_FAST
-	throw_range = 4
+	throw_range = 5
 	unacidable = TRUE
-	throwforce = MELEE_FORCE_TIER_6
+	throwforce = 100
 	sharp = IS_SHARP_ITEM_SIMPLE
 	edge = TRUE
 	hitsound = 'sound/weapons/bladeslice.ogg'
@@ -831,15 +831,8 @@
 		X.interference = 30
 	..()
 
-/obj/item/weapon/melee/combistick/attack_hand(mob/user) //Prevents marines from instantly picking it up via pickup macros.
-	if(!isYautja(user))
-		user.visible_message(SPAN_DANGER("[user] starts to untangle the chain on \the [src]..."), SPAN_NOTICE("You start to untangle the chain on \the [src]..."))
-		if(do_after(user, 30, INTERRUPT_ALL, BUSY_ICON_HOSTILE, src, INTERRUPT_MOVED, BUSY_ICON_HOSTILE))
-			..()
-	else ..()
-
 /obj/item/weapon/melee/combistick/launch_impact(atom/hit_atom)
-	if(isYautja(hit_atom))
+	if(ishuman(hit_atom))
 		var/mob/living/carbon/human/H = hit_atom
 		if(H.put_in_hands(src))
 			hit_atom.visible_message(SPAN_NOTICE(" [hit_atom] expertly catches [src] out of the air. "), \

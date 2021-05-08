@@ -248,7 +248,7 @@
 	force = MELEE_FORCE_TIER_3
 	w_class = SIZE_LARGE
 	flags_equip_slot = SLOT_BACK
-	force_wielded = MELEE_FORCE_TIER_9
+	force_wielded = 300
 	throwforce = MELEE_FORCE_TIER_6
 	embeddable = FALSE //so predators don't lose their glaive when thrown.
 	throw_speed = SPEED_VERY_FAST

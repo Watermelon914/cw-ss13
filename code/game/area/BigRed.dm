@@ -587,6 +587,16 @@ GLOBAL_DATUM_INIT(rain_effect, /obj/effect/weather_vfx_holder/rain, new)
 	soundscape_playlist = SCAPE_PL_CAVE
 	base_muffle = MUFFLE_HIGH
 
+/area/bigredv2/sand_temple
+	name = "\improper Sand Temple"
+	icon_state = "blue-red"
+	ceiling = CEILING_UNDERGROUND_ALLOW_CAS
+	sound_environment = 6
+	ceiling_muffle = FALSE
+	ambience_exterior = AMBIENCE_CAVE
+	soundscape_playlist = SCAPE_PL_CAVE
+	base_muffle = MUFFLE_HIGH
+
 /area/bigredv2/caves_east
 	name = "\improper Eastern Caves"
 	icon_state = "caves_east"

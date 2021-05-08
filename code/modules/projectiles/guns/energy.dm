@@ -162,10 +162,7 @@
 
 
 /obj/item/weapon/gun/energy/plasmarifle/examine(mob/user)
-	if(isYautja(user))
-		..()
 		to_chat(user, "It currently has [charge_time] / 100 charge.")
-	else to_chat(user, "This thing looks like an alien rifle of some kind. Strange.")
 
 /obj/item/weapon/gun/energy/plasmarifle/update_icon()
 	if(last_regen < charge_time + 20 || last_regen > charge_time || charge_time > 95)
@@ -174,18 +171,7 @@
 		last_regen = charge_time
 
 /obj/item/weapon/gun/energy/plasmarifle/unique_action(mob/user)
-	if(!isYautja(user))
-		to_chat(user, SPAN_WARNING("You have no idea how this thing works!"))
-		return
-	..()
 	zoom(user)
-
-/obj/item/weapon/gun/energy/plasmarifle/able_to_fire(mob/user)
-	if(!isYautja(user))
-		to_chat(user, SPAN_WARNING("You have no idea how this thing works!"))
-		return
-
-	return ..()
 
 /obj/item/weapon/gun/energy/plasmarifle/load_into_chamber()
 	ammo = GLOB.ammo_list[charge_time < 15? /datum/ammo/energy/yautja/rifle/bolt : /datum/ammo/energy/yautja/rifle/blast]
@@ -205,9 +191,6 @@
 	return 1
 
 /obj/item/weapon/gun/energy/plasmarifle/attack_self(mob/living/user)
-	if(!isYautja(user))
-		return ..()
-
 	if(charge_time > 10)
 		user.visible_message(SPAN_NOTICE("You feel a strange surge of energy in the area."),SPAN_NOTICE("You release the rifle battery's energy."))
 		var/obj/item/clothing/gloves/yautja/Y = user:gloves
@@ -215,7 +198,7 @@
 			Y.charge += charge_time * 2
 			if(Y.charge > Y.charge_max) Y.charge = Y.charge_max
 			charge_time = 0
-			to_chat(user, SPAN_NOTICE("Your bracers absorb some of the released energy."))
+			to_chat(user, SPAN_NOTICE("Your body absorbs some of the released energy."))
 			update_icon()
 	else to_chat(user, SPAN_WARNING("The weapon's not charged enough with ambient energy!"))
 
@@ -287,19 +270,7 @@
 
 
 /obj/item/weapon/gun/energy/plasmapistol/examine(mob/user)
-	if(isYautja(user))
-		..()
 		to_chat(user, "It currently has [charge_time] / 40 charge.")
-	else
-		to_chat(user, "This thing looks like an alien rifle of some kind. Strange.")
-
-
-/obj/item/weapon/gun/energy/plasmapistol/able_to_fire(mob/user)
-	if(!isYautja(user))
-		to_chat(user, SPAN_WARNING("You have no idea how this thing works!"))
-		return
-	else
-		return ..()
 
 /obj/item/weapon/gun/energy/plasmapistol/load_into_chamber()
 	if(charge_time < 1) return
