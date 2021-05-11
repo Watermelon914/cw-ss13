@@ -80,7 +80,7 @@
 	stack_id = "upgraded advanced burn kit"
 
 	icon_state = "burnkit_upgraded"
-	time_to_apply = 1 SECONDS
+	time_to_apply = 0.2 SECONDS
 
 	max_amount = 10
 	amount = 10
@@ -95,7 +95,7 @@
 	stack_id = "upgraded advanced trauma kit"
 
 	icon_state = "traumakit_upgraded"
-	time_to_apply = 1 SECONDS
+	time_to_apply = 0.2 SECONDS
 
 	max_amount = 10
 	amount = 10

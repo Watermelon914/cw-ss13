@@ -355,7 +355,7 @@ var/list/datum/mob_hud/huds = list(
 			if(revive_enabled)
 				var/mob/dead/observer/G = get_ghost()
 				if(client || istype(G))
-					if(world.time > timeofdeath + revive_grace_period - 1 MINUTES)
+					if(world.time > timeofdeath + revive_grace_period - 1 MINUTES && !(SSticker.mode?.flags_round_type & MODE_INFINITE_REVIVE_GRACE_PERIOD))
 						holder.icon_state = "huddeadalmost"
 						if(!holder2_set)
 							holder2.icon_state = "huddeadalmost"

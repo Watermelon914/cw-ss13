@@ -8,7 +8,7 @@
 	var/timer = 15 SECONDS
 	var/turf/target
 
-	var/loadout = "USCM Cryo Private (Equipped)"
+	var/loadout = "USCM Cryo Private Alpha (Equipped)"
 
 /datum/pointshop_product/supply_drop/reinforcement/ui_data(mob/user)
 	. = ..()

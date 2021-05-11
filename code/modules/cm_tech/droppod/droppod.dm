@@ -17,7 +17,7 @@
 	var/tiles_to_take = 15
 
 	var/drop_time = 0
-	var/dropping_time = 2 SECONDS
+	var/dropping_time = 3 SECONDS
 	var/open_time = 3 SECONDS
 
 	var/open_sound = 'sound/machines/techpod/techpod_open.ogg'
@@ -104,13 +104,13 @@
 	. = ..()
 
 /obj/structure/droppod/proc/open(mob/user)
-	playsound(loc, open_sound, sound_range = 8)
+	playsound(loc, open_sound, 50, sound_range = 8)
 
 	droppod_flags |= DROPPOD_OPEN
 	update_icon()
 
 /obj/structure/droppod/proc/close(mob/user)
-	playsound(loc, close_sound, sound_range = 8)
+	playsound(loc, close_sound, 50, sound_range = 8)
 
 	droppod_flags &= ~DROPPOD_OPEN
 	update_icon()
@@ -127,13 +127,13 @@
 	invisibility = 0
 
 	pixel_y = 32*tiles_to_take
-	playsound(loc, landing_sound, 100, TRUE, 15)
+	playsound(loc, landing_sound, 75, TRUE, 15)
 	animate(src, pixel_y = 0, time = dropping_time, easing = LINEAR_EASING)
 
 	addtimer(CALLBACK(src, .proc/land, T), dropping_time)
 
 /obj/structure/droppod/proc/land(var/turf/T)
-	playsound(T, land_sound, 100, FALSE, sound_range = 15)
+	playsound(T, land_sound, 75, FALSE, sound_range = 15)
 
 	if(warning_zone)
 		qdel(warning_zone)

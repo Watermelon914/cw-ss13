@@ -350,6 +350,15 @@
 	H.equip_to_slot_or_del(new /obj/item/ammo_magazine/rifle(H.back), WEAR_IN_BACK)
 
 
+/datum/equipment_preset/uscm/private_equipped/alpha
+	name = "USCM Cryo Private Alpha (Equipped)"
+
+/datum/equipment_preset/uscm/private_equipped/alpha/load_gear(mob/living/carbon/human/H)
+	H.equip_to_slot_or_del(new /obj/item/device/radio/headset/almayer/marine/alpha(H), WEAR_EAR)
+	H.equip_to_slot_or_del(new /obj/item/clothing/accessory/health/scrap(H), WEAR_ACCESSORY)
+	return ..()
+
+
 //*****************************************************************************************************/
 
 /datum/equipment_preset/uscm/leader_equipped

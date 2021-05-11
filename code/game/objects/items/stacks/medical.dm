@@ -128,7 +128,7 @@
 				to_chat(user, SPAN_NOTICE("The [affecting.display_name] is cut open, you'll need more than a bandage!"))
 
 /obj/item/stack/medical/advanced
-	var/time_to_apply = 3 SECONDS
+	var/time_to_apply = 1 SECONDS
 
 /obj/item/stack/medical/advanced/attack(mob/living/carbon/M, mob/user)
 	if(..())

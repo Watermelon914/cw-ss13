@@ -338,6 +338,13 @@ GLOBAL_LIST_INIT(t3_ais, list(
 			continue
 		break
 
+	var/list/possible_spawners = GLOB.xeno_ai_spawns.Copy()
+
+	for(var/i in GLOB.alive_client_human_list)
+		for(var/l in possible_spawners)
+			if(get_dist(i, l) < MIN_RANGE_TO_SPAWN_XENO)
+				possible_spawners -= l
+
 	for(var/group in groups)
 		var/list/spawners_nearby = list()
 		var/amount_to_spawn = Ceiling(length(xenos_to_spawn)/length(groups))
@@ -356,9 +363,6 @@ GLOBAL_LIST_INIT(t3_ais, list(
 
 				var/distance = get_dist(h, XA)
 				average_distance += distance
-				if(distance < MIN_RANGE_TO_SPAWN_XENO)
-					nearby_group = FALSE
-					break
 
 				if(distance > MAX_RANGE_TO_SPAWN_XENO)
 					continue

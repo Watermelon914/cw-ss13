@@ -208,6 +208,9 @@
 		return
 	var/obj/structure/droppod/container/toLaunch = new()
 	load_droppod(toLaunch)
+	toLaunch.max_hold_items = 0
+	toLaunch.should_recall = TRUE
+	toLaunch.can_be_opened = FALSE
 	toLaunch.launch(T)
 
 /datum/pointshop_product/supply_drop/proc/load_droppod(var/obj/structure/droppod/container/C)
